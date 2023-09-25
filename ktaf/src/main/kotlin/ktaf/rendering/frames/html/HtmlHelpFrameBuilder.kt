@@ -24,7 +24,9 @@ public class HtmlHelpFrameBuilder(
         }
 
         commands.forEach {
-            htmlPageBuilder.p("${it.command} - ${it.description}")
+            htmlPageBuilder.b(it.command)
+            htmlPageBuilder.append(" - ${it.description}")
+            htmlPageBuilder.br()
         }
 
         return HtmlFrame(htmlPageBuilder).also {

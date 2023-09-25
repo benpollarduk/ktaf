@@ -45,7 +45,7 @@ class HtmlPageBuilderTest {
     }
 
     @Test
-    fun `given test when p with no bold or italic then correctly formatted p returned`() {
+    fun `given test when p then correctly formatted p returned`() {
         // Given
         val builder = HtmlPageBuilder()
 
@@ -58,42 +58,42 @@ class HtmlPageBuilderTest {
     }
 
     @Test
-    fun `given test when p with bold then correctly formatted p returned`() {
+    fun `given test when u then correctly formatted p returned`() {
         // Given
         val builder = HtmlPageBuilder()
 
         // When
-        builder.p("Test", true)
+        builder.u("Test")
         val result = builder.toString()
 
         // Then
-        Assertions.assertEquals("<p><b>Test</b></p>", result)
+        Assertions.assertEquals("<u>Test</u>", result)
     }
 
     @Test
-    fun `given test when p with italic then correctly formatted p returned`() {
+    fun `given test when b then correctly formatted p returned`() {
         // Given
         val builder = HtmlPageBuilder()
 
         // When
-        builder.p("Test", false, true)
+        builder.b("Test")
         val result = builder.toString()
 
         // Then
-        Assertions.assertEquals("<p><i>Test</i></p>", result)
+        Assertions.assertEquals("<i>Test</i>", result)
     }
 
     @Test
-    fun `given test when p with bold and italic then correctly formatted p returned`() {
+    fun `given test when append then correctly formatted p returned`() {
         // Given
         val builder = HtmlPageBuilder()
 
         // When
-        builder.p("Test", true, true)
+        builder.append("Test")
         val result = builder.toString()
 
         // Then
-        Assertions.assertEquals("<p><b><i>Test</i></b></p>", result)
+        Assertions.assertEquals("Test", result)
     }
 
     @Test

@@ -42,18 +42,36 @@ public class HtmlPageBuilder {
     /**
      * Append a paragraph.
      */
-    public fun p(value: String, bold: Boolean = false, italic: Boolean = false) {
-        val tags = mutableListOf("p")
+    public fun p(value: String) {
+        append("p", value)
+    }
 
-        if (bold) {
-            tags.add("b")
-        }
+    /**
+     * Append bold.
+     */
+    public fun b(value: String) {
+        append("b", value)
+    }
 
-        if (italic) {
-            tags.add("i")
-        }
+    /**
+     * Append italic.
+     */
+    public fun i(value: String) {
+        append("i", value)
+    }
 
-        append(tags, value)
+    /**
+     * Append underline.
+     */
+    public fun u(value: String) {
+        append("u", value)
+    }
+
+    /**
+     * Append.
+     */
+    public fun append(value: String) {
+        builder.append(value)
     }
 
     /**

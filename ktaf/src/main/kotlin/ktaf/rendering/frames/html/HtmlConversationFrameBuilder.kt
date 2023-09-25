@@ -28,12 +28,16 @@ public class HtmlConversationFrameBuilder(
 
                 when (it.participant) {
                     Participant.PLAYER -> {
-                        htmlPageBuilder.p("You: ${it.line}")
+                        htmlPageBuilder.b("You: ")
+                        htmlPageBuilder.append(it.line)
                     }
                     Participant.OTHER -> {
-                        htmlPageBuilder.p("$converserName: ${it.line}")
+                        htmlPageBuilder.b("$converserName: ")
+                        htmlPageBuilder.append(it.line)
                     }
                 }
+
+                htmlPageBuilder.br()
             }
         }
 
@@ -42,7 +46,9 @@ public class HtmlConversationFrameBuilder(
             htmlPageBuilder.br()
 
             commands.forEach {
-                htmlPageBuilder.p("${it.command} - ${it.description}")
+                htmlPageBuilder.b(it.command)
+                htmlPageBuilder.append(" - ${it.description}")
+                htmlPageBuilder.br()
             }
         }
 
