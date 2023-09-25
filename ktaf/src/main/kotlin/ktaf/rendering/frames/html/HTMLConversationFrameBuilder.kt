@@ -9,8 +9,8 @@ import ktaf.rendering.frames.Frame
 /**
  * Provides an HTML conversation frame builder that builds in to the specified [htmlPageBuilder].
  */
-public class HtmlConversationFrameBuilder(
-    private val htmlPageBuilder: HtmlPageBuilder
+public class HTMLConversationFrameBuilder(
+    private val htmlPageBuilder: HTMLPageBuilder
 ) : ConversationFrameBuilder {
     override fun build(title: String, commands: List<CommandHelp>, game: Game): Frame {
         val converser = game.activeConverser
@@ -52,7 +52,7 @@ public class HtmlConversationFrameBuilder(
             }
         }
 
-        return HtmlFrame(htmlPageBuilder).also {
+        return HTMLFrame(htmlPageBuilder).also {
             it.acceptsInput = true
         }
     }

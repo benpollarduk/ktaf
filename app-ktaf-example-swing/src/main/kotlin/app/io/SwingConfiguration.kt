@@ -1,6 +1,5 @@
 package app.io
 
-import ktaf.helpers.newline
 import ktaf.io.AdjustInput
 import ktaf.io.ClearOutput
 import ktaf.io.DisplayTextOutput
@@ -10,27 +9,27 @@ import ktaf.io.WaitForCommand
 import ktaf.rendering.FramePosition
 import ktaf.rendering.frames.FrameBuilderCollection
 import ktaf.rendering.frames.ansi.AnsiGridStringBuilder
-import ktaf.rendering.frames.ansi.AnsiRegionMapBuilder
-import ktaf.rendering.frames.ansi.AnsiRegionMapFrameBuilder
 import ktaf.rendering.frames.ansi.AnsiRoomMapBuilder
 import ktaf.rendering.frames.ansi.AnsiSceneFrameBuilder
-import ktaf.rendering.frames.html.HtmlAboutFrameBuilder
-import ktaf.rendering.frames.html.HtmlCompletionFrameBuilder
-import ktaf.rendering.frames.html.HtmlConversationFrameBuilder
-import ktaf.rendering.frames.html.HtmlGameOverFrameBuilder
-import ktaf.rendering.frames.html.HtmlHelpFrameBuilder
-import ktaf.rendering.frames.html.HtmlPageBuilder
-import ktaf.rendering.frames.html.HtmlTitleFrameBuilder
-import ktaf.rendering.frames.html.HtmlTransitionFrameBuilder
+import ktaf.rendering.frames.html.HTMLAboutFrameBuilder
+import ktaf.rendering.frames.html.HTMLCompletionFrameBuilder
+import ktaf.rendering.frames.html.HTMLConversationFrameBuilder
+import ktaf.rendering.frames.html.HTMLElementType
+import ktaf.rendering.frames.html.HTMLGameOverFrameBuilder
+import ktaf.rendering.frames.html.HTMLHelpFrameBuilder
+import ktaf.rendering.frames.html.HTMLPageBuilder
+import ktaf.rendering.frames.html.HTMLRegionMapFrameBuilder
+import ktaf.rendering.frames.html.HTMLTitleFrameBuilder
+import ktaf.rendering.frames.html.HTMLTransitionFrameBuilder
 import java.util.concurrent.locks.ReentrantLock
-import javax.swing.JLabel
+import javax.swing.JEditorPane
 import javax.swing.SwingUtilities
 
 /**
  * Provides an [IOConfiguration] for Swing with A specified [output] controls.
  */
 internal class SwingConfiguration(
-    private val output: JLabel,
+    private val output: JEditorPane,
     private val allowInputChangedListener: AllowInputChangedListener? = null
 ) : IOConfiguration {
     private var command: String? = ""
@@ -64,12 +63,7 @@ internal class SwingConfiguration(
     override val displayTextOutput: DisplayTextOutput
         get() = object : DisplayTextOutput {
             override fun invoke(value: String) {
-                // get newline
-                val newline = newline()
-                // convert to HTML, replace newlines with breaks
-                val formatted = value.replace(newline, "<br>", true)
-
-                val runnable = Runnable { output.text = "<html>$formatted</html>" }
+                val runnable = Runnable { output.text = value }
                 SwingUtilities.invokeLater(runnable)
             }
         }
@@ -127,21 +121,25 @@ internal class SwingConfiguration(
     override val frameBuilders: FrameBuilderCollection
         get() {
             val gridStringBuilder = AnsiGridStringBuilder()
-            val htmlBuilder = HtmlPageBuilder()
+            val htmlBuilder = HTMLPageBuilder(HTMLElementType.Document("ktaf frame", mainCss))
             return FrameBuilderCollection(
-                HtmlTitleFrameBuilder(htmlBuilder),
-                HtmlAboutFrameBuilder(htmlBuilder),
-                HtmlHelpFrameBuilder(htmlBuilder),
-                HtmlTransitionFrameBuilder(htmlBuilder),
-                HtmlCompletionFrameBuilder(htmlBuilder),
-                HtmlGameOverFrameBuilder(htmlBuilder),
-                HtmlConversationFrameBuilder(htmlBuilder),
+                HTMLTitleFrameBuilder(htmlBuilder),
+                HTMLAboutFrameBuilder(htmlBuilder),
+                HTMLHelpFrameBuilder(htmlBuilder),
+                HTMLTransitionFrameBuilder(htmlBuilder),
+                HTMLCompletionFrameBuilder(htmlBuilder),
+                HTMLGameOverFrameBuilder(htmlBuilder),
+                HTMLConversationFrameBuilder(htmlBuilder),
                 AnsiSceneFrameBuilder(gridStringBuilder, AnsiRoomMapBuilder()),
-                AnsiRegionMapFrameBuilder(gridStringBuilder, AnsiRegionMapBuilder())
+                HTMLRegionMapFrameBuilder(htmlBuilder)
             )
         }
 
     internal interface AllowInputChangedListener {
         fun invoke(allowInput: Boolean)
+    }
+
+    private companion object {
+        private val mainCss: String = "body { background-color: black; font-size: 11; margin: 10px; font-family: Consolas, monospace; color: white; }"
     }
 }

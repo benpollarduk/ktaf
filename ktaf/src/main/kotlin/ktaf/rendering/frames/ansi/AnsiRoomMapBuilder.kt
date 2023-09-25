@@ -5,8 +5,6 @@ import ktaf.assets.locations.Room
 import ktaf.assets.locations.ViewPoint
 import ktaf.rendering.FramePosition
 import ktaf.rendering.KeyType
-import ktaf.rendering.frames.RoomMapBuilder
-import java.util.*
 
 /**
  * Provides an ANSI [Room] map builder.
@@ -25,7 +23,7 @@ public class AnsiRoomMapBuilder(
     private val lockedExitColor: AnsiColor = AnsiColor.RED,
     private val visitedExitColor: AnsiColor = AnsiColor.YELLOW,
     private val unvisitedExitColor: AnsiColor = AnsiColor.GREEN
-) : RoomMapBuilder {
+) {
     private fun drawNorthBorder(
         room: Room,
         viewPoint: ViewPoint,
@@ -287,7 +285,11 @@ public class AnsiRoomMapBuilder(
         return endPosition
     }
 
-    override fun build(
+    /**
+     * Build a map of a [Room] on a [ansiGridStringBuilder] with a [room] and a [viewPoint], with a [startX] and [startY]
+     * position. Return the end [FramePosition].
+     */
+    public fun build(
         ansiGridStringBuilder: AnsiGridStringBuilder,
         room: Room,
         viewPoint: ViewPoint,

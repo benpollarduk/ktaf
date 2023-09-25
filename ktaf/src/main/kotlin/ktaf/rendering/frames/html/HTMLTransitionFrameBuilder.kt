@@ -8,8 +8,8 @@ import ktaf.rendering.frames.TransitionFrameBuilder
 /**
  * Provides an HTML transition frame builder that builds in to the specified [htmlPageBuilder].
  */
-public class HtmlTransitionFrameBuilder(
-    private val htmlPageBuilder: HtmlPageBuilder
+public class HTMLTransitionFrameBuilder(
+    private val htmlPageBuilder: HTMLPageBuilder
 ) : TransitionFrameBuilder {
     override fun build(title: String, message: String, game: Game): Frame {
         htmlPageBuilder.h1(title)
@@ -17,7 +17,7 @@ public class HtmlTransitionFrameBuilder(
         htmlPageBuilder.br()
         htmlPageBuilder.p(message.ensureFinishedSentence())
 
-        return HtmlFrame(htmlPageBuilder).also {
+        return HTMLFrame(htmlPageBuilder).also {
             it.acceptsInput = false
         }
     }

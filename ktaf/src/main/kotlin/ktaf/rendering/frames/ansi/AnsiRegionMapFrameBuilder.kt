@@ -4,7 +4,6 @@ import ktaf.assets.locations.Region
 import ktaf.logic.Game
 import ktaf.rendering.FramePosition
 import ktaf.rendering.frames.Frame
-import ktaf.rendering.frames.RegionMapBuilder
 import ktaf.rendering.frames.RegionMapFrameBuilder
 
 /**
@@ -12,7 +11,7 @@ import ktaf.rendering.frames.RegionMapFrameBuilder
  */
 public class AnsiRegionMapFrameBuilder(
     private val ansiGridStringBuilder: AnsiGridStringBuilder,
-    private val regionMapBuilder: RegionMapBuilder,
+    private val regionMapBuilder: AnsiRegionMapBuilder,
     private val backgroundColor: AnsiColor = AnsiColor.RESET,
     private val borderColor: AnsiColor = AnsiColor.BRIGHT_BLACK,
     private val titleColor: AnsiColor = AnsiColor.WHITE

@@ -6,16 +6,16 @@ import ktaf.conversations.Paragraph
 import ktaf.conversations.Response
 import ktaf.interpretation.ConversationCommandInterpreter
 import ktaf.logic.GameTestHelper
-import ktaf.rendering.frames.html.HtmlConversationFrameBuilder
-import ktaf.rendering.frames.html.HtmlPageBuilder
+import ktaf.rendering.frames.html.HTMLConversationFrameBuilder
+import ktaf.rendering.frames.html.HTMLPageBuilder
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class HtmlConversationFrameBuilderTest {
+class HTMLConversationFrameBuilderTest {
     @Test
     fun `given defaults when build then string with some length returned`() {
         // Given
-        val builder = HtmlConversationFrameBuilder(HtmlPageBuilder())
+        val builder = HTMLConversationFrameBuilder(HTMLPageBuilder())
         val game = GameTestHelper.getBlankGame()
         NonPlayableCharacter("Test Character", "A Test Character").also { character ->
             val paragraph1 = Paragraph("First I said this.")

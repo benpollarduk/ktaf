@@ -9,8 +9,8 @@ import ktaf.rendering.frames.HelpFrameBuilder
 /**
  * Provides an HTML help frame builder that builds in to the specified [htmlPageBuilder].
  */
-public class HtmlHelpFrameBuilder(
-    private val htmlPageBuilder: HtmlPageBuilder
+public class HTMLHelpFrameBuilder(
+    private val htmlPageBuilder: HTMLPageBuilder
 ) : HelpFrameBuilder {
     override fun build(title: String, description: String, commands: List<CommandHelp>, game: Game): Frame {
         htmlPageBuilder.h1(game.name)
@@ -29,7 +29,7 @@ public class HtmlHelpFrameBuilder(
             htmlPageBuilder.br()
         }
 
-        return HtmlFrame(htmlPageBuilder).also {
+        return HTMLFrame(htmlPageBuilder).also {
             it.acceptsInput = false
         }
     }

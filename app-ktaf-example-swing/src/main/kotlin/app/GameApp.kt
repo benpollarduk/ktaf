@@ -5,12 +5,10 @@ import ktaf.helpers.DebugHelper
 import ktaf.logic.Game
 import ktaf.logic.GameCreator
 import java.awt.BorderLayout
-import java.awt.Color
-import java.awt.Font
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
+import javax.swing.JEditorPane
 import javax.swing.JFrame
-import javax.swing.JLabel
 import javax.swing.JPanel
 import javax.swing.JTextField
 import javax.swing.SwingUtilities
@@ -24,7 +22,7 @@ class GameApp : JFrame("app-example-swing") {
         this.layout = BorderLayout()
 
         // create components
-        val output = JLabel()
+        val output = JEditorPane()
         val input = JTextField()
         val outputPanel = JPanel()
         val inputPanel = JPanel()
@@ -37,9 +35,8 @@ class GameApp : JFrame("app-example-swing") {
 
         // configure output UI
         outputPanel.layout = BorderLayout()
-        outputPanel.background = Color.BLACK
-        output.font = Font("Consolas", Font.PLAIN, 11)
-        output.foreground = Color.WHITE
+        output.contentType = "text/html"
+        output.isEditable = false
 
         // configure input UI
         inputPanel.layout = BorderLayout()

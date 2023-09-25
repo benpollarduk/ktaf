@@ -6,10 +6,9 @@ import ktaf.assets.locations.Region
 import ktaf.assets.locations.Room
 import ktaf.assets.locations.RoomPosition
 import ktaf.rendering.FramePosition
-import ktaf.rendering.frames.RegionMapBuilder
 
 /**
- * Provides an ANSI region map builder that builds in to the specified [gridStringBuilder].
+ * Provides an ANSI region map builder.
  */
 public class AnsiRegionMapBuilder(
     private val lockedExit: Char = 'x',
@@ -26,7 +25,7 @@ public class AnsiRegionMapBuilder(
     private val lockedExitColor: AnsiColor = AnsiColor.RED,
     private val lowerFloorColor: AnsiColor = AnsiColor.BRIGHT_BLACK,
     private val showLowerFloors: Boolean = true
-) : RegionMapBuilder {
+) {
     private fun drawCurrentFloorRoom(
         room: Room,
         left: Int,
@@ -201,7 +200,11 @@ public class AnsiRegionMapBuilder(
         }
     }
 
-    override fun build(
+    /**
+     * Build a map of a [Region] on a [ansiGridStringBuilder] with a [region] and a [viewPoint], with a [width] and [height]. Return the end
+     * [FramePosition].
+     */
+    public fun build(
         ansiGridStringBuilder: AnsiGridStringBuilder,
         region: Region,
         x: Int,

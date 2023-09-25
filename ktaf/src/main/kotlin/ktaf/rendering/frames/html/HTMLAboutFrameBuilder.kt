@@ -8,8 +8,8 @@ import ktaf.rendering.frames.Frame
 /**
  * Provides an HTML about frame builder that builds in to the specified [htmlPageBuilder].
  */
-public class HtmlAboutFrameBuilder(
-    private val htmlPageBuilder: HtmlPageBuilder
+public class HTMLAboutFrameBuilder(
+    private val htmlPageBuilder: HTMLPageBuilder
 ) : AboutFrameBuilder {
     override fun build(title: String, game: Game): Frame {
         htmlPageBuilder.h1(title)
@@ -25,7 +25,7 @@ public class HtmlAboutFrameBuilder(
             htmlPageBuilder.h2("BP.AdventureFramework by Ben Pollard 2011 - 2023.")
         }
 
-        return HtmlFrame(htmlPageBuilder).also {
+        return HTMLFrame(htmlPageBuilder).also {
             it.acceptsInput = false
         }
     }

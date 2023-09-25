@@ -12,7 +12,6 @@ import ktaf.logic.Game
 import ktaf.rendering.FramePosition
 import ktaf.rendering.KeyType
 import ktaf.rendering.frames.Frame
-import ktaf.rendering.frames.RoomMapBuilder
 import ktaf.rendering.frames.SceneFrameBuilder
 import ktaf.utilities.StringUtilities
 import kotlin.math.max
@@ -22,7 +21,7 @@ import kotlin.math.max
  */
 public class AnsiSceneFrameBuilder(
     private val ansiGridStringBuilder: AnsiGridStringBuilder,
-    private val roomMapBuilder: RoomMapBuilder,
+    private val roomMapBuilder: AnsiRoomMapBuilder,
     private val backgroundColor: AnsiColor = AnsiColor.RESET,
     private val borderColor: AnsiColor = AnsiColor.BRIGHT_BLACK,
     private val textColor: AnsiColor = AnsiColor.WHITE,

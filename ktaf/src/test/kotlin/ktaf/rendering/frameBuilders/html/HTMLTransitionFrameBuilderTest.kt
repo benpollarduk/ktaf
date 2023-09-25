@@ -1,19 +1,19 @@
 package ktaf.rendering.frameBuilders.html
 
 import ktaf.logic.GameTestHelper
-import ktaf.rendering.frames.html.HtmlCompletionFrameBuilder
-import ktaf.rendering.frames.html.HtmlPageBuilder
+import ktaf.rendering.frames.html.HTMLPageBuilder
+import ktaf.rendering.frames.html.HTMLTransitionFrameBuilder
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class HtmlCompletionFrameBuilderTest {
+class HTMLTransitionFrameBuilderTest {
     @Test
     fun `given defaults when build then string with some length returned`() {
         // Given
-        val builder = HtmlCompletionFrameBuilder(HtmlPageBuilder())
+        val builder = HTMLTransitionFrameBuilder(HTMLPageBuilder())
 
         // When
-        val result = builder.build("Test", "Test Reason", GameTestHelper.getBlankGame()).toString()
+        val result = builder.build("Test", "Test Transition", GameTestHelper.getBlankGame()).toString()
         print(result)
 
         // Then

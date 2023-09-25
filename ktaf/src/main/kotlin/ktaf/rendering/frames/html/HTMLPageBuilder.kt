@@ -3,9 +3,11 @@ package ktaf.rendering.frames.html
 import java.lang.StringBuilder
 
 /**
- * Provides functionality for building HTML pages.
+ * Provides functionality for building HTML pages. Specify the build mode with the [mode] property.
  */
-public class HtmlPageBuilder {
+public class HTMLPageBuilder(
+    public val mode: HTMLElementType = HTMLElementType.Document()
+) {
     private val builder = StringBuilder()
     override fun toString(): String {
         return builder.toString()
