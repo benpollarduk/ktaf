@@ -38,7 +38,7 @@ public class Game private constructor(
     public val author: String,
     public val player: PlayableCharacter,
     public val overworld: Overworld,
-    public val displaySize: Size,
+    public val frameSize: Size,
     private val completionCondition: EndCheck,
     private val gameOverCondition: EndCheck,
     private val exitMode: ExitMode,
@@ -65,16 +65,9 @@ public class Game private constructor(
     /**
      * Determines if this [Game] is executing.
      */
-    public var isExecuting: Boolean = false
-        private set
+    private var isExecuting: Boolean = false
 
-    /**
-     * Specifies the size to use for frames.
-     */
-    public var frameSize: Size = defaultSize
-        private set
-
-    private var currentFrame: Frame = ioConfiguration.frameBuilders.aboutFrameBuilder.build("", this, displaySize.width, displaySize.height)
+    private var currentFrame: Frame = ioConfiguration.frameBuilders.aboutFrameBuilder.build("", this)
     private var state: GameState = GameState.NOT_STARTED
     private val startingFrameDrawCallbacks: MutableList<FrameDraw> = mutableListOf()
     private val finishedFrameDrawCallbacks: MutableList<FrameDraw> = mutableListOf()
@@ -126,7 +119,7 @@ public class Game private constructor(
      * Display the about frame.
      */
     internal fun displayAbout() {
-        refresh(ioConfiguration.frameBuilders.aboutFrameBuilder.build("About", this, displaySize.width, displaySize.height))
+        refresh(ioConfiguration.frameBuilders.aboutFrameBuilder.build("About", this))
     }
 
     /**
@@ -141,8 +134,7 @@ public class Game private constructor(
                 "Help",
                 "",
                 commands.distinct(),
-                displaySize.width,
-                displaySize.height
+                this
             )
         )
     }
@@ -154,7 +146,7 @@ public class Game private constructor(
         val region = overworld.currentRegion
 
         if (region != null) {
-            refresh(ioConfiguration.frameBuilders.regionMapFrameBuilder.build(region, displaySize.width, displaySize.height))
+            refresh(ioConfiguration.frameBuilders.regionMapFrameBuilder.build(region, this))
         } else {
             refresh(getFallbackFrame())
         }
@@ -164,7 +156,7 @@ public class Game private constructor(
      * Display a transition frame with a specified [title] and [message].
      */
     public fun displayTransition(title: String, message: String) {
-        refresh(ioConfiguration.frameBuilders.transitionFrameBuilder.build(title, message, displaySize.width, displaySize.height))
+        refresh(ioConfiguration.frameBuilders.transitionFrameBuilder.build(title, message, this))
     }
 
     private fun execute() {
@@ -174,47 +166,47 @@ public class Game private constructor(
 
         isExecuting = true
 
-        refresh(ioConfiguration.frameBuilders.titleFrameBuilder.build(name, introduction, displaySize.width, displaySize.height))
+        refresh(ioConfiguration.frameBuilders.titleFrameBuilder.build(this))
 
         var input = ""
         var reaction = Reaction(ReactionResult.ERROR, "Error.")
 
         do {
-            var displayReactiontToInput = true
+            var displayReactionToInput = true
             var completionCheckResult = completionCondition(this)
             var gameOverCheckResult = gameOverCondition(this)
             val converser = activeConverser
 
-            if (completionCheckResult.conditionMet) {
-                refresh(
-                    ioConfiguration.frameBuilders.completionFrameBuilder.build(
-                        completionCheckResult.title,
-                        completionCheckResult.description,
-                        displaySize.width,
-                        displaySize.height
+            when {
+                completionCheckResult.conditionMet -> {
+                    refresh(
+                        ioConfiguration.frameBuilders.completionFrameBuilder.build(
+                            completionCheckResult.title,
+                            completionCheckResult.description,
+                            this
+                        )
                     )
-                )
-                end()
-            } else if (gameOverCheckResult.conditionMet) {
-                refresh(
-                    ioConfiguration.frameBuilders.gameOverFrameBuilder.build(
-                        gameOverCheckResult.title,
-                        gameOverCheckResult.description,
-                        displaySize.width,
-                        displaySize.height
+                    end()
+                }
+                gameOverCheckResult.conditionMet -> {
+                    refresh(
+                        ioConfiguration.frameBuilders.gameOverFrameBuilder.build(
+                            gameOverCheckResult.title,
+                            gameOverCheckResult.description,
+                            this
+                        )
                     )
-                )
-                end()
-            } else if (converser != null) {
-                refresh(
-                    ioConfiguration.frameBuilders.conversationFrameBuilder.build(
-                        "Conversation with ${converser.identifier.name}",
-                        converser,
-                        interpreter.getContextualCommandHelp(this),
-                        displaySize.width,
-                        displaySize.height
+                    end()
+                }
+                converser != null -> {
+                    refresh(
+                        ioConfiguration.frameBuilders.conversationFrameBuilder.build(
+                            "Conversation with ${converser.identifier.name}",
+                            interpreter.getContextualCommandHelp(this),
+                            this
+                        )
                     )
-                )
+                }
             }
 
             if (!currentFrame.acceptsInput) {
@@ -229,31 +221,35 @@ public class Game private constructor(
             when (state) {
                 GameState.NOT_STARTED -> {
                     enter()
-                    displayReactiontToInput = false
+                    displayReactionToInput = false
                 }
                 GameState.ACTIVE -> {
                     if (!currentFrame.acceptsInput) {
                         refresh()
-                        displayReactiontToInput = false
+                        displayReactionToInput = false
                     } else {
                         input = input.preen()
                         val interpretation = interpreter.interpret(input, this)
 
-                        if (interpretation.interpretedSuccessfully) {
-                            reaction = interpretation.command.invoke(this)
-                        } else if (input.isNotEmpty()) {
-                            reaction = Reaction(ReactionResult.ERROR, "$input was not valid input.")
-                        } else {
-                            reaction = Reaction(ReactionResult.OK, "")
+                        reaction = when {
+                            interpretation.interpretedSuccessfully -> {
+                                interpretation.command.invoke(this)
+                            }
+                            input.isNotEmpty() -> {
+                                Reaction(ReactionResult.ERROR, "$input was not valid input.")
+                            }
+                            else -> {
+                                Reaction(ReactionResult.OK, "")
+                            }
                         }
                     }
                 }
                 GameState.FINISHED -> {
-                    displayReactiontToInput = false
+                    displayReactionToInput = false
                 }
             }
 
-            if (displayReactiontToInput) {
+            if (displayReactionToInput) {
                 when (reaction.result) {
                     ReactionResult.ERROR -> {
                         val message = "$errorPrefix: ${reaction.description}"
@@ -294,8 +290,7 @@ public class Game private constructor(
         return ioConfiguration.frameBuilders.transitionFrameBuilder.build(
             "Error",
             "Couldn't refresh frame.",
-            displaySize.width,
-            displaySize.height
+            this
         )
     }
 
@@ -318,12 +313,10 @@ public class Game private constructor(
                 ioConfiguration.frameBuilders.sceneFrameBuilder.build(
                     room,
                     ViewPoint(region),
-                    player,
+                    this,
                     message,
                     if (displayCommandListInSceneFrames) interpreter.getContextualCommandHelp(this) else emptyList(),
-                    sceneMapKeyType,
-                    displaySize.width,
-                    displaySize.height
+                    sceneMapKeyType
                 )
             )
         } else {
@@ -384,6 +377,8 @@ public class Game private constructor(
     }
 
     public companion object {
+        private val defaultSize: Size = Size(80, 50)
+
         /**
          * Get the default prefix to use for errors.
          */
@@ -405,11 +400,6 @@ public class Game private constructor(
         )
 
         /**
-         * Get the default frame size.
-         */
-        public val defaultSize: Size = Size(80, 50)
-
-        /**
          * Create a new instance of a [GameCreator].
          */
         public fun create(
@@ -421,7 +411,7 @@ public class Game private constructor(
             playerCreator: PlayableCharacterCreation,
             completionCondition: EndCheck,
             gameOverCondition: EndCheck,
-            displaySize: Size = defaultSize,
+            frameSize: Size = defaultSize,
             exitMode: ExitMode = ExitMode.RETURN_TO_TITLE_SCREEN,
             errorPrefix: String = defaultErrorPrefix,
             interpreter: Interpreter = defaultInterpreters,
@@ -436,7 +426,7 @@ public class Game private constructor(
                     author,
                     player,
                     overworldCreator(player),
-                    displaySize,
+                    frameSize,
                     completionCondition,
                     gameOverCondition,
                     exitMode,

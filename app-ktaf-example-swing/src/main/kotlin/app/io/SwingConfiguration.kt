@@ -9,18 +9,19 @@ import ktaf.io.WaitForAcknowledge
 import ktaf.io.WaitForCommand
 import ktaf.rendering.FramePosition
 import ktaf.rendering.frames.FrameBuilderCollection
-import ktaf.rendering.frames.ansi.AnsiAboutFrameBuilder
-import ktaf.rendering.frames.ansi.AnsiCompletionFrameBuilder
-import ktaf.rendering.frames.ansi.AnsiConversationFrameBuilder
-import ktaf.rendering.frames.ansi.AnsiGameOverFrameBuilder
 import ktaf.rendering.frames.ansi.AnsiGridStringBuilder
-import ktaf.rendering.frames.ansi.AnsiHelpFrameBuilder
 import ktaf.rendering.frames.ansi.AnsiRegionMapBuilder
 import ktaf.rendering.frames.ansi.AnsiRegionMapFrameBuilder
 import ktaf.rendering.frames.ansi.AnsiRoomMapBuilder
 import ktaf.rendering.frames.ansi.AnsiSceneFrameBuilder
-import ktaf.rendering.frames.ansi.AnsiTitleFrameBuilder
-import ktaf.rendering.frames.ansi.AnsiTransitionFrameBuilder
+import ktaf.rendering.frames.html.HtmlAboutFrameBuilder
+import ktaf.rendering.frames.html.HtmlCompletionFrameBuilder
+import ktaf.rendering.frames.html.HtmlConversationFrameBuilder
+import ktaf.rendering.frames.html.HtmlGameOverFrameBuilder
+import ktaf.rendering.frames.html.HtmlHelpFrameBuilder
+import ktaf.rendering.frames.html.HtmlPageBuilder
+import ktaf.rendering.frames.html.HtmlTitleFrameBuilder
+import ktaf.rendering.frames.html.HtmlTransitionFrameBuilder
 import java.util.concurrent.locks.ReentrantLock
 import javax.swing.JLabel
 import javax.swing.SwingUtilities
@@ -30,7 +31,7 @@ import javax.swing.SwingUtilities
  */
 internal class SwingConfiguration(
     private val output: JLabel,
-    private val allowInputChandedListener: AllowInputChandedListener? = null
+    private val allowInputChangedListener: AllowInputChangedListener? = null
 ) : IOConfiguration {
     private var command: String? = ""
     private var acknowledgementReceived: Boolean? = null
@@ -60,19 +61,6 @@ internal class SwingConfiguration(
         }
     }
 
-    /**
-     * Reset all input.
-     */
-    internal fun resetInput() {
-        try {
-            lock.lock()
-            acknowledgementReceived = null
-            command = null
-        } finally {
-            lock.unlock()
-        }
-    }
-
     override val displayTextOutput: DisplayTextOutput
         get() = object : DisplayTextOutput {
             override fun invoke(value: String) {
@@ -95,7 +83,7 @@ internal class SwingConfiguration(
                             acknowledgementReceived = null
                             return true
                         } else if (acknowledgementReceived == false) {
-                            acknowledgementReceived == null
+                            acknowledgementReceived = null
                             return false
                         }
                     } finally {
@@ -133,26 +121,27 @@ internal class SwingConfiguration(
     override val adjustInput: AdjustInput
         get() = object : AdjustInput {
             override fun invoke(allowInput: Boolean, cursorPosition: FramePosition) {
-                allowInputChandedListener?.invoke(allowInput)
+                allowInputChangedListener?.invoke(allowInput)
             }
         }
     override val frameBuilders: FrameBuilderCollection
         get() {
             val gridStringBuilder = AnsiGridStringBuilder()
+            val htmlBuilder = HtmlPageBuilder()
             return FrameBuilderCollection(
-                AnsiTitleFrameBuilder(gridStringBuilder),
-                AnsiAboutFrameBuilder(gridStringBuilder),
-                AnsiHelpFrameBuilder(gridStringBuilder),
-                AnsiTransitionFrameBuilder(gridStringBuilder),
-                AnsiCompletionFrameBuilder(gridStringBuilder),
-                AnsiGameOverFrameBuilder(gridStringBuilder),
-                AnsiConversationFrameBuilder(gridStringBuilder),
+                HtmlTitleFrameBuilder(htmlBuilder),
+                HtmlAboutFrameBuilder(htmlBuilder),
+                HtmlHelpFrameBuilder(htmlBuilder),
+                HtmlTransitionFrameBuilder(htmlBuilder),
+                HtmlCompletionFrameBuilder(htmlBuilder),
+                HtmlGameOverFrameBuilder(htmlBuilder),
+                HtmlConversationFrameBuilder(htmlBuilder),
                 AnsiSceneFrameBuilder(gridStringBuilder, AnsiRoomMapBuilder()),
                 AnsiRegionMapFrameBuilder(gridStringBuilder, AnsiRegionMapBuilder())
             )
         }
 
-    internal interface AllowInputChandedListener {
+    internal interface AllowInputChangedListener {
         fun invoke(allowInput: Boolean)
     }
 }

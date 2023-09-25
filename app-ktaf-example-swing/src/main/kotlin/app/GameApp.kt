@@ -28,7 +28,7 @@ class GameApp : JFrame("app-example-swing") {
         val input = JTextField()
         val outputPanel = JPanel()
         val inputPanel = JPanel()
-        val allowInputListener = object : SwingConfiguration.AllowInputChandedListener {
+        val allowInputListener = object : SwingConfiguration.AllowInputChangedListener {
             override fun invoke(allowInput: Boolean) {
                 currentFrameAcceptsInput = allowInput
             }

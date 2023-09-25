@@ -1,7 +1,5 @@
 package ktaf.rendering.frameBuilders.ansi
 
-import ktaf.assets.Item
-import ktaf.assets.characters.PlayableCharacter
 import ktaf.assets.locations.Direction
 import ktaf.assets.locations.Exit
 import ktaf.assets.locations.Room
@@ -9,6 +7,7 @@ import ktaf.assets.locations.ViewPoint
 import ktaf.helpers.DebugHelper
 import ktaf.interpretation.CommandHelp
 import ktaf.logic.Game
+import ktaf.logic.GameTestHelper
 import ktaf.rendering.KeyType
 import ktaf.rendering.frames.ansi.AnsiGridStringBuilder
 import ktaf.rendering.frames.ansi.AnsiRoomMapBuilder
@@ -34,12 +33,10 @@ class AnsiSceneFrameBuilderTest {
         val result = builder.build(
             startRoom,
             viewPoint,
-            PlayableCharacter("Player", "", listOf(Item("Test item", ""))),
+            GameTestHelper.getBlankGame(),
             "",
             listOf(CommandHelp("Test", "Test command.")),
-            KeyType.DYNAMIC,
-            80,
-            50
+            KeyType.DYNAMIC
         ).toString()
         print(result)
 
@@ -61,12 +58,10 @@ class AnsiSceneFrameBuilderTest {
             sceneFrameBuilder.build(
                 room,
                 view,
-                game.player,
+                game,
                 "",
                 Game.defaultInterpreters.getContextualCommandHelp(game),
-                KeyType.FULL,
-                game.displaySize.width,
-                game.displaySize.height
+                KeyType.FULL
             )
         }
     }

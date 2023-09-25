@@ -7,7 +7,7 @@ import ktaf.logic.Game
  */
 public interface AboutFrameBuilder {
     /**
-     * Build a frame with a [title], [game], [width] and [height]
+     * Build a frame with a [title] and [game].
      */
-    public fun build(title: String, game: Game, width: Int, height: Int): Frame
+    public fun build(title: String, game: Game): Frame
 }

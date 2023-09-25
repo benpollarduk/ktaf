@@ -1,6 +1,7 @@
 package ktaf.rendering.frameBuilders.ansi
 
 import ktaf.assets.locations.Room
+import ktaf.logic.GameTestHelper
 import ktaf.rendering.frames.ansi.AnsiGridStringBuilder
 import ktaf.rendering.frames.ansi.AnsiRegionMapBuilder
 import ktaf.rendering.frames.ansi.AnsiRegionMapFrameBuilder
@@ -20,7 +21,7 @@ class AnsiRegionMapFrameBuilderTest {
         val region = regionMaker.make()
 
         // When
-        val result = builder.build(region, 80, 50).toString()
+        val result = builder.build(region, GameTestHelper.getBlankGame()).toString()
         print(result)
 
         // Then

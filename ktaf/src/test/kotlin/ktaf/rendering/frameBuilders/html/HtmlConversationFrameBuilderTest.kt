@@ -1,4 +1,4 @@
-package ktaf.rendering.frameBuilders.ansi
+package ktaf.rendering.frameBuilders.html
 
 import ktaf.assets.characters.NonPlayableCharacter
 import ktaf.conversations.Conversation
@@ -6,16 +6,16 @@ import ktaf.conversations.Paragraph
 import ktaf.conversations.Response
 import ktaf.interpretation.ConversationCommandInterpreter
 import ktaf.logic.GameTestHelper
-import ktaf.rendering.frames.ansi.AnsiConversationFrameBuilder
-import ktaf.rendering.frames.ansi.AnsiGridStringBuilder
+import ktaf.rendering.frames.html.HtmlConversationFrameBuilder
+import ktaf.rendering.frames.html.HtmlPageBuilder
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class AnsiConversationFrameBuilderTest {
+class HtmlConversationFrameBuilderTest {
     @Test
     fun `given defaults when build then string with some length returned`() {
         // Given
-        val builder = AnsiConversationFrameBuilder(AnsiGridStringBuilder())
+        val builder = HtmlConversationFrameBuilder(HtmlPageBuilder())
         val game = GameTestHelper.getBlankGame()
         NonPlayableCharacter("Test Character", "A Test Character").also { character ->
             val paragraph1 = Paragraph("First I said this.")

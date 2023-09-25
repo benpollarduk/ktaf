@@ -1,5 +1,6 @@
 package ktaf.rendering.frameBuilders.ansi
 
+import ktaf.logic.GameTestHelper
 import ktaf.rendering.frames.ansi.AnsiGridStringBuilder
 import ktaf.rendering.frames.ansi.AnsiTransitionFrameBuilder
 import org.junit.jupiter.api.Assertions
@@ -12,7 +13,7 @@ class AnsiTransitionFrameBuilderTest {
         val builder = AnsiTransitionFrameBuilder(AnsiGridStringBuilder())
 
         // When
-        val result = builder.build("Test", "This is a test frame", 80, 50).toString()
+        val result = builder.build("Test", "This is a test frame", GameTestHelper.getBlankGame()).toString()
         print(result)
 
         // Then

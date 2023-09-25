@@ -1,7 +1,7 @@
 package ktaf.rendering.frames.ansi
 
-import ktaf.assets.Size
 import ktaf.extensions.ensureFinishedSentence
+import ktaf.logic.Game
 import ktaf.rendering.FramePosition
 import ktaf.rendering.frames.Frame
 import ktaf.rendering.frames.TitleFrameBuilder
@@ -16,15 +16,15 @@ public class AnsiTitleFrameBuilder(
     private val titleColor: AnsiColor = AnsiColor.WHITE,
     private val descriptionColor: AnsiColor = AnsiColor.WHITE
 ) : TitleFrameBuilder {
-    override fun build(title: String, description: String, width: Int, height: Int): Frame {
-        val availableWidth = width - 4
+    override fun build(game: Game): Frame {
+        val availableWidth = game.frameSize.width - 4
         val leftMargin = 2
 
-        ansiGridStringBuilder.resize(Size(width, height))
+        ansiGridStringBuilder.resize(game.frameSize)
         ansiGridStringBuilder.drawBoundary(borderColor)
-        val lastPosition: FramePosition = ansiGridStringBuilder.drawWrapped(title, leftMargin, 2, availableWidth, titleColor)
-        ansiGridStringBuilder.drawUnderline(leftMargin, lastPosition.y + 1, title.length, titleColor)
-        ansiGridStringBuilder.drawWrapped(description.ensureFinishedSentence(), leftMargin, lastPosition.y + 3, availableWidth, descriptionColor)
+        val lastPosition: FramePosition = ansiGridStringBuilder.drawWrapped(game.name, leftMargin, 2, availableWidth, titleColor)
+        ansiGridStringBuilder.drawUnderline(leftMargin, lastPosition.y + 1, game.name.length, titleColor)
+        ansiGridStringBuilder.drawWrapped(game.description.ensureFinishedSentence(), leftMargin, lastPosition.y + 3, availableWidth, descriptionColor)
 
         return AnsiGridTextFrame(ansiGridStringBuilder, 0, 0, backgroundColor).also {
             it.acceptsInput = false

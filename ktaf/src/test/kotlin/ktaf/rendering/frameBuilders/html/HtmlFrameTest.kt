@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 class HtmlFrameTest {
     @Test
-    fun `given black builder when render then does not throw exception`() {
+    fun `given blank builder when render then does not throw exception`() {
         // Then
         Assertions.assertDoesNotThrow {
             // Given

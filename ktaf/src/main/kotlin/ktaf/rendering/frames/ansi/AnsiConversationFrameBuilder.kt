@@ -1,10 +1,9 @@
 package ktaf.rendering.frames.ansi
 
-import ktaf.assets.Size
-import ktaf.conversations.Converser
 import ktaf.conversations.LogItem
 import ktaf.conversations.Participant
 import ktaf.interpretation.CommandHelp
+import ktaf.logic.Game
 import ktaf.rendering.FramePosition
 import ktaf.rendering.frames.ConversationFrameBuilder
 import ktaf.rendering.frames.Frame
@@ -41,21 +40,16 @@ public class AnsiConversationFrameBuilder(
         return truncated.toList()
     }
 
-    override fun build(
-        title: String,
-        converser: Converser,
-        commands: List<CommandHelp>,
-        width: Int,
-        height: Int
-    ): Frame {
-        val availableWidth = width - 4
-        val availableHeight = height - 2
+    override fun build(title: String, commands: List<CommandHelp>, game: Game): Frame {
+        val availableWidth = game.frameSize.width - 4
+        val availableHeight = game.frameSize.height - 2
         val leftMargin = 2
         val linePadding = 2
         var lastPosition = FramePosition(0, 2)
-        val log = converser.conversation.log
+        val converser = game.activeConverser
+        val log = converser?.conversation?.log ?: emptyList()
 
-        ansiGridStringBuilder.resize(Size(width, height))
+        ansiGridStringBuilder.resize(game.frameSize)
         ansiGridStringBuilder.drawBoundary(borderColor)
 
         if (title.isNotEmpty()) {
@@ -69,7 +63,7 @@ public class AnsiConversationFrameBuilder(
             val truncatedLog = truncateLog(leftMargin, availableWidth, spaceForLog, log)
             truncatedLog.forEach {
                 lastPosition = FramePosition(lastPosition.x, lastPosition.y + 1)
-                val converserName = converser.identifier.name
+                val converserName = converser?.identifier?.name
 
                 lastPosition = when (it.participant) {
                     Participant.PLAYER -> {
@@ -101,7 +95,7 @@ public class AnsiConversationFrameBuilder(
         ansiGridStringBuilder.drawHorizontalDivider(availableHeight - 1, borderColor)
         ansiGridStringBuilder.drawWrapped(">", leftMargin, availableHeight, availableWidth, inputColor)
 
-        return AnsiGridTextFrame(ansiGridStringBuilder, 5, height - 1, backgroundColor).also {
+        return AnsiGridTextFrame(ansiGridStringBuilder, 5, game.frameSize.height - 1, backgroundColor).also {
             it.acceptsInput = true
         }
     }
