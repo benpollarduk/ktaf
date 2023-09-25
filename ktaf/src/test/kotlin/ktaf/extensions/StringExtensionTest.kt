@@ -2,6 +2,7 @@ package ktaf.extensions
 
 import ktaf.assets.Identifier
 import ktaf.assets.Item
+import ktaf.helpers.newline
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -701,5 +702,18 @@ class StringExtensionTest {
 
         // Then
         Assertions.assertEquals("\n", result)
+    }
+
+    @Test
+    fun `given 3 lines total 2 padding when removing whitespace lines then return 1 line`() {
+        // Given
+        val newline = newline()
+        val value = "${newline}Test$newline$newline"
+
+        // When
+        val result = value.removeWhitespaceLines()
+
+        // Then
+        Assertions.assertEquals("Test$newline", result)
     }
 }

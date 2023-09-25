@@ -1,4 +1,4 @@
-package ktaf.rendering.frameBuilders.ansi
+package ktaf.rendering.frames.ansi
 
 import ktaf.assets.characters.NonPlayableCharacter
 import ktaf.conversations.Conversation
@@ -6,8 +6,6 @@ import ktaf.conversations.Paragraph
 import ktaf.conversations.Response
 import ktaf.interpretation.ConversationCommandInterpreter
 import ktaf.logic.GameTestHelper
-import ktaf.rendering.frames.ansi.AnsiConversationFrameBuilder
-import ktaf.rendering.frames.ansi.AnsiGridStringBuilder
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 

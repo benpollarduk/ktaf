@@ -3,6 +3,7 @@ package ktaf.extensions
 import ktaf.assets.Description
 import ktaf.assets.Examinable
 import ktaf.assets.Identifier
+import ktaf.helpers.newline
 import java.lang.NumberFormatException
 
 /**
@@ -203,6 +204,23 @@ public fun String.addSentence(sentence: String): String {
     }
 
     return "$this $sentence"
+}
+
+/**
+ * Remove any lines of whitespace from this [String].
+ */
+public fun String.removeWhitespaceLines(): String {
+    val newline = newline()
+    val lines = this.split(newline)
+    var noPaddingLines = ""
+
+    lines.forEach { line ->
+        if (line.isNotEmpty() && line.any { it != ' ' }) {
+            noPaddingLines += line + newline
+        }
+    }
+
+    return noPaddingLines
 }
 
 /**

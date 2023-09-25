@@ -1,4 +1,4 @@
-package ktaf.rendering.frameBuilders.ansi
+package ktaf.rendering.frames.ansi
 
 import ktaf.assets.locations.Direction
 import ktaf.assets.locations.Exit
@@ -9,9 +9,6 @@ import ktaf.interpretation.CommandHelp
 import ktaf.logic.Game
 import ktaf.logic.GameTestHelper
 import ktaf.rendering.KeyType
-import ktaf.rendering.frames.ansi.AnsiGridStringBuilder
-import ktaf.rendering.frames.ansi.AnsiRoomMapBuilder
-import ktaf.rendering.frames.ansi.AnsiSceneFrameBuilder
 import ktaf.utilities.RegionMaker
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test

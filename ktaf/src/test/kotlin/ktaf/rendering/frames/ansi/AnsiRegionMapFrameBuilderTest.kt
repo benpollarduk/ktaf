@@ -1,10 +1,7 @@
-package ktaf.rendering.frameBuilders.ansi
+package ktaf.rendering.frames.ansi
 
 import ktaf.assets.locations.Room
 import ktaf.logic.GameTestHelper
-import ktaf.rendering.frames.ansi.AnsiGridStringBuilder
-import ktaf.rendering.frames.ansi.AnsiRegionMapBuilder
-import ktaf.rendering.frames.ansi.AnsiRegionMapFrameBuilder
 import ktaf.utilities.RegionMaker
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test

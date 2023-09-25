@@ -1,8 +1,6 @@
-package ktaf.rendering.frameBuilders.html
+package ktaf.rendering.frames.html
 
 import ktaf.logic.GameTestHelper
-import ktaf.rendering.frames.html.HTMLCompletionFrameBuilder
-import ktaf.rendering.frames.html.HTMLPageBuilder
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 

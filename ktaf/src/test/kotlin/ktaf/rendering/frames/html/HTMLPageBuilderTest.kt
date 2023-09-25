@@ -1,12 +1,11 @@
-package ktaf.rendering.frameBuilders.html
+package ktaf.rendering.frames.html
 
-import ktaf.rendering.frames.html.HTMLPageBuilder
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 class HTMLPageBuilderTest {
     @Test
-    fun `given test when h1 then correctly formatted h1 returned`() {
+    fun `given test when h1 then correctly formatted html returned`() {
         // Given
         val builder = HTMLPageBuilder()
 
@@ -19,7 +18,7 @@ class HTMLPageBuilderTest {
     }
 
     @Test
-    fun `given test when h2 then correctly formatted h2 returned`() {
+    fun `given test when h2 then correctly formatted html returned`() {
         // Given
         val builder = HTMLPageBuilder()
 
@@ -32,7 +31,7 @@ class HTMLPageBuilderTest {
     }
 
     @Test
-    fun `given test when h3 then correctly formatted h3 returned`() {
+    fun `given test when h3 then correctly formatted html returned`() {
         // Given
         val builder = HTMLPageBuilder()
 
@@ -45,7 +44,20 @@ class HTMLPageBuilderTest {
     }
 
     @Test
-    fun `given test when p then correctly formatted p returned`() {
+    fun `given test when h4 then correctly formatted html returned`() {
+        // Given
+        val builder = HTMLPageBuilder()
+
+        // When
+        builder.h4("Test")
+        val result = builder.toString()
+
+        // Then
+        Assertions.assertEquals("<h4>Test</h4>", result)
+    }
+
+    @Test
+    fun `given test when p then correctly formatted html returned`() {
         // Given
         val builder = HTMLPageBuilder()
 
@@ -58,7 +70,7 @@ class HTMLPageBuilderTest {
     }
 
     @Test
-    fun `given test when u then correctly formatted p returned`() {
+    fun `given test when u then correctly formatted html returned`() {
         // Given
         val builder = HTMLPageBuilder()
 
@@ -71,7 +83,7 @@ class HTMLPageBuilderTest {
     }
 
     @Test
-    fun `given test when i then correctly formatted p returned`() {
+    fun `given test when i then correctly formatted html returned`() {
         // Given
         val builder = HTMLPageBuilder()
 
@@ -84,7 +96,7 @@ class HTMLPageBuilderTest {
     }
 
     @Test
-    fun `given test when b then correctly formatted p returned`() {
+    fun `given test when b then correctly formatted html returned`() {
         // Given
         val builder = HTMLPageBuilder()
 
@@ -97,7 +109,7 @@ class HTMLPageBuilderTest {
     }
 
     @Test
-    fun `given test when append then correctly formatted p returned`() {
+    fun `given test when append then correctly formatted html returned`() {
         // Given
         val builder = HTMLPageBuilder()
 
@@ -110,7 +122,20 @@ class HTMLPageBuilderTest {
     }
 
     @Test
-    fun `given br then correctly formatted br returned`() {
+    fun `given test when pre then correctly formatted html returned`() {
+        // Given
+        val builder = HTMLPageBuilder()
+
+        // When
+        builder.pre("Test")
+        val result = builder.toString()
+
+        // Then
+        Assertions.assertEquals("<pre>Test</pre>", result)
+    }
+
+    @Test
+    fun `given br then correctly formatted html returned`() {
         // Given
         val builder = HTMLPageBuilder()
         builder.br()

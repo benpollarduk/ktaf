@@ -1,9 +1,6 @@
-package ktaf.rendering.frameBuilders.html
+package ktaf.rendering.frames.html
 
 import ktaf.io.configurations.AnsiConsoleConfiguration
-import ktaf.rendering.frames.html.HTMLElementType
-import ktaf.rendering.frames.html.HTMLFrame
-import ktaf.rendering.frames.html.HTMLPageBuilder
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 

@@ -1,16 +1,14 @@
-package ktaf.rendering.frameBuilders.ansi
+package ktaf.rendering.frames.html
 
 import ktaf.logic.GameTestHelper
-import ktaf.rendering.frames.ansi.AnsiAboutFrameBuilder
-import ktaf.rendering.frames.ansi.AnsiGridStringBuilder
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class AnsiAboutFrameBuilderTest {
+class HTMLAboutFrameBuilderTest {
     @Test
     fun `given defaults when build then string with some length returned`() {
         // Given
-        val builder = AnsiAboutFrameBuilder(AnsiGridStringBuilder())
+        val builder = HTMLAboutFrameBuilder(HTMLPageBuilder())
 
         // When
         val result = builder.build("Test", GameTestHelper.getBlankGame()).toString()

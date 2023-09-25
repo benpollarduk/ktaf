@@ -8,6 +8,7 @@ import ktaf.io.WaitForAcknowledge
 import ktaf.io.WaitForCommand
 import ktaf.rendering.FramePosition
 import ktaf.rendering.frames.FrameBuilderCollection
+import ktaf.rendering.frames.GridRegionMapBuilder
 import ktaf.rendering.frames.ansi.AnsiGridStringBuilder
 import ktaf.rendering.frames.ansi.AnsiRoomMapBuilder
 import ktaf.rendering.frames.ansi.AnsiSceneFrameBuilder
@@ -131,7 +132,7 @@ internal class SwingConfiguration(
                 HTMLGameOverFrameBuilder(htmlBuilder),
                 HTMLConversationFrameBuilder(htmlBuilder),
                 AnsiSceneFrameBuilder(gridStringBuilder, AnsiRoomMapBuilder()),
-                HTMLRegionMapFrameBuilder(htmlBuilder)
+                HTMLRegionMapFrameBuilder(htmlBuilder, GridRegionMapBuilder())
             )
         }
 

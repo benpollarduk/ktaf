@@ -1,9 +1,7 @@
-package ktaf.rendering.frameBuilders.ansi
+package ktaf.rendering.frames.ansi
 
 import ktaf.interpretation.CommandHelp
 import ktaf.logic.GameTestHelper
-import ktaf.rendering.frames.ansi.AnsiGridStringBuilder
-import ktaf.rendering.frames.ansi.AnsiHelpFrameBuilder
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 

@@ -1,4 +1,4 @@
-package ktaf.rendering.frameBuilders.ansi
+package ktaf.rendering.frames.ansi
 
 import ktaf.assets.Item
 import ktaf.assets.Size
@@ -7,9 +7,6 @@ import ktaf.assets.locations.Exit
 import ktaf.assets.locations.Room
 import ktaf.assets.locations.ViewPoint
 import ktaf.rendering.KeyType
-import ktaf.rendering.frames.ansi.AnsiGridStringBuilder
-import ktaf.rendering.frames.ansi.AnsiGridTextFrame
-import ktaf.rendering.frames.ansi.AnsiRoomMapBuilder
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 

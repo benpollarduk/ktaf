@@ -162,4 +162,22 @@ public class AnsiGridStringBuilder(
     public fun flush() {
         buffer = Array(displaySize.width) { Array(displaySize.height) { ' ' } }
     }
+
+    override fun toString(): String {
+        val stringBuilder = StringBuilder()
+        val newLine = newline()
+
+        for (y in 0 until displaySize.height) {
+            for (x in 0 until displaySize.width) {
+                stringBuilder.append(getCharacter(x, y))
+            }
+
+            // for all but the last line append the newline
+            if (y < displaySize.height - 1) {
+                stringBuilder.append(newLine)
+            }
+        }
+
+        return stringBuilder.toString()
+    }
 }

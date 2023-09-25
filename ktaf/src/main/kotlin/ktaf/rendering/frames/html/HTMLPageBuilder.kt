@@ -83,6 +83,13 @@ public class HTMLPageBuilder(
         builder.append("<br>")
     }
 
+    /**
+     * Append pre-formatted.
+     */
+    public fun pre(value: String) {
+        append("pre", value)
+    }
+
     private fun append(tag: String, value: String) {
         val tags = listOf(tag)
         append(tags, value)

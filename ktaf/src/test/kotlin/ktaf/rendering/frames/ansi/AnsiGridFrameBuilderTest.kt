@@ -1,8 +1,6 @@
-package ktaf.rendering.frameBuilders.ansi
+package ktaf.rendering.frames.ansi
 
 import ktaf.assets.Size
-import ktaf.rendering.frames.ansi.AnsiColor
-import ktaf.rendering.frames.ansi.AnsiGridStringBuilder
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
