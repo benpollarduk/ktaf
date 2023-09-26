@@ -10,9 +10,8 @@ import ktaf.io.WaitForCommand
 import ktaf.rendering.FramePosition
 import ktaf.rendering.frames.FrameBuilderCollection
 import ktaf.rendering.frames.GridRegionMapBuilder
+import ktaf.rendering.frames.GridRoomMapBuilder
 import ktaf.rendering.frames.ansi.AnsiGridStringBuilder
-import ktaf.rendering.frames.ansi.AnsiRoomMapBuilder
-import ktaf.rendering.frames.ansi.AnsiSceneFrameBuilder
 import ktaf.rendering.frames.html.HTMLAboutFrameBuilder
 import ktaf.rendering.frames.html.HTMLCompletionFrameBuilder
 import ktaf.rendering.frames.html.HTMLConversationFrameBuilder
@@ -21,6 +20,7 @@ import ktaf.rendering.frames.html.HTMLGameOverFrameBuilder
 import ktaf.rendering.frames.html.HTMLHelpFrameBuilder
 import ktaf.rendering.frames.html.HTMLPageBuilder
 import ktaf.rendering.frames.html.HTMLRegionMapFrameBuilder
+import ktaf.rendering.frames.html.HTMLSceneFrameBuilder
 import ktaf.rendering.frames.html.HTMLTitleFrameBuilder
 import ktaf.rendering.frames.html.HTMLTransitionFrameBuilder
 import java.util.concurrent.locks.ReentrantLock
@@ -122,7 +122,6 @@ internal class SwingConfiguration(
         }
     override val frameBuilders: FrameBuilderCollection
         get() {
-            val gridStringBuilder = AnsiGridStringBuilder()
             val htmlBuilder = HTMLPageBuilder(HTMLElementType.Document("ktaf frame", mainCss))
             val frameSize = Size(80, 50)
             return FrameBuilderCollection(
@@ -133,7 +132,7 @@ internal class SwingConfiguration(
                 HTMLCompletionFrameBuilder(htmlBuilder),
                 HTMLGameOverFrameBuilder(htmlBuilder),
                 HTMLConversationFrameBuilder(htmlBuilder),
-                AnsiSceneFrameBuilder(gridStringBuilder, AnsiRoomMapBuilder(), frameSize),
+                HTMLSceneFrameBuilder(htmlBuilder, GridRoomMapBuilder(), frameSize),
                 HTMLRegionMapFrameBuilder(htmlBuilder, GridRegionMapBuilder(), frameSize)
             )
         }
