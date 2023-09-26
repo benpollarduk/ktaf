@@ -1,7 +1,7 @@
 package ktaf.rendering.frames.ansi
 
+import ktaf.assets.Size
 import ktaf.extensions.ensureFinishedSentence
-import ktaf.logic.Game
 import ktaf.rendering.FramePosition
 import ktaf.rendering.frames.Frame
 import ktaf.rendering.frames.TransitionFrameBuilder
@@ -11,17 +11,18 @@ import ktaf.rendering.frames.TransitionFrameBuilder
  */
 public class AnsiTransitionFrameBuilder(
     private val ansiGridStringBuilder: AnsiGridStringBuilder,
+    private val frameSize: Size,
     private val backgroundColor: AnsiColor = AnsiColor.RESET,
     private val borderColor: AnsiColor = AnsiColor.BRIGHT_BLACK,
     private val titleColor: AnsiColor = AnsiColor.GREEN,
     private val messageColor: AnsiColor = AnsiColor.YELLOW
 ) : TransitionFrameBuilder {
-    override fun build(title: String, message: String, game: Game): Frame {
-        val availableWidth = game.frameSize.width - 4
+    override fun build(title: String, message: String): Frame {
+        val availableWidth = frameSize.width - 4
         val leftMargin = 2
         var lastPosition = FramePosition(0, 2)
 
-        ansiGridStringBuilder.resize(game.frameSize)
+        ansiGridStringBuilder.resize(frameSize)
         ansiGridStringBuilder.drawBoundary(borderColor)
 
         if (title.isNotEmpty()) {

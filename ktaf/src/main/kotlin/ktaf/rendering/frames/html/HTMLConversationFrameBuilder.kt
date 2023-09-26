@@ -1,8 +1,8 @@
 package ktaf.rendering.frames.html
 
+import ktaf.conversations.Converser
 import ktaf.conversations.Participant
 import ktaf.interpretation.CommandHelp
-import ktaf.logic.Game
 import ktaf.rendering.frames.ConversationFrameBuilder
 import ktaf.rendering.frames.Frame
 
@@ -12,9 +12,8 @@ import ktaf.rendering.frames.Frame
 public class HTMLConversationFrameBuilder(
     private val htmlPageBuilder: HTMLPageBuilder
 ) : ConversationFrameBuilder {
-    override fun build(title: String, commands: List<CommandHelp>, game: Game): Frame {
-        val converser = game.activeConverser
-        val log = converser?.conversation?.log ?: emptyList()
+    override fun build(title: String, converser: Converser, commands: List<CommandHelp>): Frame {
+        val log = converser.conversation.log
 
         if (title.isNotEmpty()) {
             htmlPageBuilder.h1(title)
@@ -24,7 +23,7 @@ public class HTMLConversationFrameBuilder(
 
         if (log.any()) {
             log.forEach {
-                val converserName = converser?.identifier?.name
+                val converserName = converser.identifier.name
 
                 when (it.participant) {
                     Participant.PLAYER -> {

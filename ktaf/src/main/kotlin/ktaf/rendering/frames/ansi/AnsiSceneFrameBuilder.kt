@@ -1,5 +1,7 @@
 package ktaf.rendering.frames.ansi
 
+import ktaf.assets.Size
+import ktaf.assets.characters.PlayableCharacter
 import ktaf.assets.locations.Region
 import ktaf.assets.locations.Room
 import ktaf.assets.locations.ViewPoint
@@ -8,7 +10,6 @@ import ktaf.extensions.addSentence
 import ktaf.extensions.ensureFinishedSentence
 import ktaf.extensions.insensitiveEquals
 import ktaf.interpretation.CommandHelp
-import ktaf.logic.Game
 import ktaf.rendering.FramePosition
 import ktaf.rendering.KeyType
 import ktaf.rendering.frames.Frame
@@ -22,6 +23,7 @@ import kotlin.math.max
 public class AnsiSceneFrameBuilder(
     private val ansiGridStringBuilder: AnsiGridStringBuilder,
     private val roomMapBuilder: AnsiRoomMapBuilder,
+    private val frameSize: Size,
     private val backgroundColor: AnsiColor = AnsiColor.RESET,
     private val borderColor: AnsiColor = AnsiColor.BRIGHT_BLACK,
     private val textColor: AnsiColor = AnsiColor.WHITE,
@@ -45,19 +47,19 @@ public class AnsiSceneFrameBuilder(
     override fun build(
         room: Room,
         viewPoint: ViewPoint,
-        game: Game,
+        playableCharacter: PlayableCharacter,
         message: String,
         contextualCommands: List<CommandHelp>,
         keyType: KeyType
     ): Frame {
-        val availableWidth = game.frameSize.width - 4
-        val availableHeight = game.frameSize.height - 2
+        val availableWidth = frameSize.width - 4
+        val availableHeight = frameSize.height - 2
         val leftMargin = 2
         val linePadding = 2
         val displayMessage = message.isNotEmpty() && (!isMovementConfirmation(message) || !suppressMovementMessages)
         val acceptInput = !(displayMessagesInIsolation && displayMessage)
 
-        ansiGridStringBuilder.resize(game.frameSize)
+        ansiGridStringBuilder.resize(frameSize)
         ansiGridStringBuilder.drawBoundary(borderColor)
         var lastPosition: FramePosition = ansiGridStringBuilder.drawWrapped(room.identifier.name, leftMargin, 2, availableWidth, textColor)
         ansiGridStringBuilder.drawUnderline(leftMargin, lastPosition.y + 1, room.identifier.name.length, textColor)
@@ -82,8 +84,8 @@ public class AnsiSceneFrameBuilder(
             lastPosition = ansiGridStringBuilder.drawWrapped(extendedDescription, leftMargin, lastPosition.y + linePadding, availableWidth, textColor)
             lastPosition = roomMapBuilder.build(ansiGridStringBuilder, room, viewPoint, keyType, leftMargin, lastPosition.y + linePadding)
 
-            if (game.player.items.any()) {
-                lastPosition = ansiGridStringBuilder.drawWrapped("You have: " + StringUtilities.constructExaminablesAsSentence(game.player.items), leftMargin, lastPosition.y + 2, availableWidth, textColor)
+            if (playableCharacter.items.any()) {
+                lastPosition = ansiGridStringBuilder.drawWrapped("You have: " + StringUtilities.constructExaminablesAsSentence(playableCharacter.items), leftMargin, lastPosition.y + 2, availableWidth, textColor)
             }
 
             if (!displayMessagesInIsolation && !displayMessage) {
@@ -95,7 +97,7 @@ public class AnsiSceneFrameBuilder(
                 val requiredSpaceForDivider = 3
                 val requiredSpaceForPrompt = 4
                 val requiredSpaceForCommandHeader = 3
-                val requiredYToFitAllCommands = game.frameSize.height - requiredSpaceForCommandHeader - requiredSpaceForPrompt - requiredSpaceForDivider - contextualCommands.size
+                val requiredYToFitAllCommands = frameSize.height - requiredSpaceForCommandHeader - requiredSpaceForPrompt - requiredSpaceForDivider - contextualCommands.size
                 val yStart = max(requiredYToFitAllCommands, lastPosition.y)
                 val maxCommandLength = contextualCommands.maxOf { it.command.length }
                 val padding = 4
@@ -118,7 +120,7 @@ public class AnsiSceneFrameBuilder(
             ansiGridStringBuilder.drawWrapped(">", leftMargin, availableHeight, availableWidth, inputColor)
         }
 
-        return AnsiGridTextFrame(ansiGridStringBuilder, 5, game.frameSize.height - 1, backgroundColor).also {
+        return AnsiGridTextFrame(ansiGridStringBuilder, 5, frameSize.height - 1, backgroundColor).also {
             it.acceptsInput = acceptInput
         }
     }

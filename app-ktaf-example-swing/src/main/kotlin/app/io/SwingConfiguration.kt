@@ -1,5 +1,6 @@
 package app.io
 
+import ktaf.assets.Size
 import ktaf.io.AdjustInput
 import ktaf.io.ClearOutput
 import ktaf.io.DisplayTextOutput
@@ -123,6 +124,7 @@ internal class SwingConfiguration(
         get() {
             val gridStringBuilder = AnsiGridStringBuilder()
             val htmlBuilder = HTMLPageBuilder(HTMLElementType.Document("ktaf frame", mainCss))
+            val frameSize = Size(80, 50)
             return FrameBuilderCollection(
                 HTMLTitleFrameBuilder(htmlBuilder),
                 HTMLAboutFrameBuilder(htmlBuilder),
@@ -131,8 +133,8 @@ internal class SwingConfiguration(
                 HTMLCompletionFrameBuilder(htmlBuilder),
                 HTMLGameOverFrameBuilder(htmlBuilder),
                 HTMLConversationFrameBuilder(htmlBuilder),
-                AnsiSceneFrameBuilder(gridStringBuilder, AnsiRoomMapBuilder()),
-                HTMLRegionMapFrameBuilder(htmlBuilder, GridRegionMapBuilder())
+                AnsiSceneFrameBuilder(gridStringBuilder, AnsiRoomMapBuilder(), frameSize),
+                HTMLRegionMapFrameBuilder(htmlBuilder, GridRegionMapBuilder(), frameSize)
             )
         }
 

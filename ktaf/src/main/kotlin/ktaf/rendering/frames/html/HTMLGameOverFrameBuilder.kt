@@ -1,7 +1,6 @@
 package ktaf.rendering.frames.html
 
 import ktaf.extensions.ensureFinishedSentence
-import ktaf.logic.Game
 import ktaf.rendering.frames.Frame
 import ktaf.rendering.frames.GameOverFrameBuilder
 
@@ -11,7 +10,7 @@ import ktaf.rendering.frames.GameOverFrameBuilder
 public class HTMLGameOverFrameBuilder(
     private val htmlPageBuilder: HTMLPageBuilder
 ) : GameOverFrameBuilder {
-    override fun build(title: String, reason: String, game: Game): Frame {
+    override fun build(title: String, reason: String): Frame {
         htmlPageBuilder.h1(title)
         htmlPageBuilder.br()
         htmlPageBuilder.br()

@@ -1,7 +1,6 @@
 package ktaf.rendering.frames.html
 
 import ktaf.extensions.ensureFinishedSentence
-import ktaf.logic.Game
 import ktaf.rendering.frames.Frame
 import ktaf.rendering.frames.TitleFrameBuilder
 
@@ -11,10 +10,10 @@ import ktaf.rendering.frames.TitleFrameBuilder
 public class HTMLTitleFrameBuilder(
     private val htmlPageBuilder: HTMLPageBuilder
 ) : TitleFrameBuilder {
-    override fun build(game: Game): Frame {
-        htmlPageBuilder.h1(game.name)
+    override fun build(title: String, introduction: String): Frame {
+        htmlPageBuilder.h1(title)
         htmlPageBuilder.br()
-        htmlPageBuilder.p(game.description.ensureFinishedSentence())
+        htmlPageBuilder.p(introduction.ensureFinishedSentence())
 
         return HTMLFrame(htmlPageBuilder).also {
             it.acceptsInput = false

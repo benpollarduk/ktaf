@@ -1,13 +1,11 @@
 package ktaf.rendering.frames
 
-import ktaf.logic.Game
-
 /**
  * Provides a standard interface for about frames.
  */
 public interface AboutFrameBuilder {
     /**
-     * Build a frame with a [title] and [game].
+     * Build a frame with a [title], [description] and [author].
      */
-    public fun build(title: String, game: Game): Frame
+    public fun build(title: String, description: String, author: String): Frame
 }

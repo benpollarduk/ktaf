@@ -1,5 +1,6 @@
 package ktaf.rendering.frames.ansi
 
+import ktaf.assets.Size
 import ktaf.assets.characters.NonPlayableCharacter
 import ktaf.conversations.Conversation
 import ktaf.conversations.Paragraph
@@ -13,9 +14,9 @@ class AnsiConversationFrameBuilderTest {
     @Test
     fun `given defaults when build then string with some length returned`() {
         // Given
-        val builder = AnsiConversationFrameBuilder(AnsiGridStringBuilder())
+        val builder = AnsiConversationFrameBuilder(AnsiGridStringBuilder(), Size(80, 50))
         val game = GameTestHelper.getBlankGame()
-        NonPlayableCharacter("Test Character", "A Test Character").also { character ->
+        val npc = NonPlayableCharacter("Test Character", "A Test Character").also { character ->
             val paragraph1 = Paragraph("First I said this.")
             val paragraph2 = Paragraph("Then I said a load more.")
             val paragraph3 = Paragraph("A test paragraph, this is something that is said.").also {
@@ -37,8 +38,8 @@ class AnsiConversationFrameBuilderTest {
         // When
         val result = builder.build(
             "Test",
-            commands,
-            game
+            npc,
+            commands
         ).toString()
         print(result)
 

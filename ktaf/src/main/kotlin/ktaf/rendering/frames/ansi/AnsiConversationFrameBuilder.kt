@@ -1,9 +1,10 @@
 package ktaf.rendering.frames.ansi
 
+import ktaf.assets.Size
+import ktaf.conversations.Converser
 import ktaf.conversations.LogItem
 import ktaf.conversations.Participant
 import ktaf.interpretation.CommandHelp
-import ktaf.logic.Game
 import ktaf.rendering.FramePosition
 import ktaf.rendering.frames.ConversationFrameBuilder
 import ktaf.rendering.frames.Frame
@@ -13,6 +14,7 @@ import ktaf.rendering.frames.Frame
  */
 public class AnsiConversationFrameBuilder(
     private val ansiGridStringBuilder: AnsiGridStringBuilder,
+    private val frameSize: Size,
     private val backgroundColor: AnsiColor = AnsiColor.RESET,
     private val borderColor: AnsiColor = AnsiColor.BRIGHT_BLACK,
     private val titleColor: AnsiColor = AnsiColor.GREEN,
@@ -40,16 +42,15 @@ public class AnsiConversationFrameBuilder(
         return truncated.toList()
     }
 
-    override fun build(title: String, commands: List<CommandHelp>, game: Game): Frame {
-        val availableWidth = game.frameSize.width - 4
-        val availableHeight = game.frameSize.height - 2
+    override fun build(title: String, converser: Converser, commands: List<CommandHelp>): Frame {
+        val availableWidth = frameSize.width - 4
+        val availableHeight = frameSize.height - 2
         val leftMargin = 2
         val linePadding = 2
         var lastPosition = FramePosition(0, 2)
-        val converser = game.activeConverser
-        val log = converser?.conversation?.log ?: emptyList()
+        val log = converser.conversation.log
 
-        ansiGridStringBuilder.resize(game.frameSize)
+        ansiGridStringBuilder.resize(frameSize)
         ansiGridStringBuilder.drawBoundary(borderColor)
 
         if (title.isNotEmpty()) {
@@ -63,7 +64,7 @@ public class AnsiConversationFrameBuilder(
             val truncatedLog = truncateLog(leftMargin, availableWidth, spaceForLog, log)
             truncatedLog.forEach {
                 lastPosition = FramePosition(lastPosition.x, lastPosition.y + 1)
-                val converserName = converser?.identifier?.name
+                val converserName = converser.identifier.name
 
                 lastPosition = when (it.participant) {
                     Participant.PLAYER -> {
@@ -95,7 +96,7 @@ public class AnsiConversationFrameBuilder(
         ansiGridStringBuilder.drawHorizontalDivider(availableHeight - 1, borderColor)
         ansiGridStringBuilder.drawWrapped(">", leftMargin, availableHeight, availableWidth, inputColor)
 
-        return AnsiGridTextFrame(ansiGridStringBuilder, 5, game.frameSize.height - 1, backgroundColor).also {
+        return AnsiGridTextFrame(ansiGridStringBuilder, 5, frameSize.height - 1, backgroundColor).also {
             it.acceptsInput = true
         }
     }

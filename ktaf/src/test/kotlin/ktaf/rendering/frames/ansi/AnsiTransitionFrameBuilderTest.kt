@@ -1,6 +1,6 @@
 package ktaf.rendering.frames.ansi
 
-import ktaf.logic.GameTestHelper
+import ktaf.assets.Size
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -8,10 +8,10 @@ class AnsiTransitionFrameBuilderTest {
     @Test
     fun `given defaults when build then string with some length returned`() {
         // Given
-        val builder = AnsiTransitionFrameBuilder(AnsiGridStringBuilder())
+        val builder = AnsiTransitionFrameBuilder(AnsiGridStringBuilder(), Size(80, 50))
 
         // When
-        val result = builder.build("Test", "This is a test frame", GameTestHelper.getBlankGame()).toString()
+        val result = builder.build("Test", "This is a test frame").toString()
         print(result)
 
         // Then

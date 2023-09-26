@@ -38,7 +38,6 @@ public class Game private constructor(
     public val author: String,
     public val player: PlayableCharacter,
     public val overworld: Overworld,
-    public val frameSize: Size,
     private val completionCondition: EndCheck,
     private val gameOverCondition: EndCheck,
     private val exitMode: ExitMode,
@@ -67,7 +66,7 @@ public class Game private constructor(
      */
     private var isExecuting: Boolean = false
 
-    private var currentFrame: Frame = ioConfiguration.frameBuilders.aboutFrameBuilder.build("", this)
+    private var currentFrame: Frame = ioConfiguration.frameBuilders.aboutFrameBuilder.build(name, description, author)
     private var state: GameState = GameState.NOT_STARTED
     private val startingFrameDrawCallbacks: MutableList<FrameDraw> = mutableListOf()
     private val finishedFrameDrawCallbacks: MutableList<FrameDraw> = mutableListOf()
@@ -119,7 +118,7 @@ public class Game private constructor(
      * Display the about frame.
      */
     internal fun displayAbout() {
-        refresh(ioConfiguration.frameBuilders.aboutFrameBuilder.build("About", this))
+        refresh(ioConfiguration.frameBuilders.aboutFrameBuilder.build("About", this.description, this.author))
     }
 
     /**
@@ -133,8 +132,7 @@ public class Game private constructor(
             ioConfiguration.frameBuilders.helpFrameBuilder.build(
                 "Help",
                 "",
-                commands.distinct(),
-                this
+                commands.distinct()
             )
         )
     }
@@ -146,7 +144,7 @@ public class Game private constructor(
         val region = overworld.currentRegion
 
         if (region != null) {
-            refresh(ioConfiguration.frameBuilders.regionMapFrameBuilder.build(region, this))
+            refresh(ioConfiguration.frameBuilders.regionMapFrameBuilder.build(region))
         } else {
             refresh(getFallbackFrame())
         }
@@ -156,7 +154,7 @@ public class Game private constructor(
      * Display a transition frame with a specified [title] and [message].
      */
     public fun displayTransition(title: String, message: String) {
-        refresh(ioConfiguration.frameBuilders.transitionFrameBuilder.build(title, message, this))
+        refresh(ioConfiguration.frameBuilders.transitionFrameBuilder.build(title, message))
     }
 
     private fun execute() {
@@ -166,7 +164,7 @@ public class Game private constructor(
 
         isExecuting = true
 
-        refresh(ioConfiguration.frameBuilders.titleFrameBuilder.build(this))
+        refresh(ioConfiguration.frameBuilders.titleFrameBuilder.build(name, introduction))
 
         var input = ""
         var reaction = Reaction(ReactionResult.ERROR, "Error.")
@@ -182,8 +180,7 @@ public class Game private constructor(
                     refresh(
                         ioConfiguration.frameBuilders.completionFrameBuilder.build(
                             completionCheckResult.title,
-                            completionCheckResult.description,
-                            this
+                            completionCheckResult.description
                         )
                     )
                     end()
@@ -192,8 +189,7 @@ public class Game private constructor(
                     refresh(
                         ioConfiguration.frameBuilders.gameOverFrameBuilder.build(
                             gameOverCheckResult.title,
-                            gameOverCheckResult.description,
-                            this
+                            gameOverCheckResult.description
                         )
                     )
                     end()
@@ -202,8 +198,8 @@ public class Game private constructor(
                     refresh(
                         ioConfiguration.frameBuilders.conversationFrameBuilder.build(
                             "Conversation with ${converser.identifier.name}",
-                            interpreter.getContextualCommandHelp(this),
-                            this
+                            converser,
+                            interpreter.getContextualCommandHelp(this)
                         )
                     )
                 }
@@ -289,8 +285,7 @@ public class Game private constructor(
     private fun getFallbackFrame(): Frame {
         return ioConfiguration.frameBuilders.transitionFrameBuilder.build(
             "Error",
-            "Couldn't refresh frame.",
-            this
+            "Couldn't refresh frame."
         )
     }
 
@@ -313,7 +308,7 @@ public class Game private constructor(
                 ioConfiguration.frameBuilders.sceneFrameBuilder.build(
                     room,
                     ViewPoint(region),
-                    this,
+                    player,
                     message,
                     if (displayCommandListInSceneFrames) interpreter.getContextualCommandHelp(this) else emptyList(),
                     sceneMapKeyType
@@ -411,7 +406,6 @@ public class Game private constructor(
             playerCreator: PlayableCharacterCreation,
             completionCondition: EndCheck,
             gameOverCondition: EndCheck,
-            frameSize: Size = defaultSize,
             exitMode: ExitMode = ExitMode.RETURN_TO_TITLE_SCREEN,
             errorPrefix: String = defaultErrorPrefix,
             interpreter: Interpreter = defaultInterpreters,
@@ -426,7 +420,6 @@ public class Game private constructor(
                     author,
                     player,
                     overworldCreator(player),
-                    frameSize,
                     completionCondition,
                     gameOverCondition,
                     exitMode,

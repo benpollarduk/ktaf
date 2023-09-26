@@ -15,7 +15,7 @@ class HTMLConversationFrameBuilderTest {
         // Given
         val builder = HTMLConversationFrameBuilder(HTMLPageBuilder())
         val game = GameTestHelper.getBlankGame()
-        NonPlayableCharacter("Test Character", "A Test Character").also { character ->
+        val npc = NonPlayableCharacter("Test Character", "A Test Character").also { character ->
             val paragraph1 = Paragraph("First I said this.")
             val paragraph2 = Paragraph("Then I said a load more.")
             val paragraph3 = Paragraph("A test paragraph, this is something that is said.").also {
@@ -37,8 +37,8 @@ class HTMLConversationFrameBuilderTest {
         // When
         val result = builder.build(
             "Test",
-            commands,
-            game
+            npc,
+            commands
         ).toString()
         print(result)
 

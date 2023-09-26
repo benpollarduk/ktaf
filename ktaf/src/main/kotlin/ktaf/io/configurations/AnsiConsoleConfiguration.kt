@@ -1,5 +1,6 @@
 package ktaf.io.configurations
 
+import ktaf.assets.Size
 import ktaf.io.AdjustInput
 import ktaf.io.ClearOutput
 import ktaf.io.DisplayTextOutput
@@ -78,16 +79,17 @@ public object AnsiConsoleConfiguration : IOConfiguration {
     override val frameBuilders: FrameBuilderCollection
         get() {
             val gridStringBuilder = AnsiGridStringBuilder()
+            val frameSize = Size(80, 50)
             return FrameBuilderCollection(
-                AnsiTitleFrameBuilder(gridStringBuilder),
-                AnsiAboutFrameBuilder(gridStringBuilder),
-                AnsiHelpFrameBuilder(gridStringBuilder),
-                AnsiTransitionFrameBuilder(gridStringBuilder),
-                AnsiCompletionFrameBuilder(gridStringBuilder),
-                AnsiGameOverFrameBuilder(gridStringBuilder),
-                AnsiConversationFrameBuilder(gridStringBuilder),
-                AnsiSceneFrameBuilder(gridStringBuilder, AnsiRoomMapBuilder()),
-                AnsiRegionMapFrameBuilder(gridStringBuilder, AnsiRegionMapBuilder())
+                AnsiTitleFrameBuilder(gridStringBuilder, frameSize),
+                AnsiAboutFrameBuilder(gridStringBuilder, frameSize),
+                AnsiHelpFrameBuilder(gridStringBuilder, frameSize),
+                AnsiTransitionFrameBuilder(gridStringBuilder, frameSize),
+                AnsiCompletionFrameBuilder(gridStringBuilder, frameSize),
+                AnsiGameOverFrameBuilder(gridStringBuilder, frameSize),
+                AnsiConversationFrameBuilder(gridStringBuilder, frameSize),
+                AnsiSceneFrameBuilder(gridStringBuilder, AnsiRoomMapBuilder(), frameSize),
+                AnsiRegionMapFrameBuilder(gridStringBuilder, AnsiRegionMapBuilder(), frameSize)
             )
         }
 }

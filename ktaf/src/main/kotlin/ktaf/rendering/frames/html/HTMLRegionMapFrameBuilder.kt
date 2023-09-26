@@ -1,9 +1,9 @@
 package ktaf.rendering.frames.html
 
+import ktaf.assets.Size
 import ktaf.assets.locations.Region
 import ktaf.extensions.removeWhitespaceLines
 import ktaf.helpers.newline
-import ktaf.logic.Game
 import ktaf.rendering.frames.Frame
 import ktaf.rendering.frames.GridRegionMapBuilder
 import ktaf.rendering.frames.GridStringBuilder
@@ -14,16 +14,17 @@ import ktaf.rendering.frames.RegionMapFrameBuilder
  */
 public class HTMLRegionMapFrameBuilder(
     private val htmlPageBuilder: HTMLPageBuilder,
-    private val regionMapBuilder: GridRegionMapBuilder
+    private val regionMapBuilder: GridRegionMapBuilder,
+    private val frameSize: Size
 ) : RegionMapFrameBuilder {
-    override fun build(region: Region, game: Game): Frame {
+    override fun build(region: Region): Frame {
         htmlPageBuilder.h1(region.identifier.name)
         htmlPageBuilder.br()
 
         val gridStringBuilder = GridStringBuilder().also {
-            it.resize(game.frameSize)
+            it.resize(frameSize)
         }
-        regionMapBuilder.build(gridStringBuilder, region, 0, 0, game.frameSize.width, game.frameSize.height)
+        regionMapBuilder.build(gridStringBuilder, region, 0, 0, frameSize.width, frameSize.height)
 
         var map = gridStringBuilder.toString().removeWhitespaceLines()
         htmlPageBuilder.pre(map.replace(newline(), "<br>"))

@@ -1,7 +1,6 @@
 package ktaf.rendering.frames.html
 
 import ktaf.extensions.ensureFinishedSentence
-import ktaf.logic.Game
 import ktaf.rendering.frames.AboutFrameBuilder
 import ktaf.rendering.frames.Frame
 
@@ -11,18 +10,18 @@ import ktaf.rendering.frames.Frame
 public class HTMLAboutFrameBuilder(
     private val htmlPageBuilder: HTMLPageBuilder
 ) : AboutFrameBuilder {
-    override fun build(title: String, game: Game): Frame {
+    override fun build(title: String, description: String, author: String): Frame {
         htmlPageBuilder.h1(title)
         htmlPageBuilder.br()
         htmlPageBuilder.br()
-        htmlPageBuilder.p(game.description.ensureFinishedSentence())
+        htmlPageBuilder.p(description.ensureFinishedSentence())
         htmlPageBuilder.br()
         htmlPageBuilder.br()
 
-        if (game.author.isNotEmpty()) {
-            htmlPageBuilder.h2("Created by ${game.author}.")
+        if (author.isNotEmpty()) {
+            htmlPageBuilder.h2("Created by $author.")
         } else {
-            htmlPageBuilder.h2("BP.AdventureFramework by Ben Pollard 2011 - 2023.")
+            htmlPageBuilder.h2("ktaf by Ben Pollard 2023.")
         }
 
         return HTMLFrame(htmlPageBuilder).also {

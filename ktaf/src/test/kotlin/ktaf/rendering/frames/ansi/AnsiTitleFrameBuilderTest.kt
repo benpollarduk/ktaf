@@ -1,6 +1,6 @@
 package ktaf.rendering.frames.ansi
 
-import ktaf.logic.GameTestHelper
+import ktaf.assets.Size
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -8,10 +8,10 @@ class AnsiTitleFrameBuilderTest {
     @Test
     fun `given defaults when build then string with some length returned`() {
         // Given
-        val builder = AnsiTitleFrameBuilder(AnsiGridStringBuilder())
+        val builder = AnsiTitleFrameBuilder(AnsiGridStringBuilder(), Size(80, 50))
 
         // When
-        val result = builder.build(GameTestHelper.getBlankGame()).toString()
+        val result = builder.build("Test", "Test").toString()
         print(result)
 
         // Then

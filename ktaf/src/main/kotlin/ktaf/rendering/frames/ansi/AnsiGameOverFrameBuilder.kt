@@ -1,7 +1,7 @@
 package ktaf.rendering.frames.ansi
 
+import ktaf.assets.Size
 import ktaf.extensions.ensureFinishedSentence
-import ktaf.logic.Game
 import ktaf.rendering.FramePosition
 import ktaf.rendering.frames.Frame
 import ktaf.rendering.frames.GameOverFrameBuilder
@@ -11,16 +11,17 @@ import ktaf.rendering.frames.GameOverFrameBuilder
  */
 public class AnsiGameOverFrameBuilder(
     private val ansiGridStringBuilder: AnsiGridStringBuilder,
+    private val frameSize: Size,
     private val backgroundColor: AnsiColor = AnsiColor.RESET,
     private val borderColor: AnsiColor = AnsiColor.BRIGHT_BLACK,
     private val titleColor: AnsiColor = AnsiColor.RED,
     private val descriptionColor: AnsiColor = AnsiColor.WHITE
 ) : GameOverFrameBuilder {
-    override fun build(title: String, reason: String, game: Game): Frame {
-        val availableWidth = game.frameSize.width - 4
+    override fun build(title: String, reason: String): Frame {
+        val availableWidth = frameSize.width - 4
         val leftMargin = 2
 
-        ansiGridStringBuilder.resize(game.frameSize)
+        ansiGridStringBuilder.resize(frameSize)
         ansiGridStringBuilder.drawBoundary(borderColor)
         val lastPosition: FramePosition = ansiGridStringBuilder.drawWrapped(title, leftMargin, 2, availableWidth, titleColor)
         ansiGridStringBuilder.drawUnderline(leftMargin, lastPosition.y + 1, title.length, titleColor)

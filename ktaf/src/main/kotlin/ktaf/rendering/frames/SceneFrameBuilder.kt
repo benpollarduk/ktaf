@@ -1,9 +1,9 @@
 package ktaf.rendering.frames
 
+import ktaf.assets.characters.PlayableCharacter
 import ktaf.assets.locations.Room
 import ktaf.assets.locations.ViewPoint
 import ktaf.interpretation.CommandHelp
-import ktaf.logic.Game
 import ktaf.rendering.KeyType
 
 /**
@@ -11,12 +11,12 @@ import ktaf.rendering.KeyType
  */
 public interface SceneFrameBuilder {
     /**
-     * Build a frame with a [room], [viewPoint], [game], [message], [contextualCommands] and [keyType].
+     * Build a frame with a [room], [viewPoint], [playableCharacter], [message], [contextualCommands] and [keyType].
      */
     public fun build(
         room: Room,
         viewPoint: ViewPoint,
-        game: Game,
+        playableCharacter: PlayableCharacter,
         message: String,
         contextualCommands: List<CommandHelp>,
         keyType: KeyType

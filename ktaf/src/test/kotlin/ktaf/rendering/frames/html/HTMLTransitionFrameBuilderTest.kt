@@ -1,6 +1,5 @@
 package ktaf.rendering.frames.html
 
-import ktaf.logic.GameTestHelper
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -11,7 +10,7 @@ class HTMLTransitionFrameBuilderTest {
         val builder = HTMLTransitionFrameBuilder(HTMLPageBuilder())
 
         // When
-        val result = builder.build("Test", "Test Transition", GameTestHelper.getBlankGame()).toString()
+        val result = builder.build("Test", "Test Transition").toString()
         print(result)
 
         // Then

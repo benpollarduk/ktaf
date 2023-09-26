@@ -1,13 +1,11 @@
 package ktaf.rendering.frames
 
-import ktaf.logic.Game
-
 /**
  * Provides a standard interface for title frames.
  */
 public interface TitleFrameBuilder {
     /**
-     * Build a frame for a [game].
+     * Build a frame for a with a [title] and [introduction].
      */
-    public fun build(game: Game): Frame
+    public fun build(title: String, introduction: String): Frame
 }

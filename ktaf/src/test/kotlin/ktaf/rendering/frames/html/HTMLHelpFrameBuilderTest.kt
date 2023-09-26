@@ -1,7 +1,6 @@
 package ktaf.rendering.frames.html
 
 import ktaf.interpretation.CommandHelp
-import ktaf.logic.GameTestHelper
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -15,8 +14,7 @@ class HTMLHelpFrameBuilderTest {
         val result = builder.build(
             "Test",
             "This is a test frame",
-            listOf(CommandHelp("TestCommand", "Test Command Description.")),
-            GameTestHelper.getBlankGame()
+            listOf(CommandHelp("TestCommand", "Test Command Description."))
         ).toString()
         print(result)
 

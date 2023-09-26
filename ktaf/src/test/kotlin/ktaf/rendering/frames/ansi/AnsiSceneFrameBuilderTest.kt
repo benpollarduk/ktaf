@@ -1,5 +1,7 @@
 package ktaf.rendering.frames.ansi
 
+import ktaf.assets.Size
+import ktaf.assets.characters.PlayableCharacter
 import ktaf.assets.locations.Direction
 import ktaf.assets.locations.Exit
 import ktaf.assets.locations.Room
@@ -7,7 +9,6 @@ import ktaf.assets.locations.ViewPoint
 import ktaf.helpers.DebugHelper
 import ktaf.interpretation.CommandHelp
 import ktaf.logic.Game
-import ktaf.logic.GameTestHelper
 import ktaf.rendering.KeyType
 import ktaf.utilities.RegionMaker
 import org.junit.jupiter.api.Assertions
@@ -18,7 +19,7 @@ class AnsiSceneFrameBuilderTest {
     @Test
     fun `given defaults when build then string with some length returned`() {
         // Given
-        val builder = AnsiSceneFrameBuilder(AnsiGridStringBuilder(), AnsiRoomMapBuilder())
+        val builder = AnsiSceneFrameBuilder(AnsiGridStringBuilder(), AnsiRoomMapBuilder(), Size(80, 50))
         val regionMaker = RegionMaker("", "")
         val startRoom = Room("Room", "This room has no description.", listOf(Exit(Direction.EAST)))
         regionMaker[0, 0, 0] = startRoom
@@ -30,7 +31,7 @@ class AnsiSceneFrameBuilderTest {
         val result = builder.build(
             startRoom,
             viewPoint,
-            GameTestHelper.getBlankGame(),
+            PlayableCharacter("Test", "Test"),
             "",
             listOf(CommandHelp("Test", "Test command.")),
             KeyType.DYNAMIC
@@ -46,7 +47,7 @@ class AnsiSceneFrameBuilderTest {
         assertDoesNotThrow {
             // Given
             val game = DebugHelper.getSimpleGameCreator()()
-            val sceneFrameBuilder = AnsiSceneFrameBuilder(AnsiGridStringBuilder(), AnsiRoomMapBuilder())
+            val sceneFrameBuilder = AnsiSceneFrameBuilder(AnsiGridStringBuilder(), AnsiRoomMapBuilder(), Size(80, 50))
             val region = game.overworld.currentRegion ?: throw IllegalArgumentException("Region should not be null.")
             val room = region.currentRoom ?: throw IllegalArgumentException("Room should not be null.")
             val view = ViewPoint(region)
@@ -55,7 +56,7 @@ class AnsiSceneFrameBuilderTest {
             sceneFrameBuilder.build(
                 room,
                 view,
-                game,
+                PlayableCharacter("", ""),
                 "",
                 Game.defaultInterpreters.getContextualCommandHelp(game),
                 KeyType.FULL
