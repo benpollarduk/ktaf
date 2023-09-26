@@ -42,7 +42,7 @@ public class HTMLFrame(private val pageBuilder: HTMLPageBuilder) : Frame {
     }
 
     private fun getHtmlOpen(title: String = "", css: String = ""): String {
-        return "<html><head><title>$title</title><style>$css</style></head>"
+        return "<!DOCTYPE html><html><head><title>$title</title><style>$css</style></head>"
     }
 
     private companion object {

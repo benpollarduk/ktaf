@@ -11,7 +11,6 @@ import ktaf.rendering.FramePosition
 import ktaf.rendering.frames.FrameBuilderCollection
 import ktaf.rendering.frames.GridRegionMapBuilder
 import ktaf.rendering.frames.GridRoomMapBuilder
-import ktaf.rendering.frames.ansi.AnsiGridStringBuilder
 import ktaf.rendering.frames.html.HTMLAboutFrameBuilder
 import ktaf.rendering.frames.html.HTMLCompletionFrameBuilder
 import ktaf.rendering.frames.html.HTMLConversationFrameBuilder
@@ -122,8 +121,9 @@ internal class SwingConfiguration(
         }
     override val frameBuilders: FrameBuilderCollection
         get() {
-            val htmlBuilder = HTMLPageBuilder(HTMLElementType.Document("ktaf frame", mainCss))
-            val frameSize = Size(80, 50)
+            val width = 600
+            val mapSize = Size(60, 50)
+            val htmlBuilder = HTMLPageBuilder(HTMLElementType.Document("ktaf frame", createCSS(width)))
             return FrameBuilderCollection(
                 HTMLTitleFrameBuilder(htmlBuilder),
                 HTMLAboutFrameBuilder(htmlBuilder),
@@ -132,8 +132,8 @@ internal class SwingConfiguration(
                 HTMLCompletionFrameBuilder(htmlBuilder),
                 HTMLGameOverFrameBuilder(htmlBuilder),
                 HTMLConversationFrameBuilder(htmlBuilder),
-                HTMLSceneFrameBuilder(htmlBuilder, GridRoomMapBuilder(), frameSize),
-                HTMLRegionMapFrameBuilder(htmlBuilder, GridRegionMapBuilder(), frameSize)
+                HTMLSceneFrameBuilder(htmlBuilder, GridRoomMapBuilder(), mapSize),
+                HTMLRegionMapFrameBuilder(htmlBuilder, GridRegionMapBuilder(), mapSize)
             )
         }
 
@@ -142,6 +142,19 @@ internal class SwingConfiguration(
     }
 
     private companion object {
-        private val mainCss: String = "body { background-color: black; font-size: 11; margin: 10px; font-family: Consolas, monospace; color: white; }"
+        private fun createCSS(bodyWidth: Int): String {
+            return """
+               body {
+                      background-color: black;
+                      font-size: 10px;
+                      font-family: Consolas, monospace;
+                      color: white;
+                      word-wrap: break-word;
+                      margin: 10px;
+                      width:100%;
+                      max-width: ${bodyWidth}px;
+                    }
+            """.trimIndent()
+        }
     }
 }

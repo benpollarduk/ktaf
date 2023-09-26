@@ -41,7 +41,7 @@ dependencies {
     // Use the Kotlin JUnit integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 
-    // Use the lib
+    // Use the ktaf library
     implementation(project(":ktaf"))
 }
 

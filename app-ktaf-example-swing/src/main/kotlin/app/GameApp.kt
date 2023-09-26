@@ -5,13 +5,16 @@ import ktaf.helpers.DebugHelper
 import ktaf.logic.Game
 import ktaf.logic.GameCreator
 import java.awt.BorderLayout
+import java.awt.Color
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
 import javax.swing.JEditorPane
 import javax.swing.JFrame
+import javax.swing.JLabel
 import javax.swing.JPanel
 import javax.swing.JTextField
 import javax.swing.SwingUtilities
+import javax.swing.border.EmptyBorder
 
 class GameApp : JFrame("app-example-swing") {
     private var currentFrameAcceptsInput: Boolean = false
@@ -24,6 +27,7 @@ class GameApp : JFrame("app-example-swing") {
         // create components
         val output = JEditorPane()
         val input = JTextField()
+        val prompt = JLabel()
         val outputPanel = JPanel()
         val inputPanel = JPanel()
         val allowInputListener = object : SwingConfiguration.AllowInputChangedListener {
@@ -37,9 +41,18 @@ class GameApp : JFrame("app-example-swing") {
         outputPanel.layout = BorderLayout()
         output.contentType = "text/html"
         output.isEditable = false
+        output.border = null
 
         // configure input UI
         inputPanel.layout = BorderLayout()
+        prompt.text = ">"
+        prompt.background = Color.LIGHT_GRAY
+        prompt.foreground = Color.BLACK
+        prompt.isOpaque = true
+        prompt.border = EmptyBorder(5, 10, 5, 0)
+        input.background = Color.LIGHT_GRAY
+        input.border = EmptyBorder(5, 10, 5, 10)
+        input.requestFocusInWindow()
         input.addKeyListener(object : KeyAdapter() {
             override fun keyPressed(e: KeyEvent) {
                 // allow enter key presses to accept command input
@@ -57,7 +70,8 @@ class GameApp : JFrame("app-example-swing") {
 
         // arrange
         outputPanel.add(output)
-        inputPanel.add(input)
+        inputPanel.add(prompt, BorderLayout.WEST)
+        inputPanel.add(input, BorderLayout.CENTER)
         this.add(outputPanel, BorderLayout.CENTER)
         this.add(inputPanel, BorderLayout.SOUTH)
 
