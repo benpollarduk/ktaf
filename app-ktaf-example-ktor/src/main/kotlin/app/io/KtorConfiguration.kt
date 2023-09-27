@@ -11,17 +11,17 @@ import ktaf.rendering.FramePosition
 import ktaf.rendering.frames.FrameBuilderCollection
 import ktaf.rendering.frames.GridRegionMapBuilder
 import ktaf.rendering.frames.GridRoomMapBuilder
-import ktaf.rendering.frames.html.HTMLAboutFrameBuilder
-import ktaf.rendering.frames.html.HTMLCompletionFrameBuilder
-import ktaf.rendering.frames.html.HTMLConversationFrameBuilder
-import ktaf.rendering.frames.html.HTMLElementType
-import ktaf.rendering.frames.html.HTMLGameOverFrameBuilder
-import ktaf.rendering.frames.html.HTMLHelpFrameBuilder
-import ktaf.rendering.frames.html.HTMLPageBuilder
-import ktaf.rendering.frames.html.HTMLRegionMapFrameBuilder
-import ktaf.rendering.frames.html.HTMLSceneFrameBuilder
-import ktaf.rendering.frames.html.HTMLTitleFrameBuilder
-import ktaf.rendering.frames.html.HTMLTransitionFrameBuilder
+import ktaf.rendering.frames.html.HtmlAboutFrameBuilder
+import ktaf.rendering.frames.html.HtmlCompletionFrameBuilder
+import ktaf.rendering.frames.html.HtmlConversationFrameBuilder
+import ktaf.rendering.frames.html.HtmlElementType
+import ktaf.rendering.frames.html.HtmlGameOverFrameBuilder
+import ktaf.rendering.frames.html.HtmlHelpFrameBuilder
+import ktaf.rendering.frames.html.HtmlPageBuilder
+import ktaf.rendering.frames.html.HtmlRegionMapFrameBuilder
+import ktaf.rendering.frames.html.HtmlSceneFrameBuilder
+import ktaf.rendering.frames.html.HtmlTitleFrameBuilder
+import ktaf.rendering.frames.html.HtmlTransitionFrameBuilder
 import java.util.concurrent.locks.ReentrantLock
 
 /**
@@ -33,14 +33,28 @@ public object KtorConfiguration: IOConfiguration {
     private val lock = ReentrantLock()
     private var lastFrame: String = ""
     private var canAcceptCommand: Boolean = false
+    private var hasFrameArrived: Boolean = false
 
     /**
-     * Get the last received frame as a HTML string.
+     * Get the last received frame as an HTML string.
      */
-    public fun getLastFrame() : String {
+    public fun getLastFrame(): String {
         try {
             lock.lock()
+            hasFrameArrived = false
             return String(lastFrame.toCharArray())
+        } finally {
+            lock.unlock()
+        }
+    }
+
+    /**
+     * Get if a new frame has arrived.
+     */
+    public fun getHasFrameArrived(): Boolean {
+        try {
+            lock.lock()
+            return hasFrameArrived
         } finally {
             lock.unlock()
         }
@@ -49,7 +63,7 @@ public object KtorConfiguration: IOConfiguration {
     /**
      * Determine if the game can accept a command.
      */
-    public fun canAcceptCommand() : Boolean {
+    public fun canAcceptCommand(): Boolean {
         try {
             lock.lock()
             return canAcceptCommand
@@ -88,6 +102,7 @@ public object KtorConfiguration: IOConfiguration {
                 try {
                     lock.lock()
                     lastFrame = getFullyFormedHTML(value)
+                    hasFrameArrived = true
                 } finally {
                     lock.unlock()
                 }
@@ -149,33 +164,44 @@ public object KtorConfiguration: IOConfiguration {
     override val frameBuilders: FrameBuilderCollection
         get() {
             val mapSize = Size(60, 35)
-            val htmlBuilder = HTMLPageBuilder(HTMLElementType.Div)
+            val htmlBuilder = HtmlPageBuilder(HtmlElementType.Div)
             return FrameBuilderCollection(
-                HTMLTitleFrameBuilder(htmlBuilder),
-                HTMLAboutFrameBuilder(htmlBuilder),
-                HTMLHelpFrameBuilder(htmlBuilder),
-                HTMLTransitionFrameBuilder(htmlBuilder),
-                HTMLCompletionFrameBuilder(htmlBuilder),
-                HTMLGameOverFrameBuilder(htmlBuilder),
-                HTMLConversationFrameBuilder(htmlBuilder),
-                HTMLSceneFrameBuilder(htmlBuilder, GridRoomMapBuilder(), mapSize),
-                HTMLRegionMapFrameBuilder(htmlBuilder, GridRegionMapBuilder(), mapSize),
+                HtmlTitleFrameBuilder(htmlBuilder),
+                HtmlAboutFrameBuilder(htmlBuilder),
+                HtmlHelpFrameBuilder(htmlBuilder),
+                HtmlTransitionFrameBuilder(htmlBuilder),
+                HtmlCompletionFrameBuilder(htmlBuilder),
+                HtmlGameOverFrameBuilder(htmlBuilder),
+                HtmlConversationFrameBuilder(htmlBuilder),
+                HtmlSceneFrameBuilder(htmlBuilder, GridRoomMapBuilder(), mapSize),
+                HtmlRegionMapFrameBuilder(htmlBuilder, GridRegionMapBuilder(), mapSize),
             )
         }
 
-    private fun getFullyFormedHTML(div: String) : String {
+    private fun getFullyFormedHTML(div: String): String {
         return """
             <!DOCTYPE html>
             <html>
                 <head>
                     <title>app-ktaf-example-ktor</title>
                     <style>
-                    body {
+                    body 
+                    {
                         background-color: black;
-                        font-size: 10px;
+                        font-size: 12px;
                         font-family: Consolas, monospace;
                         color: white;
                         word-wrap: break-word;
+                        width:100%;
+                        max-width: 600px;
+                    }
+                    div {
+                        margin: 10px;
+                    }
+                    .input-command 
+                    {
+                        font-size: 12px;
+                        font-family: Consolas, monospace;
                         margin: 10px;
                         width:100%;
                         max-width: 600px;
@@ -185,18 +211,24 @@ public object KtorConfiguration: IOConfiguration {
                 <body>
                     $div
                     <form id="inputForm">
-                        <label for="name">Command:</label>
-                        <input type="text" id="command" name="command">
+                        <input class="input-command" type="text" id="command" name="command">
                     </form>
                     <script>
                         const commandInput = document.getElementById('command');
                         const form = document.getElementById('inputForm');
     
+                        // enter trigger submit
                         commandInput.addEventListener('keydown', function(event) {
                             if (event.key === 'Enter') {
                                 event.preventDefault();
                                 form.submit();
                             }
+                        });
+                        
+                        // wait for the page to fully load then give focus to input
+                        window.addEventListener('load', function() {
+                            const inputElement = document.getElementById('command');
+                            inputElement.focus();
                         });
                     </script>
                 </body>

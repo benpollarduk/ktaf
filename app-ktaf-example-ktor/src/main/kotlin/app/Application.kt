@@ -10,7 +10,6 @@ import ktaf.logic.Game
 import ktaf.logic.GameCreator
 
 fun main() {
-
     // create and start game on background thread
     val game = DebugHelper.getSimpleGameCreator(KtorConfiguration)
     val gameThread = Thread(GameLogic(game))

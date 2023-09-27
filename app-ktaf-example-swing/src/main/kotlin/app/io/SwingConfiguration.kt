@@ -11,17 +11,17 @@ import ktaf.rendering.FramePosition
 import ktaf.rendering.frames.FrameBuilderCollection
 import ktaf.rendering.frames.GridRegionMapBuilder
 import ktaf.rendering.frames.GridRoomMapBuilder
-import ktaf.rendering.frames.html.HTMLAboutFrameBuilder
-import ktaf.rendering.frames.html.HTMLCompletionFrameBuilder
-import ktaf.rendering.frames.html.HTMLConversationFrameBuilder
-import ktaf.rendering.frames.html.HTMLElementType
-import ktaf.rendering.frames.html.HTMLGameOverFrameBuilder
-import ktaf.rendering.frames.html.HTMLHelpFrameBuilder
-import ktaf.rendering.frames.html.HTMLPageBuilder
-import ktaf.rendering.frames.html.HTMLRegionMapFrameBuilder
-import ktaf.rendering.frames.html.HTMLSceneFrameBuilder
-import ktaf.rendering.frames.html.HTMLTitleFrameBuilder
-import ktaf.rendering.frames.html.HTMLTransitionFrameBuilder
+import ktaf.rendering.frames.html.HtmlAboutFrameBuilder
+import ktaf.rendering.frames.html.HtmlCompletionFrameBuilder
+import ktaf.rendering.frames.html.HtmlConversationFrameBuilder
+import ktaf.rendering.frames.html.HtmlElementType
+import ktaf.rendering.frames.html.HtmlGameOverFrameBuilder
+import ktaf.rendering.frames.html.HtmlHelpFrameBuilder
+import ktaf.rendering.frames.html.HtmlPageBuilder
+import ktaf.rendering.frames.html.HtmlRegionMapFrameBuilder
+import ktaf.rendering.frames.html.HtmlSceneFrameBuilder
+import ktaf.rendering.frames.html.HtmlTitleFrameBuilder
+import ktaf.rendering.frames.html.HtmlTransitionFrameBuilder
 import java.util.concurrent.locks.ReentrantLock
 import javax.swing.JEditorPane
 import javax.swing.SwingUtilities
@@ -125,17 +125,17 @@ internal class SwingConfiguration(
         get() {
             val width = 600
             val mapSize = Size(60, 35)
-            val htmlBuilder = HTMLPageBuilder(HTMLElementType.Document("ktaf frame", createCSS(width)))
+            val htmlBuilder = HtmlPageBuilder(HtmlElementType.Document("ktaf frame", createCSS(width)))
             return FrameBuilderCollection(
-                HTMLTitleFrameBuilder(htmlBuilder),
-                HTMLAboutFrameBuilder(htmlBuilder),
-                HTMLHelpFrameBuilder(htmlBuilder),
-                HTMLTransitionFrameBuilder(htmlBuilder),
-                HTMLCompletionFrameBuilder(htmlBuilder),
-                HTMLGameOverFrameBuilder(htmlBuilder),
-                HTMLConversationFrameBuilder(htmlBuilder),
-                HTMLSceneFrameBuilder(htmlBuilder, GridRoomMapBuilder(), mapSize),
-                HTMLRegionMapFrameBuilder(htmlBuilder, GridRegionMapBuilder(), mapSize),
+                HtmlTitleFrameBuilder(htmlBuilder),
+                HtmlAboutFrameBuilder(htmlBuilder),
+                HtmlHelpFrameBuilder(htmlBuilder),
+                HtmlTransitionFrameBuilder(htmlBuilder),
+                HtmlCompletionFrameBuilder(htmlBuilder),
+                HtmlGameOverFrameBuilder(htmlBuilder),
+                HtmlConversationFrameBuilder(htmlBuilder),
+                HtmlSceneFrameBuilder(htmlBuilder, GridRoomMapBuilder(), mapSize),
+                HtmlRegionMapFrameBuilder(htmlBuilder, GridRegionMapBuilder(), mapSize),
             )
         }
 

@@ -23,10 +23,28 @@ fun Application.configureRouting() {
                     }
                 }
             }
-            // allow the game time to respond and publish a new frame... not ideal, ideally this should be delegated
-            // to the KtorConfiguration to update when the frame arrives
-            delay(50)
-            call.respondText(KtorConfiguration.getLastFrame(), contentType = ContentType.Text.Html)
+
+            // capture current time
+            val startTime = System.currentTimeMillis()
+            val timeoutInMs = 1000
+            var timedOut = false
+
+            // allow the game time to respond and publish a new frame
+            while (!timedOut) {
+                if (KtorConfiguration.getHasFrameArrived()) {
+                    if (KtorConfiguration.getHasFrameArrived()) {
+                        break
+                    }
+                } else {
+                    timedOut = System.currentTimeMillis() - startTime >= timeoutInMs
+                }
+            }
+
+            if (timedOut) {
+                call.respondText("Timed out.", contentType = ContentType.Text.Plain)
+            } else {
+                call.respondText(KtorConfiguration.getLastFrame(), contentType = ContentType.Text.Html)
+            }
         }
     }
 }

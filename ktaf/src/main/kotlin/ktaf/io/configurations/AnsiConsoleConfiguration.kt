@@ -9,18 +9,18 @@ import ktaf.io.WaitForAcknowledge
 import ktaf.io.WaitForCommand
 import ktaf.rendering.FramePosition
 import ktaf.rendering.frames.FrameBuilderCollection
-import ktaf.rendering.frames.ansi.ANSIAboutFrameBuilder
-import ktaf.rendering.frames.ansi.ANSICompletionFrameBuilder
-import ktaf.rendering.frames.ansi.ANSIConversationFrameBuilder
-import ktaf.rendering.frames.ansi.ANSIGameOverFrameBuilder
-import ktaf.rendering.frames.ansi.ANSIGridStringBuilder
-import ktaf.rendering.frames.ansi.ANSIHelpFrameBuilder
-import ktaf.rendering.frames.ansi.ANSIRegionMapBuilder
-import ktaf.rendering.frames.ansi.ANSIRegionMapFrameBuilder
-import ktaf.rendering.frames.ansi.ANSIRoomMapBuilder
-import ktaf.rendering.frames.ansi.ANSISceneFrameBuilder
-import ktaf.rendering.frames.ansi.ANSITitleFrameBuilder
-import ktaf.rendering.frames.ansi.ANSITransitionFrameBuilder
+import ktaf.rendering.frames.ansi.AnsiAboutFrameBuilder
+import ktaf.rendering.frames.ansi.AnsiCompletionFrameBuilder
+import ktaf.rendering.frames.ansi.AnsiConversationFrameBuilder
+import ktaf.rendering.frames.ansi.AnsiGameOverFrameBuilder
+import ktaf.rendering.frames.ansi.AnsiGridStringBuilder
+import ktaf.rendering.frames.ansi.AnsiHelpFrameBuilder
+import ktaf.rendering.frames.ansi.AnsiRegionMapBuilder
+import ktaf.rendering.frames.ansi.AnsiRegionMapFrameBuilder
+import ktaf.rendering.frames.ansi.AnsiRoomMapBuilder
+import ktaf.rendering.frames.ansi.AnsiSceneFrameBuilder
+import ktaf.rendering.frames.ansi.AnsiTitleFrameBuilder
+import ktaf.rendering.frames.ansi.AnsiTransitionFrameBuilder
 
 /**
  * Provides an [IOConfiguration] for ANSI enabled consoles.
@@ -78,18 +78,18 @@ public object AnsiConsoleConfiguration : IOConfiguration {
         }
     override val frameBuilders: FrameBuilderCollection
         get() {
-            val gridStringBuilder = ANSIGridStringBuilder()
+            val gridStringBuilder = AnsiGridStringBuilder()
             val frameSize = Size(80, 50)
             return FrameBuilderCollection(
-                ANSITitleFrameBuilder(gridStringBuilder, frameSize),
-                ANSIAboutFrameBuilder(gridStringBuilder, frameSize),
-                ANSIHelpFrameBuilder(gridStringBuilder, frameSize),
-                ANSITransitionFrameBuilder(gridStringBuilder, frameSize),
-                ANSICompletionFrameBuilder(gridStringBuilder, frameSize),
-                ANSIGameOverFrameBuilder(gridStringBuilder, frameSize),
-                ANSIConversationFrameBuilder(gridStringBuilder, frameSize),
-                ANSISceneFrameBuilder(gridStringBuilder, ANSIRoomMapBuilder(), frameSize),
-                ANSIRegionMapFrameBuilder(gridStringBuilder, ANSIRegionMapBuilder(), frameSize)
+                AnsiTitleFrameBuilder(gridStringBuilder, frameSize),
+                AnsiAboutFrameBuilder(gridStringBuilder, frameSize),
+                AnsiHelpFrameBuilder(gridStringBuilder, frameSize),
+                AnsiTransitionFrameBuilder(gridStringBuilder, frameSize),
+                AnsiCompletionFrameBuilder(gridStringBuilder, frameSize),
+                AnsiGameOverFrameBuilder(gridStringBuilder, frameSize),
+                AnsiConversationFrameBuilder(gridStringBuilder, frameSize),
+                AnsiSceneFrameBuilder(gridStringBuilder, AnsiRoomMapBuilder(), frameSize),
+                AnsiRegionMapFrameBuilder(gridStringBuilder, AnsiRegionMapBuilder(), frameSize)
             )
         }
 }
