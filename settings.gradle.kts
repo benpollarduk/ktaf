@@ -11,5 +11,6 @@ rootProject.name = "ktaf"
 include(
     ":ktaf",
     ":app-ktaf-example-console",
-    ":app-ktaf-example-swing"
+    ":app-ktaf-example-swing",
+    ":app-ktaf-example-ktor"
 )
