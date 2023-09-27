@@ -23,21 +23,40 @@ import ktaf.rendering.frames.html.HTMLSceneFrameBuilder
 import ktaf.rendering.frames.html.HTMLTitleFrameBuilder
 import ktaf.rendering.frames.html.HTMLTransitionFrameBuilder
 import java.util.concurrent.locks.ReentrantLock
-import javax.swing.JEditorPane
-import javax.swing.SwingUtilities
 
 /**
- * Provides an [IOConfiguration] for a Swing application. The output [JEditorPane] must be specified [output].
- * [allowInputChangedListener] allows a listener to be injected to allow callbacks back to the UI when the adjustInput
- * method is called.
+ * Provides an [IOConfiguration] for a Ktor application.
  */
-internal class SwingConfiguration(
-    private val output: JEditorPane,
-    private val allowInputChangedListener: AllowInputChangedListener? = null,
-) : IOConfiguration {
+public object KtorConfiguration: IOConfiguration {
     private var command: String? = ""
     private var acknowledgementReceived: Boolean? = null
     private val lock = ReentrantLock()
+    private var lastFrame: String = ""
+    private var canAcceptCommand: Boolean = false
+
+    /**
+     * Get the last received frame as a HTML string.
+     */
+    public fun getLastFrame() : String {
+        try {
+            lock.lock()
+            return String(lastFrame.toCharArray())
+        } finally {
+            lock.unlock()
+        }
+    }
+
+    /**
+     * Determine if the game can accept a command.
+     */
+    public fun canAcceptCommand() : Boolean {
+        try {
+            lock.lock()
+            return canAcceptCommand
+        } finally {
+            lock.unlock()
+        }
+    }
 
     /**
      * Acknowledge.
@@ -57,7 +76,7 @@ internal class SwingConfiguration(
     internal fun acceptCommand(command: String) {
         try {
             lock.lock()
-            this.command = String(command.toCharArray())
+            KtorConfiguration.command = String(command.toCharArray())
         } finally {
             lock.unlock()
         }
@@ -66,8 +85,12 @@ internal class SwingConfiguration(
     override val displayTextOutput: DisplayTextOutput
         get() = object : DisplayTextOutput {
             override fun invoke(value: String) {
-                val runnable = Runnable { output.text = value }
-                SwingUtilities.invokeLater(runnable)
+                try {
+                    lock.lock()
+                    lastFrame = getFullyFormedHTML(value)
+                } finally {
+                    lock.unlock()
+                }
             }
         }
     override val waitForAcknowledge: WaitForAcknowledge
@@ -110,22 +133,23 @@ internal class SwingConfiguration(
         }
     override val clearOutput: ClearOutput
         get() = object : ClearOutput {
-            override fun invoke() {
-                // clear output
-                output.text = ""
-            }
+            override fun invoke() = Unit
         }
     override val adjustInput: AdjustInput
         get() = object : AdjustInput {
             override fun invoke(allowInput: Boolean, cursorPosition: FramePosition) {
-                allowInputChangedListener?.invoke(allowInput)
+                try {
+                    lock.lock()
+                    canAcceptCommand = allowInput
+                } finally {
+                    lock.unlock()
+                }
             }
         }
     override val frameBuilders: FrameBuilderCollection
         get() {
-            val width = 600
             val mapSize = Size(60, 35)
-            val htmlBuilder = HTMLPageBuilder(HTMLElementType.Document("ktaf frame", createCSS(width)))
+            val htmlBuilder = HTMLPageBuilder(HTMLElementType.Div)
             return FrameBuilderCollection(
                 HTMLTitleFrameBuilder(htmlBuilder),
                 HTMLAboutFrameBuilder(htmlBuilder),
@@ -139,24 +163,44 @@ internal class SwingConfiguration(
             )
         }
 
-    internal interface AllowInputChangedListener {
-        fun invoke(allowInput: Boolean)
-    }
-
-    private companion object {
-        private fun createCSS(bodyWidth: Int): String {
-            return """
-               body {
-                      background-color: black;
-                      font-size: 10px;
-                      font-family: Consolas, monospace;
-                      color: white;
-                      word-wrap: break-word;
-                      margin: 10px;
-                      width:100%;
-                      max-width: ${bodyWidth}px;
+    private fun getFullyFormedHTML(div: String) : String {
+        return """
+            <!DOCTYPE html>
+            <html>
+                <head>
+                    <title>app-ktaf-example-ktor</title>
+                    <style>
+                    body {
+                        background-color: black;
+                        font-size: 10px;
+                        font-family: Consolas, monospace;
+                        color: white;
+                        word-wrap: break-word;
+                        margin: 10px;
+                        width:100%;
+                        max-width: 600px;
                     }
-            """.trimIndent()
-        }
+                    </style>
+                </head>
+                <body>
+                    $div
+                    <form id="inputForm">
+                        <label for="name">Command:</label>
+                        <input type="text" id="command" name="command">
+                    </form>
+                    <script>
+                        const commandInput = document.getElementById('command');
+                        const form = document.getElementById('inputForm');
+    
+                        commandInput.addEventListener('keydown', function(event) {
+                            if (event.key === 'Enter') {
+                                event.preventDefault();
+                                form.submit();
+                            }
+                        });
+                    </script>
+                </body>
+            </html>
+        """.trimIndent()
     }
 }
