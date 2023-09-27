@@ -2,7 +2,6 @@ package ktaf.rendering.frames.html
 
 import ktaf.assets.Size
 import ktaf.assets.locations.Region
-import ktaf.extensions.removeWhitespaceLines
 import ktaf.helpers.newline
 import ktaf.rendering.frames.Frame
 import ktaf.rendering.frames.GridRegionMapBuilder

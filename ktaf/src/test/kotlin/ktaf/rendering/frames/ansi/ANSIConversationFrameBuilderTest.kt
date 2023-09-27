@@ -10,11 +10,11 @@ import ktaf.logic.GameTestHelper
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class AnsiConversationFrameBuilderTest {
+class ANSIConversationFrameBuilderTest {
     @Test
     fun `given defaults when build then string with some length returned`() {
         // Given
-        val builder = AnsiConversationFrameBuilder(AnsiGridStringBuilder(), Size(80, 50))
+        val builder = ANSIConversationFrameBuilder(ANSIGridStringBuilder(), Size(80, 50))
         val game = GameTestHelper.getBlankGame()
         val npc = NonPlayableCharacter("Test Character", "A Test Character").also { character ->
             val paragraph1 = Paragraph("First I said this.")

@@ -8,14 +8,14 @@ import ktaf.utilities.StringUtilities
 /**
  * Provides a class for building strings as part of a grid.
  */
-public class AnsiGridStringBuilder(
+public class ANSIGridStringBuilder(
     public var leftBoundary: Char = '|',
     public var rightBoundary: Char = '|',
     public var horizontalDivider: Char = '-',
     public var lineTerminator: String = newline()
 ) {
     private var buffer: Array<Array<Char>> = Array(0) { Array(0) { ' ' } }
-    private var colors: Array<Array<AnsiColor>> = Array(0) { Array(0) { AnsiColor.WHITE } }
+    private var colors: Array<Array<ANSIColor>> = Array(0) { Array(0) { ANSIColor.WHITE } }
 
     /**
      * Get the size of the display area.
@@ -28,7 +28,7 @@ public class AnsiGridStringBuilder(
      */
     public fun resize(displaySize: Size) {
         this.displaySize = displaySize
-        colors = Array(displaySize.width) { Array(displaySize.height) { AnsiColor.WHITE } }
+        colors = Array(displaySize.width) { Array(displaySize.height) { ANSIColor.WHITE } }
         flush()
     }
 
@@ -40,16 +40,16 @@ public class AnsiGridStringBuilder(
     }
 
     /**
-     * Get a cell [AnsiColor] at a specified [x] and [y] location.
+     * Get a cell [ANSIColor] at a specified [x] and [y] location.
      */
-    public fun getCellColor(x: Int, y: Int): AnsiColor {
+    public fun getCellColor(x: Int, y: Int): ANSIColor {
         return colors[x][y]
     }
 
     /**
      * Set the cell at  a specified [x] and [y] position to a specified [character] and [color].
      */
-    public fun setCell(x: Int, y: Int, character: Char, color: AnsiColor) {
+    public fun setCell(x: Int, y: Int, character: Char, color: ANSIColor) {
         buffer[x][y] = character
         colors[x][y] = color
     }
@@ -76,7 +76,7 @@ public class AnsiGridStringBuilder(
     /**
      * Draw a boundary with a specified [color].
      */
-    public fun drawBoundary(color: AnsiColor) {
+    public fun drawBoundary(color: ANSIColor) {
         drawHorizontalDivider(0, color)
         drawHorizontalDivider(displaySize.height - 1, color)
 
@@ -89,7 +89,7 @@ public class AnsiGridStringBuilder(
     /**
      * Draw a horizontal divider at a specified [y] position in a specified [color].
      */
-    public fun drawHorizontalDivider(y: Int, color: AnsiColor) {
+    public fun drawHorizontalDivider(y: Int, color: ANSIColor) {
         for (i in 1 until displaySize.width - 1) {
             setCell(i, y, horizontalDivider, color)
         }
@@ -99,7 +99,7 @@ public class AnsiGridStringBuilder(
      * Draw a wrapped string at a specified [startX] and [startY] position with a [maxWidth]. The end position will be
      * returned.
      */
-    public fun drawWrapped(value: String, startX: Int, startY: Int, maxWidth: Int, color: AnsiColor): FramePosition {
+    public fun drawWrapped(value: String, startX: Int, startY: Int, maxWidth: Int, color: ANSIColor): FramePosition {
         var paragraph = value
         var endX = startX
         var endY = startY
@@ -124,7 +124,7 @@ public class AnsiGridStringBuilder(
      * Draw a centralised wrapped string at a specified [startY] position with a [maxWidth]. The end position will be
      * returned.
      */
-    public fun drawCentralisedWrapped(value: String, startY: Int, maxWidth: Int, color: AnsiColor): FramePosition {
+    public fun drawCentralisedWrapped(value: String, startY: Int, maxWidth: Int, color: ANSIColor): FramePosition {
         var paragraph = value
         var endX = 0
         var endY = startY
@@ -149,7 +149,7 @@ public class AnsiGridStringBuilder(
     /**
      * Draw an underline at a specified [x] and [y] location for a specified [length] in a specified [color].
      */
-    public fun drawUnderline(x: Int, y: Int, length: Int, color: AnsiColor) {
+    public fun drawUnderline(x: Int, y: Int, length: Int, color: ANSIColor) {
         val char = '-'
         for (i in 0 until length) {
             setCell(x + i, y, char, color)

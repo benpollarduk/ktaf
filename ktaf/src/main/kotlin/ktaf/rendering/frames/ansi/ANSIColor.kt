@@ -3,7 +3,7 @@ package ktaf.rendering.frames.ansi
 /**
  * Enumeration of ANSI color codes.
  */
-public enum class AnsiColor(public val code: Int) {
+public enum class ANSIColor(public val code: Int) {
     /**
      * Reset (0).
      */

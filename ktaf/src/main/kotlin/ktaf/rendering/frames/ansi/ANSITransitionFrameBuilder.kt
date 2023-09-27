@@ -9,13 +9,13 @@ import ktaf.rendering.frames.TransitionFrameBuilder
 /**
  * Provides an ANSI title frame builder that builds in to the specified [ansiGridStringBuilder].
  */
-public class AnsiTransitionFrameBuilder(
-    private val ansiGridStringBuilder: AnsiGridStringBuilder,
+public class ANSITransitionFrameBuilder(
+    private val ansiGridStringBuilder: ANSIGridStringBuilder,
     private val frameSize: Size,
-    private val backgroundColor: AnsiColor = AnsiColor.RESET,
-    private val borderColor: AnsiColor = AnsiColor.BRIGHT_BLACK,
-    private val titleColor: AnsiColor = AnsiColor.GREEN,
-    private val messageColor: AnsiColor = AnsiColor.YELLOW
+    private val backgroundColor: ANSIColor = ANSIColor.RESET,
+    private val borderColor: ANSIColor = ANSIColor.BRIGHT_BLACK,
+    private val titleColor: ANSIColor = ANSIColor.GREEN,
+    private val messageColor: ANSIColor = ANSIColor.YELLOW
 ) : TransitionFrameBuilder {
     override fun build(title: String, message: String): Frame {
         val availableWidth = frameSize.width - 4
@@ -33,7 +33,7 @@ public class AnsiTransitionFrameBuilder(
 
         ansiGridStringBuilder.drawWrapped(message.ensureFinishedSentence(), leftMargin, lastPosition.y, availableWidth, messageColor)
 
-        return AnsiGridTextFrame(ansiGridStringBuilder, 0, 0, backgroundColor).also {
+        return ANSIGridTextFrame(ansiGridStringBuilder, 0, 0, backgroundColor).also {
             it.acceptsInput = false
         }
     }

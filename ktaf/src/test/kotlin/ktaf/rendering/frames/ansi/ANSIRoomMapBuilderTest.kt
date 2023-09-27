@@ -10,11 +10,11 @@ import ktaf.rendering.KeyType
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class AnsiRoomMapBuilderTest {
+class ANSIRoomMapBuilderTest {
     @Test
     fun `given test room with dynamic map when build then string with some length returned`() {
         // Given
-        val builder = AnsiRoomMapBuilder()
+        val builder = ANSIRoomMapBuilder()
         val room = Room(
             "",
             "",
@@ -28,13 +28,13 @@ class AnsiRoomMapBuilderTest {
                 Item("", "")
             )
         )
-        val gridStringBuilder = AnsiGridStringBuilder().also {
+        val gridStringBuilder = ANSIGridStringBuilder().also {
             it.resize(Size(75, 50))
         }
 
         // When
         builder.build(gridStringBuilder, room, ViewPoint.noView, KeyType.FULL, 0, 0)
-        val result = AnsiGridTextFrame(gridStringBuilder, 0, 0).toString()
+        val result = ANSIGridTextFrame(gridStringBuilder, 0, 0).toString()
         print(result)
 
         // Then
@@ -44,7 +44,7 @@ class AnsiRoomMapBuilderTest {
     @Test
     fun `given test room with key type full when build then string with some length returned`() {
         // Given
-        val builder = AnsiRoomMapBuilder()
+        val builder = ANSIRoomMapBuilder()
         val room = Room(
             "",
             "",
@@ -58,13 +58,13 @@ class AnsiRoomMapBuilderTest {
                 Item("", "")
             )
         )
-        val gridStringBuilder = AnsiGridStringBuilder().also {
+        val gridStringBuilder = ANSIGridStringBuilder().also {
             it.resize(Size(75, 50))
         }
 
         // When
         builder.build(gridStringBuilder, room, ViewPoint.noView, KeyType.FULL, 0, 0)
-        val result = AnsiGridTextFrame(gridStringBuilder, 0, 0).toString()
+        val result = ANSIGridTextFrame(gridStringBuilder, 0, 0).toString()
         print(result)
 
         // Then
@@ -74,7 +74,7 @@ class AnsiRoomMapBuilderTest {
     @Test
     fun `given test room with key type none when build then string with some length returned`() {
         // Given
-        val builder = AnsiRoomMapBuilder()
+        val builder = ANSIRoomMapBuilder()
         val room = Room(
             "",
             "",
@@ -85,13 +85,13 @@ class AnsiRoomMapBuilderTest {
                 Exit(Direction.NORTH)
             )
         )
-        val gridStringBuilder = AnsiGridStringBuilder().also {
+        val gridStringBuilder = ANSIGridStringBuilder().also {
             it.resize(Size(75, 50))
         }
 
         // When
         builder.build(gridStringBuilder, room, ViewPoint.noView, KeyType.NONE, 0, 0)
-        val result = AnsiGridTextFrame(gridStringBuilder, 0, 0).toString()
+        val result = ANSIGridTextFrame(gridStringBuilder, 0, 0).toString()
         print(result)
 
         // Then

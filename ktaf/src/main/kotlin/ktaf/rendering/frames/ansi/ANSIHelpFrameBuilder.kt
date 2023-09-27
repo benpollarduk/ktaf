@@ -10,15 +10,15 @@ import ktaf.rendering.frames.HelpFrameBuilder
 /**
  * Provides an ANSI help frame builder that builds in to the specified [ansiGridStringBuilder].
  */
-public class AnsiHelpFrameBuilder(
-    private val ansiGridStringBuilder: AnsiGridStringBuilder,
+public class ANSIHelpFrameBuilder(
+    private val ansiGridStringBuilder: ANSIGridStringBuilder,
     private val frameSize: Size,
-    private val backgroundColor: AnsiColor = AnsiColor.RESET,
-    private val borderColor: AnsiColor = AnsiColor.BRIGHT_BLACK,
-    private val titleColor: AnsiColor = AnsiColor.WHITE,
-    private val descriptionColor: AnsiColor = AnsiColor.WHITE,
-    private val commandColor: AnsiColor = AnsiColor.GREEN,
-    private val commandDescriptionColor: AnsiColor = AnsiColor.YELLOW
+    private val backgroundColor: ANSIColor = ANSIColor.RESET,
+    private val borderColor: ANSIColor = ANSIColor.BRIGHT_BLACK,
+    private val titleColor: ANSIColor = ANSIColor.WHITE,
+    private val descriptionColor: ANSIColor = ANSIColor.WHITE,
+    private val commandColor: ANSIColor = ANSIColor.GREEN,
+    private val commandDescriptionColor: ANSIColor = ANSIColor.YELLOW
 ) : HelpFrameBuilder {
     override fun build(title: String, description: String, commands: List<CommandHelp>): Frame {
         val availableWidth = frameSize.width - 4
@@ -48,7 +48,7 @@ public class AnsiHelpFrameBuilder(
             }
         }
 
-        return AnsiGridTextFrame(ansiGridStringBuilder, 0, 0, backgroundColor).also {
+        return ANSIGridTextFrame(ansiGridStringBuilder, 0, 0, backgroundColor).also {
             it.acceptsInput = false
         }
     }

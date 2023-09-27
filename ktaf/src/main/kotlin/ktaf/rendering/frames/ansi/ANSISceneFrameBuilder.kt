@@ -20,15 +20,15 @@ import kotlin.math.max
 /**
  * Provides an ANSI scene frame builder that builds in to the specified [ansiGridStringBuilder].
  */
-public class AnsiSceneFrameBuilder(
-    private val ansiGridStringBuilder: AnsiGridStringBuilder,
-    private val roomMapBuilder: AnsiRoomMapBuilder,
+public class ANSISceneFrameBuilder(
+    private val ansiGridStringBuilder: ANSIGridStringBuilder,
+    private val roomMapBuilder: ANSIRoomMapBuilder,
     private val frameSize: Size,
-    private val backgroundColor: AnsiColor = AnsiColor.RESET,
-    private val borderColor: AnsiColor = AnsiColor.BRIGHT_BLACK,
-    private val textColor: AnsiColor = AnsiColor.WHITE,
-    private val inputColor: AnsiColor = AnsiColor.WHITE,
-    private val commandsColor: AnsiColor = AnsiColor.WHITE,
+    private val backgroundColor: ANSIColor = ANSIColor.RESET,
+    private val borderColor: ANSIColor = ANSIColor.BRIGHT_BLACK,
+    private val textColor: ANSIColor = ANSIColor.WHITE,
+    private val inputColor: ANSIColor = ANSIColor.WHITE,
+    private val commandsColor: ANSIColor = ANSIColor.WHITE,
     private val displayMessagesInIsolation: Boolean = true,
     private val suppressMovementMessages: Boolean = true
 ) : SceneFrameBuilder {
@@ -120,7 +120,7 @@ public class AnsiSceneFrameBuilder(
             ansiGridStringBuilder.drawWrapped(">", leftMargin, availableHeight, availableWidth, inputColor)
         }
 
-        return AnsiGridTextFrame(ansiGridStringBuilder, 5, frameSize.height - 1, backgroundColor).also {
+        return ANSIGridTextFrame(ansiGridStringBuilder, 5, frameSize.height - 1, backgroundColor).also {
             it.acceptsInput = acceptInput
         }
     }

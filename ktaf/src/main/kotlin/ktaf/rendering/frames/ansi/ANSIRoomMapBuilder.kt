@@ -9,7 +9,7 @@ import ktaf.rendering.KeyType
 /**
  * Provides an ANSI [Room] map builder.
  */
-public class AnsiRoomMapBuilder(
+public class ANSIRoomMapBuilder(
     private val lockedExit: Char = 'x',
     private val itemOrCharacterInRoom: Char = '?',
     private val verticalBoundary: Char = '|',
@@ -18,16 +18,16 @@ public class AnsiRoomMapBuilder(
     private val horizontalExitBorder: Char = '-',
     private val corner: Char = '+',
     private val keyPadding: Int = 6,
-    private val boundaryColor: AnsiColor = AnsiColor.BRIGHT_BLACK,
-    private val itemOrCharacterColor: AnsiColor = AnsiColor.BLUE,
-    private val lockedExitColor: AnsiColor = AnsiColor.RED,
-    private val visitedExitColor: AnsiColor = AnsiColor.YELLOW,
-    private val unvisitedExitColor: AnsiColor = AnsiColor.GREEN
+    private val boundaryColor: ANSIColor = ANSIColor.BRIGHT_BLACK,
+    private val itemOrCharacterColor: ANSIColor = ANSIColor.BLUE,
+    private val lockedExitColor: ANSIColor = ANSIColor.RED,
+    private val visitedExitColor: ANSIColor = ANSIColor.YELLOW,
+    private val unvisitedExitColor: ANSIColor = ANSIColor.GREEN
 ) {
     private fun drawNorthBorder(
         room: Room,
         viewPoint: ViewPoint,
-        ansiGridStringBuilder: AnsiGridStringBuilder,
+        ansiGridStringBuilder: ANSIGridStringBuilder,
         startX: Int,
         startY: Int
     ) {
@@ -66,7 +66,7 @@ public class AnsiRoomMapBuilder(
     private fun drawSouthBorder(
         room: Room,
         viewPoint: ViewPoint,
-        ansiGridStringBuilder: AnsiGridStringBuilder,
+        ansiGridStringBuilder: ANSIGridStringBuilder,
         startX: Int,
         startY: Int
     ) {
@@ -105,7 +105,7 @@ public class AnsiRoomMapBuilder(
     private fun drawEastBorder(
         room: Room,
         viewPoint: ViewPoint,
-        ansiGridStringBuilder: AnsiGridStringBuilder,
+        ansiGridStringBuilder: ANSIGridStringBuilder,
         startX: Int,
         startY: Int
     ) {
@@ -141,7 +141,7 @@ public class AnsiRoomMapBuilder(
     private fun drawWestBorder(
         room: Room,
         viewPoint: ViewPoint,
-        ansiGridStringBuilder: AnsiGridStringBuilder,
+        ansiGridStringBuilder: ANSIGridStringBuilder,
         startX: Int,
         startY: Int
     ) {
@@ -177,7 +177,7 @@ public class AnsiRoomMapBuilder(
     private fun drawUpExit(
         room: Room,
         viewPoint: ViewPoint,
-        ansiGridStringBuilder: AnsiGridStringBuilder,
+        ansiGridStringBuilder: ANSIGridStringBuilder,
         startX: Int,
         startY: Int
     ) {
@@ -195,7 +195,7 @@ public class AnsiRoomMapBuilder(
     private fun drawDownExit(
         room: Room,
         viewPoint: ViewPoint,
-        ansiGridStringBuilder: AnsiGridStringBuilder,
+        ansiGridStringBuilder: ANSIGridStringBuilder,
         startX: Int,
         startY: Int
     ) {
@@ -212,7 +212,7 @@ public class AnsiRoomMapBuilder(
 
     private fun drawItemOrCharacter(
         room: Room,
-        ansiGridStringBuilder: AnsiGridStringBuilder,
+        ansiGridStringBuilder: ANSIGridStringBuilder,
         startX: Int,
         startY: Int
     ) {
@@ -226,11 +226,11 @@ public class AnsiRoomMapBuilder(
         room: Room,
         viewPoint: ViewPoint,
         keyType: KeyType,
-        ansiGridStringBuilder: AnsiGridStringBuilder,
+        ansiGridStringBuilder: ANSIGridStringBuilder,
         startX: Int,
         startY: Int
     ): FramePosition {
-        val keyLines = mutableMapOf<String, AnsiColor>()
+        val keyLines = mutableMapOf<String, ANSIColor>()
         val lockedExitString = "$lockedExit = Locked Exit"
         val notVisitedString = "N/E/S/W/U/D = Unvisited"
         val visitedString = "n/s/e/w/u/d = Visited"
@@ -290,7 +290,7 @@ public class AnsiRoomMapBuilder(
      * position. Return the end [FramePosition].
      */
     public fun build(
-        ansiGridStringBuilder: AnsiGridStringBuilder,
+        ansiGridStringBuilder: ANSIGridStringBuilder,
         room: Room,
         viewPoint: ViewPoint,
         keyType: KeyType,

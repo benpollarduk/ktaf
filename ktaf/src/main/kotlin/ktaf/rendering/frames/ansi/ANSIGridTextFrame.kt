@@ -7,11 +7,11 @@ import ktaf.rendering.frames.Frame
 /**
  * Provides an ANSI grid based [Frame].
  */
-public class AnsiGridTextFrame(
-    private val builder: AnsiGridStringBuilder,
+public class ANSIGridTextFrame(
+    private val builder: ANSIGridStringBuilder,
     override var cursorLeft: Int,
     override var cursorTop: Int,
-    private var backgroundColor: AnsiColor = AnsiColor.BLACK
+    private var backgroundColor: ANSIColor = ANSIColor.BLACK
 ) : Frame {
     override var acceptsInput: Boolean = true
 
@@ -46,7 +46,7 @@ public class AnsiGridTextFrame(
         }
 
         // reset both font and background colors
-        stringBuilder.append("${AnsiColor.RESET.toFontColorEscapeCode()}${AnsiColor.RESET.toBackgroundColorEscapeCode()}")
+        stringBuilder.append("${ANSIColor.RESET.toFontColorEscapeCode()}${ANSIColor.RESET.toBackgroundColorEscapeCode()}")
         displayTextOutput(stringBuilder.toString())
     }
 

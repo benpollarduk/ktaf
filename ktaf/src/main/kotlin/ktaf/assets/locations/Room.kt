@@ -25,7 +25,7 @@ public class Room(
     override var identifier: Identifier,
     override var description: Description,
     exits: List<Exit> = emptyList(),
-    items: List<Item> = emptyList(),
+    items: List<Item> = emptyList()
 ) : ExaminableObject(), InteractionTarget {
     /**
      * A room with a specified [identifier] and a [description].
@@ -34,7 +34,7 @@ public class Room(
         identifier: String,
         description: String,
         exits: List<Exit> = emptyList(),
-        items: List<Item> = emptyList(),
+        items: List<Item> = emptyList()
     ) : this(Identifier(identifier), Description(description), exits, items)
 
     private val _exits: MutableList<Exit> = mutableListOf()

@@ -5,18 +5,18 @@ import ktaf.io.configurations.AnsiConsoleConfiguration
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class AnsiGridTextFrameTest {
+class ANSIGridTextFrameTest {
     @Test
     fun `given grid string builder when rendering test text then does not throw exception`() {
         // Then
         Assertions.assertDoesNotThrow {
             // Given
-            val builder = AnsiGridStringBuilder().also {
+            val builder = ANSIGridStringBuilder().also {
                 it.resize(Size(75, 50))
             }
-            builder.drawBoundary(AnsiColor.BLUE)
-            builder.drawWrapped("TEST", 5, 5, 50, AnsiColor.GREEN)
-            val frame = AnsiGridTextFrame(builder, 10, 10, AnsiColor.BLACK).also {
+            builder.drawBoundary(ANSIColor.BLUE)
+            builder.drawWrapped("TEST", 5, 5, 50, ANSIColor.GREEN)
+            val frame = ANSIGridTextFrame(builder, 10, 10, ANSIColor.BLACK).also {
                 it.acceptsInput = false
             }
 

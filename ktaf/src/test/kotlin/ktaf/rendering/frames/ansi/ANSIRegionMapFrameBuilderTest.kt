@@ -6,11 +6,11 @@ import ktaf.utilities.RegionMaker
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class AnsiRegionMapFrameBuilderTest {
+class ANSIRegionMapFrameBuilderTest {
     @Test
     fun `given defaults when build then string with some length returned`() {
         // Given
-        val builder = AnsiRegionMapFrameBuilder(AnsiGridStringBuilder(), AnsiRegionMapBuilder(), Size(80, 50))
+        val builder = ANSIRegionMapFrameBuilder(ANSIGridStringBuilder(), ANSIRegionMapBuilder(), Size(80, 50))
         val regionMaker = RegionMaker("", "")
         regionMaker[0, 0, 0] = Room("", "")
         regionMaker[1, 0, 0] = Room("", "")

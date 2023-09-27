@@ -15,11 +15,11 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 
-class AnsiSceneFrameBuilderTest {
+class ANSISceneFrameBuilderTest {
     @Test
     fun `given defaults when build then string with some length returned`() {
         // Given
-        val builder = AnsiSceneFrameBuilder(AnsiGridStringBuilder(), AnsiRoomMapBuilder(), Size(80, 50))
+        val builder = ANSISceneFrameBuilder(ANSIGridStringBuilder(), ANSIRoomMapBuilder(), Size(80, 50))
         val regionMaker = RegionMaker("", "")
         val startRoom = Room("Room", "This room has no description.", listOf(Exit(Direction.EAST)))
         regionMaker[0, 0, 0] = startRoom
@@ -47,7 +47,7 @@ class AnsiSceneFrameBuilderTest {
         assertDoesNotThrow {
             // Given
             val game = DebugHelper.getSimpleGameCreator()()
-            val sceneFrameBuilder = AnsiSceneFrameBuilder(AnsiGridStringBuilder(), AnsiRoomMapBuilder(), Size(80, 50))
+            val sceneFrameBuilder = ANSISceneFrameBuilder(ANSIGridStringBuilder(), ANSIRoomMapBuilder(), Size(80, 50))
             val region = game.overworld.currentRegion ?: throw IllegalArgumentException("Region should not be null.")
             val room = region.currentRoom ?: throw IllegalArgumentException("Room should not be null.")
             val view = ViewPoint(region)

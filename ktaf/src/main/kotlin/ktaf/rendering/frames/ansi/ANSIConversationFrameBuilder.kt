@@ -12,16 +12,16 @@ import ktaf.rendering.frames.Frame
 /**
  * Provides an ANSI conversation frame builder that builds in to the specified [ansiGridStringBuilder].
  */
-public class AnsiConversationFrameBuilder(
-    private val ansiGridStringBuilder: AnsiGridStringBuilder,
+public class ANSIConversationFrameBuilder(
+    private val ansiGridStringBuilder: ANSIGridStringBuilder,
     private val frameSize: Size,
-    private val backgroundColor: AnsiColor = AnsiColor.RESET,
-    private val borderColor: AnsiColor = AnsiColor.BRIGHT_BLACK,
-    private val titleColor: AnsiColor = AnsiColor.GREEN,
-    private val nonPlayerMessageColor: AnsiColor = AnsiColor.YELLOW,
-    private val playerMessageColor: AnsiColor = AnsiColor.BLUE,
-    private val responseColor: AnsiColor = AnsiColor.BRIGHT_BLACK,
-    private val inputColor: AnsiColor = AnsiColor.WHITE
+    private val backgroundColor: ANSIColor = ANSIColor.RESET,
+    private val borderColor: ANSIColor = ANSIColor.BRIGHT_BLACK,
+    private val titleColor: ANSIColor = ANSIColor.GREEN,
+    private val nonPlayerMessageColor: ANSIColor = ANSIColor.YELLOW,
+    private val playerMessageColor: ANSIColor = ANSIColor.BLUE,
+    private val responseColor: ANSIColor = ANSIColor.BRIGHT_BLACK,
+    private val inputColor: ANSIColor = ANSIColor.WHITE
 ) : ConversationFrameBuilder {
     private fun truncateLog(startX: Int, availableWidth: Int, availableHeight: Int, log: List<LogItem>): List<LogItem> {
         val truncated = mutableListOf<LogItem>()
@@ -96,7 +96,7 @@ public class AnsiConversationFrameBuilder(
         ansiGridStringBuilder.drawHorizontalDivider(availableHeight - 1, borderColor)
         ansiGridStringBuilder.drawWrapped(">", leftMargin, availableHeight, availableWidth, inputColor)
 
-        return AnsiGridTextFrame(ansiGridStringBuilder, 5, frameSize.height - 1, backgroundColor).also {
+        return ANSIGridTextFrame(ansiGridStringBuilder, 5, frameSize.height - 1, backgroundColor).also {
             it.acceptsInput = true
         }
     }

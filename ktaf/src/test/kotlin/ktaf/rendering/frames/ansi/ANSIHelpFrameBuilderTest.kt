@@ -1,17 +1,22 @@
 package ktaf.rendering.frames.ansi
 
 import ktaf.assets.Size
+import ktaf.interpretation.CommandHelp
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class AnsiTransitionFrameBuilderTest {
+class ANSIHelpFrameBuilderTest {
     @Test
     fun `given defaults when build then string with some length returned`() {
         // Given
-        val builder = AnsiTransitionFrameBuilder(AnsiGridStringBuilder(), Size(80, 50))
+        val builder = ANSIHelpFrameBuilder(ANSIGridStringBuilder(), Size(80, 50))
 
         // When
-        val result = builder.build("Test", "This is a test frame").toString()
+        val result = builder.build(
+            "Test",
+            "This is a test frame",
+            listOf(CommandHelp("TestCommand", "Test Command Description."))
+        ).toString()
         print(result)
 
         // Then

@@ -10,7 +10,7 @@ import ktaf.rendering.FramePosition
 /**
  * Provides an ANSI region map builder.
  */
-public class AnsiRegionMapBuilder(
+public class ANSIRegionMapBuilder(
     private val lockedExit: Char = 'x',
     private val unlockedExit: Char = ' ',
     private val emptySpace: Char = ' ',
@@ -19,11 +19,11 @@ public class AnsiRegionMapBuilder(
     private val lowerLevel: Char = '.',
     private val player: Char = 'O',
     private val currentFloorIndicator: Char = '*',
-    private val visitedBoundaryColor: AnsiColor = AnsiColor.WHITE,
-    private val unvisitedBoundaryColor: AnsiColor = AnsiColor.BRIGHT_BLACK,
-    private val playerColor: AnsiColor = AnsiColor.BLUE,
-    private val lockedExitColor: AnsiColor = AnsiColor.RED,
-    private val lowerFloorColor: AnsiColor = AnsiColor.BRIGHT_BLACK,
+    private val visitedBoundaryColor: ANSIColor = ANSIColor.WHITE,
+    private val unvisitedBoundaryColor: ANSIColor = ANSIColor.BRIGHT_BLACK,
+    private val playerColor: ANSIColor = ANSIColor.BLUE,
+    private val lockedExitColor: ANSIColor = ANSIColor.RED,
+    private val lowerFloorColor: ANSIColor = ANSIColor.BRIGHT_BLACK,
     private val showLowerFloors: Boolean = true
 ) {
     private fun drawCurrentFloorRoom(
@@ -31,7 +31,7 @@ public class AnsiRegionMapBuilder(
         left: Int,
         top: Int,
         isCurrent: Boolean,
-        ansiGridStringBuilder: AnsiGridStringBuilder
+        ansiGridStringBuilder: ANSIGridStringBuilder
     ) {
         /*
          * |   |
@@ -39,7 +39,7 @@ public class AnsiRegionMapBuilder(
          * |---|
          */
 
-        val color: AnsiColor = if (room.hasBeenVisited) visitedBoundaryColor else unvisitedBoundaryColor
+        val color: ANSIColor = if (room.hasBeenVisited) visitedBoundaryColor else unvisitedBoundaryColor
 
         ansiGridStringBuilder.setCell(left, top, verticalBoundary, color)
 
@@ -143,7 +143,7 @@ public class AnsiRegionMapBuilder(
     private fun drawLowerFloorRoom(
         left: Int,
         top: Int,
-        ansiGridStringBuilder: AnsiGridStringBuilder
+        ansiGridStringBuilder: ANSIGridStringBuilder
     ) {
         /*
          * .....
@@ -205,7 +205,7 @@ public class AnsiRegionMapBuilder(
      * [FramePosition].
      */
     public fun build(
-        ansiGridStringBuilder: AnsiGridStringBuilder,
+        ansiGridStringBuilder: ANSIGridStringBuilder,
         region: Region,
         x: Int,
         y: Int,

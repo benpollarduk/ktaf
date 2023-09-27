@@ -4,16 +4,16 @@ import ktaf.assets.Size
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class AnsiGridFrameBuilderTest {
+class ANSIGridFrameBuilderTest {
     @Test
     fun `given blank when draw horizontal border then border is drawn`() {
         // Given
-        val builder = AnsiGridStringBuilder().also {
+        val builder = ANSIGridStringBuilder().also {
             it.resize(Size(10, 10))
         }
 
         // When
-        builder.drawHorizontalDivider(0, AnsiColor.BLACK)
+        builder.drawHorizontalDivider(0, ANSIColor.BLACK)
         val left = builder.getCharacter(1, 0)
         val right = builder.getCharacter(8, 0)
 
@@ -25,12 +25,12 @@ class AnsiGridFrameBuilderTest {
     @Test
     fun `given blank when draw underline then underline is drawn`() {
         // Given
-        val builder = AnsiGridStringBuilder().also {
+        val builder = ANSIGridStringBuilder().also {
             it.resize(Size(10, 10))
         }
 
         // When
-        builder.drawUnderline(0, 0, 1, AnsiColor.BLACK)
+        builder.drawUnderline(0, 0, 1, ANSIColor.BLACK)
         val underline = builder.getCharacter(0, 0)
 
         // Then
@@ -40,12 +40,12 @@ class AnsiGridFrameBuilderTest {
     @Test
     fun `given blank when draw boundary then boundary is drawn`() {
         // Given
-        val builder = AnsiGridStringBuilder().also {
+        val builder = ANSIGridStringBuilder().also {
             it.resize(Size(10, 10))
         }
 
         // When
-        builder.drawBoundary(AnsiColor.BLACK)
+        builder.drawBoundary(ANSIColor.BLACK)
         val topLeft = builder.getCharacter(0, 0)
         val topRight = builder.getCharacter(9, 0)
         val bottomLeft = builder.getCharacter(9, 0)
@@ -61,12 +61,12 @@ class AnsiGridFrameBuilderTest {
     @Test
     fun `given blank when draw wrapped with A then drawn character is A`() {
         // Given
-        val builder = AnsiGridStringBuilder().also {
+        val builder = ANSIGridStringBuilder().also {
             it.resize(Size(10, 10))
         }
 
         // When
-        builder.drawWrapped("A", 0, 0, 10, AnsiColor.BLACK)
+        builder.drawWrapped("A", 0, 0, 10, ANSIColor.BLACK)
         val result = builder.getCharacter(0, 0)
 
         // Then
@@ -76,12 +76,12 @@ class AnsiGridFrameBuilderTest {
     @Test
     fun `given blank when draw wrapped with AA then end position x is 1`() {
         // Given
-        val builder = AnsiGridStringBuilder().also {
+        val builder = ANSIGridStringBuilder().also {
             it.resize(Size(10, 10))
         }
 
         // When
-        val result = builder.drawWrapped("AA", 0, 0, 10, AnsiColor.BLACK)
+        val result = builder.drawWrapped("AA", 0, 0, 10, ANSIColor.BLACK)
 
         // Then
         Assertions.assertEquals(1, result.x)
@@ -90,12 +90,12 @@ class AnsiGridFrameBuilderTest {
     @Test
     fun `given blank when draw wrapped with AA then end position y is 0`() {
         // Given
-        val builder = AnsiGridStringBuilder().also {
+        val builder = ANSIGridStringBuilder().also {
             it.resize(Size(10, 10))
         }
 
         // When
-        val result = builder.drawWrapped("AA", 0, 0, 10, AnsiColor.BLACK)
+        val result = builder.drawWrapped("AA", 0, 0, 10, ANSIColor.BLACK)
 
         // Then
         Assertions.assertEquals(0, result.y)
@@ -106,25 +106,25 @@ class AnsiGridFrameBuilderTest {
         // Then
         Assertions.assertDoesNotThrow {
             // Given
-            val builder = AnsiGridStringBuilder().also {
+            val builder = ANSIGridStringBuilder().also {
                 it.resize(Size(80, 50))
             }
             val longString = "There is a Beaver. Person is in Test Room. To the north is the South Room, east is the East Room, south is the North Room, west is the West Room, above is the Top Room, below is the Bottom Room."
 
             // When
-            builder.drawWrapped(longString, 0, 0, 80, AnsiColor.BLACK)
+            builder.drawWrapped(longString, 0, 0, 80, ANSIColor.BLACK)
         }
     }
 
     @Test
     fun `given blank when draw centralised wrapped with A then drawn character is A`() {
         // Given
-        val builder = AnsiGridStringBuilder().also {
+        val builder = ANSIGridStringBuilder().also {
             it.resize(Size(10, 10))
         }
 
         // When
-        builder.drawCentralisedWrapped("A", 0, 10, AnsiColor.BLACK)
+        builder.drawCentralisedWrapped("A", 0, 10, ANSIColor.BLACK)
         val result = builder.getCharacter(5, 0)
 
         // Then
@@ -134,12 +134,12 @@ class AnsiGridFrameBuilderTest {
     @Test
     fun `given blank when centralised draw wrapped with AA then end position x is 5`() {
         // Given
-        val builder = AnsiGridStringBuilder().also {
+        val builder = ANSIGridStringBuilder().also {
             it.resize(Size(10, 10))
         }
 
         // When
-        val result = builder.drawCentralisedWrapped("AA", 0, 10, AnsiColor.BLACK)
+        val result = builder.drawCentralisedWrapped("AA", 0, 10, ANSIColor.BLACK)
 
         // Then
         Assertions.assertEquals(5, result.x)
@@ -148,12 +148,12 @@ class AnsiGridFrameBuilderTest {
     @Test
     fun `given blank when centralised draw wrapped with AA then end position y is 0`() {
         // Given
-        val builder = AnsiGridStringBuilder().also {
+        val builder = ANSIGridStringBuilder().also {
             it.resize(Size(10, 10))
         }
 
         // When
-        val result = builder.drawCentralisedWrapped("AA", 0, 10, AnsiColor.BLACK)
+        val result = builder.drawCentralisedWrapped("AA", 0, 10, ANSIColor.BLACK)
 
         // Then
         Assertions.assertEquals(0, result.y)
@@ -162,7 +162,7 @@ class AnsiGridFrameBuilderTest {
     @Test
     fun `given display size of 10x10 and a line of -and the do- with when get number of lines then return 1`() {
         // Given
-        val builder = AnsiGridStringBuilder().also {
+        val builder = ANSIGridStringBuilder().also {
             it.resize(Size(10, 10))
         }
 
@@ -176,7 +176,7 @@ class AnsiGridFrameBuilderTest {
     @Test
     fun `given display size of 10x10 and a line of -and the dog- with when get number of lines then return 2`() {
         // Given
-        val builder = AnsiGridStringBuilder().also {
+        val builder = ANSIGridStringBuilder().also {
             it.resize(Size(10, 10))
         }
 

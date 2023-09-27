@@ -9,13 +9,13 @@ import ktaf.rendering.frames.GameOverFrameBuilder
 /**
  * Provides an ANSI game over frame builder that builds in to the specified [ansiGridStringBuilder].
  */
-public class AnsiGameOverFrameBuilder(
-    private val ansiGridStringBuilder: AnsiGridStringBuilder,
+public class ANSIGameOverFrameBuilder(
+    private val ansiGridStringBuilder: ANSIGridStringBuilder,
     private val frameSize: Size,
-    private val backgroundColor: AnsiColor = AnsiColor.RESET,
-    private val borderColor: AnsiColor = AnsiColor.BRIGHT_BLACK,
-    private val titleColor: AnsiColor = AnsiColor.RED,
-    private val descriptionColor: AnsiColor = AnsiColor.WHITE
+    private val backgroundColor: ANSIColor = ANSIColor.RESET,
+    private val borderColor: ANSIColor = ANSIColor.BRIGHT_BLACK,
+    private val titleColor: ANSIColor = ANSIColor.RED,
+    private val descriptionColor: ANSIColor = ANSIColor.WHITE
 ) : GameOverFrameBuilder {
     override fun build(title: String, reason: String): Frame {
         val availableWidth = frameSize.width - 4
@@ -27,7 +27,7 @@ public class AnsiGameOverFrameBuilder(
         ansiGridStringBuilder.drawUnderline(leftMargin, lastPosition.y + 1, title.length, titleColor)
         ansiGridStringBuilder.drawWrapped(reason.ensureFinishedSentence(), leftMargin, lastPosition.y + 3, availableWidth, descriptionColor)
 
-        return AnsiGridTextFrame(ansiGridStringBuilder, 0, 0, backgroundColor).also {
+        return ANSIGridTextFrame(ansiGridStringBuilder, 0, 0, backgroundColor).also {
             it.acceptsInput = false
         }
     }
