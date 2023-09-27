@@ -11,14 +11,14 @@ import ktaf.utilities.RegionMaker
  */
 public class Region(
     override var identifier: Identifier,
-    override var description: Description
+    override var description: Description,
 ) : ExaminableObject() {
     /**
      * Provides a region which is a container of [Room]. The region has an [identifier] and a [description].
      */
     public constructor(
         identifier: String,
-        description: String
+        description: String,
     ) : this(Identifier(identifier), Description(description))
 
     /**
@@ -210,7 +210,7 @@ public class Region(
             Direction.SOUTH,
             Direction.WEST,
             Direction.UP,
-            Direction.DOWN
+            Direction.DOWN,
         )
     }
 }

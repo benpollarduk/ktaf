@@ -8,13 +8,16 @@
 
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
-    id("org.jetbrains.kotlin.jvm") version "1.5.31"
+    id("org.jetbrains.kotlin.jvm") version "1.9.10"
 
     // https://plugins.grajlleitschuh.gradle.ktlintdle.org/plugin/org.
     id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
 
     // https://plugins.gradle.org/plugin/org.sonarqube
     id("org.sonarqube") version "4.3.1.3277"
+
+    // https://plugins.gradle.org/plugin/io.gitlab.arturbosch.detekt
+    // id("io.gitlab.arturbosch.detekt") version "1.23.1"
 
     // Apply the Jacoco plugin for test coverage.
     jacoco
@@ -23,7 +26,7 @@ plugins {
     `java-library`
 
     // Apply the distribution plugin https://docs.gradle.org/current/userguide/distribution_plugin.html.
-    `distribution`
+    distribution
 
     // Apply the maven-publish plugin to allow publish to Maven.
     `maven-publish`
@@ -85,6 +88,9 @@ dependencies {
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation("com.google.guava:guava:30.1.1-jre")
 
+    // https://mvnrepository.com/artifact/io.gitlab.arturbosch.detekt/detekt-gradle-plugin
+    // implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.23.1")
+
     // Use JUnit Jupiter API for testing.
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.1")
 
@@ -141,7 +147,6 @@ ktlint {
     verbose.set(true)
     outputToConsole.set(true)
     coloredOutput.set(true)
-    disabledRules.set(setOf("no-wildcard-imports"))
     reporters {
         reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.HTML)
     }

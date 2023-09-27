@@ -8,10 +8,7 @@
 
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
-    id("org.jetbrains.kotlin.jvm") version "1.5.31"
-
-    // https://plugins.grajlleitschuh.gradle.ktlintdle.org/plugin/org.
-    id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
+    id("org.jetbrains.kotlin.jvm") version "1.9.10"
 
     // Apply the application plugin to add support for building a CLI application in Java.
     application
@@ -53,7 +50,7 @@ application {
 tasks.jar {
     manifest {
         attributes(
-            "Main-Class" to "app.GameApp"
+            "Main-Class" to "app.GameApp",
         )
     }
 }

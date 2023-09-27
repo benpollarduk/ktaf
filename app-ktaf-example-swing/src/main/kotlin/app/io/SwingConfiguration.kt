@@ -27,11 +27,13 @@ import javax.swing.JEditorPane
 import javax.swing.SwingUtilities
 
 /**
- * Provides an [IOConfiguration] for Swing with A specified [output] controls.
+ * Provides an [IOConfiguration] for Swing application. The output [JEditorPane] must be specified [output].
+ * [allowInputChangedListener] allows a listener to be injected to allow calbacks back to the UI when the adjustInput
+ * method is called.
  */
 internal class SwingConfiguration(
     private val output: JEditorPane,
-    private val allowInputChangedListener: AllowInputChangedListener? = null
+    private val allowInputChangedListener: AllowInputChangedListener? = null,
 ) : IOConfiguration {
     private var command: String? = ""
     private var acknowledgementReceived: Boolean? = null
@@ -133,7 +135,7 @@ internal class SwingConfiguration(
                 HTMLGameOverFrameBuilder(htmlBuilder),
                 HTMLConversationFrameBuilder(htmlBuilder),
                 HTMLSceneFrameBuilder(htmlBuilder, GridRoomMapBuilder(), mapSize),
-                HTMLRegionMapFrameBuilder(htmlBuilder, GridRegionMapBuilder(), mapSize)
+                HTMLRegionMapFrameBuilder(htmlBuilder, GridRegionMapBuilder(), mapSize),
             )
         }
 

@@ -24,7 +24,7 @@ class GameApp : JFrame("app-example-swing") {
         this.setSize(600, 800)
         this.layout = BorderLayout()
 
-        // create components
+        // create components for interacting with the game
         val output = JEditorPane()
         val input = JTextField()
         val prompt = JLabel()
@@ -32,6 +32,7 @@ class GameApp : JFrame("app-example-swing") {
         val inputPanel = JPanel()
         val allowInputListener = object : SwingConfiguration.AllowInputChangedListener {
             override fun invoke(allowInput: Boolean) {
+                // capture if input is allowed on the current frame
                 currentFrameAcceptsInput = allowInput
             }
         }
@@ -68,10 +69,11 @@ class GameApp : JFrame("app-example-swing") {
             }
         })
 
-        // arrange
+        // add all UI to panels
         outputPanel.add(output)
         inputPanel.add(prompt, BorderLayout.WEST)
         inputPanel.add(input, BorderLayout.CENTER)
+        // add panels to this frame
         this.add(outputPanel, BorderLayout.CENTER)
         this.add(inputPanel, BorderLayout.SOUTH)
 
