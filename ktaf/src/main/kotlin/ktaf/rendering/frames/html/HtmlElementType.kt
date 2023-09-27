@@ -7,7 +7,7 @@ public sealed class HtmlElementType {
     /**
      * Full document with optional [title] and [css].
      */
-    public data class Document(public val tile: String = "", public val css: String = "") : HtmlElementType()
+    public data class Document(public val title: String = "", public val css: String = "") : HtmlElementType()
 
     /**
      * Div only.

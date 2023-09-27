@@ -3,9 +3,7 @@ package ktaf.assets
 import java.util.*
 
 /**
- * Provides functionality that can be used to identify an object.
- *
- * @param name The name to be associated with this identifier.
+ * Provides functionality that can be used to identify an object with a specified [name].
  */
 public class Identifier(public val name: String) {
 

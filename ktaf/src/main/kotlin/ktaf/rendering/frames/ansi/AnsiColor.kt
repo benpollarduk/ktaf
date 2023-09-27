@@ -87,7 +87,8 @@ public enum class AnsiColor(public val code: Int) {
     /**
      * Bright white (97).
      */
-    BRIGHT_WHITE(97);
+    BRIGHT_WHITE(97)
+    ;
 
     /**
      * Convert to font color escape code.

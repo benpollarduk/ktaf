@@ -11,7 +11,7 @@ public class InputInterpreter(private val interpreters: List<Interpreter> = empt
     override val supportedCommands: List<CommandHelp>
         get() {
             val list = interpreters
-                .mapNotNull { it.supportedCommands }
+                .map { it.supportedCommands }
                 .flatten()
                 .toTypedArray()
 
@@ -32,7 +32,7 @@ public class InputInterpreter(private val interpreters: List<Interpreter> = empt
 
     override fun getContextualCommandHelp(game: Game): List<CommandHelp> {
         val list = interpreters
-            .mapNotNull { it.getContextualCommandHelp(game) }
+            .map { it.getContextualCommandHelp(game) }
             .flatten()
             .toTypedArray()
 

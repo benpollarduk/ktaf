@@ -30,7 +30,7 @@ public enum class InteractionEffect {
     TARGET_USED_UP,
 
     /**
-     * Any other self contained effect.
+     * Any other self-contained effect.
      */
     SELF_CONTAINED
 }

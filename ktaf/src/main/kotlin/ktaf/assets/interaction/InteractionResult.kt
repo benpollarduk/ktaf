@@ -10,7 +10,7 @@ import ktaf.assets.Item
 public class InteractionResult(
     public val effect: InteractionEffect,
     public val item: Item,
-    public val descriptionOfInteraction: String?
+    private val descriptionOfInteraction: String?
 ) : Result {
 
     override val description: String

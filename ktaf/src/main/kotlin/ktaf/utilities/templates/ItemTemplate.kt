@@ -7,10 +7,9 @@ import ktaf.assets.locations.Room
 /**
  * Provides a template for producing [Item] objects.
  */
-public open class ItemTemplate<TDerived : ItemTemplate<TDerived>> {
+public open class ItemTemplate {
     /**
-     * Instantiate a new instance of the templated [Item] with a specified [playableCharacter] and
-     * [room].
+     * Instantiate a new instance of the templated [Item] with a specified [playableCharacter] and [room].
      */
     public open fun instantiate(playableCharacter: PlayableCharacter, room: Room): Item {
         throw NotImplementedError()

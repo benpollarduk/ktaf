@@ -24,7 +24,7 @@ public class HtmlFrame(private val pageBuilder: HtmlPageBuilder) : Frame {
                 stringBuilder.append(divOpen)
             }
             is HtmlElementType.Document -> {
-                stringBuilder.append("${getHtmlOpen(pageBuilder.mode.tile, pageBuilder.mode.css)}$bodyOpen$divOpen")
+                stringBuilder.append("${getHtmlOpen(pageBuilder.mode.title, pageBuilder.mode.css)}$bodyOpen$divOpen")
             }
         }
 

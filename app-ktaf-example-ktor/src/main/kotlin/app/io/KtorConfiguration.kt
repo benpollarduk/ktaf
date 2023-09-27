@@ -131,12 +131,16 @@ public object KtorConfiguration: IOConfiguration {
         get() = object : WaitForCommand {
             override fun invoke(): String {
                 var captured: String? = null
-                while (captured.isNullOrEmpty()) {
+                while (captured == null) {
                     try {
                         lock.lock()
                         val buffer: CharArray = command?.toCharArray() ?: CharArray(0)
                         if (buffer.isNotEmpty()) {
                             captured = String(buffer)
+                            command = null
+                        } else if (command != null) {
+                            // could be empty string
+                            captured = ""
                             command = null
                         }
                     } finally {

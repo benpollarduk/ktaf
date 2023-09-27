@@ -32,7 +32,9 @@ public enum class Direction {
     /**
      * Down.
      */
-    DOWN;
+    DOWN
+
+    ;
 
     /**
      * Invert this [Direction].

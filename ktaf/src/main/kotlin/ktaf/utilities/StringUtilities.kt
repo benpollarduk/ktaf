@@ -19,7 +19,7 @@ internal object StringUtilities {
      * Construct a sentence describing a collection of one or more [examinables].
      */
     internal fun constructExaminablesAsSentence(examinables: List<ExaminableObject>): String {
-        if (examinables.isNullOrEmpty()) {
+        if (examinables.isEmpty()) {
             return ""
         }
 
@@ -134,12 +134,16 @@ internal object StringUtilities {
         for (i in characters.indices) {
             val character = characters[i]
 
-            charactersAsString += if (i == characters.size - 1) {
-                "${character.identifier} are in the ${room.identifier}."
-            } else if (i == characters.size - 2) {
-                "${character.identifier} and "
-            } else {
-                "${character.identifier}, "
+            charactersAsString += when (i) {
+                characters.size - 1 -> {
+                    "${character.identifier} are in the ${room.identifier}."
+                }
+                characters.size - 2 -> {
+                    "${character.identifier} and "
+                }
+                else -> {
+                    "${character.identifier}, "
+                }
             }
         }
 
@@ -160,14 +164,14 @@ internal object StringUtilities {
                 "the ${roomInDirection.identifier.name}"
             }
 
-            if (view.isEmpty()) {
-                view += when (direction) {
+            view += if (view.isEmpty()) {
+                when (direction) {
                     Direction.UP -> "Above is $roomDescription, "
                     Direction.DOWN -> "Below is $roomDescription, "
                     else -> "To the ${direction.toString().lowercase()} is $roomDescription, "
                 }
             } else {
-                view += when (direction) {
+                when (direction) {
                     Direction.UP -> "above is $roomDescription, "
                     Direction.DOWN -> "below is $roomDescription, "
                     else -> "${direction.toString().lowercase()} is $roomDescription, "
