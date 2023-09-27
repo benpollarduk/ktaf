@@ -1,7 +1,6 @@
 package ktaf.logic
 
 import ktaf.assets.Examinable
-import ktaf.assets.Size
 import ktaf.assets.characters.PlayableCharacter
 import ktaf.assets.interaction.InteractionTarget
 import ktaf.assets.interaction.Reaction
@@ -290,13 +289,9 @@ public class Game private constructor(
     }
 
     private fun drawFrame(frame: Frame) {
-        try {
-            startingFrameDrawCallbacks.forEach { it.invoke(frame) }
-            frame.render(ioConfiguration.displayTextOutput)
-            finishedFrameDrawCallbacks.forEach { it.invoke(frame) }
-        } catch (e: Exception) {
-            println("An exception was caught drawing the frame: ${e.message}")
-        }
+        startingFrameDrawCallbacks.forEach { it.invoke(frame) }
+        frame.render(ioConfiguration.displayTextOutput)
+        finishedFrameDrawCallbacks.forEach { it.invoke(frame) }
     }
 
     private fun refresh(message: String = "") {
@@ -372,12 +367,10 @@ public class Game private constructor(
     }
 
     public companion object {
-        private val defaultSize: Size = Size(80, 50)
-
         /**
          * Get the default prefix to use for errors.
          */
-        public val defaultErrorPrefix: String = "Oops"
+        public const val defaultErrorPrefix: String = "Oops"
 
         /**
          * Get all default interpreters.

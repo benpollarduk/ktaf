@@ -253,7 +253,9 @@ public class Room(
      */
     public fun findInteractionTarget(target: String, includeInvisibleTargets: Boolean = false): InteractionTarget? {
         val item = items.firstOrNull { target.equalsExaminable(it) && (includeInvisibleTargets || it.isPlayerVisible) }
-        return item ?: characters.firstOrNull { target.equalsExaminable(it) && (includeInvisibleTargets || it.isPlayerVisible) }
+        return item ?: characters.firstOrNull {
+            target.equalsExaminable(it) && (includeInvisibleTargets || it.isPlayerVisible)
+        }
     }
 
     /**
@@ -276,7 +278,9 @@ public class Room(
      * that aren't visible to the player are included.
      */
     public fun findCharacter(character: String, includeInvisibleCharacters: Boolean = false): NonPlayableCharacter? {
-        return characters.firstOrNull { character.equalsExaminable(it) && (includeInvisibleCharacters || it.isPlayerVisible) }
+        return characters.firstOrNull {
+            character.equalsExaminable(it) && (includeInvisibleCharacters || it.isPlayerVisible)
+        }
     }
 
     /**
@@ -295,7 +299,10 @@ public class Room(
 
         if (visibleItems.size == 1) {
             val item = visibleItems.first()
-            return ExaminationResult("There ${if (item.identifier.name.isPlural()) "are" else "is"} ${item.identifier.name.getObjectifier()} ${item.identifier}")
+            return ExaminationResult(
+                "There ${if (item.identifier.name.isPlural()) "are" else "is"} " +
+                    "${item.identifier.name.getObjectifier()} ${item.identifier}"
+            )
         }
 
         val sentence = StringUtilities.constructExaminablesAsSentence(items)
@@ -304,7 +311,9 @@ public class Room(
             false -> sentence.indexOf(" and ")
         }
         val firstItemName = sentence.substring(0, endIndex)
-        return ExaminationResult("There ${if (firstItemName.isPlural()) "are" else "is"} ${sentence.startWithLower()}()")
+        return ExaminationResult(
+            "There ${if (firstItemName.isPlural()) "are" else "is"} ${sentence.startWithLower()}()"
+        )
     }
 
     override fun interact(item: Item): InteractionResult {

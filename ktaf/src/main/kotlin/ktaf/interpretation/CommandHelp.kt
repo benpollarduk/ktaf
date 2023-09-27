@@ -11,4 +11,11 @@ public class CommandHelp(public val command: String, public val description: Str
             else -> false
         }
     }
+
+    override fun hashCode(): Int {
+        var result = 17
+        result = 31 * result + command.hashCode()
+        result = 31 * result + description.hashCode()
+        return result
+    }
 }

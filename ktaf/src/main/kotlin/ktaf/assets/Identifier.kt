@@ -31,6 +31,13 @@ public class Identifier(public val name: String) {
         }
     }
 
+    override fun hashCode(): Int {
+        var result = 17
+        result = 31 * result + identifiableName.hashCode()
+        result = 31 * result + name.hashCode()
+        return result
+    }
+
     public companion object {
         /**
          * An empty identifier.

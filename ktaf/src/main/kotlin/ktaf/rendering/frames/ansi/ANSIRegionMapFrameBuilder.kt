@@ -23,9 +23,27 @@ public class ANSIRegionMapFrameBuilder(
 
         ansiGridStringBuilder.resize(frameSize)
         ansiGridStringBuilder.drawBoundary(borderColor)
-        val lastPosition: FramePosition = ansiGridStringBuilder.drawWrapped(region.identifier.name, leftMargin, 2, availableWidth, titleColor)
-        ansiGridStringBuilder.drawUnderline(leftMargin, lastPosition.y + 1, region.identifier.name.length, titleColor)
-        regionMapBuilder.build(ansiGridStringBuilder, region, 2, lastPosition.y + 2, availableWidth, frameSize.height - 4)
+        val lastPosition: FramePosition = ansiGridStringBuilder.drawWrapped(
+            region.identifier.name,
+            leftMargin,
+            2,
+            availableWidth,
+            titleColor
+        )
+        ansiGridStringBuilder.drawUnderline(
+            leftMargin,
+            lastPosition.y + 1,
+            region.identifier.name.length,
+            titleColor
+        )
+        regionMapBuilder.build(
+            ansiGridStringBuilder,
+            region,
+            2,
+            lastPosition.y + 2,
+            availableWidth,
+            frameSize.height - 4
+        )
 
         return ANSIGridTextFrame(ansiGridStringBuilder, 0, 0, backgroundColor).also {
             it.acceptsInput = false

@@ -29,7 +29,8 @@ public class ConversationCommandInterpreter : Interpreter {
             return InterpretationResult(true, Next())
         }
 
-        val responses = game.activeConverser?.conversation?.currentParagraph?.responses ?: return InterpretationResult.fail
+        val conversation = game.activeConverser?.conversation
+        val responses = conversation?.currentParagraph?.responses ?: return InterpretationResult.fail
         val index = input.tryParseInt() ?: return InterpretationResult.fail
 
         if (index > 0 && index <= responses.size) {
@@ -49,7 +50,12 @@ public class ConversationCommandInterpreter : Interpreter {
         }
 
         for (i in 0 until paragraph.responses.size) {
-            commands.add(CommandHelp((i + 1).toString(), paragraph.responses[i].line.ensureFinishedSentence().toSpeech()))
+            commands.add(
+                CommandHelp(
+                    (i + 1).toString(),
+                    paragraph.responses[i].line.ensureFinishedSentence().toSpeech()
+                )
+            )
         }
 
         return commands.toList()

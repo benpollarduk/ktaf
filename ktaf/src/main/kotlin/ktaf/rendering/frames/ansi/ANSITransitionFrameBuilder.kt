@@ -26,12 +26,24 @@ public class ANSITransitionFrameBuilder(
         ansiGridStringBuilder.drawBoundary(borderColor)
 
         if (title.isNotEmpty()) {
-            lastPosition = ansiGridStringBuilder.drawWrapped(title, leftMargin, lastPosition.y, availableWidth, titleColor)
+            lastPosition = ansiGridStringBuilder.drawWrapped(
+                title,
+                leftMargin,
+                lastPosition.y,
+                availableWidth,
+                titleColor
+            )
             ansiGridStringBuilder.drawUnderline(leftMargin, lastPosition.y + 1, title.length, titleColor)
             lastPosition = FramePosition(lastPosition.x, lastPosition.y + 3)
         }
 
-        ansiGridStringBuilder.drawWrapped(message.ensureFinishedSentence(), leftMargin, lastPosition.y, availableWidth, messageColor)
+        ansiGridStringBuilder.drawWrapped(
+            message.ensureFinishedSentence(),
+            leftMargin,
+            lastPosition.y,
+            availableWidth,
+            messageColor
+        )
 
         return ANSIGridTextFrame(ansiGridStringBuilder, 0, 0, backgroundColor).also {
             it.acceptsInput = false

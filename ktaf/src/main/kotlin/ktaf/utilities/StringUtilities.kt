@@ -154,7 +154,11 @@ internal object StringUtilities {
 
         for (direction in Region.allDirections) {
             val roomInDirection = viewPoint[direction] ?: continue
-            val roomDescription = if (room[direction]?.isLocked == true) "a locked exit" else "the ${roomInDirection.identifier.name}"
+            val roomDescription = if (room[direction]?.isLocked == true) {
+                "a locked exit"
+            } else {
+                "the ${roomInDirection.identifier.name}"
+            }
 
             if (view.isEmpty()) {
                 view += when (direction) {

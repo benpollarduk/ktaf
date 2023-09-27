@@ -278,7 +278,13 @@ public class ANSIRoomMapBuilder(
             val maxWidth = keyLines.maxOf { it.key.length } + startKeyX + 1
 
             keyLines.forEach {
-                endPosition = ansiGridStringBuilder.drawWrapped(it.key, startKeyX, endPosition.y + 1, maxWidth, it.value)
+                endPosition = ansiGridStringBuilder.drawWrapped(
+                    it.key,
+                    startKeyX,
+                    endPosition.y + 1,
+                    maxWidth,
+                    it.value
+                )
             }
         }
 

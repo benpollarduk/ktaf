@@ -71,7 +71,12 @@ public class HTMLSceneFrameBuilder(
             extendedDescription = extendedDescription.addSentence(StringUtilities.createNPCString(room))
 
             if (viewPoint.any) {
-                extendedDescription = extendedDescription.addSentence(StringUtilities.createViewpointAsString(room, viewPoint))
+                extendedDescription = extendedDescription.addSentence(
+                    StringUtilities.createViewpointAsString(
+                        room,
+                        viewPoint
+                    )
+                )
             }
 
             htmlPageBuilder.p(extendedDescription)
@@ -85,7 +90,11 @@ public class HTMLSceneFrameBuilder(
             htmlPageBuilder.pre(map.replace(newline(), "<br>"))
 
             if (playableCharacter.items.any()) {
-                htmlPageBuilder.p("You have: " + StringUtilities.constructExaminablesAsSentence(playableCharacter.items))
+                htmlPageBuilder.p(
+                    "You have: " + StringUtilities.constructExaminablesAsSentence(
+                        playableCharacter.items
+                    )
+                )
             }
 
             if (!displayMessagesInIsolation && !displayMessage) {

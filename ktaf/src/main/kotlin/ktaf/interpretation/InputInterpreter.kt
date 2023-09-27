@@ -4,7 +4,8 @@ import ktaf.commands.game.Unactionable
 import ktaf.logic.Game
 
 /**
- * Provides an [Interpreter] for input. This [Interpreter] acts as a master containing a collection of child interpreters.
+ * Provides an [Interpreter] for input. This [Interpreter] acts as a master containing a collection of child
+ * interpreters.
  */
 public class InputInterpreter(private val interpreters: List<Interpreter> = emptyList()) : Interpreter {
     override val supportedCommands: List<CommandHelp>

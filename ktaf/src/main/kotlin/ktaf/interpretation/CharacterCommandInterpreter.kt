@@ -5,7 +5,6 @@ import ktaf.commands.Command
 import ktaf.commands.game.Talk
 import ktaf.extensions.insensitiveEquals
 import ktaf.logic.Game
-import java.util.*
 
 /**
  * Provides an [Interpreter] for character commands.
@@ -20,8 +19,8 @@ public class CharacterCommandInterpreter : Interpreter {
             return when {
                 (noun.length > 3 && noun.startsWith("$to ", true)) -> {
                     noun = noun.substring(3)
-                    val character: NonPlayableCharacter? = game.overworld.currentRegion?.currentRoom?.findCharacter(noun)
-                    Talk(character)
+                    val c: NonPlayableCharacter? = game.overworld.currentRegion?.currentRoom?.findCharacter(noun)
+                    Talk(c)
                 }
                 (game.overworld.currentRegion?.currentRoom?.characters?.size == 1) -> {
                     Talk(game.overworld.currentRegion?.currentRoom?.characters?.firstOrNull())
@@ -80,7 +79,10 @@ public class CharacterCommandInterpreter : Interpreter {
          */
         public const val variable: String = "__"
 
-        private val talkCommandHelp = CommandHelp("$talk / $talkShort ${to.lowercase()} $variable", "Talk to a character")
+        private val talkCommandHelp = CommandHelp(
+            "$talk / $talkShort ${to.lowercase()} $variable",
+            "Talk to a character"
+        )
 
         /**
          * Get the supported commands.

@@ -1,11 +1,9 @@
-package ktaf.rendering.frames.ansi
+package ktaf.rendering.frames
 
 import ktaf.assets.Size
 import ktaf.assets.locations.Direction
 import ktaf.assets.locations.Exit
 import ktaf.assets.locations.Room
-import ktaf.rendering.frames.GridRegionMapBuilder
-import ktaf.rendering.frames.GridStringBuilder
 import ktaf.utilities.RegionMaker
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test

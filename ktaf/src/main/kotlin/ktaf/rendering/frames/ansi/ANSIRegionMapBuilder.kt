@@ -201,8 +201,8 @@ public class ANSIRegionMapBuilder(
     }
 
     /**
-     * Build a map of a [Region] on a [ansiGridStringBuilder] with a [region] and a [viewPoint], with a [width] and [height]. Return the end
-     * [FramePosition].
+     * Build a map of a [Region] on a [ansiGridStringBuilder] with a [region] and a [viewPoint], with a [width] and
+     * [height]. Return the end [FramePosition].
      */
     public fun build(
         ansiGridStringBuilder: ANSIGridStringBuilder,
@@ -234,7 +234,8 @@ public class ANSIRegionMapBuilder(
             for (floor in matrix.depth - 1 downTo 0) {
                 val roomsOnThisFloor = rooms.filter { region.getPositionOfRoom(it)?.z == floor }
 
-                // only draw levels indicators where a region is visible without discovery or a room on the floor has been visited
+                // only draw levels indicators where a region is visible without discovery or a room on the floor has
+                // been visited
                 if (!region.visibleWithoutDiscovery && roomsOnThisFloor.all { !it.hasBeenVisited }) continue
 
                 if (floor == currentFloor) {

@@ -43,7 +43,8 @@ public class HTMLFrame(private val pageBuilder: HTMLPageBuilder) : Frame {
     }
 
     private fun getHtmlOpen(title: String = "", css: String = ""): String {
-        return "<!DOCTYPE html>$newline<html>$newline<head>$newline<title>$title</title>$newline<style>$css</style>$newline</head>$newline"
+        return "<!DOCTYPE html>$newline<html>$newline<head>$newline<title>$title</title>$newline" +
+            "<style>$css</style>$newline</head>$newline"
     }
 
     private companion object {

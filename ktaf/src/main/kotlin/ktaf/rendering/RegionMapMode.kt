@@ -10,7 +10,8 @@ public enum class RegionMapMode {
     DETAILED,
 
     /**
-     * Displays rooms in a region as a single character which allows larger region maps to be displayed in a limited area.
+     * Displays rooms in a region as a single character which allows larger region maps to be displayed in a limited
+     * area.
      */
     UNDETAILED,
 

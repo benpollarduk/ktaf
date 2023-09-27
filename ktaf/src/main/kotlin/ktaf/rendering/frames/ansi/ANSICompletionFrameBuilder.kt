@@ -23,9 +23,26 @@ public class ANSICompletionFrameBuilder(
 
         ansiGridStringBuilder.resize(frameSize)
         ansiGridStringBuilder.drawBoundary(borderColor)
-        val lastPosition: FramePosition = ansiGridStringBuilder.drawWrapped(title, leftMargin, 2, availableWidth, titleColor)
-        ansiGridStringBuilder.drawUnderline(leftMargin, lastPosition.y + 1, title.length, titleColor)
-        ansiGridStringBuilder.drawWrapped(reason.ensureFinishedSentence(), leftMargin, lastPosition.y + 3, availableWidth, descriptionColor)
+        val lastPosition: FramePosition = ansiGridStringBuilder.drawWrapped(
+            title,
+            leftMargin,
+            2,
+            availableWidth,
+            titleColor
+        )
+        ansiGridStringBuilder.drawUnderline(
+            leftMargin,
+            lastPosition.y + 1,
+            title.length,
+            titleColor
+        )
+        ansiGridStringBuilder.drawWrapped(
+            reason.ensureFinishedSentence(),
+            leftMargin,
+            lastPosition.y + 3,
+            availableWidth,
+            descriptionColor
+        )
 
         return ANSIGridTextFrame(ansiGridStringBuilder, 0, 0, backgroundColor).also {
             it.acceptsInput = false

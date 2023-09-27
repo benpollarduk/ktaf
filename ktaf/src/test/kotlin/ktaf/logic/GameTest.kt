@@ -125,13 +125,11 @@ class GameTest {
                     }
                 override val clearOutput: ClearOutput
                     get() = object : ClearOutput {
-                        override fun invoke() {
-                        }
+                        override fun invoke() = Unit
                     }
                 override val adjustInput: AdjustInput
                     get() = object : AdjustInput {
-                        override fun invoke(allowInput: Boolean, cursorPosition: FramePosition) {
-                        }
+                        override fun invoke(allowInput: Boolean, cursorPosition: FramePosition) = Unit
                     }
                 override val frameBuilders: FrameBuilderCollection
                     get() = AnsiConsoleConfiguration.frameBuilders

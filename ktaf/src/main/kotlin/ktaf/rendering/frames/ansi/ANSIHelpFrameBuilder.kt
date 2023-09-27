@@ -27,11 +27,22 @@ public class ANSIHelpFrameBuilder(
 
         ansiGridStringBuilder.resize(frameSize)
         ansiGridStringBuilder.drawBoundary(borderColor)
-        var lastPosition: FramePosition = ansiGridStringBuilder.drawWrapped(title, leftMargin, 2, availableWidth, titleColor)
+        var lastPosition: FramePosition = ansiGridStringBuilder.drawWrapped(
+            title,
+            leftMargin,
+            2,
+            availableWidth,
+            titleColor
+        )
         ansiGridStringBuilder.drawUnderline(leftMargin, lastPosition.y + 1, title.length, titleColor)
 
         if (description.isNotEmpty()) {
-            lastPosition = ansiGridStringBuilder.drawCentralisedWrapped(description.ensureFinishedSentence(), lastPosition.y + 3, availableWidth, descriptionColor)
+            lastPosition = ansiGridStringBuilder.drawCentralisedWrapped(
+                description.ensureFinishedSentence(),
+                lastPosition.y + 3,
+                availableWidth,
+                descriptionColor
+            )
         }
 
         lastPosition = FramePosition(lastPosition.x, lastPosition.y + 2)
@@ -39,11 +50,35 @@ public class ANSIHelpFrameBuilder(
         commands.forEach {
             if (lastPosition.y < frameSize.height - 1) {
                 if (it.command.isNotEmpty() && it.description.isNotEmpty()) {
-                    lastPosition = ansiGridStringBuilder.drawWrapped(it.command, leftMargin, lastPosition.y + 1, availableWidth, commandColor)
-                    lastPosition = ansiGridStringBuilder.drawWrapped("-", leftMargin + padding, lastPosition.y, availableWidth, commandColor)
-                    lastPosition = ansiGridStringBuilder.drawWrapped(it.description, leftMargin + padding + 2, lastPosition.y, availableWidth, descriptionColor)
+                    lastPosition = ansiGridStringBuilder.drawWrapped(
+                        it.command,
+                        leftMargin,
+                        lastPosition.y + 1,
+                        availableWidth,
+                        commandColor
+                    )
+                    lastPosition = ansiGridStringBuilder.drawWrapped(
+                        "-",
+                        leftMargin + padding,
+                        lastPosition.y,
+                        availableWidth,
+                        commandColor
+                    )
+                    lastPosition = ansiGridStringBuilder.drawWrapped(
+                        it.description,
+                        leftMargin + padding + 2,
+                        lastPosition.y,
+                        availableWidth,
+                        descriptionColor
+                    )
                 } else if (it.command.isNotEmpty() && it.description.isEmpty()) {
-                    lastPosition = ansiGridStringBuilder.drawWrapped(it.command, leftMargin, lastPosition.y + 1, availableWidth, commandDescriptionColor)
+                    lastPosition = ansiGridStringBuilder.drawWrapped(
+                        it.command,
+                        leftMargin,
+                        lastPosition.y + 1,
+                        availableWidth,
+                        commandDescriptionColor
+                    )
                 }
             }
         }

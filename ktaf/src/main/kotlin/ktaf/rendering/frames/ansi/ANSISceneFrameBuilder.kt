@@ -61,13 +61,31 @@ public class ANSISceneFrameBuilder(
 
         ansiGridStringBuilder.resize(frameSize)
         ansiGridStringBuilder.drawBoundary(borderColor)
-        var lastPosition: FramePosition = ansiGridStringBuilder.drawWrapped(room.identifier.name, leftMargin, 2, availableWidth, textColor)
+        var lastPosition: FramePosition = ansiGridStringBuilder.drawWrapped(
+            room.identifier.name,
+            leftMargin,
+            2,
+            availableWidth,
+            textColor
+        )
         ansiGridStringBuilder.drawUnderline(leftMargin, lastPosition.y + 1, room.identifier.name.length, textColor)
 
         if (displayMessagesInIsolation && displayMessage) {
-            ansiGridStringBuilder.drawWrapped(message.ensureFinishedSentence(), leftMargin, lastPosition.y + 3, availableWidth, textColor)
+            ansiGridStringBuilder.drawWrapped(
+                message.ensureFinishedSentence(),
+                leftMargin,
+                lastPosition.y + 3,
+                availableWidth,
+                textColor
+            )
         } else {
-            lastPosition = ansiGridStringBuilder.drawWrapped(room.description.getDescription().ensureFinishedSentence(), leftMargin, lastPosition.y + 3, availableWidth, textColor)
+            lastPosition = ansiGridStringBuilder.drawWrapped(
+                room.description.getDescription().ensureFinishedSentence(),
+                leftMargin,
+                lastPosition.y + 3,
+                availableWidth,
+                textColor
+            )
 
             var extendedDescription: String = if (room.items.any()) {
                 room.examine().description.ensureFinishedSentence()
@@ -78,26 +96,54 @@ public class ANSISceneFrameBuilder(
             extendedDescription = extendedDescription.addSentence(StringUtilities.createNPCString(room))
 
             if (viewPoint.any) {
-                extendedDescription = extendedDescription.addSentence(StringUtilities.createViewpointAsString(room, viewPoint))
+                extendedDescription = extendedDescription.addSentence(
+                    StringUtilities.createViewpointAsString(room, viewPoint)
+                )
             }
 
-            lastPosition = ansiGridStringBuilder.drawWrapped(extendedDescription, leftMargin, lastPosition.y + linePadding, availableWidth, textColor)
-            lastPosition = roomMapBuilder.build(ansiGridStringBuilder, room, viewPoint, keyType, leftMargin, lastPosition.y + linePadding)
+            lastPosition = ansiGridStringBuilder.drawWrapped(
+                extendedDescription,
+                leftMargin,
+                lastPosition.y + linePadding,
+                availableWidth,
+                textColor
+            )
+            lastPosition = roomMapBuilder.build(
+                ansiGridStringBuilder,
+                room,
+                viewPoint,
+                keyType,
+                leftMargin,
+                lastPosition.y + linePadding
+            )
 
             if (playableCharacter.items.any()) {
-                lastPosition = ansiGridStringBuilder.drawWrapped("You have: " + StringUtilities.constructExaminablesAsSentence(playableCharacter.items), leftMargin, lastPosition.y + 2, availableWidth, textColor)
+                lastPosition = ansiGridStringBuilder.drawWrapped(
+                    "You have: " + StringUtilities.constructExaminablesAsSentence(playableCharacter.items),
+                    leftMargin,
+                    lastPosition.y + 2,
+                    availableWidth,
+                    textColor
+                )
             }
 
             if (!displayMessagesInIsolation && !displayMessage) {
                 ansiGridStringBuilder.drawHorizontalDivider(lastPosition.y + 3, borderColor)
-                lastPosition = ansiGridStringBuilder.drawWrapped(message.ensureFinishedSentence(), leftMargin, lastPosition.y + 5, availableWidth, textColor)
+                lastPosition = ansiGridStringBuilder.drawWrapped(
+                    message.ensureFinishedSentence(),
+                    leftMargin,
+                    lastPosition.y + 5,
+                    availableWidth,
+                    textColor
+                )
             }
 
             if (contextualCommands.any()) {
                 val requiredSpaceForDivider = 3
                 val requiredSpaceForPrompt = 4
                 val requiredSpaceForCommandHeader = 3
-                val requiredYToFitAllCommands = frameSize.height - requiredSpaceForCommandHeader - requiredSpaceForPrompt - requiredSpaceForDivider - contextualCommands.size
+                val requiredYToFitAllCommands = frameSize.height - requiredSpaceForCommandHeader -
+                    requiredSpaceForPrompt - requiredSpaceForDivider - contextualCommands.size
                 val yStart = max(requiredYToFitAllCommands, lastPosition.y)
                 val maxCommandLength = contextualCommands.maxOf { it.command.length }
                 val padding = 4
@@ -106,13 +152,37 @@ public class ANSISceneFrameBuilder(
                 lastPosition = FramePosition(lastPosition.x, yStart)
 
                 ansiGridStringBuilder.drawHorizontalDivider(lastPosition.y + linePadding, borderColor)
-                lastPosition = ansiGridStringBuilder.drawWrapped("You can:", leftMargin, lastPosition.y + 4, availableWidth, commandsColor)
+                lastPosition = ansiGridStringBuilder.drawWrapped(
+                    "You can:",
+                    leftMargin,
+                    lastPosition.y + 4,
+                    availableWidth,
+                    commandsColor
+                )
                 lastPosition = FramePosition(lastPosition.x, lastPosition.y + 1)
 
                 contextualCommands.forEach {
-                    lastPosition = ansiGridStringBuilder.drawWrapped(it.command, leftMargin, lastPosition.y + 1, availableWidth, commandsColor)
-                    lastPosition = ansiGridStringBuilder.drawWrapped("-", dashStartX, lastPosition.y, availableWidth, commandsColor)
-                    ansiGridStringBuilder.drawWrapped(it.description, descptiptionStartX, lastPosition.y, availableWidth, commandsColor)
+                    lastPosition = ansiGridStringBuilder.drawWrapped(
+                        it.command,
+                        leftMargin,
+                        lastPosition.y + 1,
+                        availableWidth,
+                        commandsColor
+                    )
+                    lastPosition = ansiGridStringBuilder.drawWrapped(
+                        "-",
+                        dashStartX,
+                        lastPosition.y,
+                        availableWidth,
+                        commandsColor
+                    )
+                    ansiGridStringBuilder.drawWrapped(
+                        it.description,
+                        descptiptionStartX,
+                        lastPosition.y,
+                        availableWidth,
+                        commandsColor
+                    )
                 }
             }
 
@@ -120,7 +190,12 @@ public class ANSISceneFrameBuilder(
             ansiGridStringBuilder.drawWrapped(">", leftMargin, availableHeight, availableWidth, inputColor)
         }
 
-        return ANSIGridTextFrame(ansiGridStringBuilder, 5, frameSize.height - 1, backgroundColor).also {
+        return ANSIGridTextFrame(
+            ansiGridStringBuilder,
+            5,
+            frameSize.height - 1,
+            backgroundColor
+        ).also {
             it.acceptsInput = acceptInput
         }
     }

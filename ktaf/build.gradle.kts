@@ -89,7 +89,7 @@ dependencies {
     implementation("com.google.guava:guava:30.1.1-jre")
 
     // https://mvnrepository.com/artifact/io.gitlab.arturbosch.detekt/detekt-gradle-plugin
-    // implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.23.1")
+    implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.23.1")
 
     // Use JUnit Jupiter API for testing.
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.1")

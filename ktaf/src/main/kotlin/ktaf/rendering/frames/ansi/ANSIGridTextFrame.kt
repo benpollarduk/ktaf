@@ -46,7 +46,9 @@ public class ANSIGridTextFrame(
         }
 
         // reset both font and background colors
-        stringBuilder.append("${ANSIColor.RESET.toFontColorEscapeCode()}${ANSIColor.RESET.toBackgroundColorEscapeCode()}")
+        stringBuilder.append(
+            "${ANSIColor.RESET.toFontColorEscapeCode()}${ANSIColor.RESET.toBackgroundColorEscapeCode()}"
+        )
         displayTextOutput(stringBuilder.toString())
     }
 

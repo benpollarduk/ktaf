@@ -54,8 +54,19 @@ public class ANSIConversationFrameBuilder(
         ansiGridStringBuilder.drawBoundary(borderColor)
 
         if (title.isNotEmpty()) {
-            lastPosition = ansiGridStringBuilder.drawWrapped(title, leftMargin, lastPosition.y, availableWidth, titleColor)
-            ansiGridStringBuilder.drawUnderline(leftMargin, lastPosition.y + 1, title.length, titleColor)
+            lastPosition = ansiGridStringBuilder.drawWrapped(
+                title,
+                leftMargin,
+                lastPosition.y,
+                availableWidth,
+                titleColor
+            )
+            ansiGridStringBuilder.drawUnderline(
+                leftMargin,
+                lastPosition.y + 1,
+                title.length,
+                titleColor
+            )
             lastPosition = FramePosition(lastPosition.x, lastPosition.y + 2)
         }
 
@@ -68,10 +79,22 @@ public class ANSIConversationFrameBuilder(
 
                 lastPosition = when (it.participant) {
                     Participant.PLAYER -> {
-                        ansiGridStringBuilder.drawWrapped("You: ${it.line}", leftMargin, lastPosition.y, availableWidth, playerMessageColor)
+                        ansiGridStringBuilder.drawWrapped(
+                            "You: ${it.line}",
+                            leftMargin,
+                            lastPosition.y,
+                            availableWidth,
+                            playerMessageColor
+                        )
                     }
                     Participant.OTHER -> {
-                        ansiGridStringBuilder.drawWrapped("$converserName: ${it.line}", leftMargin, lastPosition.y, availableWidth, nonPlayerMessageColor)
+                        ansiGridStringBuilder.drawWrapped(
+                            "$converserName: ${it.line}",
+                            leftMargin,
+                            lastPosition.y,
+                            availableWidth,
+                            nonPlayerMessageColor
+                        )
                     }
                 }
             }
@@ -79,7 +102,13 @@ public class ANSIConversationFrameBuilder(
 
         if (commands.any()) {
             ansiGridStringBuilder.drawHorizontalDivider(lastPosition.y + linePadding, borderColor)
-            lastPosition = ansiGridStringBuilder.drawWrapped("You can: ", leftMargin, lastPosition.y + 4, availableWidth, responseColor)
+            lastPosition = ansiGridStringBuilder.drawWrapped(
+                "You can: ",
+                leftMargin,
+                lastPosition.y + 4,
+                availableWidth,
+                responseColor
+            )
             val maxCommandLength = commands.maxOf { it.command.length }
             val padding = 4
             val dashStartX = leftMargin + maxCommandLength + padding
@@ -87,16 +116,39 @@ public class ANSIConversationFrameBuilder(
             lastPosition = FramePosition(lastPosition.x, lastPosition.y + 1)
 
             commands.forEach {
-                lastPosition = ansiGridStringBuilder.drawWrapped(it.command, leftMargin, lastPosition.y + 1, availableWidth, responseColor)
-                lastPosition = ansiGridStringBuilder.drawWrapped("-", dashStartX, lastPosition.y, availableWidth, responseColor)
-                lastPosition = ansiGridStringBuilder.drawWrapped(it.description, descriptionStartX, lastPosition.y, availableWidth, responseColor)
+                lastPosition = ansiGridStringBuilder.drawWrapped(
+                    it.command,
+                    leftMargin,
+                    lastPosition.y + 1,
+                    availableWidth,
+                    responseColor
+                )
+                lastPosition = ansiGridStringBuilder.drawWrapped(
+                    "-",
+                    dashStartX,
+                    lastPosition.y,
+                    availableWidth,
+                    responseColor
+                )
+                lastPosition = ansiGridStringBuilder.drawWrapped(
+                    it.description,
+                    descriptionStartX,
+                    lastPosition.y,
+                    availableWidth,
+                    responseColor
+                )
             }
         }
 
         ansiGridStringBuilder.drawHorizontalDivider(availableHeight - 1, borderColor)
         ansiGridStringBuilder.drawWrapped(">", leftMargin, availableHeight, availableWidth, inputColor)
 
-        return ANSIGridTextFrame(ansiGridStringBuilder, 5, frameSize.height - 1, backgroundColor).also {
+        return ANSIGridTextFrame(
+            ansiGridStringBuilder,
+            5,
+            frameSize.height - 1,
+            backgroundColor
+        ).also {
             it.acceptsInput = true
         }
     }

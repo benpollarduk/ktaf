@@ -25,10 +25,33 @@ public class ANSIAboutFrameBuilder(
 
         ansiGridStringBuilder.resize(frameSize)
         ansiGridStringBuilder.drawBoundary(borderColor)
-        var lastPosition: FramePosition = ansiGridStringBuilder.drawWrapped(title, leftMargin, 2, availableWidth, titleColor)
-        ansiGridStringBuilder.drawUnderline(leftMargin, lastPosition.y + 1, title.length, titleColor)
-        lastPosition = ansiGridStringBuilder.drawWrapped(title, leftMargin, lastPosition.y + 3, availableWidth, nameColor)
-        lastPosition = ansiGridStringBuilder.drawWrapped(description.ensureFinishedSentence(), leftMargin, lastPosition.y + 2, availableWidth, descriptionColor)
+        var lastPosition: FramePosition = ansiGridStringBuilder.drawWrapped(
+            title,
+            leftMargin,
+            2,
+            availableWidth,
+            titleColor
+        )
+        ansiGridStringBuilder.drawUnderline(
+            leftMargin,
+            lastPosition.y + 1,
+            title.length,
+            titleColor
+        )
+        lastPosition = ansiGridStringBuilder.drawWrapped(
+            title,
+            leftMargin,
+            lastPosition.y + 3,
+            availableWidth,
+            nameColor
+        )
+        lastPosition = ansiGridStringBuilder.drawWrapped(
+            description.ensureFinishedSentence(),
+            leftMargin,
+            lastPosition.y + 2,
+            availableWidth,
+            descriptionColor
+        )
 
         if (author.isNotEmpty()) {
             ansiGridStringBuilder.drawWrapped("Created by $author.", leftMargin, lastPosition.y + 2, availableWidth, authorColor)

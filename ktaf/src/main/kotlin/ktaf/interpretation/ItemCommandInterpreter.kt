@@ -41,7 +41,9 @@ public class ItemCommandInterpreter : Interpreter {
                     Take(item)
                 }
                 noun.isEmpty() -> {
-                    item = game.overworld.currentRegion?.currentRoom?.items?.firstOrNull { it.isPlayerVisible && it.isTakeable }
+                    item = game.overworld.currentRegion?.currentRoom?.items?.firstOrNull {
+                        it.isPlayerVisible && it.isTakeable
+                    }
                     if (item != null) {
                         Unactionable("There are no takeable items in the room.")
                     }
@@ -89,7 +91,10 @@ public class ItemCommandInterpreter : Interpreter {
 
             val direction = CommonInterpretation.tryParseDirection(text)
             if (direction != null) {
-                val exit = game.overworld.currentRegion?.currentRoom?.findExit(direction) ?: return Unactionable("There is no exit in this room to the $direction.")
+                val room = game.overworld.currentRegion?.currentRoom
+                val exit = room?.findExit(direction) ?: return Unactionable(
+                    "There is no exit in this room to the $direction."
+                )
                 return Examine(exit)
             }
 
@@ -282,12 +287,30 @@ public class ItemCommandInterpreter : Interpreter {
          */
         public const val variable: String = "__"
 
-        private val examineCommandHelp = CommandHelp("$examine / $examineShort $variable", "Examine anything in the game")
-        private val dropCommandHelp = CommandHelp("$drop / $dropShort $variable", "Drop an item")
-        private val takeCommandHelp = CommandHelp("$take / $takeShort $variable", "Take an item")
-        private val takeAllCommandHelp = CommandHelp("$take / $takeShort $all", "Take all items in the current room")
-        private val useCommandHelp = CommandHelp("$use $variable", "Use an item on the current room")
-        private val useOnCommandHelp = CommandHelp("$use $variable ${on.lowercase()} $variable", "Use an item on another item or character")
+        private val examineCommandHelp = CommandHelp(
+            "$examine / $examineShort $variable",
+            "Examine anything in the game"
+        )
+        private val dropCommandHelp = CommandHelp(
+            "$drop / $dropShort $variable",
+            "Drop an item"
+        )
+        private val takeCommandHelp = CommandHelp(
+            "$take / $takeShort $variable",
+            "Take an item"
+        )
+        private val takeAllCommandHelp = CommandHelp(
+            "$take / $takeShort $all",
+            "Take all items in the current room"
+        )
+        private val useCommandHelp = CommandHelp(
+            "$use $variable",
+            "Use an item on the current room"
+        )
+        private val useOnCommandHelp = CommandHelp(
+            "$use $variable ${on.lowercase()} $variable",
+            "Use an item on another item or character"
+        )
 
         /**
          * Get the supported commands.
