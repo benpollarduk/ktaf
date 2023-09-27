@@ -26,7 +26,7 @@ public class HTMLRegionMapFrameBuilder(
         }
         regionMapBuilder.build(gridStringBuilder, region, 0, 0, frameSize.width, frameSize.height)
 
-        var map = gridStringBuilder.toString().removeWhitespaceLines()
+        var map = gridStringBuilder.toString() // .removeWhitespaceLines()
         htmlPageBuilder.pre(map.replace(newline(), "<br>"))
 
         return HTMLFrame(htmlPageBuilder).also {

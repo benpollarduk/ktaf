@@ -124,7 +124,7 @@ internal class SwingConfiguration(
     override val frameBuilders: FrameBuilderCollection
         get() {
             val width = 600
-            val mapSize = Size(60, 50)
+            val mapSize = Size(60, 35)
             val htmlBuilder = HTMLPageBuilder(HTMLElementType.Document("ktaf frame", createCSS(width)))
             return FrameBuilderCollection(
                 HTMLTitleFrameBuilder(htmlBuilder),

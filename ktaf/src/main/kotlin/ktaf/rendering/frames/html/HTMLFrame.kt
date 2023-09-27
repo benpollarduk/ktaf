@@ -1,5 +1,6 @@
 package ktaf.rendering.frames.html
 
+import ktaf.helpers.newline
 import ktaf.io.DisplayTextOutput
 import ktaf.rendering.frames.Frame
 
@@ -42,14 +43,15 @@ public class HTMLFrame(private val pageBuilder: HTMLPageBuilder) : Frame {
     }
 
     private fun getHtmlOpen(title: String = "", css: String = ""): String {
-        return "<!DOCTYPE html><html><head><title>$title</title><style>$css</style></head>"
+        return "<!DOCTYPE html>$newline<html>$newline<head>$newline<title>$title</title>$newline<style>$css</style>$newline</head>$newline"
     }
 
     private companion object {
+        private val newline = newline()
         private const val htmlClose: String = "</html>"
-        private const val bodyOpen: String = "<body>"
-        private const val bodyClose: String = "</body>"
-        private const val divOpen: String = "<div>"
-        private const val divClose: String = "</div>"
+        private val bodyOpen: String = "<body>$newline"
+        private val bodyClose: String = "</body>$newline"
+        private val divOpen: String = "<div>$newline"
+        private val divClose: String = "</div>$newline"
     }
 }
