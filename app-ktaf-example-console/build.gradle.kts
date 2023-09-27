@@ -31,6 +31,8 @@ dependencies {
 
     // This dependency is used by the application.
     implementation("com.google.guava:guava:30.1.1-jre")
+    implementation(project(mapOf("path" to ":ktaf-example")))
+    implementation(project(mapOf("path" to ":ktaf-example")))
 
     // Use the Kotlin test library.
     testImplementation("org.jetbrains.kotlin:kotlin-test")
@@ -40,6 +42,9 @@ dependencies {
 
     // Use the ktaf library
     implementation(project(":ktaf"))
+
+    // Use the ktaf example library
+    implementation(project(":ktaf-example"))
 }
 
 application {

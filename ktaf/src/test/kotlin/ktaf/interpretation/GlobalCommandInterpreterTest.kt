@@ -52,7 +52,7 @@ class GlobalCommandInterpreterTest {
         val interpreter = GlobalCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(GlobalCommandInterpreter.about, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(GlobalCommandInterpreter.ABOUT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is About)
@@ -64,7 +64,7 @@ class GlobalCommandInterpreterTest {
         val interpreter = GlobalCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(GlobalCommandInterpreter.about, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(GlobalCommandInterpreter.ABOUT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -76,7 +76,7 @@ class GlobalCommandInterpreterTest {
         val interpreter = GlobalCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(GlobalCommandInterpreter.exit, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(GlobalCommandInterpreter.EXIT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Exit)
@@ -88,7 +88,7 @@ class GlobalCommandInterpreterTest {
         val interpreter = GlobalCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(GlobalCommandInterpreter.exit, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(GlobalCommandInterpreter.EXIT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -100,7 +100,7 @@ class GlobalCommandInterpreterTest {
         val interpreter = GlobalCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(GlobalCommandInterpreter.help, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(GlobalCommandInterpreter.HELP, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Help)
@@ -112,7 +112,7 @@ class GlobalCommandInterpreterTest {
         val interpreter = GlobalCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(GlobalCommandInterpreter.help, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(GlobalCommandInterpreter.HELP, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -124,7 +124,7 @@ class GlobalCommandInterpreterTest {
         val interpreter = GlobalCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(GlobalCommandInterpreter.map, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(GlobalCommandInterpreter.MAP, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Map)
@@ -136,7 +136,7 @@ class GlobalCommandInterpreterTest {
         val interpreter = GlobalCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(GlobalCommandInterpreter.map, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(GlobalCommandInterpreter.MAP, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -148,7 +148,7 @@ class GlobalCommandInterpreterTest {
         val interpreter = GlobalCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(GlobalCommandInterpreter.new, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(GlobalCommandInterpreter.NEW, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is New)
@@ -160,7 +160,7 @@ class GlobalCommandInterpreterTest {
         val interpreter = GlobalCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(GlobalCommandInterpreter.new, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(GlobalCommandInterpreter.NEW, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)

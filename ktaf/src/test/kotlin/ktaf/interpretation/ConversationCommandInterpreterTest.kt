@@ -52,7 +52,7 @@ class ConversationCommandInterpreterTest {
         val interpreter = ConversationCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(ConversationCommandInterpreter.end, game)
+        val result = interpreter.interpret(ConversationCommandInterpreter.END, game)
 
         // Then
         Assertions.assertTrue(result.command is End)
@@ -64,7 +64,7 @@ class ConversationCommandInterpreterTest {
         val interpreter = ConversationCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(ConversationCommandInterpreter.end, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(ConversationCommandInterpreter.END, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result == InterpretationResult.fail)
@@ -79,7 +79,7 @@ class ConversationCommandInterpreterTest {
         val interpreter = ConversationCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(ConversationCommandInterpreter.end, game)
+        val result = interpreter.interpret(ConversationCommandInterpreter.END, game)
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -91,7 +91,7 @@ class ConversationCommandInterpreterTest {
         val interpreter = ConversationCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(ConversationCommandInterpreter.end, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(ConversationCommandInterpreter.END, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertFalse(result.interpretedSuccessfully)

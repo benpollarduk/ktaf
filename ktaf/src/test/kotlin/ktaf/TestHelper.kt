@@ -1,4 +1,4 @@
-package ktaf.helpers
+package ktaf
 
 import ktaf.assets.Item
 import ktaf.assets.characters.NonPlayableCharacter
@@ -20,11 +20,11 @@ import ktaf.utilities.RegionMaker
 /**
  *  An object for providing objects for debugging purposes.
  */
-public object DebugHelper {
+internal object TestHelper {
     /**
      * Provides a simple instance of [GameCreator] with an optionally specified [ioConfiguration].
      */
-    public fun getSimpleGameCreator(ioConfiguration: IOConfiguration = AnsiConsoleConfiguration): GameCreator {
+    internal fun getSimpleGameCreator(ioConfiguration: IOConfiguration = AnsiConsoleConfiguration): GameCreator {
         val basicRoomDescription = "This is just a test room."
         val player = PlayableCharacter("Test Player", "This is a test player.")
         val regionMaker = RegionMaker("Test Region", "This is a test region.")

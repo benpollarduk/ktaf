@@ -1,12 +1,12 @@
 package ktaf.rendering.frames.html
 
+import ktaf.TestHelper
 import ktaf.assets.Size
 import ktaf.assets.characters.PlayableCharacter
 import ktaf.assets.locations.Direction
 import ktaf.assets.locations.Exit
 import ktaf.assets.locations.Room
 import ktaf.assets.locations.ViewPoint
-import ktaf.helpers.DebugHelper
 import ktaf.interpretation.CommandHelp
 import ktaf.logic.Game
 import ktaf.rendering.KeyType
@@ -47,7 +47,7 @@ class HtmlSceneFrameBuilderTest {
     fun `given complex game when build then no exception thrown`() {
         assertDoesNotThrow {
             // Given
-            val game = DebugHelper.getSimpleGameCreator()()
+            val game = TestHelper.getSimpleGameCreator()()
             val sceneFrameBuilder = HtmlSceneFrameBuilder(HtmlPageBuilder(), GridRoomMapBuilder(), Size(80, 50))
             val region = game.overworld.currentRegion ?: throw IllegalArgumentException("Region should not be null.")
             val room = region.currentRoom ?: throw IllegalArgumentException("Room should not be null.")

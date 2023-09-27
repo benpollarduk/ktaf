@@ -1,7 +1,7 @@
 package app
 
 import app.io.SwingConfiguration
-import ktaf.helpers.DebugHelper
+import example.ExampleGameCreator
 import ktaf.logic.Game
 import ktaf.logic.GameCreator
 import java.awt.BorderLayout
@@ -80,7 +80,7 @@ class GameApp : JFrame("app-example-swing") {
         this.isVisible = true
 
         // create and start game on background thread
-        val game = DebugHelper.getSimpleGameCreator(ioConfiguration)
+        val game = ExampleGameCreator.create(ioConfiguration)
         val gameThread = Thread(GameLogic(game))
         gameThread.start()
     }

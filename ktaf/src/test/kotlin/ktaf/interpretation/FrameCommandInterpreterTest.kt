@@ -51,7 +51,7 @@ class FrameCommandInterpreterTest {
         val interpreter = FrameCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(FrameCommandInterpreter.commandsOff, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(FrameCommandInterpreter.COMMANDS_OFF, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is CommandsOff)
@@ -63,7 +63,7 @@ class FrameCommandInterpreterTest {
         val interpreter = FrameCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(FrameCommandInterpreter.commandsOff, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(FrameCommandInterpreter.COMMANDS_OFF, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -75,7 +75,7 @@ class FrameCommandInterpreterTest {
         val interpreter = FrameCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(FrameCommandInterpreter.commandsOn, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(FrameCommandInterpreter.COMMANDS_ON, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is CommandsOn)
@@ -87,7 +87,7 @@ class FrameCommandInterpreterTest {
         val interpreter = FrameCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(FrameCommandInterpreter.commandsOn, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(FrameCommandInterpreter.COMMANDS_ON, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -99,7 +99,7 @@ class FrameCommandInterpreterTest {
         val interpreter = FrameCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(FrameCommandInterpreter.keyOff, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(FrameCommandInterpreter.KEY_OFF, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is KeyOff)
@@ -111,7 +111,7 @@ class FrameCommandInterpreterTest {
         val interpreter = FrameCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(FrameCommandInterpreter.keyOff, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(FrameCommandInterpreter.KEY_OFF, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -123,7 +123,7 @@ class FrameCommandInterpreterTest {
         val interpreter = FrameCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(FrameCommandInterpreter.keyOn, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(FrameCommandInterpreter.KEY_ON, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is KeyOn)
@@ -135,7 +135,7 @@ class FrameCommandInterpreterTest {
         val interpreter = FrameCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(FrameCommandInterpreter.keyOn, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(FrameCommandInterpreter.KEY_ON, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)

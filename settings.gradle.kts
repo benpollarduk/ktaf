@@ -10,6 +10,7 @@
 rootProject.name = "ktaf"
 include(
     ":ktaf",
+    ":ktaf-example",
     ":app-ktaf-example-console",
     ":app-ktaf-example-swing",
     ":app-ktaf-example-ktor"

@@ -12,7 +12,7 @@ import ktaf.logic.Game
 internal class Move(private val direction: Direction) : Command {
     override fun invoke(game: Game): Reaction {
         if (game.overworld.currentRegion?.move(direction) == true) {
-            return Reaction(ReactionResult.OK, "$successfulMovePrefix $direction.")
+            return Reaction(ReactionResult.OK, "$SUCCESSFUL_MOVE_PREFIX $direction.")
         }
         return Reaction(ReactionResult.ERROR, "Could not move $direction.")
     }
@@ -21,6 +21,6 @@ internal class Move(private val direction: Direction) : Command {
         /**
          * A prefix for successful moves.
          */
-        internal const val successfulMovePrefix: String = "Moved"
+        internal const val SUCCESSFUL_MOVE_PREFIX: String = "Moved"
     }
 }

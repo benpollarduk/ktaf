@@ -13,11 +13,11 @@ public class CharacterCommandInterpreter : Interpreter {
     private fun tryParseTalk(text: String, game: Game): Command? {
         val verb = CommonInterpretation.extractVerb(text)
         var noun = CommonInterpretation.extractNoun(text)
-        return if (!verb.insensitiveEquals(talk) && !verb.insensitiveEquals(talkShort)) {
+        return if (!verb.insensitiveEquals(TALK) && !verb.insensitiveEquals(TALK_SHORT)) {
             null
         } else {
             return when {
-                (noun.length > 3 && noun.startsWith("$to ", true)) -> {
+                (noun.length > 3 && noun.startsWith("$TO ", true)) -> {
                     noun = noun.substring(3)
                     val c: NonPlayableCharacter? = game.overworld.currentRegion?.currentRoom?.findCharacter(noun)
                     Talk(c)
@@ -62,25 +62,25 @@ public class CharacterCommandInterpreter : Interpreter {
         /**
          * Get the string for the [Talk] command.
          */
-        public const val talk: String = "Talk"
+        public const val TALK: String = "Talk"
 
         /**
          * Get the string for the short [Talk] command.
          */
-        public const val talkShort: String = "L"
+        public const val TALK_SHORT: String = "L"
 
         /**
          * Get the string for the to command.
          */
-        public const val to: String = "To"
+        public const val TO: String = "To"
 
         /**
          * Get the string for the variable command.
          */
-        public const val variable: String = "__"
+        public const val VARIABLE: String = "__"
 
         private val talkCommandHelp = CommandHelp(
-            "$talk / $talkShort ${to.lowercase()} $variable",
+            "$TALK / $TALK_SHORT ${TO.lowercase()} $VARIABLE",
             "Talk to a character"
         )
 

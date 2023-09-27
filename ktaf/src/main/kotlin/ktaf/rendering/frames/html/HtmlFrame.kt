@@ -35,7 +35,7 @@ public class HtmlFrame(private val pageBuilder: HtmlPageBuilder) : Frame {
                 stringBuilder.append(divClose)
             }
             is HtmlElementType.Document -> {
-                stringBuilder.append("$divClose$bodyClose$htmlClose")
+                stringBuilder.append("$divClose$bodyClose$HTML_CLOSE")
             }
         }
 
@@ -49,7 +49,7 @@ public class HtmlFrame(private val pageBuilder: HtmlPageBuilder) : Frame {
 
     private companion object {
         private val newline = newline()
-        private const val htmlClose: String = "</html>"
+        private const val HTML_CLOSE: String = "</html>"
         private val bodyOpen: String = "<body>$newline"
         private val bodyClose: String = "</body>$newline"
         private val divOpen: String = "<div>$newline"

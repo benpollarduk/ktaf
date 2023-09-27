@@ -90,7 +90,7 @@ class InputInterpreterTest {
         )
 
         // When
-        val result = interpreter.interpret(ConversationCommandInterpreter.end, game)
+        val result = interpreter.interpret(ConversationCommandInterpreter.END, game)
 
         // Then
         Assertions.assertTrue(result.command is End)
@@ -107,7 +107,7 @@ class InputInterpreterTest {
         )
 
         // When
-        val result = interpreter.interpret(ConversationCommandInterpreter.end, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(ConversationCommandInterpreter.END, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Unactionable)
@@ -127,7 +127,7 @@ class InputInterpreterTest {
         )
 
         // When
-        val result = interpreter.interpret(ConversationCommandInterpreter.end, game)
+        val result = interpreter.interpret(ConversationCommandInterpreter.END, game)
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -144,7 +144,7 @@ class InputInterpreterTest {
         )
 
         // When
-        val result = interpreter.interpret(ConversationCommandInterpreter.end, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(ConversationCommandInterpreter.END, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertFalse(result.interpretedSuccessfully)

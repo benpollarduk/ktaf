@@ -40,6 +40,9 @@ dependencies {
 
     // Use the ktaf library
     implementation(project(":ktaf"))
+
+    // Use the ktaf example library
+    implementation(project(":ktaf-example"))
 }
 
 application {

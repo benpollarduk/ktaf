@@ -1,7 +1,6 @@
 package ktaf.interpretation
 
 import ktaf.assets.locations.Direction
-import java.util.*
 
 public object CommonInterpretation {
     /**
@@ -9,18 +8,18 @@ public object CommonInterpretation {
      */
     internal fun tryParseDirection(text: String): Direction? {
         return when (text.lowercase()) {
-            MovementCommandInterpreter.north.lowercase() -> Direction.NORTH
-            MovementCommandInterpreter.northShort.lowercase() -> Direction.NORTH
-            MovementCommandInterpreter.east.lowercase() -> Direction.EAST
-            MovementCommandInterpreter.eastShort.lowercase() -> Direction.EAST
-            MovementCommandInterpreter.south.lowercase() -> Direction.SOUTH
-            MovementCommandInterpreter.southShort.lowercase() -> Direction.SOUTH
-            MovementCommandInterpreter.west.lowercase() -> Direction.WEST
-            MovementCommandInterpreter.westShort.lowercase() -> Direction.WEST
-            MovementCommandInterpreter.up.lowercase() -> Direction.UP
-            MovementCommandInterpreter.upShort.lowercase() -> Direction.UP
-            MovementCommandInterpreter.down.lowercase() -> Direction.DOWN
-            MovementCommandInterpreter.downShort.lowercase() -> Direction.DOWN
+            MovementCommandInterpreter.NORTH.lowercase() -> Direction.NORTH
+            MovementCommandInterpreter.NORTH_SHORT.lowercase() -> Direction.NORTH
+            MovementCommandInterpreter.EAST.lowercase() -> Direction.EAST
+            MovementCommandInterpreter.EAST_SHORT.lowercase() -> Direction.EAST
+            MovementCommandInterpreter.SOUTH.lowercase() -> Direction.SOUTH
+            MovementCommandInterpreter.SOUTH_SHORT.lowercase() -> Direction.SOUTH
+            MovementCommandInterpreter.WEST.lowercase() -> Direction.WEST
+            MovementCommandInterpreter.WEST_SHORT.lowercase() -> Direction.WEST
+            MovementCommandInterpreter.UP.lowercase() -> Direction.UP
+            MovementCommandInterpreter.UP_SHORT.lowercase() -> Direction.UP
+            MovementCommandInterpreter.DOWN.lowercase() -> Direction.DOWN
+            MovementCommandInterpreter.DOWN_SHORT.lowercase() -> Direction.DOWN
             else -> null
         }
     }

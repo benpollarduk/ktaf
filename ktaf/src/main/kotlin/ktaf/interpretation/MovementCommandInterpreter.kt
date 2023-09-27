@@ -58,69 +58,69 @@ public class MovementCommandInterpreter : Interpreter {
         /**
          * Get the string for the [Move] north command.
          */
-        public const val north: String = "North"
+        public const val NORTH: String = "North"
 
         /**
          * Get the string for the short [Move] north command.
          */
-        public const val northShort: String = "N"
+        public const val NORTH_SHORT: String = "N"
 
         /**
          * Get the string for the [Move] east command.
          */
-        public const val east: String = "East"
+        public const val EAST: String = "East"
 
         /**
          * Get the string for the short [Move] east command.
          */
-        public const val eastShort: String = "E"
+        public const val EAST_SHORT: String = "E"
 
         /**
          * Get the string for the [Move] south command.
          */
-        public const val south: String = "South"
+        public const val SOUTH: String = "South"
 
         /**
          * Get the string for the short [Move] south command.
          */
-        public const val southShort: String = "S"
+        public const val SOUTH_SHORT: String = "S"
 
         /**
          * Get the string for the [Move] west command.
          */
-        public const val west: String = "West"
+        public const val WEST: String = "West"
 
         /**
          * Get the string for the short [Move] west command.
          */
-        public const val westShort: String = "W"
+        public const val WEST_SHORT: String = "W"
 
         /**
          * Get the string for the [Move] up command.
          */
-        public const val up: String = "Up"
+        public const val UP: String = "Up"
 
         /**
          * Get the string for the short [Move] up command.
          */
-        public const val upShort: String = "U"
+        public const val UP_SHORT: String = "U"
 
         /**
          * Get the string for the [Move] down command.
          */
-        public const val down: String = "Down"
+        public const val DOWN: String = "Down"
 
         /**
          * Get the string for the short [Move] down command.
          */
-        public const val downShort: String = "D"
+        public const val DOWN_SHORT: String = "D"
 
-        private val moveNorthCommandHelp = CommandHelp("$north / $northShort", "Move north")
-        private val moveEastCommandHelp = CommandHelp("$east / $eastShort", "Move east")
-        private val moveSouthCommandHelp = CommandHelp("$south / $southShort", "Move south")
-        private val moveWestCommandHelp = CommandHelp("$west / $westShort", "Move west")
-        private val moveUpCommandHelp = CommandHelp("$up / $upShort", "Move up")
-        private val moveDownCommandHelp = CommandHelp("$down / $downShort", "Move down")
+        private val moveNorthCommandHelp = CommandHelp("$NORTH / $NORTH_SHORT", "Move north")
+        private val moveEastCommandHelp = CommandHelp("$EAST / $EAST_SHORT", "Move east")
+        private val moveSouthCommandHelp = CommandHelp("$SOUTH / $SOUTH_SHORT", "Move south")
+        private val moveWestCommandHelp = CommandHelp("$WEST / $WEST_SHORT", "Move west")
+        private val moveUpCommandHelp = CommandHelp("$UP / $UP_SHORT", "Move up")
+        private val moveDownCommandHelp = CommandHelp("$DOWN / $DOWN_SHORT", "Move down")
 
         /**
          * Get the supported commands.

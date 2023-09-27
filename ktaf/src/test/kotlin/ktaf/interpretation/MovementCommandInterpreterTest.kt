@@ -48,7 +48,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.north, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.NORTH, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Move)
@@ -60,7 +60,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.north, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.NORTH, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -72,7 +72,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.northShort, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.NORTH_SHORT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Move)
@@ -84,7 +84,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.northShort, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.NORTH_SHORT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -96,7 +96,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.south, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.SOUTH, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Move)
@@ -108,7 +108,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.south, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.SOUTH, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -120,7 +120,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.southShort, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.SOUTH_SHORT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Move)
@@ -132,7 +132,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.southShort, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.SOUTH_SHORT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -144,7 +144,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.east, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.EAST, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Move)
@@ -156,7 +156,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.east, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.EAST, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -168,7 +168,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.eastShort, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.EAST_SHORT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Move)
@@ -180,7 +180,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.eastShort, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.EAST_SHORT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -192,7 +192,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.west, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.WEST, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Move)
@@ -204,7 +204,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.west, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.WEST, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -216,7 +216,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.westShort, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.WEST_SHORT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Move)
@@ -228,7 +228,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.westShort, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.WEST_SHORT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -240,7 +240,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.up, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.UP, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Move)
@@ -252,7 +252,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.up, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.UP, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -264,7 +264,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.upShort, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.UP_SHORT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Move)
@@ -276,7 +276,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.upShort, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.UP_SHORT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -288,7 +288,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.down, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.DOWN, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Move)
@@ -300,7 +300,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.down, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.DOWN, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -312,7 +312,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.downShort, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.DOWN_SHORT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Move)
@@ -324,7 +324,7 @@ class MovementCommandInterpreterTest {
         val interpreter = MovementCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(MovementCommandInterpreter.downShort, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(MovementCommandInterpreter.DOWN_SHORT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)

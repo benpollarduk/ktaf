@@ -13,7 +13,6 @@ import ktaf.commands.game.UseOn
 import ktaf.extensions.equalsExaminable
 import ktaf.extensions.insensitiveEquals
 import ktaf.logic.Game
-import java.util.*
 
 /**
  * Provides an [Interpreter] for item commands.
@@ -22,7 +21,7 @@ public class ItemCommandInterpreter : Interpreter {
     private fun tryParseDrop(text: String, game: Game): Drop? {
         val verb = CommonInterpretation.extractVerb(text)
         val noun = CommonInterpretation.extractNoun(text)
-        return if (!verb.insensitiveEquals(drop) && !verb.insensitiveEquals(dropShort)) {
+        return if (!verb.insensitiveEquals(DROP) && !verb.insensitiveEquals(DROP_SHORT)) {
             null
         } else {
             Drop(game.player.findItem(noun))
@@ -32,7 +31,7 @@ public class ItemCommandInterpreter : Interpreter {
     private fun tryParseTake(text: String, game: Game): Command? {
         val verb = CommonInterpretation.extractVerb(text)
         val noun = CommonInterpretation.extractNoun(text)
-        return if (!verb.insensitiveEquals(take) && !verb.insensitiveEquals(takeShort)) {
+        return if (!verb.insensitiveEquals(TAKE) && !verb.insensitiveEquals(TAKE_SHORT)) {
             null
         } else {
             var item: Item? = game.player.findItem(noun)
@@ -49,7 +48,7 @@ public class ItemCommandInterpreter : Interpreter {
                     }
                     Take(item)
                 }
-                noun.insensitiveEquals(all) -> {
+                noun.insensitiveEquals(ALL) -> {
                     TakeAll()
                 }
                 else -> {
@@ -66,7 +65,7 @@ public class ItemCommandInterpreter : Interpreter {
     private fun tryParseExamine(text: String, game: Game): Command? {
         val verb = CommonInterpretation.extractVerb(text)
         val noun = CommonInterpretation.extractNoun(text)
-        if (!verb.insensitiveEquals(examine) && !verb.insensitiveEquals(examineShort)) {
+        if (!verb.insensitiveEquals(EXAMINE) && !verb.insensitiveEquals(EXAMINE_SHORT)) {
             return null
         } else {
             if (noun.isEmpty()) {
@@ -98,19 +97,19 @@ public class ItemCommandInterpreter : Interpreter {
                 return Examine(exit)
             }
 
-            if (noun.insensitiveEquals(me) || noun.equalsExaminable(game.player)) {
+            if (noun.insensitiveEquals(ME) || noun.equalsExaminable(game.player)) {
                 return Examine(game.player)
             }
 
-            if (noun.insensitiveEquals(room) || noun.equalsExaminable(game.overworld.currentRegion?.currentRoom)) {
+            if (noun.insensitiveEquals(ROOM) || noun.equalsExaminable(game.overworld.currentRegion?.currentRoom)) {
                 return Examine(game.overworld.currentRegion?.currentRoom)
             }
 
-            if (noun.insensitiveEquals(region) || noun.equalsExaminable(game.overworld.currentRegion)) {
+            if (noun.insensitiveEquals(REGION) || noun.equalsExaminable(game.overworld.currentRegion)) {
                 return Examine(game.overworld.currentRegion)
             }
 
-            if (noun.insensitiveEquals(overworld) || noun.equalsExaminable(game.overworld)) {
+            if (noun.insensitiveEquals(OVERWORLD) || noun.equalsExaminable(game.overworld)) {
                 return Examine(game.overworld)
             }
 
@@ -122,13 +121,13 @@ public class ItemCommandInterpreter : Interpreter {
         val verb = CommonInterpretation.extractVerb(text)
         var noun = CommonInterpretation.extractNoun(text)
 
-        if (!verb.insensitiveEquals(use)) {
+        if (!verb.insensitiveEquals(USE)) {
             return null
         }
 
         val target: InteractionTarget?
         var itemName: String
-        val onPadded = " $on "
+        val onPadded = " $ON "
 
         val currentRoom = game.overworld.currentRegion?.currentRoom
 
@@ -138,9 +137,9 @@ public class ItemCommandInterpreter : Interpreter {
             val onIndex = noun.indexOf(onPadded, 0, true)
             val targetName = noun.substring(onIndex + onPadded.length)
 
-            target = if (targetName.insensitiveEquals(me) || targetName.equalsExaminable(game.player)) {
+            target = if (targetName.insensitiveEquals(ME) || targetName.equalsExaminable(game.player)) {
                 game.player
-            } else if (targetName.insensitiveEquals(room) || targetName.equalsExaminable(currentRoom)) {
+            } else if (targetName.insensitiveEquals(ROOM) || targetName.equalsExaminable(currentRoom)) {
                 currentRoom
             } else {
                 game.findInteractionTarget(targetName)
@@ -220,95 +219,95 @@ public class ItemCommandInterpreter : Interpreter {
         /**
          * Get the string for the [Drop] command.
          */
-        public const val drop: String = "Drop"
+        public const val DROP: String = "Drop"
 
         /**
          * Get the string for the short [Drop] command.
          */
-        public const val dropShort: String = "R"
+        public const val DROP_SHORT: String = "R"
 
         /**
          * Get the string for the [UseOn] command.
          */
-        public const val use: String = "Use"
+        public const val USE: String = "Use"
 
         /**
          * Get the string for the on command.
          */
-        public const val on: String = "On"
+        public const val ON: String = "On"
 
         /**
          * Get the string for the [Take] command.
          */
-        public const val take: String = "Take"
+        public const val TAKE: String = "Take"
 
         /**
          * Get the string for the short [Take] command.
          */
-        public const val takeShort: String = "T"
+        public const val TAKE_SHORT: String = "T"
 
         /**
          * Get the string for the all command.
          */
-        public const val all: String = "all"
+        public const val ALL: String = "all"
 
         /**
          * Get the string for the [Examine] command.
          */
-        public const val examine: String = "Examine"
+        public const val EXAMINE: String = "Examine"
 
         /**
          * Get the string for the short [Examine] command.
          */
-        public const val examineShort: String = "X"
+        public const val EXAMINE_SHORT: String = "X"
 
         /**
          * Get the string for the me command.
          */
-        public const val me: String = "Me"
+        public const val ME: String = "Me"
 
         /**
          * Get the string for the room command.
          */
-        public const val room: String = "Room"
+        public const val ROOM: String = "Room"
 
         /**
          * Get the string for the region command.
          */
-        public const val region: String = "Region"
+        public const val REGION: String = "Region"
 
         /**
          * Get the string for the overworld command.
          */
-        public const val overworld: String = "overworld"
+        public const val OVERWORLD: String = "overworld"
 
         /**
          * Get the string for the variable command.
          */
-        public const val variable: String = "__"
+        public const val VARIABLE: String = "__"
 
         private val examineCommandHelp = CommandHelp(
-            "$examine / $examineShort $variable",
+            "$EXAMINE / $EXAMINE_SHORT $VARIABLE",
             "Examine anything in the game"
         )
         private val dropCommandHelp = CommandHelp(
-            "$drop / $dropShort $variable",
+            "$DROP / $DROP_SHORT $VARIABLE",
             "Drop an item"
         )
         private val takeCommandHelp = CommandHelp(
-            "$take / $takeShort $variable",
+            "$TAKE / $TAKE_SHORT $VARIABLE",
             "Take an item"
         )
         private val takeAllCommandHelp = CommandHelp(
-            "$take / $takeShort $all",
+            "$TAKE / $TAKE_SHORT $ALL",
             "Take all items in the current room"
         )
         private val useCommandHelp = CommandHelp(
-            "$use $variable",
+            "$USE $VARIABLE",
             "Use an item on the current room"
         )
         private val useOnCommandHelp = CommandHelp(
-            "$use $variable ${on.lowercase()} $variable",
+            "$USE $VARIABLE ${ON.lowercase()} $VARIABLE",
             "Use an item on another item or character"
         )
 

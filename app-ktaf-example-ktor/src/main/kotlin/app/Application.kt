@@ -2,16 +2,16 @@ package app
 
 import app.io.KtorConfiguration
 import app.plugins.configureRouting
+import example.ExampleGameCreator
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import ktaf.helpers.DebugHelper
 import ktaf.logic.Game
 import ktaf.logic.GameCreator
 
 fun main() {
     // create and start game on background thread
-    val game = DebugHelper.getSimpleGameCreator(KtorConfiguration)
+    val game = ExampleGameCreator.create(KtorConfiguration)
     val gameThread = Thread(GameLogic(game))
     gameThread.start()
 

@@ -24,6 +24,7 @@ repositories {
 
 dependencies {
     implementation(project(":ktaf"))
+    implementation(project(":ktaf-example"))
     implementation("io.ktor:ktor-server-core-jvm")
     implementation("io.ktor:ktor-server-netty-jvm")
     implementation("ch.qos.logback:logback-classic:$logback_version")

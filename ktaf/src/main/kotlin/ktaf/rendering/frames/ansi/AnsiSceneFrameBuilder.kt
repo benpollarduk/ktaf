@@ -35,7 +35,7 @@ public class AnsiSceneFrameBuilder(
     private fun isMovementConfirmation(message: String): Boolean {
         if (message.isNotEmpty()) {
             for (direction in Region.allDirections) {
-                if (message.insensitiveEquals("${Move.successfulMovePrefix} $direction.")) {
+                if (message.insensitiveEquals("${Move.SUCCESSFUL_MOVE_PREFIX} $direction.")) {
                     return true
                 }
             }

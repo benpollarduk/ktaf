@@ -370,7 +370,7 @@ public class Game private constructor(
         /**
          * Get the default prefix to use for errors.
          */
-        public const val defaultErrorPrefix: String = "Oops"
+        public const val DEFAULT_ERROR_PREFIX: String = "Oops"
 
         /**
          * Get all default interpreters.
@@ -400,7 +400,7 @@ public class Game private constructor(
             completionCondition: EndCheck,
             gameOverCondition: EndCheck,
             exitMode: ExitMode = ExitMode.RETURN_TO_TITLE_SCREEN,
-            errorPrefix: String = defaultErrorPrefix,
+            errorPrefix: String = DEFAULT_ERROR_PREFIX,
             interpreter: Interpreter = defaultInterpreters,
             ioConfiguration: IOConfiguration = AnsiConsoleConfiguration
         ): GameCreator {

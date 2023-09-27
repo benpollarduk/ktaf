@@ -58,7 +58,7 @@ class ItemCommandInterpreterTest {
         val interpreter = ItemCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(ItemCommandInterpreter.drop, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(ItemCommandInterpreter.DROP, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Drop)
@@ -70,7 +70,7 @@ class ItemCommandInterpreterTest {
         val interpreter = ItemCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(ItemCommandInterpreter.drop, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(ItemCommandInterpreter.DROP, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -82,7 +82,7 @@ class ItemCommandInterpreterTest {
         val interpreter = ItemCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(ItemCommandInterpreter.dropShort, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(ItemCommandInterpreter.DROP_SHORT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Drop)
@@ -94,7 +94,7 @@ class ItemCommandInterpreterTest {
         val interpreter = ItemCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(ItemCommandInterpreter.dropShort, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(ItemCommandInterpreter.DROP_SHORT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -106,7 +106,7 @@ class ItemCommandInterpreterTest {
         val interpreter = ItemCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(ItemCommandInterpreter.examine, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(ItemCommandInterpreter.EXAMINE, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Examine)
@@ -118,7 +118,7 @@ class ItemCommandInterpreterTest {
         val interpreter = ItemCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(ItemCommandInterpreter.examine, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(ItemCommandInterpreter.EXAMINE, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -130,7 +130,7 @@ class ItemCommandInterpreterTest {
         val interpreter = ItemCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(ItemCommandInterpreter.examineShort, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(ItemCommandInterpreter.EXAMINE_SHORT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Examine)
@@ -142,7 +142,7 @@ class ItemCommandInterpreterTest {
         val interpreter = ItemCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(ItemCommandInterpreter.examineShort, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(ItemCommandInterpreter.EXAMINE_SHORT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -154,7 +154,7 @@ class ItemCommandInterpreterTest {
         val interpreter = ItemCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(ItemCommandInterpreter.take, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(ItemCommandInterpreter.TAKE, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Take)
@@ -166,7 +166,7 @@ class ItemCommandInterpreterTest {
         val interpreter = ItemCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(ItemCommandInterpreter.take, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(ItemCommandInterpreter.TAKE, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -178,7 +178,7 @@ class ItemCommandInterpreterTest {
         val interpreter = ItemCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(ItemCommandInterpreter.takeShort, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(ItemCommandInterpreter.TAKE_SHORT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Take)
@@ -190,7 +190,7 @@ class ItemCommandInterpreterTest {
         val interpreter = ItemCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(ItemCommandInterpreter.takeShort, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(ItemCommandInterpreter.TAKE_SHORT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)

@@ -48,7 +48,7 @@ class CharacterCommandInterpreterTest {
         val interpreter = CharacterCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(CharacterCommandInterpreter.talk, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(CharacterCommandInterpreter.TALK, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Talk)
@@ -60,7 +60,7 @@ class CharacterCommandInterpreterTest {
         val interpreter = CharacterCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(CharacterCommandInterpreter.talk, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(CharacterCommandInterpreter.TALK, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)
@@ -72,7 +72,7 @@ class CharacterCommandInterpreterTest {
         val interpreter = CharacterCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(CharacterCommandInterpreter.talkShort, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(CharacterCommandInterpreter.TALK_SHORT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.command is Talk)
@@ -84,7 +84,7 @@ class CharacterCommandInterpreterTest {
         val interpreter = CharacterCommandInterpreter()
 
         // When
-        val result = interpreter.interpret(CharacterCommandInterpreter.talkShort, GameTestHelper.getBlankGame())
+        val result = interpreter.interpret(CharacterCommandInterpreter.TALK_SHORT, GameTestHelper.getBlankGame())
 
         // Then
         Assertions.assertTrue(result.interpretedSuccessfully)

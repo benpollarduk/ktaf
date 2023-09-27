@@ -21,7 +21,7 @@ public class ConversationCommandInterpreter : Interpreter {
             return InterpretationResult.fail
         }
 
-        if (input.insensitiveEquals(end)) {
+        if (input.insensitiveEquals(END)) {
             return InterpretationResult(true, End())
         }
 
@@ -42,7 +42,7 @@ public class ConversationCommandInterpreter : Interpreter {
 
     override fun getContextualCommandHelp(game: Game): List<CommandHelp> {
         val converser = game.activeConverser ?: return emptyList()
-        val commands = mutableListOf(CommandHelp(end, "End the conversation."))
+        val commands = mutableListOf(CommandHelp(END, "End the conversation."))
         val paragraph = converser.conversation.currentParagraph ?: return commands.toList()
 
         if (!paragraph.canRespond) {
@@ -65,11 +65,11 @@ public class ConversationCommandInterpreter : Interpreter {
         /**
          * Get the string for the [End] command.
          */
-        public const val end: String = "End"
+        public const val END: String = "End"
 
         /**
          * Get the supported commands.
          */
-        public val supportedCommands: List<CommandHelp> = listOf(CommandHelp(end, "End the conversation"))
+        public val supportedCommands: List<CommandHelp> = listOf(CommandHelp(END, "End the conversation"))
     }
 }

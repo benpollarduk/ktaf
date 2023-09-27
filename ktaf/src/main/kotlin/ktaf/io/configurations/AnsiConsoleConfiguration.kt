@@ -26,7 +26,7 @@ import ktaf.rendering.frames.ansi.AnsiTransitionFrameBuilder
  * Provides an [IOConfiguration] for ANSI enabled consoles.
  */
 public object AnsiConsoleConfiguration : IOConfiguration {
-    private const val endOfBuffer = -1
+    private const val END_OF_BUFFER = -1
     override val displayTextOutput: DisplayTextOutput
         get() = object : DisplayTextOutput {
             override fun invoke(value: String) {
@@ -37,8 +37,8 @@ public object AnsiConsoleConfiguration : IOConfiguration {
     override val waitForAcknowledge: WaitForAcknowledge
         get() = object : WaitForAcknowledge {
             override fun invoke(): Boolean {
-                var c = endOfBuffer
-                while (c == endOfBuffer) {
+                var c = END_OF_BUFFER
+                while (c == END_OF_BUFFER) {
                     // read character from in
                     c = System.`in`.read()
                 }
