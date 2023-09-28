@@ -13,7 +13,7 @@ import ktaf.io.IOConfiguration
 import ktaf.io.configurations.AnsiConsoleConfiguration
 import ktaf.logic.EndCheckResult
 import ktaf.logic.Game
-import ktaf.logic.GameCreator
+import ktaf.logic.GameFactory
 import ktaf.utilities.OverworldMaker
 import ktaf.utilities.RegionMaker
 
@@ -22,9 +22,9 @@ import ktaf.utilities.RegionMaker
  */
 internal object TestHelper {
     /**
-     * Provides a simple instance of [GameCreator] with an optionally specified [ioConfiguration].
+     * Provides a simple instance of [GameFactory] with an optionally specified [ioConfiguration].
      */
-    internal fun getSimpleGameCreator(ioConfiguration: IOConfiguration = AnsiConsoleConfiguration): GameCreator {
+    internal fun getSimpleGameCreator(ioConfiguration: IOConfiguration = AnsiConsoleConfiguration): GameFactory {
         val basicRoomDescription = "This is just a test room."
         val player = PlayableCharacter("Test Player", "This is a test player.")
         val regionMaker = RegionMaker("Test Region", "This is a test region.")

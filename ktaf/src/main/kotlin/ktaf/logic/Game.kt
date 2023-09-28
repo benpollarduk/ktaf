@@ -355,23 +355,23 @@ public class Game private constructor(
         )
 
         /**
-         * Create a new instance of a [GameCreator].
+         * Create a new instance of a [GameFactory] for producing the [Game].
          */
         public fun create(
             name: String,
             introduction: String,
             description: String,
             author: String,
-            overworldCreator: OverworldCreator,
-            playerCreator: PlayableCharacterCreation,
+            overworldFactory: OverworldFactory,
+            playerFactory: PlayableCharacterFactory,
             completionCondition: EndCheck,
             gameOverCondition: EndCheck,
             exitMode: ExitMode = ExitMode.RETURN_TO_TITLE_SCREEN,
             errorPrefix: String = DEFAULT_ERROR_PREFIX,
             interpreter: Interpreter = defaultInterpreters,
             ioConfiguration: IOConfiguration = AnsiConsoleConfiguration,
-        ): GameCreator {
-            val player = playerCreator()
+        ): GameFactory {
+            val player = playerFactory()
             return {
                 Game(
                     name,
@@ -379,7 +379,7 @@ public class Game private constructor(
                     description,
                     author,
                     player,
-                    overworldCreator(player),
+                    overworldFactory(player),
                     completionCondition,
                     gameOverCondition,
                     exitMode,
@@ -391,9 +391,9 @@ public class Game private constructor(
         }
 
         /**
-         * Execute an instance of a [GameCreator].
+         * Execute an instance of a [GameFactory].
          */
-        public fun execute(creator: GameCreator) {
+        public fun execute(creator: GameFactory) {
             var run = true
 
             while (run) {

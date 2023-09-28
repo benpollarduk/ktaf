@@ -14,11 +14,11 @@ import ktaf.interpretation.CommandHelp
 import ktaf.io.IOConfiguration
 import ktaf.logic.EndCheckResult
 import ktaf.logic.Game
-import ktaf.logic.GameCreator
-import ktaf.logic.OverworldCreator
+import ktaf.logic.GameFactory
+import ktaf.logic.OverworldFactory
 
 /**
- * Provides an example [GameCreator].
+ * Provides an example [GameFactory].
  */
 public object ExampleGameCreator {
     private fun determineIfGameIsComplete(game: Game): EndCheckResult {
@@ -81,12 +81,12 @@ public object ExampleGameCreator {
     }
 
     /**
-     * Create a new instance of the example [GameCreator] using a [ioConfiguration].
+     * Create a new instance of the example [GameFactory] using a [ioConfiguration].
      */
-    public fun create(ioConfiguration: IOConfiguration): GameCreator {
+    public fun create(ioConfiguration: IOConfiguration): GameFactory {
         val player = Player().instantiate()
 
-        val overworldCreator: OverworldCreator = { playableCharacter ->
+        val overworldFactory: OverworldFactory = { playableCharacter ->
             val regions = emptyList<Region>()
             val overworld = Overworld("Test Overworld", "This is a test overworld")
             val hub = Hub().instantiate(playableCharacter)
@@ -133,7 +133,7 @@ public object ExampleGameCreator {
             about,
             about,
             "Ben Pollard",
-            overworldCreator,
+            overworldFactory,
             { player },
             { determineIfGameIsComplete(it) },
             { determineIfGameOver(it) },

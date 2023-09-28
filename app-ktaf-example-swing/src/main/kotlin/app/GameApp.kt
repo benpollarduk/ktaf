@@ -3,7 +3,7 @@ package app
 import app.io.SwingConfiguration
 import example.ExampleGameCreator
 import ktaf.logic.Game
-import ktaf.logic.GameCreator
+import ktaf.logic.GameFactory
 import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.event.KeyAdapter
@@ -85,9 +85,9 @@ class GameApp : JFrame("app-example-swing") {
         gameThread.start()
     }
 
-    inner class GameLogic(private val gameCreator: GameCreator) : Runnable {
+    inner class GameLogic(private val gameFactory: GameFactory) : Runnable {
         override fun run() {
-            Game.execute(gameCreator)
+            Game.execute(gameFactory)
         }
     }
 

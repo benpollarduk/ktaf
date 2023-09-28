@@ -7,7 +7,7 @@ import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import ktaf.logic.Game
-import ktaf.logic.GameCreator
+import ktaf.logic.GameFactory
 
 fun main() {
     // create and start game on background thread
@@ -23,8 +23,8 @@ fun Application.module() {
     configureRouting()
 }
 
-class GameLogic(private val gameCreator: GameCreator) : Runnable {
+class GameLogic(private val gameFactory: GameFactory) : Runnable {
     override fun run() {
-        Game.execute(gameCreator)
+        Game.execute(gameFactory)
     }
 }
