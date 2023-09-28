@@ -26,7 +26,7 @@ import java.util.concurrent.locks.ReentrantLock
  * Provides an [IOConfiguration] for a Ktor application.
  */
 public object KtorConfiguration : IOConfiguration {
-    private var command: String? = ""
+    private var command: String? = null
     private var acknowledgementReceived: Boolean? = null
     private val lock = ReentrantLock()
     private var lastFrame: String = ""
@@ -88,7 +88,7 @@ public object KtorConfiguration : IOConfiguration {
     internal fun acceptCommand(command: String) {
         try {
             lock.lock()
-            KtorConfiguration.command = String(command.toCharArray())
+            this.command = String(command.toCharArray())
         } finally {
             lock.unlock()
         }
@@ -115,9 +115,11 @@ public object KtorConfiguration : IOConfiguration {
                         lock.lock()
                         if (acknowledgementReceived == true) {
                             acknowledgementReceived = null
+                            command = null
                             return true
                         } else if (acknowledgementReceived == false) {
                             acknowledgementReceived = null
+                            command = null
                             return false
                         }
                     } finally {

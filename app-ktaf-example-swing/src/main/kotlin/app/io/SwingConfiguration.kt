@@ -33,7 +33,7 @@ internal class SwingConfiguration(
     private val output: JEditorPane,
     private val allowInputChangedListener: AllowInputChangedListener? = null,
 ) : IOConfiguration {
-    private var command: String? = ""
+    private var command: String? = null
     private var acknowledgementReceived: Boolean? = null
     private val lock = ReentrantLock()
 
@@ -77,9 +77,11 @@ internal class SwingConfiguration(
                         lock.lock()
                         if (acknowledgementReceived == true) {
                             acknowledgementReceived = null
+                            command = null
                             return true
                         } else if (acknowledgementReceived == false) {
                             acknowledgementReceived = null
+                            command = null
                             return false
                         }
                     } finally {

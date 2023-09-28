@@ -87,8 +87,6 @@ public object ExampleGameCreator {
      * Create a new instance of the example [GameFactory] using a [ioConfiguration].
      */
     public fun create(ioConfiguration: IOConfiguration): GameFactory {
-        val player = Player().instantiate()
-
         val overworldFactory: OverworldFactory = { playableCharacter ->
             val regions = listOf(
                 Everglades().instantiate(playableCharacter)
@@ -139,7 +137,7 @@ public object ExampleGameCreator {
             about,
             "Ben Pollard",
             overworldFactory,
-            { player },
+            { Player().instantiate() },
             { determineIfGameIsComplete(it) },
             { determineIfGameOver(it) },
             ioConfiguration = ioConfiguration
