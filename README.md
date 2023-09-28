@@ -116,9 +116,5 @@ var gameCallback = Game.create(
 Game.execute(gameCallback);
 ```
 
-# Contribute
-It´s Open Source (License >> MIT), please feel free to use or contribute. To raise a pull request visit https://github.com/ben-pollard-uk/ktaf/pulls.
-
 # For Open Questions
 Visit https://github.com/ben-pollard-uk/ktaf/issues
-
