@@ -1,14 +1,16 @@
 package example
 
+import example.everglades.Everglades
 import example.everglades.rooms.InnerCave
+import example.global.player.Player
 import example.hub.Hub
-import example.player.Player
 import ktaf.assets.Item
 import ktaf.assets.interaction.Reaction
 import ktaf.assets.interaction.ReactionResult
 import ktaf.assets.locations.Overworld
 import ktaf.assets.locations.Region
 import ktaf.commands.CustomCommand
+import ktaf.extensions.equalsExaminable
 import ktaf.extensions.tryParseInt
 import ktaf.interpretation.CommandHelp
 import ktaf.io.IOConfiguration
@@ -22,9 +24,9 @@ import ktaf.logic.OverworldFactory
  */
 public object ExampleGameCreator {
     private fun determineIfGameIsComplete(game: Game): EndCheckResult {
-        return if (InnerCave.NAME == game.overworld.currentRegion?.currentRoom?.identifier?.name) {
+        return if (InnerCave.NAME.equalsExaminable(game.overworld.currentRegion?.currentRoom)) {
             EndCheckResult(
-                false,
+                true,
                 "Game Over",
                 "You have reached the end of the game, thanks for playing!"
             )
@@ -35,7 +37,7 @@ public object ExampleGameCreator {
 
     private fun determineIfGameOver(game: Game): EndCheckResult {
         return if (!game.player.isAlive) {
-            EndCheckResult(false, "Game Over", "You are dead.")
+            EndCheckResult(true, "Game Over", "You are dead.")
         } else {
             EndCheckResult.notEnded
         }
@@ -54,8 +56,9 @@ public object ExampleGameCreator {
                     it.commands = listOf(
                         CustomCommand(
                             CommandHelp(
-                                "Warp ${it.identifier.name}",
-                                "Use the ${it.identifier.name} Sphere to warp to the ${it.identifier.name}."
+                                "Warp ${region.identifier.name}",
+                                "Use the ${region.identifier.name} Sphere to warp to the " +
+                                    "${region.identifier.name}."
                             ),
                             true
                         ) { game, _ ->
@@ -87,7 +90,9 @@ public object ExampleGameCreator {
         val player = Player().instantiate()
 
         val overworldFactory: OverworldFactory = { playableCharacter ->
-            val regions = emptyList<Region>()
+            val regions = listOf(
+                Everglades().instantiate(playableCharacter)
+            )
             val overworld = Overworld("Test Overworld", "This is a test overworld")
             val hub = Hub().instantiate(playableCharacter)
             populateHub(hub, overworld, regions)

@@ -11,9 +11,11 @@ public class HtmlTransitionFrameBuilder(
     private val htmlPageBuilder: HtmlPageBuilder
 ) : TransitionFrameBuilder {
     override fun build(title: String, message: String): Frame {
-        htmlPageBuilder.h1(title)
-        htmlPageBuilder.br()
-        htmlPageBuilder.br()
+        if (title.isNotEmpty()) {
+            htmlPageBuilder.h1(title)
+            htmlPageBuilder.br()
+            htmlPageBuilder.br()
+        }
         htmlPageBuilder.p(message.ensureFinishedSentence())
 
         return HtmlFrame(htmlPageBuilder, false)
