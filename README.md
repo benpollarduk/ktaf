@@ -1,7 +1,7 @@
 # Introduction 
 Implementation of the BP.AdventureFramework in Kotlin. A framework for building text based adventures.
 
-![image](https://github.com/ben-pollard-uk/ktaf/assets/129943363/cc89e6a4-de53-4a80-8f1a-9160402b4b67)
+![image](https://github.com/ben-pollard-uk/ktaf/assets/129943363/27670c5d-7f4f-4534-93cb-7931fd8d90e4)
 
 Provides simple classes for developing game elements:
   * Interface and base class for examinable objects:
@@ -36,7 +36,8 @@ The framework provides keywords for interacting with game elements:
 
 Conversations with NPC's can be entered in to with an easy to use interface to display dialogue and provide responses:
 
-![image](https://github.com/ben-pollard-uk/ktaf/assets/129943363/19ce697e-66d2-4259-bef2-0286de1d53fb)
+![image](https://github.com/ben-pollard-uk/ktaf/assets/129943363/3adc4210-2732-4f79-9d19-000af0287f07)
+
   
 The framework also provides global commands to help with game flow:
   * About - display version information.
@@ -63,7 +64,7 @@ All game management is provided by the framework, including:
   
 Maps are automatically generated for regions:
 
-![image](https://github.com/ben-pollard-uk/ktaf/assets/129943363/5d137e42-cbf0-4b5e-b84b-d3c34c3d510a)
+![image](https://github.com/ben-pollard-uk/ktaf/assets/129943363/b8e52974-dad7-4c27-8c0a-6861964a2fbe)
 
 # Prerequisites
  * Windows
