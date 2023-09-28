@@ -1,7 +1,7 @@
 # Introduction 
 Implementation of the BP.AdventureFramework in Kotlin. A framework for building text based adventures.
 
-![image](https://github.com/ben-pollard-uk/adventure-framework/assets/129943363/3d6fb517-3b00-4362-868a-0a21b5195163)
+![image](https://github.com/ben-pollard-uk/ktaf/assets/129943363/cc89e6a4-de53-4a80-8f1a-9160402b4b67)
 
 Provides simple classes for developing game elements:
   * Interface and base class for examinable objects:
@@ -36,7 +36,7 @@ The framework provides keywords for interacting with game elements:
 
 Conversations with NPC's can be entered in to with an easy to use interface to display dialogue and provide responses:
 
-![image](https://github.com/ben-pollard-uk/adventure-framework/assets/129943363/5ed1afc0-1ab8-4d35-9c90-dd848f18bfda)
+![image](https://github.com/ben-pollard-uk/ktaf/assets/129943363/19ce697e-66d2-4259-bef2-0286de1d53fb)
   
 The framework also provides global commands to help with game flow:
   * About - display version information.
@@ -63,7 +63,7 @@ All game management is provided by the framework, including:
   
 Maps are automatically generated for regions:
 
-![image](https://github.com/ben-pollard-uk/adventure-framework/assets/129943363/b6c05233-6856-4103-be44-be1c73a85874)
+![image](https://github.com/ben-pollard-uk/ktaf/assets/129943363/5d137e42-cbf0-4b5e-b84b-d3c34c3d510a)
 
 # Prerequisites
  * Windows
@@ -73,12 +73,35 @@ Maps are automatically generated for regions:
 
 # Getting Started
  * Clone the repo
- * Build all projects
- * Todo
+ * Run ./gradlew :app-ktaf-example-console:run
 
 # Hello World
-```csharp
-Todo
+```kotlin
+// create player
+var player = PlayableCharacter("Dave", "A young boy on a quest to find the meaning of life.");
+
+// create region maker and add room
+var regionMaker = RegionMaker("Mountain", "An imposing volcano just East of town.").also {
+    it[0, 0, 0] = Room("Cavern", "A dark cavern set in to the base of the mountain.")
+}
+
+// create overworld maker
+var overworldMaker = OverworldMaker("Daves World", "An ancient kingdom.", regionMaker);
+
+// create callback for generating games
+var gameCallback = Game.create(
+    "The Life Of Dave",
+    "Dave awakes to find himself in a cavern...",
+    "A very low budget adventure.",
+    "Me",
+    { overworldMaker.Make() },
+    { player },
+    { EndCheckResult.notEnded },
+    { EndCheckResult.notEnded }
+)
+
+// execute the game
+Game.execute(gameCallback);
 ```
 
 # Contribute
