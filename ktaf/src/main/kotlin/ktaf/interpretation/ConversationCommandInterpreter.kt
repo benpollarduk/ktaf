@@ -42,12 +42,8 @@ public class ConversationCommandInterpreter : Interpreter {
 
     override fun getContextualCommandHelp(game: Game): List<CommandHelp> {
         val converser = game.activeConverser ?: return emptyList()
-        val commands = mutableListOf(CommandHelp(END, "End the conversation."))
+        val commands = mutableListOf<CommandHelp>()
         val paragraph = converser.conversation.currentParagraph ?: return commands.toList()
-
-        if (!paragraph.canRespond) {
-            return commands.toList()
-        }
 
         for (i in 0 until paragraph.responses.size) {
             commands.add(
@@ -57,6 +53,8 @@ public class ConversationCommandInterpreter : Interpreter {
                 )
             )
         }
+
+        commands.add(CommandHelp(END, "End the conversation."))
 
         return commands.toList()
     }
