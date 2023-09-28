@@ -51,8 +51,6 @@ public class HtmlConversationFrameBuilder(
             }
         }
 
-        return HtmlFrame(htmlPageBuilder).also {
-            it.acceptsInput = true
-        }
+        return HtmlFrame(htmlPageBuilder, true)
     }
 }

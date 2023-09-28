@@ -45,8 +45,6 @@ public class AnsiRegionMapFrameBuilder(
             frameSize.height - 4
         )
 
-        return AnsiGridTextFrame(ansiGridStringBuilder, 0, 0, backgroundColor).also {
-            it.acceptsInput = false
-        }
+        return AnsiGridTextFrame(ansiGridStringBuilder, 0, 0, false, backgroundColor)
     }
 }

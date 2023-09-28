@@ -1,19 +1,19 @@
 package ktaf.rendering.frames.html
 
 import ktaf.helpers.newline
-import ktaf.io.DisplayTextOutput
+import ktaf.io.RenderFrame
+import ktaf.rendering.FramePosition
 import ktaf.rendering.frames.Frame
 
 /**
  * Provides a HTML based [Frame].
  */
-public class HtmlFrame(private val pageBuilder: HtmlPageBuilder) : Frame {
-    override var cursorLeft: Int = 0
-    override var cursorTop: Int = 0
-    override var acceptsInput: Boolean = true
-
-    override fun render(displayTextOutput: DisplayTextOutput) {
-        displayTextOutput(toString())
+public class HtmlFrame(
+    private val pageBuilder: HtmlPageBuilder,
+    public override val acceptsInput: Boolean = true
+) : Frame {
+    override fun render(callback: RenderFrame) {
+        callback(toString(), acceptsInput, FramePosition(0, 0))
     }
 
     override fun toString(): String {

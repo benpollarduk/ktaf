@@ -1,7 +1,8 @@
 package ktaf.rendering.frames.ansi
 
 import ktaf.helpers.newline
-import ktaf.io.DisplayTextOutput
+import ktaf.io.RenderFrame
+import ktaf.rendering.FramePosition
 import ktaf.rendering.frames.Frame
 
 /**
@@ -9,13 +10,12 @@ import ktaf.rendering.frames.Frame
  */
 public class AnsiGridTextFrame(
     private val builder: AnsiGridStringBuilder,
-    override var cursorLeft: Int,
-    override var cursorTop: Int,
-    private var backgroundColor: AnsiColor = AnsiColor.BLACK
+    private val cursorLeft: Int,
+    private val cursorTop: Int,
+    public override val acceptsInput: Boolean = true,
+    private val backgroundColor: AnsiColor = AnsiColor.BLACK
 ) : Frame {
-    override var acceptsInput: Boolean = true
-
-    override fun render(displayTextOutput: DisplayTextOutput) {
+    override fun render(callback: RenderFrame) {
         val stringBuilder = StringBuilder()
         val newLine = newline()
         var fontColor = builder.getCellColor(0, 0)
@@ -49,7 +49,7 @@ public class AnsiGridTextFrame(
         stringBuilder.append(
             "${AnsiColor.RESET.toFontColorEscapeCode()}${AnsiColor.RESET.toBackgroundColorEscapeCode()}"
         )
-        displayTextOutput(stringBuilder.toString())
+        callback(stringBuilder.toString(), acceptsInput, FramePosition(cursorLeft, cursorTop))
     }
 
     override fun toString(): String {

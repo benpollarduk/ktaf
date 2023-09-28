@@ -194,9 +194,8 @@ public class AnsiSceneFrameBuilder(
             ansiGridStringBuilder,
             5,
             frameSize.height - 1,
+            acceptInput,
             backgroundColor
-        ).also {
-            it.acceptsInput = acceptInput
-        }
+        )
     }
 }

@@ -16,12 +16,10 @@ class AnsiGridTextFrameTest {
             }
             builder.drawBoundary(AnsiColor.BLUE)
             builder.drawWrapped("TEST", 5, 5, 50, AnsiColor.GREEN)
-            val frame = AnsiGridTextFrame(builder, 10, 10, AnsiColor.BLACK).also {
-                it.acceptsInput = false
-            }
+            val frame = AnsiGridTextFrame(builder, 10, 10, false, AnsiColor.BLACK)
 
             // When
-            frame.render(AnsiConsoleConfiguration.displayTextOutput)
+            frame.render(AnsiConsoleConfiguration.renderFrame)
         }
     }
 }

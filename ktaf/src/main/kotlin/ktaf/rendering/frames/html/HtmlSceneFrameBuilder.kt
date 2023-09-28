@@ -113,8 +113,6 @@ public class HtmlSceneFrameBuilder(
             }
         }
 
-        return HtmlFrame(htmlPageBuilder).also {
-            it.acceptsInput = acceptInput
-        }
+        return HtmlFrame(htmlPageBuilder, acceptInput)
     }
 }

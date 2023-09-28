@@ -1,10 +1,8 @@
 package app.io
 
 import ktaf.assets.Size
-import ktaf.io.AdjustInput
-import ktaf.io.ClearOutput
-import ktaf.io.DisplayTextOutput
 import ktaf.io.IOConfiguration
+import ktaf.io.RenderFrame
 import ktaf.io.WaitForAcknowledge
 import ktaf.io.WaitForCommand
 import ktaf.rendering.FramePosition
@@ -27,7 +25,7 @@ import java.util.concurrent.locks.ReentrantLock
 /**
  * Provides an [IOConfiguration] for a Ktor application.
  */
-public object KtorConfiguration: IOConfiguration {
+public object KtorConfiguration : IOConfiguration {
     private var command: String? = ""
     private var acknowledgementReceived: Boolean? = null
     private val lock = ReentrantLock()
@@ -96,13 +94,14 @@ public object KtorConfiguration: IOConfiguration {
         }
     }
 
-    override val displayTextOutput: DisplayTextOutput
-        get() = object : DisplayTextOutput {
-            override fun invoke(value: String) {
+    override val renderFrame: RenderFrame
+        get() = object : RenderFrame {
+            override fun invoke(frame: String, allowInput: Boolean, cursorPosition: FramePosition) {
                 try {
                     lock.lock()
-                    lastFrame = getFullyFormedHTML(value)
+                    lastFrame = getFullyFormedHTML(frame)
                     hasFrameArrived = true
+                    canAcceptCommand = allowInput
                 } finally {
                     lock.unlock()
                 }
@@ -148,21 +147,6 @@ public object KtorConfiguration: IOConfiguration {
                     }
                 }
                 return captured
-            }
-        }
-    override val clearOutput: ClearOutput
-        get() = object : ClearOutput {
-            override fun invoke() = Unit
-        }
-    override val adjustInput: AdjustInput
-        get() = object : AdjustInput {
-            override fun invoke(allowInput: Boolean, cursorPosition: FramePosition) {
-                try {
-                    lock.lock()
-                    canAcceptCommand = allowInput
-                } finally {
-                    lock.unlock()
-                }
             }
         }
     override val frameBuilders: FrameBuilderCollection

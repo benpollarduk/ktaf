@@ -147,9 +147,8 @@ public class AnsiConversationFrameBuilder(
             ansiGridStringBuilder,
             5,
             frameSize.height - 1,
+            true,
             backgroundColor
-        ).also {
-            it.acceptsInput = true
-        }
+        )
     }
 }

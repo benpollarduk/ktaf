@@ -28,8 +28,6 @@ public class HtmlRegionMapFrameBuilder(
         var map = gridStringBuilder.toString() // .removeWhitespaceLines()
         htmlPageBuilder.pre(map.replace(newline(), "<br>"))
 
-        return HtmlFrame(htmlPageBuilder).also {
-            it.acceptsInput = false
-        }
+        return HtmlFrame(htmlPageBuilder, false)
     }
 }

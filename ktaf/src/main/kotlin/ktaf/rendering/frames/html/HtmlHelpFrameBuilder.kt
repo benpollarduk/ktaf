@@ -28,8 +28,6 @@ public class HtmlHelpFrameBuilder(
             htmlPageBuilder.br()
         }
 
-        return HtmlFrame(htmlPageBuilder).also {
-            it.acceptsInput = false
-        }
+        return HtmlFrame(htmlPageBuilder, false)
     }
 }

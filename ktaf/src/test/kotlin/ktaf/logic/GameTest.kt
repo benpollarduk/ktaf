@@ -3,10 +3,8 @@ package ktaf.logic
 import ktaf.assets.characters.NonPlayableCharacter
 import ktaf.assets.characters.PlayableCharacter
 import ktaf.assets.locations.Room
-import ktaf.io.AdjustInput
-import ktaf.io.ClearOutput
-import ktaf.io.DisplayTextOutput
 import ktaf.io.IOConfiguration
+import ktaf.io.RenderFrame
 import ktaf.io.WaitForAcknowledge
 import ktaf.io.WaitForCommand
 import ktaf.io.configurations.AnsiConsoleConfiguration
@@ -103,10 +101,10 @@ class GameTest {
             regionMaker[0, 0, 0] = Room("TestRoom", "")
             val overworldMaker = OverworldMaker("TestOverworld", "", listOf(regionMaker))
             val io = object : IOConfiguration {
-                override val displayTextOutput: DisplayTextOutput
-                    get() = object : DisplayTextOutput {
-                        override fun invoke(value: String) {
-                            println(value)
+                override val renderFrame: RenderFrame
+                    get() = object : RenderFrame {
+                        override fun invoke(frame: String, allowInput: Boolean, cursorPosition: FramePosition) {
+                            println(frame)
                             println()
                             println()
                         }
@@ -122,14 +120,6 @@ class GameTest {
                         override fun invoke(): String {
                             return "Exit"
                         }
-                    }
-                override val clearOutput: ClearOutput
-                    get() = object : ClearOutput {
-                        override fun invoke() = Unit
-                    }
-                override val adjustInput: AdjustInput
-                    get() = object : AdjustInput {
-                        override fun invoke(allowInput: Boolean, cursorPosition: FramePosition) = Unit
                     }
                 override val frameBuilders: FrameBuilderCollection
                     get() = AnsiConsoleConfiguration.frameBuilders

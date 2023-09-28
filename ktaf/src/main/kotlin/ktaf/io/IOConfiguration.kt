@@ -7,9 +7,9 @@ import ktaf.rendering.frames.FrameBuilderCollection
  */
 public interface IOConfiguration {
     /**
-     * Specifies how text should be output.
+     * Specifies how frames should be rendered.
      */
-    public val displayTextOutput: DisplayTextOutput
+    public val renderFrame: RenderFrame
 
     /**
      * Specifies how acknowledgments should be waited for.
@@ -20,16 +20,6 @@ public interface IOConfiguration {
      * Specifies how commands should be waited for.
      */
     public val waitForCommand: WaitForCommand
-
-    /**
-     * Specifies how the output should be cleared.
-     */
-    public val clearOutput: ClearOutput
-
-    /**
-     * Specifies how the input should be adjusted.
-     */
-    public val adjustInput: AdjustInput
 
     /**
      * Specifies the frame builders used to render the [Game].

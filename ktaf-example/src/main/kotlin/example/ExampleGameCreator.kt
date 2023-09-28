@@ -26,7 +26,7 @@ public object ExampleGameCreator {
             EndCheckResult(
                 false,
                 "Game Over",
-                "You have reached the end of the game, thanks for playing!",
+                "You have reached the end of the game, thanks for playing!"
             )
         } else {
             EndCheckResult.notEnded
@@ -49,33 +49,33 @@ public object ExampleGameCreator {
                 Item(
                     "${region.identifier.name} Sphere",
                     "A glass sphere, about the size of a snooker ball. Inside you can see a swirling mist.",
-                    true,
+                    true
                 ).also {
                     it.commands = listOf(
                         CustomCommand(
                             CommandHelp(
                                 "Warp ${it.identifier.name}",
-                                "Use the ${it.identifier.name} Sphere to warp to the ${it.identifier.name}.",
+                                "Use the ${it.identifier.name} Sphere to warp to the ${it.identifier.name}."
                             ),
-                            true,
+                            true
                         ) { game, _ ->
                             val move = overworld.move(region)
                             if (!move) {
                                 Reaction(
                                     ReactionResult.ERROR,
-                                    "Could not move to ${region.identifier.name}.",
+                                    "Could not move to ${region.identifier.name}."
                                 )
                             }
                             game.displayTransition(
                                 "",
                                 "You peer inside the sphere and feel faint. When the sensation passes you open " +
-                                    "you eyes and have been transported to the ${region.identifier.name}.",
+                                    "you eyes and have been transported to the ${region.identifier.name}."
                             )
 
                             Reaction(ReactionResult.INTERNAL, "")
-                        },
+                        }
                     )
-                },
+                }
             )
         }
     }
@@ -101,9 +101,9 @@ public object ExampleGameCreator {
                 CustomCommand(
                     CommandHelp(
                         "Jump",
-                        "Jump to a location in a region.",
+                        "Jump to a location in a region."
                     ),
-                    false,
+                    false
                 ) { game, args ->
                     var x = 0
                     var y = 0
@@ -120,7 +120,7 @@ public object ExampleGameCreator {
                     } else {
                         Reaction(ReactionResult.ERROR, "Failed to jump to $x $y $z.")
                     }
-                },
+                }
             )
             overworld
         }
@@ -137,7 +137,7 @@ public object ExampleGameCreator {
             { player },
             { determineIfGameIsComplete(it) },
             { determineIfGameOver(it) },
-            ioConfiguration = ioConfiguration,
+            ioConfiguration = ioConfiguration
         )
     }
 }

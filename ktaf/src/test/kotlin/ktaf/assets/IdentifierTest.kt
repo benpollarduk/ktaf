@@ -12,7 +12,7 @@ class IdentifierTest {
         val identifier = Identifier("")
 
         // When
-        val result = identifier == null
+        val result = identifier.equals(null)
 
         // Then
         assertFalse(result)

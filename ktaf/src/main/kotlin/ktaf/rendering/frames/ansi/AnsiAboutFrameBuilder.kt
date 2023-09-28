@@ -54,13 +54,23 @@ public class AnsiAboutFrameBuilder(
         )
 
         if (author.isNotEmpty()) {
-            ansiGridStringBuilder.drawWrapped("Created by $author.", leftMargin, lastPosition.y + 2, availableWidth, authorColor)
+            ansiGridStringBuilder.drawWrapped(
+                "Created by $author.",
+                leftMargin,
+                lastPosition.y + 2,
+                availableWidth,
+                authorColor
+            )
         } else {
-            ansiGridStringBuilder.drawWrapped("BP.AdventureFramework by Ben Pollard 2011 - 2023.", leftMargin, lastPosition.y + 2, availableWidth, authorColor)
+            ansiGridStringBuilder.drawWrapped(
+                "BP.AdventureFramework by Ben Pollard 2011 - 2023.",
+                leftMargin,
+                lastPosition.y + 2,
+                availableWidth,
+                authorColor
+            )
         }
 
-        return AnsiGridTextFrame(ansiGridStringBuilder, 0, 0, backgroundColor).also {
-            it.acceptsInput = false
-        }
+        return AnsiGridTextFrame(ansiGridStringBuilder, 0, 0, false, backgroundColor)
     }
 }

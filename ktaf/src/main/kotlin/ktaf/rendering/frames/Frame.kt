@@ -1,28 +1,18 @@
 package ktaf.rendering.frames
 
-import ktaf.io.DisplayTextOutput
+import ktaf.io.RenderFrame
 
 /**
  * Provides an interface displaying a command based interface.
  */
 public interface Frame {
     /**
-     * The cursors left position.
+     * Get if this frame accepts input.
      */
-    public var cursorLeft: Int
+    public val acceptsInput: Boolean
 
     /**
-     * The cursors top position.
+     * Render this frame using a specified [callback] to handle output.
      */
-    public var cursorTop: Int
-
-    /**
-     * Specifies if this frame accepts input.
-     */
-    public var acceptsInput: Boolean
-
-    /**
-     * Render this frame using a specified [displayTextOutput] lambda to handle output.
-     */
-    public fun render(displayTextOutput: DisplayTextOutput)
+    public fun render(callback: RenderFrame)
 }

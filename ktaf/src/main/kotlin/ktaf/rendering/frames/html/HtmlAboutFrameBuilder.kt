@@ -24,8 +24,6 @@ public class HtmlAboutFrameBuilder(
             htmlPageBuilder.h2("ktaf by Ben Pollard 2023.")
         }
 
-        return HtmlFrame(htmlPageBuilder).also {
-            it.acceptsInput = false
-        }
+        return HtmlFrame(htmlPageBuilder, false)
     }
 }

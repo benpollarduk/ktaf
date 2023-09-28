@@ -15,8 +15,6 @@ public class HtmlTitleFrameBuilder(
         htmlPageBuilder.br()
         htmlPageBuilder.p(introduction.ensureFinishedSentence())
 
-        return HtmlFrame(htmlPageBuilder).also {
-            it.acceptsInput = false
-        }
+        return HtmlFrame(htmlPageBuilder, false)
     }
 }

@@ -43,9 +43,8 @@ public class AnsiGameOverFrameBuilder(
             ansiGridStringBuilder,
             0,
             0,
+            false,
             backgroundColor
-        ).also {
-            it.acceptsInput = false
-        }
+        )
     }
 }

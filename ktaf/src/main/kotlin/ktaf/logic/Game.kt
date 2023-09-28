@@ -22,7 +22,6 @@ import ktaf.interpretation.ItemCommandInterpreter
 import ktaf.interpretation.MovementCommandInterpreter
 import ktaf.io.IOConfiguration
 import ktaf.io.configurations.AnsiConsoleConfiguration
-import ktaf.rendering.FramePosition
 import ktaf.rendering.KeyType
 import ktaf.rendering.frames.Frame
 import java.util.*
@@ -42,7 +41,7 @@ public class Game private constructor(
     private val exitMode: ExitMode,
     private val errorPrefix: String,
     private val interpreter: Interpreter,
-    private val ioConfiguration: IOConfiguration
+    private val ioConfiguration: IOConfiguration,
 ) {
     /**
      * The active [Converser].
@@ -67,36 +66,6 @@ public class Game private constructor(
 
     private var currentFrame: Frame = ioConfiguration.frameBuilders.aboutFrameBuilder.build(name, description, author)
     private var state: GameState = GameState.NOT_STARTED
-    private val startingFrameDrawCallbacks: MutableList<FrameDraw> = mutableListOf()
-    private val finishedFrameDrawCallbacks: MutableList<FrameDraw> = mutableListOf()
-
-    /**
-     * Start listening to StartingFrameDraw.
-     */
-    public fun subscribeToStartingFrameDraw(listener: FrameDraw) {
-        startingFrameDrawCallbacks.add(listener)
-    }
-
-    /**
-     * Start listening to StartingFrameDraw.
-     */
-    public fun subscribeToFinishedFrameDraw(listener: FrameDraw) {
-        finishedFrameDrawCallbacks.add(listener)
-    }
-
-    /**
-     * Stop listening to StartingFrameDraw.
-     */
-    public fun unsubscribeFromStartingFrameDraw(listener: FrameDraw) {
-        startingFrameDrawCallbacks.remove(listener)
-    }
-
-    /**
-     * Stop listening to StartingFrameDraw.
-     */
-    public fun unsubscribeFromFinishedFrameDraw(listener: FrameDraw) {
-        finishedFrameDrawCallbacks.remove(listener)
-    }
 
     /**
      * Start a conversation with a [converser].
@@ -289,9 +258,7 @@ public class Game private constructor(
     }
 
     private fun drawFrame(frame: Frame) {
-        startingFrameDrawCallbacks.forEach { it.invoke(frame) }
-        frame.render(ioConfiguration.displayTextOutput)
-        finishedFrameDrawCallbacks.forEach { it.invoke(frame) }
+        frame.render(ioConfiguration.renderFrame)
     }
 
     private fun refresh(message: String = "") {
@@ -402,7 +369,7 @@ public class Game private constructor(
             exitMode: ExitMode = ExitMode.RETURN_TO_TITLE_SCREEN,
             errorPrefix: String = DEFAULT_ERROR_PREFIX,
             interpreter: Interpreter = defaultInterpreters,
-            ioConfiguration: IOConfiguration = AnsiConsoleConfiguration
+            ioConfiguration: IOConfiguration = AnsiConsoleConfiguration,
         ): GameCreator {
             val player = playerCreator()
             return {
@@ -431,17 +398,6 @@ public class Game private constructor(
 
             while (run) {
                 val game = creator.invoke()
-
-                game.subscribeToStartingFrameDraw {
-                    game.ioConfiguration.clearOutput()
-                }
-                game.subscribeToFinishedFrameDraw {
-                    game.ioConfiguration.adjustInput(
-                        it.acceptsInput,
-                        FramePosition(it.cursorLeft, it.cursorTop)
-                    )
-                }
-
                 game.execute()
 
                 when (game.exitMode) {

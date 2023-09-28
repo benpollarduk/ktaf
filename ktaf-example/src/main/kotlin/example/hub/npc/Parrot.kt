@@ -11,13 +11,13 @@ internal class Parrot : NonPlayableCharacterTemplate() {
     override fun instantiate(playableCharacter: PlayableCharacter, room: Room): NonPlayableCharacter {
         return NonPlayableCharacter(
             NAME,
-            DESCRIPTION,
+            DESCRIPTION
         ).also {
             it.conversation = Conversation(
                 listOf(
                     Paragraph("Squarrrkkk"),
-                    Paragraph("Mode changing not implemented yet, come back soon!"),
-                ),
+                    Paragraph("Mode changing not implemented yet, come back soon!")
+                )
             )
         }
     }

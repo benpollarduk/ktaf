@@ -16,8 +16,6 @@ public class HtmlGameOverFrameBuilder(
         htmlPageBuilder.br()
         htmlPageBuilder.p(reason.ensureFinishedSentence())
 
-        return HtmlFrame(htmlPageBuilder).also {
-            it.acceptsInput = false
-        }
+        return HtmlFrame(htmlPageBuilder, false)
     }
 }

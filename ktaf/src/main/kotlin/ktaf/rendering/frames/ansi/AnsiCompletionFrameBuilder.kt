@@ -44,8 +44,6 @@ public class AnsiCompletionFrameBuilder(
             descriptionColor
         )
 
-        return AnsiGridTextFrame(ansiGridStringBuilder, 0, 0, backgroundColor).also {
-            it.acceptsInput = false
-        }
+        return AnsiGridTextFrame(ansiGridStringBuilder, 0, 0, false, backgroundColor)
     }
 }

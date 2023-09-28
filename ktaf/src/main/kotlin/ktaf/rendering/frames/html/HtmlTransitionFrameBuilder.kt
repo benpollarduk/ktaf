@@ -16,8 +16,6 @@ public class HtmlTransitionFrameBuilder(
         htmlPageBuilder.br()
         htmlPageBuilder.p(message.ensureFinishedSentence())
 
-        return HtmlFrame(htmlPageBuilder).also {
-            it.acceptsInput = false
-        }
+        return HtmlFrame(htmlPageBuilder, false)
     }
 }

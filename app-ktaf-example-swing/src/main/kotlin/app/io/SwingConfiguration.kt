@@ -1,9 +1,7 @@
 package app.io
 
 import ktaf.assets.Size
-import ktaf.io.AdjustInput
-import ktaf.io.ClearOutput
-import ktaf.io.DisplayTextOutput
+import ktaf.io.RenderFrame
 import ktaf.io.IOConfiguration
 import ktaf.io.WaitForAcknowledge
 import ktaf.io.WaitForCommand
@@ -63,10 +61,11 @@ internal class SwingConfiguration(
         }
     }
 
-    override val displayTextOutput: DisplayTextOutput
-        get() = object : DisplayTextOutput {
-            override fun invoke(value: String) {
-                val runnable = Runnable { output.text = value }
+    override val renderFrame: RenderFrame
+        get() = object : RenderFrame {
+            override fun invoke(frame: String, allowInput: Boolean, cursorPosition: FramePosition) {
+                val runnable = Runnable { output.text = frame }
+                allowInputChangedListener?.invoke(allowInput)
                 SwingUtilities.invokeLater(runnable)
             }
         }
@@ -110,19 +109,6 @@ internal class SwingConfiguration(
                     }
                 }
                 return captured
-            }
-        }
-    override val clearOutput: ClearOutput
-        get() = object : ClearOutput {
-            override fun invoke() {
-                // clear output
-                output.text = ""
-            }
-        }
-    override val adjustInput: AdjustInput
-        get() = object : AdjustInput {
-            override fun invoke(allowInput: Boolean, cursorPosition: FramePosition) {
-                allowInputChangedListener?.invoke(allowInput)
             }
         }
     override val frameBuilders: FrameBuilderCollection

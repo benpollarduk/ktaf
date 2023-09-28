@@ -13,7 +13,7 @@ class HtmlFrameTest {
             val frame = HtmlFrame(HtmlPageBuilder())
 
             // When
-            frame.render(AnsiConsoleConfiguration.displayTextOutput)
+            frame.render(AnsiConsoleConfiguration.renderFrame)
         }
     }
 
@@ -26,7 +26,7 @@ class HtmlFrameTest {
             print(frame.toString())
 
             // When
-            frame.render(AnsiConsoleConfiguration.displayTextOutput)
+            frame.render(AnsiConsoleConfiguration.renderFrame)
         }
     }
 }
