@@ -14,18 +14,16 @@ public class HtmlHelpFrameBuilder(
     override fun build(title: String, description: String, commands: List<CommandHelp>): Frame {
         htmlPageBuilder.h1(title)
         htmlPageBuilder.br()
-        htmlPageBuilder.br()
 
         if (description.isNotEmpty()) {
             htmlPageBuilder.p(description.ensureFinishedSentence())
             htmlPageBuilder.br()
-            htmlPageBuilder.br()
         }
 
         commands.forEach {
+            htmlPageBuilder.br()
             htmlPageBuilder.b(it.command)
             htmlPageBuilder.append(" - ${it.description}")
-            htmlPageBuilder.br()
         }
 
         return HtmlFrame(htmlPageBuilder, false)

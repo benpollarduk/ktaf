@@ -12,9 +12,6 @@ fun Application.configureRouting() {
         get("/") {
             when (val command = call.parameters["command"]) {
                 null -> Unit
-                "" -> {
-                    KtorConfiguration.acknowledge()
-                }
                 else -> {
                     if (KtorConfiguration.canAcceptCommand()) {
                         KtorConfiguration.acceptCommand(command)
@@ -32,11 +29,13 @@ fun Application.configureRouting() {
             // allow the game time to respond and publish a new frame
             while (!timedOut) {
                 if (KtorConfiguration.getHasFrameArrived()) {
-                    if (KtorConfiguration.getHasFrameArrived()) {
-                        break
-                    }
+                    break
                 } else {
                     timedOut = System.currentTimeMillis() - startTime >= timeoutInMs
+
+                    if (timedOut) {
+                        delay(10)
+                    }
                 }
             }
 

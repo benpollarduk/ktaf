@@ -41,7 +41,7 @@ public class Game private constructor(
     private val exitMode: ExitMode,
     private val errorPrefix: String,
     private val interpreter: Interpreter,
-    private val ioConfiguration: IOConfiguration,
+    private val ioConfiguration: IOConfiguration
 ) {
     /**
      * The active [Converser].
@@ -369,7 +369,7 @@ public class Game private constructor(
             exitMode: ExitMode = ExitMode.RETURN_TO_TITLE_SCREEN,
             errorPrefix: String = DEFAULT_ERROR_PREFIX,
             interpreter: Interpreter = defaultInterpreters,
-            ioConfiguration: IOConfiguration = AnsiConsoleConfiguration,
+            ioConfiguration: IOConfiguration = AnsiConsoleConfiguration
         ): GameFactory {
             return {
                 val player = playerFactory()

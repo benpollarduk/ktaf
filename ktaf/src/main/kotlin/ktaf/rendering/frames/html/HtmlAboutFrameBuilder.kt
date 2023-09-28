@@ -13,15 +13,13 @@ public class HtmlAboutFrameBuilder(
     override fun build(title: String, description: String, author: String): Frame {
         htmlPageBuilder.h1(title)
         htmlPageBuilder.br()
-        htmlPageBuilder.br()
         htmlPageBuilder.p(description.ensureFinishedSentence())
-        htmlPageBuilder.br()
         htmlPageBuilder.br()
 
         if (author.isNotEmpty()) {
-            htmlPageBuilder.h2("Created by $author.")
+            htmlPageBuilder.h4("Created by $author.")
         } else {
-            htmlPageBuilder.h2("ktaf by Ben Pollard 2023.")
+            htmlPageBuilder.h4("ktaf by Ben Pollard 2023.")
         }
 
         return HtmlFrame(htmlPageBuilder, false)

@@ -13,7 +13,6 @@ public class HtmlGameOverFrameBuilder(
     override fun build(title: String, reason: String): Frame {
         htmlPageBuilder.h1(title)
         htmlPageBuilder.br()
-        htmlPageBuilder.br()
         htmlPageBuilder.p(reason.ensureFinishedSentence())
 
         return HtmlFrame(htmlPageBuilder, false)

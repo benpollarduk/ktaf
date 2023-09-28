@@ -18,7 +18,6 @@ public class HtmlConversationFrameBuilder(
         if (title.isNotEmpty()) {
             htmlPageBuilder.h1(title)
             htmlPageBuilder.br()
-            htmlPageBuilder.br()
         }
 
         if (log.any()) {
@@ -42,12 +41,11 @@ public class HtmlConversationFrameBuilder(
 
         if (commands.any()) {
             htmlPageBuilder.br()
-            htmlPageBuilder.br()
 
             commands.forEach {
+                htmlPageBuilder.br()
                 htmlPageBuilder.b(it.command)
                 htmlPageBuilder.append(" - ${it.description}")
-                htmlPageBuilder.br()
             }
         }
 

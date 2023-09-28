@@ -55,7 +55,6 @@ public class HtmlSceneFrameBuilder(
 
         htmlPageBuilder.h1(room.identifier.name)
         htmlPageBuilder.br()
-        htmlPageBuilder.br()
 
         if (displayMessagesInIsolation && displayMessage) {
             htmlPageBuilder.p(message.ensureFinishedSentence())
@@ -103,9 +102,9 @@ public class HtmlSceneFrameBuilder(
 
             if (contextualCommands.any()) {
                 htmlPageBuilder.p("You can:")
-                htmlPageBuilder.br()
 
                 contextualCommands.forEach {
+                    htmlPageBuilder.br()
                     htmlPageBuilder.b(it.command)
                     htmlPageBuilder.append(" - ${it.description}")
                     htmlPageBuilder.br()
