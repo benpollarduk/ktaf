@@ -1,9 +1,11 @@
 # Introduction 
-Implementation of the BP.AdventureFramework in Kotlin. A framework for building text based adventures.
+An implementation of the BP.AdventureFramework - a framework for building text based adventures - in Kotlin. Ktaf aims to provide all of the basic building blocks required to start writing simple games.
+
+Included in the repo are example projects that show how ktaf can be used to write games that run in a terminal window as originally intended, and also an example Swing application and an example Ktor webserver are also included that render the game in HTML.
 
 ![image](https://github.com/ben-pollard-uk/ktaf/assets/129943363/27670c5d-7f4f-4534-93cb-7931fd8d90e4)
 
-Provides simple classes for developing game elements:
+Ktaf provides simple classes for developing game elements:
   * Interface and base class for examinable objects:
     * Examination returns a description of the object.
     * Descriptions can be conditional, with different results generated from the game state.
@@ -34,12 +36,13 @@ The framework provides keywords for interacting with game elements:
   * Use on - use an item. Items can be used on a variety of targets.
   * N, S, E, W, U, D - traverse through the rooms in a region.
 
+Interpretation can be easily extended with the ability for custom interpreters and commands to be added outside of the core Ktor library.
+
 Conversations with NPC's can be entered in to with an easy to use interface to display dialogue and provide responses:
 
 ![image](https://github.com/ben-pollard-uk/ktaf/assets/129943363/3adc4210-2732-4f79-9d19-000af0287f07)
-
   
-The framework also provides global commands to help with game flow:
+The framework also provides global commands to help with game flow and option management:
   * About - display version information.
   * CommandsOn / CommandsOff - toggle commands on/off.
   * Exit - exit the game.
@@ -62,15 +65,12 @@ All game management is provided by the framework, including:
   * State management.
   * Game creation.
   
-Maps are automatically generated for regions:
+Maps are automatically generated for regions and rooms:
 
 ![image](https://github.com/ben-pollard-uk/ktaf/assets/129943363/b8e52974-dad7-4c27-8c0a-6861964a2fbe)
 
 # Prerequisites
- * Windows
-   * Download free IDE IntelliJ Community ( >> [https://visualstudio.microsoft.com/de/vs/community/](https://www.jetbrains.com/idea/download/other.html) ), or use commercial IntelliJ Version.
- * Linux
-   * Download free IDE IntelliJ Community ( >> [https://visualstudio.microsoft.com/de/vs/community/](https://www.jetbrains.com/idea/download/other.html) ), or use commercial IntelliJ Version.
+The default frame collections for rendering in a terminal assume that a terminal capable of handling ANSI is bring used. If a terminal that doesn't support ANSI is used the game will still render but ANSI will also be displayed.
 
 # Getting Started
  * Clone the repo
