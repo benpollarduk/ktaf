@@ -1,7 +1,7 @@
 package example
 
 import example.everglades.Everglades
-import example.everglades.rooms.InnerCave
+import example.everglades.rooms.Outskirts
 import example.global.player.Player
 import example.hub.Hub
 import ktaf.assets.Item
@@ -24,7 +24,7 @@ import ktaf.logic.OverworldFactory
  */
 public object ExampleGameCreator {
     private fun determineIfGameIsComplete(game: Game): EndCheckResult {
-        return if (InnerCave.NAME.equalsExaminable(game.overworld.currentRegion?.currentRoom)) {
+        return if (Outskirts.NAME.equalsExaminable(game.overworld.currentRegion?.currentRoom)) {
             EndCheckResult(
                 true,
                 "Game Over",
