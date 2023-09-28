@@ -73,7 +73,18 @@ Maps are automatically generated for regions:
 
 # Getting Started
  * Clone the repo
- * Run ./gradlew :app-ktaf-example-console:run
+ * Run the included terminal application
+```bash
+./gradlew :app-ktaf-example-console:run
+```
+ * Run included Swing example application to run with a basic UI
+```bash
+./gradlew :app-ktaf-example-swing:run
+```
+ * Run included ktor example webserver then navigate to localhost:8080 in browser
+```bash
+./gradlew :app-ktaf-example-ktor:run
+```
 
 # Hello World
 ```kotlin
