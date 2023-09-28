@@ -35,7 +35,7 @@ plugins {
 // Publishing properties defined at a project level gradle.properties.
 val artifactId: String by project
 val artifactGroup: String by project
-val ver = "0.0.0"
+val ver = "0.0.1"
 
 ext {
     // Set the version.
@@ -171,7 +171,7 @@ val publishUsername: String by project
 val publishPassword: String by project
 
 publishing {
-    /*repositories {
+    repositories {
         maven {
             url = uri(publishUrl)
             credentials {
@@ -179,7 +179,7 @@ publishing {
                 password = publishPassword
             }
         }
-    }*/
+    }
 
     publications {
         create<MavenPublication>("maven") {
