@@ -1,7 +1,7 @@
 package ktaf.assets.locations
 
-import ktaf.ExaminableObject
 import ktaf.assets.Description
+import ktaf.assets.ExaminableObject
 import ktaf.assets.ExaminationResult
 import ktaf.assets.Identifier
 import ktaf.extensions.equalsExaminable

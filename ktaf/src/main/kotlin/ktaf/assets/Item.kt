@@ -1,6 +1,5 @@
 package ktaf.assets
 
-import ktaf.ExaminableObject
 import ktaf.assets.interaction.Interaction
 import ktaf.assets.interaction.InteractionEffect
 import ktaf.assets.interaction.InteractionResult

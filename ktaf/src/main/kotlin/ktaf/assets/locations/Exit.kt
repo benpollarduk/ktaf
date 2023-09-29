@@ -1,9 +1,8 @@
 package ktaf.assets.locations
 
-import ktaf.ExaminableObject
 import ktaf.assets.ConditionalDescription
 import ktaf.assets.Description
-import java.util.*
+import ktaf.assets.ExaminableObject
 
 public class Exit(
     public val direction: Direction,

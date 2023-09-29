@@ -1,6 +1,6 @@
 package ktaf.assets.characters
 
-import ktaf.ExaminableObject
+import ktaf.assets.ExaminableObject
 import ktaf.assets.Item
 import ktaf.assets.interaction.Interaction
 import ktaf.assets.interaction.InteractionEffect

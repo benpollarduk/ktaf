@@ -1,6 +1,6 @@
 package ktaf.utilities
 
-import ktaf.ExaminableObject
+import ktaf.assets.ExaminableObject
 import ktaf.assets.locations.Direction
 import ktaf.assets.locations.Region
 import ktaf.assets.locations.Room
@@ -9,7 +9,6 @@ import ktaf.extensions.ensureFinishedSentence
 import ktaf.extensions.getObjectifier
 import ktaf.extensions.toSentenceCase
 import ktaf.helpers.newline
-import java.util.*
 
 /**
  * Provides utility functions to help with handling [String] values.

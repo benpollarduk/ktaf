@@ -1,10 +1,5 @@
-package ktaf
+package ktaf.assets
 
-import ktaf.assets.Description
-import ktaf.assets.Examinable
-import ktaf.assets.Examination
-import ktaf.assets.ExaminationResult
-import ktaf.assets.Identifier
 import ktaf.commands.CustomCommand
 import ktaf.extensions.ensureFinishedSentence
 import ktaf.extensions.removeSentenceEnd
