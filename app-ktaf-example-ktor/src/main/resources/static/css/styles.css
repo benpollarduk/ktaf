@@ -1,0 +1,21 @@
+body {
+    background-color: black;
+    font-size: 12px;
+    font-family: Consolas, monospace;
+    color: white;
+    word-wrap: break-word;
+    width: 100%;
+    max-width: 600px;
+}
+
+div {
+    margin: 10px;
+}
+
+.input-command {
+    font-size: 12px;
+    font-family: Consolas, monospace;
+    margin: 10px;
+    width: 100%;
+    max-width: 600px;
+}

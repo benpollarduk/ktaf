@@ -99,7 +99,24 @@ public object KtorConfiguration : IOConfiguration {
             override fun invoke(frame: String, allowInput: Boolean, cursorPosition: FramePosition) {
                 try {
                     lock.lock()
-                    lastFrame = getFullyFormedHTML(frame)
+                    // pull default HTML from resources
+                    lastFrame =
+                        """
+                            <!DOCTYPE html>
+                            <html>
+                            <head>
+                                <title>app-ktaf-example-ktor</title>
+                                <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+                            </head>
+                            <body>
+                            $frame
+                            <form id="inputForm">
+                                <input class="input-command" type="text" id="command" name="command">
+                            </form>
+                            <script src="/static/js/script.js"></script>
+                            </body>
+                            </html>
+                        """.trimIndent()
                     hasFrameArrived = true
                     canAcceptCommand = allowInput
                 } finally {
@@ -167,62 +184,4 @@ public object KtorConfiguration : IOConfiguration {
                 HtmlRegionMapFrameBuilder(htmlBuilder, GridRegionMapBuilder(), mapSize),
             )
         }
-
-    private fun getFullyFormedHTML(div: String): String {
-        return """
-            <!DOCTYPE html>
-            <html>
-                <head>
-                    <title>app-ktaf-example-ktor</title>
-                    <style>
-                    body 
-                    {
-                        background-color: black;
-                        font-size: 12px;
-                        font-family: Consolas, monospace;
-                        color: white;
-                        word-wrap: break-word;
-                        width:100%;
-                        max-width: 600px;
-                    }
-                    div {
-                        margin: 10px;
-                    }
-                    .input-command 
-                    {
-                        font-size: 12px;
-                        font-family: Consolas, monospace;
-                        margin: 10px;
-                        width:100%;
-                        max-width: 600px;
-                    }
-                    </style>
-                </head>
-                <body>
-                    $div
-                    <form id="inputForm">
-                        <input class="input-command" type="text" id="command" name="command">
-                    </form>
-                    <script>
-                        const commandInput = document.getElementById('command');
-                        const form = document.getElementById('inputForm');
-    
-                        // enter trigger submit
-                        commandInput.addEventListener('keydown', function(event) {
-                            if (event.key === 'Enter') {
-                                event.preventDefault();
-                                form.submit();
-                            }
-                        });
-                        
-                        // wait for the page to fully load then give focus to input
-                        window.addEventListener('load', function() {
-                            const inputElement = document.getElementById('command');
-                            inputElement.focus();
-                        });
-                    </script>
-                </body>
-            </html>
-        """.trimIndent()
-    }
 }

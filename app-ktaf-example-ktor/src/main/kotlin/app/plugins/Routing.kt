@@ -3,6 +3,7 @@ package app.plugins
 import app.io.KtorConfiguration
 import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.http.content.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.coroutines.delay
@@ -45,5 +46,8 @@ fun Application.configureRouting() {
                 call.respondText(KtorConfiguration.getLastFrame(), contentType = ContentType.Text.Html)
             }
         }
+    }
+    routing {
+        staticResources("static", "/static")
     }
 }
