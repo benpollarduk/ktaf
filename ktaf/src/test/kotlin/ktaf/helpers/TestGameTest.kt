@@ -11,7 +11,7 @@ class TestGameTest {
         // Then
         Assertions.assertDoesNotThrow {
             // Given
-            TestGame.get(AnsiConsoleConfiguration)
+            TestGame.instantiate(AnsiConsoleConfiguration)
         }
     }
 }

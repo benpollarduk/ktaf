@@ -113,22 +113,22 @@ val overworldMaker = OverworldMaker(
     listOf(regionMaker),
 )
 
-// create callback for generating games
-val gameCallback = Game.create(
+// create game
+val game = Game(
     GameInformation(
         "The Life Of Dave",
         "Dave awakes to find himself in a cavern...",
         "A very low budget adventure.",
         "Me",
     ),
-    { overworldMaker.make() },
-    { player },
+    player,
+    overworldMaker.make(),
     { EndCheckResult.notEnded },
     { EndCheckResult.notEnded },
 )
 
 // execute the game
-GameExecutor.execute(gameCallback)
+GameExecutor.execute(game)
 ```
 
 # For Open Questions

@@ -10,7 +10,7 @@ import ktaf.logic.GameExecutor
 
 fun main() {
     // create and start game on background thread
-    GameExecutor.executeAysnc(ExampleGame.get(KtorConfiguration))
+    GameExecutor.executeAysnc(ExampleGame, ioConfiguration = KtorConfiguration)
 
     embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
         .start(wait = true)

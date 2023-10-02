@@ -79,10 +79,10 @@ class GameApp : JFrame("app-example-swing") {
         this.isVisible = true
 
         // create and start game on background thread
-        GameExecutor.executeAysnc(ExampleGame.get(ioConfiguration))
+        GameExecutor.executeAysnc(ExampleGame, ioConfiguration = ioConfiguration)
     }
 
-    public companion object {
+    companion object {
         @JvmStatic
         fun main(args: Array<String>) {
             SwingUtilities.invokeLater {

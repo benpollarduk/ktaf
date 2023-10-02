@@ -8,6 +8,6 @@ object Main {
     @JvmStatic
     fun main(args: Array<String>) {
         // Create a new example game and begin execution
-        GameExecutor.execute(ExampleGame.get(AnsiConsoleConfiguration))
+        GameExecutor.execute(ExampleGame, ioConfiguration = AnsiConsoleConfiguration)
     }
 }

@@ -1,6 +1,7 @@
 package ktaf.logic
 
-import ktaf.logic.factories.GameFactory
+import ktaf.io.IOConfiguration
+import ktaf.utilities.templates.GameTemplate
 import java.util.concurrent.locks.ReentrantLock
 
 public object GameExecutor {
@@ -8,25 +9,18 @@ public object GameExecutor {
     private val lock = ReentrantLock()
 
     /**
-     * Execute an instance of a [factory].
+     * Execute an instance of a [Game] instantiated by a specified [template].
      */
     public fun execute(
-        factory: GameFactory,
-        exitMode: ExitMode = ExitMode.RETURN_TO_TITLE_SCREEN
-    ) {
-        execute(factory.invoke(), exitMode)
-    }
-
-    /**
-     * Execute an instance of a [game].
-     */
-    public fun execute(
-        game: Game,
-        exitMode: ExitMode = ExitMode.RETURN_TO_TITLE_SCREEN
+        template: GameTemplate,
+        exitMode: ExitMode = ExitMode.RETURN_TO_TITLE_SCREEN,
+        ioConfiguration: IOConfiguration
     ) {
         var run = true
 
         while (run) {
+            val game = template.instantiate(ioConfiguration)
+
             try {
                 lock.lock()
                 executingGames.add(game)
@@ -55,23 +49,14 @@ public object GameExecutor {
     }
 
     /**
-     * Execute an instance of a [factory].
+     * Execute an instance of a [Game] asynchronously, instantiated by a specified [template].
      */
     public fun executeAysnc(
-        factory: GameFactory,
-        exitMode: ExitMode = ExitMode.RETURN_TO_TITLE_SCREEN
+        template: GameTemplate,
+        exitMode: ExitMode = ExitMode.RETURN_TO_TITLE_SCREEN,
+        ioConfiguration: IOConfiguration
     ) {
-        executeAysnc(factory.invoke(), exitMode)
-    }
-
-    /**
-     * Execute an instance of a [game].
-     */
-    public fun executeAysnc(
-        game: Game,
-        exitMode: ExitMode = ExitMode.RETURN_TO_TITLE_SCREEN
-    ) {
-        val gameThread = Thread { execute(game, exitMode) }
+        val gameThread = Thread { execute(template, exitMode, ioConfiguration) }
         gameThread.start()
     }
 

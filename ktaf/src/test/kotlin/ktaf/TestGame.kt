@@ -12,17 +12,16 @@ import ktaf.conversations.Response
 import ktaf.io.IOConfiguration
 import ktaf.logic.Game
 import ktaf.logic.GameInformation
-import ktaf.logic.GameWrapper
 import ktaf.logic.conditions.EndCheckResult
-import ktaf.logic.factories.GameFactory
 import ktaf.utilities.OverworldMaker
 import ktaf.utilities.RegionMaker
+import ktaf.utilities.templates.GameTemplate
 
 /**
  *  An object for providing a test [Game] for debugging purposes.
  */
-internal object TestGame : GameWrapper {
-    override fun get(ioConfiguration: IOConfiguration): GameFactory {
+internal object TestGame : GameTemplate() {
+    override fun instantiate(ioConfiguration: IOConfiguration): Game {
         val basicRoomDescription = "This is just a test room."
         val player = PlayableCharacter("Test Player", "This is a test player.")
         val regionMaker = RegionMaker("Test Region", "This is a test region.")
@@ -99,10 +98,10 @@ internal object TestGame : GameWrapper {
             )
         )
         val overworldMaker = OverworldMaker("Test Overworld", "This is a test overworld", listOf(regionMaker))
-        return Game.create(
+        return Game(
             GameInformation("Test game", "This is a test game", "This is a test game", "Test author"),
-            { overworldMaker.make() },
-            { player },
+            player,
+            overworldMaker.make(),
             { EndCheckResult.notEnded },
             { EndCheckResult.notEnded },
             ioConfiguration = ioConfiguration

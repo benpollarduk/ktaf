@@ -47,7 +47,7 @@ class AnsiSceneFrameBuilderTest {
     fun `given complex game when build then no exception thrown`() {
         assertDoesNotThrow {
             // Given
-            val game = TestGame.get(AnsiConsoleConfiguration).invoke()
+            val game = TestGame.instantiate(AnsiConsoleConfiguration)
             val sceneFrameBuilder = AnsiSceneFrameBuilder(AnsiGridStringBuilder(), AnsiRoomMapBuilder(), Size(80, 50))
             val region = game.overworld.currentRegion ?: throw IllegalArgumentException("Region should not be null.")
             val room = region.currentRoom ?: throw IllegalArgumentException("Room should not be null.")

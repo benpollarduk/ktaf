@@ -206,14 +206,13 @@ class ItemCommandInterpreterTest {
             it.addItem(Item("Ball", "A ball is on the floor!"))
         }
         val overworldMaker = OverworldMaker("Test Overworld", "This is a test overworld", listOf(regionMaker))
-        val gameCreation = Game.create(
+        val game = Game(
             GameInformation("Test game", "This is a test game", "This is a test game", "Test author"),
-            { overworldMaker.make() },
-            { player },
+            player,
+            overworldMaker.make(),
             { EndCheckResult.notEnded },
             { EndCheckResult.notEnded }
         )
-        val game = gameCreation()
         val itemCommandInterpreter = ItemCommandInterpreter()
 
         // When
@@ -232,14 +231,13 @@ class ItemCommandInterpreterTest {
             it.addItem(Item("Ball", "A ball is on the floor!"))
         }
         val overworldMaker = OverworldMaker("Test Overworld", "This is a test overworld", listOf(regionMaker))
-        val gameCreation = Game.create(
+        val game = Game(
             GameInformation("Test game", "This is a test game", "This is a test game", "Test author"),
-            { overworldMaker.make() },
-            { player },
+            player,
+            overworldMaker.make(),
             { EndCheckResult.notEnded },
             { EndCheckResult.notEnded }
         )
-        val game = gameCreation()
         val itemCommandInterpreter = ItemCommandInterpreter()
 
         // When

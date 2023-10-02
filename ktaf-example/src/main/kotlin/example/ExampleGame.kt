@@ -16,15 +16,13 @@ import ktaf.interpretation.CommandHelp
 import ktaf.io.IOConfiguration
 import ktaf.logic.Game
 import ktaf.logic.GameInformation
-import ktaf.logic.GameWrapper
 import ktaf.logic.conditions.EndCheckResult
-import ktaf.logic.factories.GameFactory
-import ktaf.logic.factories.OverworldFactory
+import ktaf.utilities.templates.GameTemplate
 
 /**
- * Provides an example [Game] with a specified [ioConfiguration].
+ * Provides an example [Game].
  */
-public object ExampleGame : GameWrapper {
+public object ExampleGame : GameTemplate() {
     private fun determineIfGameIsComplete(game: Game): EndCheckResult {
         return if (Outskirts.NAME.equalsExaminable(game.overworld.currentRegion?.currentRoom)) {
             EndCheckResult(
@@ -85,62 +83,54 @@ public object ExampleGame : GameWrapper {
         }
     }
 
-    /**
-     * Create a new instance of a [GameFactory] that will produce this [Game], with a specified [ioConfiguration].
-     */
-    private fun create(ioConfiguration: IOConfiguration): GameFactory {
-        val overworldFactory: OverworldFactory = { playableCharacter ->
-            val regions = listOf(Everglades().instantiate(playableCharacter))
-            val overworld = Overworld("Test Overworld", "This is a test overworld")
-            val hub = Hub().instantiate(playableCharacter)
-            populateHub(hub, overworld, regions)
-            overworld.addRegion(hub)
+    override fun instantiate(ioConfiguration: IOConfiguration): Game {
+        val playableCharacter = Player().instantiate()
+        val regions = listOf(Everglades().instantiate(playableCharacter))
+        val overworld = Overworld("Test Overworld", "This is a test overworld")
+        val hub = Hub().instantiate(playableCharacter)
+        populateHub(hub, overworld, regions)
+        overworld.addRegion(hub)
 
-            regions.forEach {
-                overworld.addRegion(it)
-            }
-
-            overworld.commands = listOf(
-                CustomCommand(
-                    CommandHelp(
-                        "Jump",
-                        "Jump to a location in a region."
-                    ),
-                    false
-                ) { game, args ->
-                    var x = 0
-                    var y = 0
-                    var z = 0
-
-                    if (args.size >= 3) {
-                        x = args[0].tryParseInt() ?: 0
-                        y = args[1].tryParseInt() ?: 0
-                        z = args[2].tryParseInt() ?: 0
-                    }
-
-                    if (game.overworld.currentRegion?.jumpToRoom(x, y, z) == true) {
-                        Reaction(ReactionResult.OK, "Jumped to $x $y $z.")
-                    } else {
-                        Reaction(ReactionResult.ERROR, "Failed to jump to $x $y $z.")
-                    }
-                }
-            )
-            overworld
+        regions.forEach {
+            overworld.addRegion(it)
         }
+
+        overworld.commands = listOf(
+            CustomCommand(
+                CommandHelp(
+                    "Jump",
+                    "Jump to a location in a region."
+                ),
+                false
+            ) { game, args ->
+                var x = 0
+                var y = 0
+                var z = 0
+
+                if (args.size >= 3) {
+                    x = args[0].tryParseInt() ?: 0
+                    y = args[1].tryParseInt() ?: 0
+                    z = args[2].tryParseInt() ?: 0
+                }
+
+                if (game.overworld.currentRegion?.jumpToRoom(x, y, z) == true) {
+                    Reaction(ReactionResult.OK, "Jumped to $x $y $z.")
+                } else {
+                    Reaction(ReactionResult.ERROR, "Failed to jump to $x $y $z.")
+                }
+            }
+        )
 
         val about = "This is a short demo of ktaf made up from test chunks of games that were " +
             "build to test different features during development."
 
-        return Game.create(
+        return Game(
             GameInformation("ktav dmo", about, about, "Ben Pollard"),
-            overworldFactory,
-            { Player().instantiate() },
+            playableCharacter,
+            overworld,
             { determineIfGameIsComplete(it) },
             { determineIfGameOver(it) },
             ioConfiguration = ioConfiguration
         )
-    }
-    override fun get(ioConfiguration: IOConfiguration): GameFactory {
-        return create(ioConfiguration)
     }
 }
