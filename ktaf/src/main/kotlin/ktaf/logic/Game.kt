@@ -10,17 +10,29 @@ import ktaf.assets.locations.ViewPoint
 import ktaf.conversations.Converser
 import ktaf.extensions.equalsExaminable
 import ktaf.extensions.preen
+import ktaf.interpretation.CharacterCommandInterpreter
 import ktaf.interpretation.CommandHelp
+import ktaf.interpretation.ConversationCommandInterpreter
+import ktaf.interpretation.CustomCommandInterpreter
+import ktaf.interpretation.FrameCommandInterpreter
+import ktaf.interpretation.GlobalCommandInterpreter
+import ktaf.interpretation.InputInterpreter
 import ktaf.interpretation.Interpreter
+import ktaf.interpretation.ItemCommandInterpreter
+import ktaf.interpretation.MovementCommandInterpreter
 import ktaf.io.IOConfiguration
+import ktaf.io.configurations.AnsiConsoleConfiguration
 import ktaf.logic.conditions.EndCheck
+import ktaf.logic.factories.GameFactory
+import ktaf.logic.factories.OverworldFactory
+import ktaf.logic.factories.PlayableCharacterFactory
 import ktaf.rendering.KeyType
 import ktaf.rendering.frames.Frame
 
 /**
  * Provides the overall container and logic for a game.
  */
-public class Game(
+public class Game private constructor(
     public val information: GameInformation,
     public val player: PlayableCharacter,
     public val overworld: Overworld,
@@ -28,14 +40,14 @@ public class Game(
     private val gameOverCondition: EndCheck,
     private val errorPrefix: String,
     private val interpreter: Interpreter,
-    private val ioConfiguration: IOConfiguration,
+    private val ioConfiguration: IOConfiguration
 ) {
     private var isExecuting: Boolean = false
     private val cancellationToken = CancellationToken()
     private var currentFrame: Frame = ioConfiguration.frameBuilders.aboutFrameBuilder.build(
         information.name,
         information.description,
-        information.author,
+        information.author
     )
     public var state: GameState = GameState.NOT_STARTED
         private set
@@ -79,8 +91,8 @@ public class Game(
             ioConfiguration.frameBuilders.aboutFrameBuilder.build(
                 "About",
                 this.information.description,
-                this.information.author,
-            ),
+                this.information.author
+            )
         )
     }
 
@@ -95,8 +107,8 @@ public class Game(
             ioConfiguration.frameBuilders.helpFrameBuilder.build(
                 "Help",
                 "",
-                commands.distinct(),
-            ),
+                commands.distinct()
+            )
         )
     }
 
@@ -130,8 +142,8 @@ public class Game(
         refresh(
             ioConfiguration.frameBuilders.titleFrameBuilder.build(
                 information.name,
-                information.introduction,
-            ),
+                information.introduction
+            )
         )
 
         var input = ""
@@ -148,8 +160,8 @@ public class Game(
                     refresh(
                         ioConfiguration.frameBuilders.completionFrameBuilder.build(
                             completionCheckResult.title,
-                            completionCheckResult.description,
-                        ),
+                            completionCheckResult.description
+                        )
                     )
                     end()
                 }
@@ -157,8 +169,8 @@ public class Game(
                     refresh(
                         ioConfiguration.frameBuilders.gameOverFrameBuilder.build(
                             gameOverCheckResult.title,
-                            gameOverCheckResult.description,
-                        ),
+                            gameOverCheckResult.description
+                        )
                     )
                     end()
                 }
@@ -167,8 +179,8 @@ public class Game(
                         ioConfiguration.frameBuilders.conversationFrameBuilder.build(
                             "Conversation with ${converser.identifier.name}",
                             converser,
-                            interpreter.getContextualCommandHelp(this),
-                        ),
+                            interpreter.getContextualCommandHelp(this)
+                        )
                     )
                 }
             }
@@ -254,7 +266,7 @@ public class Game(
     private fun getFallbackFrame(): Frame {
         return ioConfiguration.frameBuilders.transitionFrameBuilder.build(
             "Error",
-            "Couldn't refresh frame.",
+            "Couldn't refresh frame."
         )
     }
 
@@ -274,8 +286,8 @@ public class Game(
                     player,
                     message,
                     if (displayCommandListInSceneFrames) interpreter.getContextualCommandHelp(this) else emptyList(),
-                    sceneMapKeyType,
-                ),
+                    sceneMapKeyType
+                )
             )
         } else {
             refresh(getFallbackFrame())
@@ -332,5 +344,52 @@ public class Game(
         }
 
         return examinables.toList()
+    }
+
+    public companion object {
+        private const val DEFAULT_ERROR_PREFIX: String = "Oops"
+
+        /**
+         * Get all default interpreters.
+         */
+        public val defaultInterpreters: Interpreter = InputInterpreter(
+            listOf(
+                FrameCommandInterpreter(),
+                GlobalCommandInterpreter(),
+                ConversationCommandInterpreter(),
+                ItemCommandInterpreter(),
+                CharacterCommandInterpreter(),
+                MovementCommandInterpreter(),
+                CustomCommandInterpreter()
+            )
+        )
+
+        /**
+         * Create a new instance of a [GameFactory] for producing the [Game].
+         */
+        public fun create(
+            information: GameInformation,
+            overworldFactory: OverworldFactory,
+            playerFactory: PlayableCharacterFactory,
+            completionCondition: EndCheck,
+            gameOverCondition: EndCheck,
+            errorPrefix: String = DEFAULT_ERROR_PREFIX,
+            interpreter: Interpreter = defaultInterpreters,
+            ioConfiguration: IOConfiguration = AnsiConsoleConfiguration
+        ): GameFactory {
+            return {
+                val player = playerFactory()
+                Game(
+                    information,
+                    player,
+                    overworldFactory(player),
+                    completionCondition,
+                    gameOverCondition,
+                    errorPrefix,
+                    interpreter,
+                    ioConfiguration
+                )
+            }
+        }
     }
 }

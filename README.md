@@ -114,7 +114,7 @@ val overworldMaker = OverworldMaker(
 )
 
 // create callback for generating games
-val gameCallback = GameFactoryCreator.create(
+val gameCallback = Game.create(
     GameInformation(
         "The Life Of Dave",
         "Dave awakes to find himself in a cavern...",

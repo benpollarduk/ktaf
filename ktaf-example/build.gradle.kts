@@ -13,6 +13,9 @@ plugins {
     // https://plugins.grajlleitschuh.gradle.ktlintdle.org/plugin/org.
     id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
 
+    // https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+
     // Apply the java-library plugin for API and implementation separation.
     `java-library`
 }

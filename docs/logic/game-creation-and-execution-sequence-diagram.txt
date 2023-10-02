@@ -1,13 +1,13 @@
 title Game Execution
 
 participant MainCode
-participant GameFactoryCreator
+participant Game
 participant GameExecutor
 participant GameFactory
 participant Game
 
-MainCode->GameFactoryCreator: Create
-GameFactoryCreator->MainCode: Instance of GameFactory
+MainCode->Game: Create
+Game->MainCode: Instance of GameFactory
 MainCode->GameExecutor: Execute
 GameExecutor->GameFactory: Invoke
 GameFactory->GameExecutor: Instance of Game

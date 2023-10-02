@@ -18,7 +18,7 @@ internal object GameTestHelper {
         val regionMaker = RegionMaker("TestRegion", "")
         regionMaker[0, 0, 0] = Room("TestRoom", "")
         val overworldMaker = OverworldMaker("TestOverworld", "", listOf(regionMaker))
-        return GameFactoryCreator.create(
+        return Game.create(
             GameInformation("", "", "", ""),
             { overworldMaker.make() },
             { player },

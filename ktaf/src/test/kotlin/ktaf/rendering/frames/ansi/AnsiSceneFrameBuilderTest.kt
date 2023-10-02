@@ -8,7 +8,7 @@ import ktaf.assets.locations.Exit
 import ktaf.assets.locations.Room
 import ktaf.assets.locations.ViewPoint
 import ktaf.interpretation.CommandHelp
-import ktaf.logic.GameFactoryCreator
+import ktaf.logic.Game
 import ktaf.rendering.KeyType
 import ktaf.utilities.RegionMaker
 import org.junit.jupiter.api.Assertions
@@ -58,7 +58,7 @@ class AnsiSceneFrameBuilderTest {
                 view,
                 PlayableCharacter("", ""),
                 "",
-                GameFactoryCreator.defaultInterpreters.getContextualCommandHelp(game),
+                Game.defaultInterpreters.getContextualCommandHelp(game),
                 KeyType.FULL
             )
         }

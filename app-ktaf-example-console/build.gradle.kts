@@ -10,6 +10,9 @@ plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.9.10"
 
+    // https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+
     // Apply the application plugin to add support for building a CLI application in Java.
     application
 

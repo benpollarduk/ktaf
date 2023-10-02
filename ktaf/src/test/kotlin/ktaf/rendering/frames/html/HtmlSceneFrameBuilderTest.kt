@@ -8,7 +8,7 @@ import ktaf.assets.locations.Exit
 import ktaf.assets.locations.Room
 import ktaf.assets.locations.ViewPoint
 import ktaf.interpretation.CommandHelp
-import ktaf.logic.GameFactoryCreator
+import ktaf.logic.Game
 import ktaf.rendering.KeyType
 import ktaf.rendering.frames.GridRoomMapBuilder
 import ktaf.utilities.RegionMaker
@@ -59,7 +59,7 @@ class HtmlSceneFrameBuilderTest {
                 view,
                 PlayableCharacter("", ""),
                 "",
-                GameFactoryCreator.defaultInterpreters.getContextualCommandHelp(game),
+                Game.defaultInterpreters.getContextualCommandHelp(game),
                 KeyType.FULL
             )
         }
