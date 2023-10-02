@@ -7,7 +7,7 @@ import ktaf.commands.game.Drop
 import ktaf.commands.game.Examine
 import ktaf.commands.game.Take
 import ktaf.commands.game.UseOn
-import ktaf.logic.GameFactoryCreator
+import ktaf.logic.Game
 import ktaf.logic.GameInformation
 import ktaf.logic.GameTestHelper
 import ktaf.logic.conditions.EndCheckResult
@@ -206,7 +206,7 @@ class ItemCommandInterpreterTest {
             it.addItem(Item("Ball", "A ball is on the floor!"))
         }
         val overworldMaker = OverworldMaker("Test Overworld", "This is a test overworld", listOf(regionMaker))
-        val gameCreation = GameFactoryCreator.create(
+        val gameCreation = Game.create(
             GameInformation("Test game", "This is a test game", "This is a test game", "Test author"),
             { overworldMaker.make() },
             { player },
@@ -232,7 +232,7 @@ class ItemCommandInterpreterTest {
             it.addItem(Item("Ball", "A ball is on the floor!"))
         }
         val overworldMaker = OverworldMaker("Test Overworld", "This is a test overworld", listOf(regionMaker))
-        val gameCreation = GameFactoryCreator.create(
+        val gameCreation = Game.create(
             GameInformation("Test game", "This is a test game", "This is a test game", "Test author"),
             { overworldMaker.make() },
             { player },

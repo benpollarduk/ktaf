@@ -50,13 +50,13 @@ class GameExecutorTest {
                     get() = AnsiConsoleConfiguration.frameBuilders
             }
 
-            val game = GameFactoryCreator.create(
+            val game = Game.create(
                 GameInformation("", "", "", ""),
                 { overworldMaker.make() },
                 { player },
                 { EndCheckResult.notEnded },
                 { EndCheckResult.notEnded },
-                ioConfiguration = io,
+                ioConfiguration = io
             )
 
             // When
@@ -96,13 +96,13 @@ class GameExecutorTest {
                 get() = AnsiConsoleConfiguration.frameBuilders
         }
 
-        val gameFactory = GameFactoryCreator.create(
+        val gameFactory = Game.create(
             GameInformation("", "", "", ""),
             { overworldMaker.make() },
             { player },
             { EndCheckResult.notEnded },
             { EndCheckResult.notEnded },
-            ioConfiguration = io,
+            ioConfiguration = io
         )
 
         val game = gameFactory.invoke()

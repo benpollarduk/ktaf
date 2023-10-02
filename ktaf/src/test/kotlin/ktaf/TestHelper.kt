@@ -11,7 +11,7 @@ import ktaf.conversations.Paragraph
 import ktaf.conversations.Response
 import ktaf.io.IOConfiguration
 import ktaf.io.configurations.AnsiConsoleConfiguration
-import ktaf.logic.GameFactoryCreator
+import ktaf.logic.Game
 import ktaf.logic.GameInformation
 import ktaf.logic.conditions.EndCheckResult
 import ktaf.logic.factories.GameFactory
@@ -38,8 +38,8 @@ internal object TestHelper {
                 Exit(Direction.EAST),
                 Exit(Direction.WEST),
                 Exit(Direction.UP),
-                Exit(Direction.DOWN),
-            ),
+                Exit(Direction.DOWN)
+            )
         ).also { room ->
             room.addItem(Item("Beaver", "A beaver is on the floor!", true))
             room.addCharacter(NonPlayableCharacter("Person 1", "A quiet person."))
@@ -51,64 +51,64 @@ internal object TestHelper {
                             Paragraph("Here is a question?").also { paragraph ->
                                 paragraph.responses = listOf(
                                     Response("Continue"),
-                                    Response("Repeat", -1),
+                                    Response("Repeat", -1)
                                 )
-                            },
-                        ),
+                            }
+                        )
                     )
-                },
+                }
             )
         }
         regionMaker[0, 1, 1] = Room(
             "West Room",
             basicRoomDescription,
             listOf(
-                Exit(Direction.EAST),
-            ),
+                Exit(Direction.EAST)
+            )
         )
         regionMaker[2, 1, 1] = Room(
             "East Room",
             basicRoomDescription,
             listOf(
-                Exit(Direction.WEST),
-            ),
+                Exit(Direction.WEST)
+            )
         )
         regionMaker[1, 2, 1] = Room(
             "North Room",
             basicRoomDescription,
             listOf(
-                Exit(Direction.SOUTH),
-            ),
+                Exit(Direction.SOUTH)
+            )
         )
         regionMaker[1, 0, 1] = Room(
             "South Room",
             basicRoomDescription,
             listOf(
-                Exit(Direction.NORTH),
-            ),
+                Exit(Direction.NORTH)
+            )
         )
         regionMaker[1, 1, 2] = Room(
             "Top Room",
             basicRoomDescription,
             listOf(
-                Exit(Direction.DOWN),
-            ),
+                Exit(Direction.DOWN)
+            )
         )
         regionMaker[1, 1, 0] = Room(
             "Bottom Room",
             basicRoomDescription,
             listOf(
-                Exit(Direction.UP),
-            ),
+                Exit(Direction.UP)
+            )
         )
         val overworldMaker = OverworldMaker("Test Overworld", "This is a test overworld", listOf(regionMaker))
-        return GameFactoryCreator.create(
+        return Game.create(
             GameInformation("Test game", "This is a test game", "This is a test game", "Test author"),
             { overworldMaker.make() },
             { player },
             { EndCheckResult.notEnded },
             { EndCheckResult.notEnded },
-            ioConfiguration = ioConfiguration,
+            ioConfiguration = ioConfiguration
         )
     }
 }

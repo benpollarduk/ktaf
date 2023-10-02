@@ -15,7 +15,6 @@ import ktaf.extensions.tryParseInt
 import ktaf.interpretation.CommandHelp
 import ktaf.io.IOConfiguration
 import ktaf.logic.Game
-import ktaf.logic.GameFactoryCreator
 import ktaf.logic.GameInformation
 import ktaf.logic.conditions.EndCheckResult
 import ktaf.logic.factories.GameFactory
@@ -133,7 +132,7 @@ public object ExampleGameCreator {
         val about = "This is a short demo of ktaf made up from test chunks of games that were " +
             "build to test different features during development."
 
-        return GameFactoryCreator.create(
+        return Game.create(
             GameInformation("ktav dmo", about, about, "Ben Pollard"),
             overworldFactory,
             { Player().instantiate() },
