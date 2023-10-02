@@ -19,6 +19,9 @@ plugins {
     // https://plugins.gradle.org/plugin/io.gitlab.arturbosch.detekt
     // id("io.gitlab.arturbosch.detekt") version "1.23.1"
 
+    // https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+
     // Apply the Jacoco plugin for test coverage.
     jacoco
 
