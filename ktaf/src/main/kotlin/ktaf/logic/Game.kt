@@ -23,24 +23,21 @@ import ktaf.interpretation.MovementCommandInterpreter
 import ktaf.io.IOConfiguration
 import ktaf.io.configurations.AnsiConsoleConfiguration
 import ktaf.logic.conditions.EndCheck
-import ktaf.logic.factories.GameFactory
-import ktaf.logic.factories.OverworldFactory
-import ktaf.logic.factories.PlayableCharacterFactory
 import ktaf.rendering.KeyType
 import ktaf.rendering.frames.Frame
 
 /**
  * Provides the overall container and logic for a game.
  */
-public class Game private constructor(
+public class Game(
     public val information: GameInformation,
     public val player: PlayableCharacter,
     public val overworld: Overworld,
     private val completionCondition: EndCheck,
     private val gameOverCondition: EndCheck,
-    private val errorPrefix: String,
-    private val interpreter: Interpreter,
-    private val ioConfiguration: IOConfiguration
+    private val errorPrefix: String = DEFAULT_ERROR_PREFIX,
+    private val interpreter: Interpreter = defaultInterpreters,
+    private val ioConfiguration: IOConfiguration = AnsiConsoleConfiguration
 ) {
     private var isExecuting: Boolean = false
     private val cancellationToken = CancellationToken()
@@ -185,13 +182,18 @@ public class Game private constructor(
                 }
             }
 
-            if (!currentFrame.acceptsInput) {
-                val frame = currentFrame
-                while (!ioConfiguration.waitForAcknowledge(cancellationToken) && currentFrame == frame) {
-                    drawFrame(currentFrame)
+            if (state == GameState.ACTIVE) {
+                if (!currentFrame.acceptsInput) {
+                    val frame = currentFrame
+                    while (!ioConfiguration.waitForAcknowledge(cancellationToken) &&
+                        !cancellationToken.wasCancelled &&
+                        currentFrame == frame
+                    ) {
+                        drawFrame(currentFrame)
+                    }
+                } else {
+                    input = ioConfiguration.waitForCommand(cancellationToken)
                 }
-            } else {
-                input = ioConfiguration.waitForCommand(cancellationToken)
             }
 
             when (state) {
@@ -363,33 +365,5 @@ public class Game private constructor(
                 CustomCommandInterpreter()
             )
         )
-
-        /**
-         * Create a new instance of a [GameFactory] for producing the [Game].
-         */
-        public fun create(
-            information: GameInformation,
-            overworldFactory: OverworldFactory,
-            playerFactory: PlayableCharacterFactory,
-            completionCondition: EndCheck,
-            gameOverCondition: EndCheck,
-            errorPrefix: String = DEFAULT_ERROR_PREFIX,
-            interpreter: Interpreter = defaultInterpreters,
-            ioConfiguration: IOConfiguration = AnsiConsoleConfiguration
-        ): GameFactory {
-            return {
-                val player = playerFactory()
-                Game(
-                    information,
-                    player,
-                    overworldFactory(player),
-                    completionCondition,
-                    gameOverCondition,
-                    errorPrefix,
-                    interpreter,
-                    ioConfiguration
-                )
-            }
-        }
     }
 }

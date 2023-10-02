@@ -1,7 +1,7 @@
 package app
 
 import app.io.SwingConfiguration
-import example.ExampleGameCreator
+import example.ExampleGame
 import ktaf.logic.GameExecutor
 import java.awt.BorderLayout
 import java.awt.Color
@@ -79,10 +79,10 @@ class GameApp : JFrame("app-example-swing") {
         this.isVisible = true
 
         // create and start game on background thread
-        GameExecutor.executeAysnc(ExampleGameCreator.create(ioConfiguration))
+        GameExecutor.executeAysnc(ExampleGame, ioConfiguration = ioConfiguration)
     }
 
-    public companion object {
+    companion object {
         @JvmStatic
         fun main(args: Array<String>) {
             SwingUtilities.invokeLater {

@@ -1,16 +1,17 @@
 package ktaf.helpers
 
-import ktaf.TestHelper
+import ktaf.TestGame
+import ktaf.io.configurations.AnsiConsoleConfiguration
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class TestHelperTest {
+class TestGameTest {
     @Test
     fun `given get simple debug then no exception thrown`() {
         // Then
         Assertions.assertDoesNotThrow {
             // Given
-            TestHelper.getSimpleGameCreator()
+            TestGame.instantiate(AnsiConsoleConfiguration)
         }
     }
 }

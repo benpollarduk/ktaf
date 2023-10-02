@@ -18,12 +18,12 @@ internal object GameTestHelper {
         val regionMaker = RegionMaker("TestRegion", "")
         regionMaker[0, 0, 0] = Room("TestRoom", "")
         val overworldMaker = OverworldMaker("TestOverworld", "", listOf(regionMaker))
-        return Game.create(
+        return Game(
             GameInformation("", "", "", ""),
-            { overworldMaker.make() },
-            { player },
+            player,
+            overworldMaker.make(),
             { EndCheckResult.notEnded },
             { EndCheckResult.notEnded }
-        ).invoke()
+        )
     }
 }

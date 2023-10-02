@@ -70,10 +70,10 @@ class GameTest {
         val regionMaker = RegionMaker("TestRegion", "")
         regionMaker[0, 0, 0] = Room("TestRoom", "")
         val overworldMaker = OverworldMaker("TestOverworld", "", listOf(regionMaker))
-        val result = Game.create(
+        val result = Game(
             GameInformation("", "", "", ""),
-            { overworldMaker.make() },
-            { player },
+            player,
+            overworldMaker.make(),
             { EndCheckResult.notEnded },
             { EndCheckResult.notEnded }
         )

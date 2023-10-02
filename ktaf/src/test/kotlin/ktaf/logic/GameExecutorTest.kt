@@ -50,10 +50,10 @@ class GameExecutorTest {
                     get() = AnsiConsoleConfiguration.frameBuilders
             }
 
-            val game = Game.create(
+            val game = Game(
                 GameInformation("", "", "", ""),
-                { overworldMaker.make() },
-                { player },
+                player,
+                overworldMaker.make(),
                 { EndCheckResult.notEnded },
                 { EndCheckResult.notEnded },
                 ioConfiguration = io
@@ -96,16 +96,14 @@ class GameExecutorTest {
                 get() = AnsiConsoleConfiguration.frameBuilders
         }
 
-        val gameFactory = Game.create(
+        val game = Game(
             GameInformation("", "", "", ""),
-            { overworldMaker.make() },
-            { player },
+            player,
+            overworldMaker.make(),
             { EndCheckResult.notEnded },
             { EndCheckResult.notEnded },
             ioConfiguration = io
         )
-
-        val game = gameFactory.invoke()
 
         // When
         GameExecutor.executeAysnc(game, ExitMode.EXIT_APPLICATION)
