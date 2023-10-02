@@ -128,7 +128,7 @@ public object ExampleGameCreator {
             overworld
         }
 
-        val about = "This is a short demo of the BP.AdventureFramework made up from test chunks of games that were " +
+        val about = "This is a short demo of ktaf made up from test chunks of games that were " +
             "build to test different features during development."
 
         return Game.create(
