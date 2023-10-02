@@ -10,22 +10,19 @@ import ktaf.conversations.Conversation
 import ktaf.conversations.Paragraph
 import ktaf.conversations.Response
 import ktaf.io.IOConfiguration
-import ktaf.io.configurations.AnsiConsoleConfiguration
 import ktaf.logic.Game
 import ktaf.logic.GameInformation
+import ktaf.logic.GameWrapper
 import ktaf.logic.conditions.EndCheckResult
 import ktaf.logic.factories.GameFactory
 import ktaf.utilities.OverworldMaker
 import ktaf.utilities.RegionMaker
 
 /**
- *  An object for providing objects for debugging purposes.
+ *  An object for providing a test [Game] for debugging purposes.
  */
-internal object TestHelper {
-    /**
-     * Provides a simple instance of [GameFactory] with an optionally specified [ioConfiguration].
-     */
-    internal fun getSimpleGameCreator(ioConfiguration: IOConfiguration = AnsiConsoleConfiguration): GameFactory {
+internal object TestGame : GameWrapper {
+    override fun get(ioConfiguration: IOConfiguration): GameFactory {
         val basicRoomDescription = "This is just a test room."
         val player = PlayableCharacter("Test Player", "This is a test player.")
         val regionMaker = RegionMaker("Test Region", "This is a test region.")

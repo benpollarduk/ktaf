@@ -16,14 +16,15 @@ import ktaf.interpretation.CommandHelp
 import ktaf.io.IOConfiguration
 import ktaf.logic.Game
 import ktaf.logic.GameInformation
+import ktaf.logic.GameWrapper
 import ktaf.logic.conditions.EndCheckResult
 import ktaf.logic.factories.GameFactory
 import ktaf.logic.factories.OverworldFactory
 
 /**
- * Provides an example [GameFactory].
+ * Provides an example [Game] with a specified [ioConfiguration].
  */
-public object ExampleGameCreator {
+public object ExampleGame : GameWrapper {
     private fun determineIfGameIsComplete(game: Game): EndCheckResult {
         return if (Outskirts.NAME.equalsExaminable(game.overworld.currentRegion?.currentRoom)) {
             EndCheckResult(
@@ -85,13 +86,11 @@ public object ExampleGameCreator {
     }
 
     /**
-     * Create a new instance of the example [GameFactory] using a [ioConfiguration].
+     * Create a new instance of a [GameFactory] that will produce this [Game], with a specified [ioConfiguration].
      */
-    public fun create(ioConfiguration: IOConfiguration): GameFactory {
+    private fun create(ioConfiguration: IOConfiguration): GameFactory {
         val overworldFactory: OverworldFactory = { playableCharacter ->
-            val regions = listOf(
-                Everglades().instantiate(playableCharacter)
-            )
+            val regions = listOf(Everglades().instantiate(playableCharacter))
             val overworld = Overworld("Test Overworld", "This is a test overworld")
             val hub = Hub().instantiate(playableCharacter)
             populateHub(hub, overworld, regions)
@@ -140,5 +139,8 @@ public object ExampleGameCreator {
             { determineIfGameOver(it) },
             ioConfiguration = ioConfiguration
         )
+    }
+    override fun get(ioConfiguration: IOConfiguration): GameFactory {
+        return create(ioConfiguration)
     }
 }
