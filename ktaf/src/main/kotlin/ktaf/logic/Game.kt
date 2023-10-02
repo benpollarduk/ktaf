@@ -10,39 +10,36 @@ import ktaf.assets.locations.ViewPoint
 import ktaf.conversations.Converser
 import ktaf.extensions.equalsExaminable
 import ktaf.extensions.preen
-import ktaf.interpretation.CharacterCommandInterpreter
 import ktaf.interpretation.CommandHelp
-import ktaf.interpretation.ConversationCommandInterpreter
-import ktaf.interpretation.CustomCommandInterpreter
-import ktaf.interpretation.FrameCommandInterpreter
-import ktaf.interpretation.GlobalCommandInterpreter
-import ktaf.interpretation.InputInterpreter
 import ktaf.interpretation.Interpreter
-import ktaf.interpretation.ItemCommandInterpreter
-import ktaf.interpretation.MovementCommandInterpreter
 import ktaf.io.IOConfiguration
-import ktaf.io.configurations.AnsiConsoleConfiguration
+import ktaf.logic.conditions.EndCheck
 import ktaf.rendering.KeyType
 import ktaf.rendering.frames.Frame
-import java.util.*
 
 /**
  * Provides the overall container and logic for a game.
  */
-public class Game private constructor(
-    public val name: String,
-    public val introduction: String,
-    public val description: String,
-    public val author: String,
+public class Game(
+    public val information: GameInformation,
     public val player: PlayableCharacter,
     public val overworld: Overworld,
     private val completionCondition: EndCheck,
     private val gameOverCondition: EndCheck,
-    private val exitMode: ExitMode,
     private val errorPrefix: String,
     private val interpreter: Interpreter,
-    private val ioConfiguration: IOConfiguration
+    private val ioConfiguration: IOConfiguration,
 ) {
+    private var isExecuting: Boolean = false
+    private val cancellationToken = CancellationToken()
+    private var currentFrame: Frame = ioConfiguration.frameBuilders.aboutFrameBuilder.build(
+        information.name,
+        information.description,
+        information.author,
+    )
+    public var state: GameState = GameState.NOT_STARTED
+        private set
+
     /**
      * The active [Converser].
      */
@@ -60,14 +57,6 @@ public class Game private constructor(
     public var sceneMapKeyType: KeyType = KeyType.DYNAMIC
 
     /**
-     * Determines if this [Game] is executing.
-     */
-    private var isExecuting: Boolean = false
-
-    private var currentFrame: Frame = ioConfiguration.frameBuilders.aboutFrameBuilder.build(name, description, author)
-    private var state: GameState = GameState.NOT_STARTED
-
-    /**
      * Start a conversation with a [converser].
      */
     internal fun startConversation(converser: Converser) {
@@ -76,7 +65,7 @@ public class Game private constructor(
     }
 
     /**
-     * End the [Conversation] with the [activeConverser].
+     * End the conversation with the [activeConverser].
      */
     internal fun endConversation() {
         activeConverser = null
@@ -86,7 +75,13 @@ public class Game private constructor(
      * Display the about frame.
      */
     internal fun displayAbout() {
-        refresh(ioConfiguration.frameBuilders.aboutFrameBuilder.build("About", this.description, this.author))
+        refresh(
+            ioConfiguration.frameBuilders.aboutFrameBuilder.build(
+                "About",
+                this.information.description,
+                this.information.author,
+            ),
+        )
     }
 
     /**
@@ -100,8 +95,8 @@ public class Game private constructor(
             ioConfiguration.frameBuilders.helpFrameBuilder.build(
                 "Help",
                 "",
-                commands.distinct()
-            )
+                commands.distinct(),
+            ),
         )
     }
 
@@ -125,22 +120,27 @@ public class Game private constructor(
         refresh(ioConfiguration.frameBuilders.transitionFrameBuilder.build(title, message))
     }
 
-    private fun execute() {
+    internal fun execute() {
         if (isExecuting) {
             return
         }
 
         isExecuting = true
 
-        refresh(ioConfiguration.frameBuilders.titleFrameBuilder.build(name, introduction))
+        refresh(
+            ioConfiguration.frameBuilders.titleFrameBuilder.build(
+                information.name,
+                information.introduction,
+            ),
+        )
 
         var input = ""
         var reaction = Reaction(ReactionResult.ERROR, "Error.")
 
         do {
             var displayReactionToInput = true
-            var completionCheckResult = completionCondition(this)
-            var gameOverCheckResult = gameOverCondition(this)
+            val completionCheckResult = completionCondition(this)
+            val gameOverCheckResult = gameOverCondition(this)
             val converser = activeConverser
 
             when {
@@ -148,8 +148,8 @@ public class Game private constructor(
                     refresh(
                         ioConfiguration.frameBuilders.completionFrameBuilder.build(
                             completionCheckResult.title,
-                            completionCheckResult.description
-                        )
+                            completionCheckResult.description,
+                        ),
                     )
                     end()
                 }
@@ -157,8 +157,8 @@ public class Game private constructor(
                     refresh(
                         ioConfiguration.frameBuilders.gameOverFrameBuilder.build(
                             gameOverCheckResult.title,
-                            gameOverCheckResult.description
-                        )
+                            gameOverCheckResult.description,
+                        ),
                     )
                     end()
                 }
@@ -167,19 +167,19 @@ public class Game private constructor(
                         ioConfiguration.frameBuilders.conversationFrameBuilder.build(
                             "Conversation with ${converser.identifier.name}",
                             converser,
-                            interpreter.getContextualCommandHelp(this)
-                        )
+                            interpreter.getContextualCommandHelp(this),
+                        ),
                     )
                 }
             }
 
             if (!currentFrame.acceptsInput) {
                 val frame = currentFrame
-                while (!ioConfiguration.waitForAcknowledge() && currentFrame == frame) {
+                while (!ioConfiguration.waitForAcknowledge(cancellationToken) && currentFrame == frame) {
                     drawFrame(currentFrame)
                 }
             } else {
-                input = ioConfiguration.waitForCommand()
+                input = ioConfiguration.waitForCommand(cancellationToken)
             }
 
             when (state) {
@@ -247,13 +247,14 @@ public class Game private constructor(
      * End the [Game].
      */
     internal fun end() {
+        cancellationToken.cancel()
         state = GameState.FINISHED
     }
 
     private fun getFallbackFrame(): Frame {
         return ioConfiguration.frameBuilders.transitionFrameBuilder.build(
             "Error",
-            "Couldn't refresh frame."
+            "Couldn't refresh frame.",
         )
     }
 
@@ -273,8 +274,8 @@ public class Game private constructor(
                     player,
                     message,
                     if (displayCommandListInSceneFrames) interpreter.getContextualCommandHelp(this) else emptyList(),
-                    sceneMapKeyType
-                )
+                    sceneMapKeyType,
+                ),
             )
         } else {
             refresh(getFallbackFrame())
@@ -331,84 +332,5 @@ public class Game private constructor(
         }
 
         return examinables.toList()
-    }
-
-    public companion object {
-        /**
-         * Get the default prefix to use for errors.
-         */
-        public const val DEFAULT_ERROR_PREFIX: String = "Oops"
-
-        /**
-         * Get all default interpreters.
-         */
-        public val defaultInterpreters: Interpreter = InputInterpreter(
-            listOf(
-                FrameCommandInterpreter(),
-                GlobalCommandInterpreter(),
-                ConversationCommandInterpreter(),
-                ItemCommandInterpreter(),
-                CharacterCommandInterpreter(),
-                MovementCommandInterpreter(),
-                CustomCommandInterpreter()
-            )
-        )
-
-        /**
-         * Create a new instance of a [GameFactory] for producing the [Game].
-         */
-        public fun create(
-            name: String,
-            introduction: String,
-            description: String,
-            author: String,
-            overworldFactory: OverworldFactory,
-            playerFactory: PlayableCharacterFactory,
-            completionCondition: EndCheck,
-            gameOverCondition: EndCheck,
-            exitMode: ExitMode = ExitMode.RETURN_TO_TITLE_SCREEN,
-            errorPrefix: String = DEFAULT_ERROR_PREFIX,
-            interpreter: Interpreter = defaultInterpreters,
-            ioConfiguration: IOConfiguration = AnsiConsoleConfiguration
-        ): GameFactory {
-            return {
-                val player = playerFactory()
-                Game(
-                    name,
-                    introduction,
-                    description,
-                    author,
-                    player,
-                    overworldFactory(player),
-                    completionCondition,
-                    gameOverCondition,
-                    exitMode,
-                    errorPrefix,
-                    interpreter,
-                    ioConfiguration
-                )
-            }
-        }
-
-        /**
-         * Execute an instance of a [GameFactory].
-         */
-        public fun execute(creator: GameFactory) {
-            var run = true
-
-            while (run) {
-                val game = creator.invoke()
-                game.execute()
-
-                when (game.exitMode) {
-                    ExitMode.EXIT_APPLICATION -> {
-                        run = false
-                    }
-                    ExitMode.RETURN_TO_TITLE_SCREEN -> {
-                        // nothing
-                    }
-                }
-            }
-        }
     }
 }

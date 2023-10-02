@@ -14,10 +14,12 @@ import ktaf.extensions.equalsExaminable
 import ktaf.extensions.tryParseInt
 import ktaf.interpretation.CommandHelp
 import ktaf.io.IOConfiguration
-import ktaf.logic.EndCheckResult
 import ktaf.logic.Game
-import ktaf.logic.GameFactory
-import ktaf.logic.OverworldFactory
+import ktaf.logic.GameFactoryCreator
+import ktaf.logic.GameInformation
+import ktaf.logic.conditions.EndCheckResult
+import ktaf.logic.factories.GameFactory
+import ktaf.logic.factories.OverworldFactory
 
 /**
  * Provides an example [GameFactory].
@@ -131,11 +133,8 @@ public object ExampleGameCreator {
         val about = "This is a short demo of ktaf made up from test chunks of games that were " +
             "build to test different features during development."
 
-        return Game.create(
-            "ktav dmo",
-            about,
-            about,
-            "Ben Pollard",
+        return GameFactoryCreator.create(
+            GameInformation("ktav dmo", about, about, "Ben Pollard"),
             overworldFactory,
             { Player().instantiate() },
             { determineIfGameIsComplete(it) },

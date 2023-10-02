@@ -101,7 +101,7 @@ var regionMaker = RegionMaker("Mountain", "An imposing volcano just East of town
 var overworldMaker = OverworldMaker("Daves World", "An ancient kingdom.", regionMaker);
 
 // create callback for generating games
-var gameCallback = Game.create(
+var gameCallback = GameFactoryCreator.create(
     "The Life Of Dave",
     "Dave awakes to find himself in a cavern...",
     "A very low budget adventure.",

@@ -11,9 +11,10 @@ import ktaf.conversations.Paragraph
 import ktaf.conversations.Response
 import ktaf.io.IOConfiguration
 import ktaf.io.configurations.AnsiConsoleConfiguration
-import ktaf.logic.EndCheckResult
-import ktaf.logic.Game
-import ktaf.logic.GameFactory
+import ktaf.logic.GameFactoryCreator
+import ktaf.logic.GameInformation
+import ktaf.logic.conditions.EndCheckResult
+import ktaf.logic.factories.GameFactory
 import ktaf.utilities.OverworldMaker
 import ktaf.utilities.RegionMaker
 
@@ -101,11 +102,8 @@ internal object TestHelper {
             )
         )
         val overworldMaker = OverworldMaker("Test Overworld", "This is a test overworld", listOf(regionMaker))
-        return Game.create(
-            "Test game",
-            "This is a test game",
-            "This is a test game",
-            "Test author",
+        return GameFactoryCreator.create(
+            GameInformation("Test game", "This is a test game", "This is a test game", "Test author"),
             { overworldMaker.make() },
             { player },
             { EndCheckResult.notEnded },
