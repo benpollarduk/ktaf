@@ -1,4 +1,4 @@
-package ktaf.logic
+package ktaf.logic.factories
 
 import ktaf.assets.characters.PlayableCharacter
 

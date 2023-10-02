@@ -2,8 +2,7 @@ package app
 
 import app.io.SwingConfiguration
 import example.ExampleGameCreator
-import ktaf.logic.Game
-import ktaf.logic.GameFactory
+import ktaf.logic.GameExecutor
 import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.event.KeyAdapter
@@ -80,15 +79,7 @@ class GameApp : JFrame("app-example-swing") {
         this.isVisible = true
 
         // create and start game on background thread
-        val game = ExampleGameCreator.create(ioConfiguration)
-        val gameThread = Thread(GameLogic(game))
-        gameThread.start()
-    }
-
-    inner class GameLogic(private val gameFactory: GameFactory) : Runnable {
-        override fun run() {
-            Game.execute(gameFactory)
-        }
+        GameExecutor.executeAysnc(ExampleGameCreator.create(ioConfiguration))
     }
 
     public companion object {

@@ -7,9 +7,10 @@ import ktaf.commands.game.Drop
 import ktaf.commands.game.Examine
 import ktaf.commands.game.Take
 import ktaf.commands.game.UseOn
-import ktaf.logic.EndCheckResult
-import ktaf.logic.Game
+import ktaf.logic.GameFactoryCreator
+import ktaf.logic.GameInformation
 import ktaf.logic.GameTestHelper
+import ktaf.logic.conditions.EndCheckResult
 import ktaf.utilities.OverworldMaker
 import ktaf.utilities.RegionMaker
 import org.junit.jupiter.api.Assertions
@@ -205,11 +206,8 @@ class ItemCommandInterpreterTest {
             it.addItem(Item("Ball", "A ball is on the floor!"))
         }
         val overworldMaker = OverworldMaker("Test Overworld", "This is a test overworld", listOf(regionMaker))
-        val gameCreation = Game.create(
-            "Test game",
-            "This is a test game",
-            "This is a test game",
-            "Test author",
+        val gameCreation = GameFactoryCreator.create(
+            GameInformation("Test game", "This is a test game", "This is a test game", "Test author"),
             { overworldMaker.make() },
             { player },
             { EndCheckResult.notEnded },
@@ -234,11 +232,8 @@ class ItemCommandInterpreterTest {
             it.addItem(Item("Ball", "A ball is on the floor!"))
         }
         val overworldMaker = OverworldMaker("Test Overworld", "This is a test overworld", listOf(regionMaker))
-        val gameCreation = Game.create(
-            "Test game",
-            "This is a test game",
-            "This is a test game",
-            "Test author",
+        val gameCreation = GameFactoryCreator.create(
+            GameInformation("Test game", "This is a test game", "This is a test game", "Test author"),
             { overworldMaker.make() },
             { player },
             { EndCheckResult.notEnded },

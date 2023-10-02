@@ -5,6 +5,7 @@ import ktaf.io.IOConfiguration
 import ktaf.io.RenderFrame
 import ktaf.io.WaitForAcknowledge
 import ktaf.io.WaitForCommand
+import ktaf.logic.CancellationToken
 import ktaf.rendering.FramePosition
 import ktaf.rendering.frames.FrameBuilderCollection
 import ktaf.rendering.frames.GridRegionMapBuilder
@@ -126,8 +127,11 @@ public object KtorConfiguration : IOConfiguration {
         }
     override val waitForAcknowledge: WaitForAcknowledge
         get() = object : WaitForAcknowledge {
-            override fun invoke(): Boolean {
+            override fun invoke(cancellationToken: CancellationToken): Boolean {
                 while (true) {
+                    if (cancellationToken.wasCancelled) {
+                        return false
+                    }
                     try {
                         lock.lock()
                         if (acknowledgementReceived == true) {
@@ -147,9 +151,12 @@ public object KtorConfiguration : IOConfiguration {
         }
     override val waitForCommand: WaitForCommand
         get() = object : WaitForCommand {
-            override fun invoke(): String {
+            override fun invoke(cancellationToken: CancellationToken): String {
                 var captured: String? = null
                 while (captured == null) {
+                    if (cancellationToken.wasCancelled) {
+                        return ""
+                    }
                     try {
                         lock.lock()
                         val buffer: CharArray = command?.toCharArray() ?: CharArray(0)

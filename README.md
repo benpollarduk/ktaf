@@ -90,30 +90,45 @@ The default frame collections for rendering in a terminal assume that a terminal
 # Hello World
 ```kotlin
 // create player
-var player = PlayableCharacter("Dave", "A young boy on a quest to find the meaning of life.");
+val player = PlayableCharacter(
+    "Dave", 
+    "A young boy on a quest to find the meaning of life."
+)
 
 // create region maker and add room
-var regionMaker = RegionMaker("Mountain", "An imposing volcano just East of town.").also {
-    it[0, 0, 0] = Room("Cavern", "A dark cavern set in to the base of the mountain.")
+val regionMaker = RegionMaker(
+    "Mountain", 
+    "An imposing volcano just East of town."
+).also {
+    it[0, 0, 0] = Room(
+        "Cavern", 
+        "A dark cavern set in to the base of the mountain."
+    )
 }
 
 // create overworld maker
-var overworldMaker = OverworldMaker("Daves World", "An ancient kingdom.", regionMaker);
+val overworldMaker = OverworldMaker(
+    "Daves World",
+    "An ancient kingdom.",
+    listOf(regionMaker),
+)
 
 // create callback for generating games
-var gameCallback = Game.create(
-    "The Life Of Dave",
-    "Dave awakes to find himself in a cavern...",
-    "A very low budget adventure.",
-    "Me",
-    { overworldMaker.Make() },
+val gameCallback = GameFactoryCreator.create(
+    GameInformation(
+        "The Life Of Dave",
+        "Dave awakes to find himself in a cavern...",
+        "A very low budget adventure.",
+        "Me",
+    ),
+    { overworldMaker.make() },
     { player },
     { EndCheckResult.notEnded },
-    { EndCheckResult.notEnded }
+    { EndCheckResult.notEnded },
 )
 
 // execute the game
-Game.execute(gameCallback);
+GameExecutor.execute(gameCallback)
 ```
 
 # For Open Questions

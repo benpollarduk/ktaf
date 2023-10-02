@@ -5,6 +5,7 @@ import ktaf.io.IOConfiguration
 import ktaf.io.RenderFrame
 import ktaf.io.WaitForAcknowledge
 import ktaf.io.WaitForCommand
+import ktaf.logic.CancellationToken
 import ktaf.rendering.FramePosition
 import ktaf.rendering.frames.FrameBuilderCollection
 import ktaf.rendering.frames.ansi.AnsiAboutFrameBuilder
@@ -51,9 +52,12 @@ public object AnsiConsoleConfiguration : IOConfiguration {
         }
     override val waitForAcknowledge: WaitForAcknowledge
         get() = object : WaitForAcknowledge {
-            override fun invoke(): Boolean {
+            override fun invoke(cancellationToken: CancellationToken): Boolean {
                 var c = END_OF_BUFFER
                 while (c == END_OF_BUFFER) {
+                    if (cancellationToken.wasCancelled) {
+                        return false
+                    }
                     // read character from in
                     c = System.`in`.read()
                 }
@@ -63,7 +67,7 @@ public object AnsiConsoleConfiguration : IOConfiguration {
         }
     override val waitForCommand: WaitForCommand
         get() = object : WaitForCommand {
-            override fun invoke(): String {
+            override fun invoke(cancellationToken: CancellationToken): String {
                 // use standard read line
                 return readLine() ?: ""
             }

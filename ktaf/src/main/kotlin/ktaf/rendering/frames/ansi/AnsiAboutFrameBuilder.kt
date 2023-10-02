@@ -63,7 +63,7 @@ public class AnsiAboutFrameBuilder(
             )
         } else {
             ansiGridStringBuilder.drawWrapped(
-                "BP.AdventureFramework by Ben Pollard 2011 - 2023.",
+                "ktaf by Ben Pollard 2023.",
                 leftMargin,
                 lastPosition.y + 2,
                 availableWidth,

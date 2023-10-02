@@ -1,4 +1,4 @@
-package ktaf.logic
+package ktaf.logic.conditions
 
 /**
  * Provides a result from a end check which details if [conditionMet] and provides a [title] and [description] to
