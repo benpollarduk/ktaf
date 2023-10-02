@@ -1,13 +1,14 @@
-title Input Parsing
+title Game Execution
 
-participant Console
+participant MainCode
+participant GameFactoryCreator
+participant GameExecutor
+participant GameFactory
 participant Game
-participant Interpreter
 
-note over Interpreter: Provided by:\nInputInterpreter\nGlobalCommandInterpreter\nFrameCommandInterpreter \nGameCommandInterpreter
-
-Console->Game: Input
-Game->Interpreter: Interpret
-Interpreter->Game:IntrepretationResult
-Game->Game: RunCommand
-Game->Console: Output
+MainCode->GameFactoryCreator: Create
+GameFactoryCreator->MainCode: Instance of GameFactory
+MainCode->GameExecutor: Execute
+GameExecutor->GameFactory: Invoke
+GameFactory->GameExecutor: Instance of Game
+GameExecutor->Game: Execute
