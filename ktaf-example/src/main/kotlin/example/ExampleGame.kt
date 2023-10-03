@@ -28,7 +28,7 @@ public object ExampleGame : GameTemplate() {
             EndCheckResult(
                 true,
                 "Game Over",
-                "You have reached the end of the game, thanks for playing!"
+                "You have reached the end of the game, thanks for playing!",
             )
         } else {
             EndCheckResult.notEnded
@@ -51,34 +51,34 @@ public object ExampleGame : GameTemplate() {
                 Item(
                     "${region.identifier.name} Sphere",
                     "A glass sphere, about the size of a snooker ball. Inside you can see a swirling mist.",
-                    true
+                    true,
                 ).also {
                     it.commands = listOf(
                         CustomCommand(
                             CommandHelp(
                                 "Warp ${region.identifier.name}",
                                 "Use the ${region.identifier.name} Sphere to warp to the " +
-                                    "${region.identifier.name}."
+                                    "${region.identifier.name}.",
                             ),
-                            true
+                            true,
                         ) { game, _ ->
                             val move = overworld.move(region)
                             if (!move) {
                                 Reaction(
                                     ReactionResult.ERROR,
-                                    "Could not move to ${region.identifier.name}."
+                                    "Could not move to ${region.identifier.name}.",
                                 )
                             }
                             game.displayTransition(
                                 "",
                                 "You peer inside the sphere and feel faint. When the sensation passes you open " +
-                                    "you eyes and have been transported to the ${region.identifier.name}."
+                                    "you eyes and have been transported to the ${region.identifier.name}.",
                             )
 
                             Reaction(ReactionResult.INTERNAL, "")
-                        }
+                        },
                     )
-                }
+                },
             )
         }
     }
@@ -99,9 +99,9 @@ public object ExampleGame : GameTemplate() {
             CustomCommand(
                 CommandHelp(
                     "Jump",
-                    "Jump to a location in a region."
+                    "Jump to a location in a region.",
                 ),
-                false
+                false,
             ) { game, args ->
                 var x = 0
                 var y = 0
@@ -118,19 +118,19 @@ public object ExampleGame : GameTemplate() {
                 } else {
                     Reaction(ReactionResult.ERROR, "Failed to jump to $x $y $z.")
                 }
-            }
+            },
         )
 
         val about = "This is a short demo of ktaf made up from test chunks of games that were " +
             "build to test different features during development."
 
         return Game(
-            GameInformation("ktav dmo", about, about, "Ben Pollard"),
+            GameInformation("ktav demo", about, about, "Ben Pollard"),
             playableCharacter,
             overworld,
             { determineIfGameIsComplete(it) },
             { determineIfGameOver(it) },
-            ioConfiguration = ioConfiguration
+            ioConfiguration = ioConfiguration,
         )
     }
 }
