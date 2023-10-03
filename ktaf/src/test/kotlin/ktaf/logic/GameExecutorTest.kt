@@ -22,46 +22,50 @@ class GameExecutorTest {
         // Then
         Assertions.assertDoesNotThrow {
             // Given
-            val player = PlayableCharacter("TestPlayer", "")
-            val regionMaker = RegionMaker("TestRegion", "")
-            regionMaker[0, 0, 0] = Room("TestRoom", "")
-            val overworldMaker = OverworldMaker("TestOverworld", "", listOf(regionMaker))
-            val io = object : IOConfiguration {
-                override val renderFrame: RenderFrame
-                    get() = object : RenderFrame {
-                        override fun invoke(frame: String, allowInput: Boolean, cursorPosition: FramePosition) {
-                            println(frame)
-                            println()
-                            println()
-                        }
+            val template = object : GameTemplate() {
+                override fun instantiate(ioConfiguration: IOConfiguration): Game {
+                    val player = PlayableCharacter("TestPlayer", "")
+                    val regionMaker = RegionMaker("TestRegion", "")
+                    regionMaker[0, 0, 0] = Room("TestRoom", "")
+                    val overworldMaker = OverworldMaker("TestOverworld", "", listOf(regionMaker))
+                    val io = object : IOConfiguration {
+                        override val renderFrame: RenderFrame
+                            get() = object : RenderFrame {
+                                override fun invoke(frame: String, allowInput: Boolean, cursorPosition: FramePosition) {
+                                    println(frame)
+                                    println()
+                                    println()
+                                }
+                            }
+                        override val waitForAcknowledge: WaitForAcknowledge
+                            get() = object : WaitForAcknowledge {
+                                override fun invoke(cancellationToken: CancellationToken): Boolean {
+                                    return true
+                                }
+                            }
+                        override val waitForCommand: WaitForCommand
+                            get() = object : WaitForCommand {
+                                override fun invoke(cancellationToken: CancellationToken): String {
+                                    return "Exit"
+                                }
+                            }
+                        override val frameBuilders: FrameBuilderCollection
+                            get() = AnsiConsoleConfiguration.frameBuilders
                     }
-                override val waitForAcknowledge: WaitForAcknowledge
-                    get() = object : WaitForAcknowledge {
-                        override fun invoke(cancellationToken: CancellationToken): Boolean {
-                            return true
-                        }
-                    }
-                override val waitForCommand: WaitForCommand
-                    get() = object : WaitForCommand {
-                        override fun invoke(cancellationToken: CancellationToken): String {
-                            return "Exit"
-                        }
-                    }
-                override val frameBuilders: FrameBuilderCollection
-                    get() = AnsiConsoleConfiguration.frameBuilders
+
+                    return Game(
+                        GameInformation("", "", "", ""),
+                        player,
+                        overworldMaker.make(),
+                        { EndCheckResult.notEnded },
+                        { EndCheckResult.notEnded },
+                        ioConfiguration = io
+                    )
+                }
             }
 
-            val game = Game(
-                GameInformation("", "", "", ""),
-                player,
-                overworldMaker.make(),
-                { EndCheckResult.notEnded },
-                { EndCheckResult.notEnded },
-                ioConfiguration = io
-            )
-
             // When
-            GameExecutor.execute(GameTemplate.fromGame(game), ExitMode.EXIT_APPLICATION, AnsiConsoleConfiguration)
+            GameExecutor.execute(template, ExitMode.EXIT_APPLICATION, AnsiConsoleConfiguration)
         }
     }
 
@@ -106,8 +110,14 @@ class GameExecutorTest {
             ioConfiguration = io
         )
 
+        val template = object : GameTemplate() {
+            override fun instantiate(ioConfiguration: IOConfiguration): Game {
+                return game
+            }
+        }
+
         // When
-        GameExecutor.executeAysnc(GameTemplate.fromGame(game), ExitMode.EXIT_APPLICATION, AnsiConsoleConfiguration)
+        GameExecutor.executeAysnc(template, ExitMode.EXIT_APPLICATION, AnsiConsoleConfiguration)
         Thread.sleep(1000)
         GameExecutor.cancelAysnc()
         Thread.sleep(1000)

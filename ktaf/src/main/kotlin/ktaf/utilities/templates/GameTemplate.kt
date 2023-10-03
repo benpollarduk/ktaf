@@ -13,17 +13,4 @@ public open class GameTemplate {
     public open fun instantiate(ioConfiguration: IOConfiguration): Game {
         throw NotImplementedError()
     }
-
-    public companion object {
-        /**
-         * Create a new [GameTemplate] from a specified [game].
-         */
-        public fun fromGame(game: Game): GameTemplate {
-            return object : GameTemplate() {
-                override fun instantiate(ioConfiguration: IOConfiguration): Game {
-                    return game
-                }
-            }
-        }
-    }
 }

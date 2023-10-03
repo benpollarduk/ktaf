@@ -99,46 +99,51 @@ The default frame collections for rendering in a terminal assume that a terminal
 
 # Hello World
 ```kotlin
-// create player
-val player = PlayableCharacter(
-    "Dave", 
-    "A young boy on a quest to find the meaning of life."
-)
+// create a template for creating games
+val template = object : GameTemplate() {
+    override fun instantiate(ioConfiguration: IOConfiguration): Game {
+        // create player
+        val player = PlayableCharacter(
+            "Dave",
+            "A young boy on a quest to find the meaning of life.",
+        )
 
-// create region maker and add room
-val regionMaker = RegionMaker(
-    "Mountain", 
-    "An imposing volcano just East of town."
-).also {
-    it[0, 0, 0] = Room(
-        "Cavern", 
-        "A dark cavern set in to the base of the mountain."
-    )
+        // create region maker and add room
+        val regionMaker = RegionMaker(
+            "Mountain",
+            "An imposing volcano just East of town.",
+        ).also {
+            it[0, 0, 0] = Room(
+                "Cavern",
+                "A dark cavern set in to the base of the mountain.",
+            )
+        }
+
+        // create overworld maker
+        val overworldMaker = OverworldMaker(
+            "Daves World",
+            "An ancient kingdom.",
+            listOf(regionMaker),
+        )
+
+        // create game
+        return Game(
+            GameInformation(
+                "The Life Of Dave",
+                "Dave awakes to find himself in a cavern...",
+                "A very low budget adventure.",
+                "Me",
+            ),
+            player,
+            overworldMaker.make(),
+            { EndCheckResult.notEnded },
+            { EndCheckResult.notEnded },
+        )
+    }
 }
 
-// create overworld maker
-val overworldMaker = OverworldMaker(
-    "Daves World",
-    "An ancient kingdom.",
-    listOf(regionMaker),
-)
-
-// create game
-val game = Game(
-    GameInformation(
-        "The Life Of Dave",
-        "Dave awakes to find himself in a cavern...",
-        "A very low budget adventure.",
-        "Me",
-    ),
-    player,
-    overworldMaker.make(),
-    { EndCheckResult.notEnded },
-    { EndCheckResult.notEnded },
-)
-
 // execute the game
-GameExecutor.execute(game)
+GameExecutor.execute(template, ioConfiguration = AnsiConsoleConfiguration)
 ```
 
 # For Open Questions

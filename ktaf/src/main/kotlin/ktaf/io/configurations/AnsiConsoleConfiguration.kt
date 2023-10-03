@@ -26,6 +26,7 @@ import ktaf.rendering.frames.ansi.AnsiTransitionFrameBuilder
  */
 public object AnsiConsoleConfiguration : IOConfiguration {
     private const val END_OF_BUFFER = -1
+    private const val LINE_FEED = 10
     override val renderFrame: RenderFrame
         get() = object : RenderFrame {
             override fun invoke(
@@ -61,8 +62,8 @@ public object AnsiConsoleConfiguration : IOConfiguration {
                     // read character from in
                     c = System.`in`.read()
                 }
-                // check for enter
-                return c == 10
+                // check for line feed
+                return c == LINE_FEED
             }
         }
     override val waitForCommand: WaitForCommand

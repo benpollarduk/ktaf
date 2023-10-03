@@ -31,14 +31,14 @@ plugins {
     // Apply the distribution plugin https://docs.gradle.org/current/userguide/distribution_plugin.html.
     distribution
 
-    // Apply the maven-publish plugin to allow publish to Maven.
+    // Apply the maven-publish plugin to allow publishing to Maven.
     `maven-publish`
 }
 
 // Publishing properties defined at a project level gradle.properties.
 val artifactId: String by project
 val artifactGroup: String by project
-val ver = "0.2.1"
+val ver = "0.2.2"
 
 ext {
     // Set the version.
