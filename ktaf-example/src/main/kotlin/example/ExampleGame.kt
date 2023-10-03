@@ -125,7 +125,7 @@ public object ExampleGame : GameTemplate() {
             "build to test different features during development."
 
         return Game(
-            GameInformation("ktav dmo", about, about, "Ben Pollard"),
+            GameInformation("ktav demo", about, about, "Ben Pollard"),
             playableCharacter,
             overworld,
             { determineIfGameIsComplete(it) },

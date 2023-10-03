@@ -12,6 +12,7 @@ import ktaf.rendering.FramePosition
 import ktaf.rendering.frames.FrameBuilderCollection
 import ktaf.utilities.OverworldMaker
 import ktaf.utilities.RegionMaker
+import ktaf.utilities.templates.GameTemplate
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -60,7 +61,7 @@ class GameExecutorTest {
             )
 
             // When
-            GameExecutor.execute(game, ExitMode.EXIT_APPLICATION)
+            GameExecutor.execute(GameTemplate.fromGame(game), ExitMode.EXIT_APPLICATION, AnsiConsoleConfiguration)
         }
     }
 
@@ -106,7 +107,7 @@ class GameExecutorTest {
         )
 
         // When
-        GameExecutor.executeAysnc(game, ExitMode.EXIT_APPLICATION)
+        GameExecutor.executeAysnc(GameTemplate.fromGame(game), ExitMode.EXIT_APPLICATION, AnsiConsoleConfiguration)
         Thread.sleep(1000)
         GameExecutor.cancelAysnc()
         Thread.sleep(1000)

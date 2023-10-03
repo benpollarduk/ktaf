@@ -69,6 +69,16 @@ Maps are automatically generated for regions and rooms:
 
 ![image](https://github.com/ben-pollard-uk/ktaf/assets/129943363/b8e52974-dad7-4c27-8c0a-6861964a2fbe)
 
+Precompiled games can also be discovered and loaded from .jar files at runtime with the GameCatalogResolver.
+```Kotlin
+// load a .jar file and discover all GameTemplate instances
+val catalog = GameCatalogResolver.resolveCatalogFromJar(File(path))
+// grab the first GameTemplate
+val template = catalog.get().first()
+// begin execution of the game
+GameExecutor.execute(gameTemplate, ioConfiguration = AnsiConsoleConfiguration)
+```
+
 # Prerequisites
 The default frame collections for rendering in a terminal assume that a terminal capable of handling ANSI is bring used. If a terminal that doesn't support ANSI is used the game will still render but ANSI will also be displayed.
 
