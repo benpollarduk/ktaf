@@ -98,7 +98,7 @@ class GameApp : JFrame("app-example-swing") {
 
     private fun createMenu(ioConfiguration: IOConfiguration): JMenuBar {
         val menu = JMenuBar()
-        val fileMenuItem = JMenu("File")
+        val gameMenuItem = JMenu("Game")
         val importJarMenuItem = JMenuItem("Load .jar...")
         val examplesMenuItem = JMenu("Examples")
         val ktafDemoMenuItem = JMenuItem("ktaf-demo")
@@ -119,14 +119,14 @@ class GameApp : JFrame("app-example-swing") {
         }
 
         examplesMenuItem.add(ktafDemoMenuItem)
-        fileMenuItem.add(examplesMenuItem)
-        fileMenuItem.add(importJarMenuItem)
-        menu.add(fileMenuItem)
+        gameMenuItem.add(examplesMenuItem)
+        gameMenuItem.add(importJarMenuItem)
+        menu.add(gameMenuItem)
         return menu
     }
 
     private fun loadGameFromFile(file: File, ioConfiguration: IOConfiguration) {
-        val catalogEntries = GameCatalogResolver.resolveCatalogFromJarFile(file)
+        val catalogEntries = GameCatalogResolver.resolveCatalogFromJar(file)
         val gameTemplates = catalogEntries.get()
         if (gameTemplates.any()) {
             beginGame(gameTemplates.first().template, ioConfiguration)
