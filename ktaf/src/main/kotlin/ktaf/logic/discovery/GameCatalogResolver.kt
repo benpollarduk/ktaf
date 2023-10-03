@@ -43,7 +43,7 @@ public object GameCatalogResolver {
     /**
      * Resolve a [Catalog] from a jar file.
      */
-    public fun resolveCatalogEntriesForJarFile(jarFile: File): Catalog<GameTemplate> {
+    public fun resolveCatalogFromJar(jarFile: File): Catalog<GameTemplate> {
         val url = getURL(jarFile)
         val classLoader = URLClassLoader(arrayOf(url))
         return resolveCatalogFromJar(jarFile, classLoader)

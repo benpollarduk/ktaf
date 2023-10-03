@@ -46,8 +46,6 @@ fun Application.configureRouting() {
                 call.respondText(KtorConfiguration.getLastFrame(), contentType = ContentType.Text.Html)
             }
         }
-    }
-    routing {
         staticResources("static", "/static")
     }
 }

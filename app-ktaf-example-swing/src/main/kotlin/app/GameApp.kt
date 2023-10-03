@@ -126,7 +126,7 @@ class GameApp : JFrame("app-example-swing") {
     }
 
     private fun loadGameFromFile(file: File, ioConfiguration: IOConfiguration) {
-        val catalogEntries = GameCatalogResolver.resolveCatalogEntriesForJarFile(file)
+        val catalogEntries = GameCatalogResolver.resolveCatalogFromJarFile(file)
         val gameTemplates = catalogEntries.get()
         if (gameTemplates.any()) {
             beginGame(gameTemplates.first().template, ioConfiguration)

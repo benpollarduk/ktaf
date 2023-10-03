@@ -21,7 +21,7 @@ class GameCatalogResolverTest {
         }
 
         // When
-        val result = GameCatalogResolver.resolveCatalogEntriesForJarFile(tempFile)
+        val result = GameCatalogResolver.resolveCatalogFromJarFile(tempFile)
 
         // Then
         Assertions.assertEquals(1, result.get().size)
