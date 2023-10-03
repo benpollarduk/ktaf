@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import java.io.File
 import java.io.FileOutputStream
-import java.net.URLClassLoader
 
 class GameCatalogResolverTest {
     @Test
@@ -20,14 +19,12 @@ class GameCatalogResolverTest {
                 input.copyTo(output)
             }
         }
-        val url = GameCatalogResolver.getURL(tempFile)
-        val classLoader = URLClassLoader(arrayOf(url))
 
         // When
-        val result = GameCatalogResolver.resolveCatalogEntriesForJarFile(tempFile, classLoader)
+        val result = GameCatalogResolver.resolveCatalogEntriesForJarFile(tempFile)
 
         // Then
-        Assertions.assertEquals(1, result.elements.size)
-        Assertions.assertEquals("ktav demo", result.elements.first().name)
+        Assertions.assertEquals(1, result.get().size)
+        Assertions.assertEquals("ktav demo", result.get().first().name)
     }
 }

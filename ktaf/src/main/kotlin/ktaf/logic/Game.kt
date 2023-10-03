@@ -254,7 +254,6 @@ public class Game(
      */
     private fun enter() {
         state = GameState.ACTIVE
-        refresh()
     }
 
     /**

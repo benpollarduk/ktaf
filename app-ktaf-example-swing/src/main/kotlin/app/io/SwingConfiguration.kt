@@ -1,5 +1,6 @@
 package app.io
 
+import app.HtmlHelper
 import ktaf.assets.Size
 import ktaf.io.RenderFrame
 import ktaf.io.IOConfiguration
@@ -124,7 +125,7 @@ internal class SwingConfiguration(
         get() {
             val width = 600
             val mapSize = Size(60, 35)
-            val htmlBuilder = HtmlPageBuilder(HtmlElementType.Document("ktaf frame", createCSS(width)))
+            val htmlBuilder = HtmlPageBuilder(HtmlElementType.Document("ktaf frame", HtmlHelper.createCSS(width)))
             return FrameBuilderCollection(
                 HtmlTitleFrameBuilder(htmlBuilder),
                 HtmlAboutFrameBuilder(htmlBuilder),
@@ -140,22 +141,5 @@ internal class SwingConfiguration(
 
     internal interface AllowInputChangedListener {
         fun invoke(allowInput: Boolean)
-    }
-
-    private companion object {
-        private fun createCSS(bodyWidth: Int): String {
-            return """
-               body {
-                      background-color: black;
-                      font-size: 10px;
-                      font-family: Consolas, monospace;
-                      color: white;
-                      word-wrap: break-word;
-                      margin: 10px;
-                      width:100%;
-                      max-width: ${bodyWidth}px;
-                    }
-            """.trimIndent()
-        }
     }
 }

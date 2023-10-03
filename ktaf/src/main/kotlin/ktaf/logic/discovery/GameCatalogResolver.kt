@@ -9,7 +9,7 @@ import java.net.URLClassLoader
 import java.util.jar.JarFile
 
 /**
- * Provides an object for resolving a [Catalog] of [Game] objects.
+ * Provides an object for resolving a [Catalog] of [GameTemplate] objects.
  */
 public object GameCatalogResolver {
     /**
@@ -43,10 +43,19 @@ public object GameCatalogResolver {
     /**
      * Resolve a [Catalog] from a jar file.
      */
-    public fun resolveCatalogEntriesForJarFile(jarFile: File, classLoader: URLClassLoader): Catalog {
+    public fun resolveCatalogEntriesForJarFile(jarFile: File): Catalog<GameTemplate> {
+        val url = getURL(jarFile)
+        val classLoader = URLClassLoader(arrayOf(url))
+        return resolveCatalogFromJar(jarFile, classLoader)
+    }
+
+    /**
+     * Resolve a [Catalog] from a jar file with a specified [classLoader].
+     */
+    public fun resolveCatalogFromJar(jarFile: File, classLoader: URLClassLoader): Catalog<GameTemplate> {
         val jarClassLoader = URLClassLoader(arrayOf(jarFile.toURI().toURL()), classLoader)
         val jarClassNames = getClassNamesFromJar(jarFile)
-        val catalog = mutableListOf<CatalogEntry>()
+        val catalog = mutableListOf<CatalogEntry<GameTemplate>>()
 
         // iterate all class names in jar
         for (className in jarClassNames) {
@@ -77,8 +86,8 @@ public object GameCatalogResolver {
     /**
      * Resolve a [Catalog] from a [path] to a directory. As default a relative path to '/games' will be used.
      */
-    public fun resolveCatalog(path: String = "/games"): Catalog {
-        val catalogs = mutableListOf<Catalog>()
+    public fun resolveCatalogFromDirectory(path: String): Catalog<GameTemplate> {
+        val catalogs = mutableListOf<Catalog<GameTemplate>>()
         val directory = File(path)
 
         if (!directory.isDirectory) {
@@ -95,9 +104,9 @@ public object GameCatalogResolver {
         val classLoader = URLClassLoader(urls)
 
         jarFiles.forEach {
-            catalogs.add(resolveCatalogEntriesForJarFile(it, classLoader))
+            catalogs.add(resolveCatalogFromJar(it, classLoader))
         }
 
-        return Catalog(catalogs.toList().flatMap { it.elements })
+        return Catalog(catalogs.toList().flatMap { it.get() })
     }
 }

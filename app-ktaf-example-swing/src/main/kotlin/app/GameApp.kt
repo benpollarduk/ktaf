@@ -2,18 +2,28 @@ package app
 
 import app.io.SwingConfiguration
 import example.ExampleGame
+import ktaf.io.IOConfiguration
 import ktaf.logic.GameExecutor
+import ktaf.logic.discovery.GameCatalogResolver
+import ktaf.utilities.templates.GameTemplate
 import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
+import java.io.File
 import javax.swing.JEditorPane
+import javax.swing.JFileChooser
 import javax.swing.JFrame
 import javax.swing.JLabel
+import javax.swing.JMenu
+import javax.swing.JMenuBar
+import javax.swing.JMenuItem
+import javax.swing.JOptionPane
 import javax.swing.JPanel
 import javax.swing.JTextField
 import javax.swing.SwingUtilities
 import javax.swing.border.EmptyBorder
+import javax.swing.filechooser.FileNameExtensionFilter
 
 class GameApp : JFrame("app-example-swing") {
     private var currentFrameAcceptsInput: Boolean = false
@@ -42,6 +52,12 @@ class GameApp : JFrame("app-example-swing") {
         output.contentType = "text/html"
         output.isEditable = false
         output.border = null
+        output.text = HtmlHelper.simpleMessage(
+            """
+                Load a GameTemplate from a .jar file or run an example.<br>
+                Please only run .jar files from trusted sources.
+            """,
+        ).trimIndent()
 
         // configure input UI
         inputPanel.layout = BorderLayout()
@@ -73,13 +89,63 @@ class GameApp : JFrame("app-example-swing") {
         inputPanel.add(prompt, BorderLayout.WEST)
         inputPanel.add(input, BorderLayout.CENTER)
         // add panels to this frame
+        this.add(createMenu(ioConfiguration), BorderLayout.NORTH)
         this.add(outputPanel, BorderLayout.CENTER)
         this.add(inputPanel, BorderLayout.SOUTH)
 
         this.isVisible = true
+    }
+
+    private fun createMenu(ioConfiguration: IOConfiguration): JMenuBar {
+        val menu = JMenuBar()
+        val fileMenuItem = JMenu("File")
+        val importJarMenuItem = JMenuItem("Load .jar...")
+        val examplesMenuItem = JMenu("Examples")
+        val ktafDemoMenuItem = JMenuItem("ktaf-demo")
+
+        importJarMenuItem.addActionListener {
+            val fileChooser = JFileChooser()
+            val jarFileFilter = FileNameExtensionFilter("JAR Files", "jar")
+            fileChooser.fileFilter = jarFileFilter
+            val returnValue = fileChooser.showOpenDialog(this@GameApp)
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                val file = fileChooser.selectedFile
+                loadGameFromFile(file, ioConfiguration)
+            }
+        }
+
+        ktafDemoMenuItem.addActionListener {
+            beginGame(ExampleGame, ioConfiguration)
+        }
+
+        examplesMenuItem.add(ktafDemoMenuItem)
+        fileMenuItem.add(examplesMenuItem)
+        fileMenuItem.add(importJarMenuItem)
+        menu.add(fileMenuItem)
+        return menu
+    }
+
+    private fun loadGameFromFile(file: File, ioConfiguration: IOConfiguration) {
+        val catalogEntries = GameCatalogResolver.resolveCatalogEntriesForJarFile(file)
+        val gameTemplates = catalogEntries.get()
+        if (gameTemplates.any()) {
+            beginGame(gameTemplates.first().template, ioConfiguration)
+        } else {
+            JOptionPane.showMessageDialog(
+                this,
+                "No games were found.",
+                "No games found in ${file.name}",
+                JOptionPane.INFORMATION_MESSAGE,
+            )
+        }
+    }
+
+    private fun beginGame(gameTemplate: GameTemplate, ioConfiguration: IOConfiguration) {
+        // cancel any pending
+        GameExecutor.cancelAysnc()
 
         // create and start game on background thread
-        GameExecutor.executeAysnc(ExampleGame, ioConfiguration = ioConfiguration)
+        GameExecutor.executeAysnc(gameTemplate, ioConfiguration = ioConfiguration)
     }
 
     companion object {
