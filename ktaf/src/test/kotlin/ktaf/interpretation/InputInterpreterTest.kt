@@ -7,6 +7,7 @@ import ktaf.logic.GameTestHelper
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
+@Suppress("MaxLineLength")
 class InputInterpreterTest {
     @Test
     fun `given get supported commands when frame and conversation interpreters then three elements returned`() {

@@ -16,6 +16,7 @@ public class ConversationCommandInterpreter : Interpreter {
     override val supportedCommands: List<CommandHelp>
         get() = ConversationCommandInterpreter.supportedCommands
 
+    @Suppress("ReturnCount")
     override fun interpret(input: String, game: Game): InterpretationResult {
         if (game.activeConverser == null) {
             return InterpretationResult.fail

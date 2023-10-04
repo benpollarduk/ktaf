@@ -23,9 +23,21 @@ public class AnsiTitleFrameBuilder(
 
         ansiGridStringBuilder.resize(frameSize)
         ansiGridStringBuilder.drawBoundary(borderColor)
-        val lastPosition: FramePosition = ansiGridStringBuilder.drawWrapped(title, leftMargin, 2, availableWidth, titleColor)
+        val lastPosition: FramePosition = ansiGridStringBuilder.drawWrapped(
+            title,
+            leftMargin,
+            2,
+            availableWidth,
+            titleColor
+        )
         ansiGridStringBuilder.drawUnderline(leftMargin, lastPosition.y + 1, title.length, titleColor)
-        ansiGridStringBuilder.drawWrapped(introduction.ensureFinishedSentence(), leftMargin, lastPosition.y + 3, availableWidth, descriptionColor)
+        ansiGridStringBuilder.drawWrapped(
+            introduction.ensureFinishedSentence(),
+            leftMargin,
+            lastPosition.y + 3,
+            availableWidth,
+            descriptionColor
+        )
 
         return AnsiGridTextFrame(ansiGridStringBuilder, 0, 0, false, backgroundColor)
     }

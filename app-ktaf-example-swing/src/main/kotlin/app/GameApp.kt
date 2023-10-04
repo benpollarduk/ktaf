@@ -4,13 +4,17 @@ import app.io.SwingConfiguration
 import example.ExampleGame
 import ktaf.io.IOConfiguration
 import ktaf.logic.GameExecutor
+import ktaf.logic.discovery.CatalogEntry
 import ktaf.logic.discovery.GameCatalogResolver
 import ktaf.utilities.templates.GameTemplate
 import java.awt.BorderLayout
 import java.awt.Color
+import java.awt.FlowLayout
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
 import java.io.File
+import javax.swing.JButton
+import javax.swing.JDialog
 import javax.swing.JEditorPane
 import javax.swing.JFileChooser
 import javax.swing.JFrame
@@ -128,8 +132,10 @@ class GameApp : JFrame("app-example-swing") {
     private fun loadGameFromFile(file: File, ioConfiguration: IOConfiguration) {
         val catalogEntries = GameCatalogResolver.resolveCatalogFromJar(file)
         val gameTemplates = catalogEntries.get()
-        if (gameTemplates.any()) {
+        if (gameTemplates.size == 1) {
             beginGame(gameTemplates.first().template, ioConfiguration)
+        } else if (gameTemplates.size > 1) {
+            handleMultipleGamesFoundInJar(gameTemplates, ioConfiguration)
         } else {
             JOptionPane.showMessageDialog(
                 this,
@@ -140,9 +146,31 @@ class GameApp : JFrame("app-example-swing") {
         }
     }
 
+    private fun handleMultipleGamesFoundInJar(
+        gameTemplates: List<CatalogEntry<GameTemplate>>,
+        ioConfiguration: IOConfiguration,
+    ) {
+        val dialog = JDialog(this, "Select Game", true)
+        dialog.defaultCloseOperation = JDialog.DISPOSE_ON_CLOSE
+        dialog.layout = FlowLayout()
+
+        gameTemplates.forEach { game ->
+            val button = JButton(game.name)
+            button.addActionListener {
+                beginGame(game.template, ioConfiguration)
+                dialog.dispose()
+            }
+            dialog.add(button)
+        }
+
+        dialog.pack()
+        dialog.setLocationRelativeTo(this)
+        dialog.isVisible = true
+    }
+
     private fun beginGame(gameTemplate: GameTemplate, ioConfiguration: IOConfiguration) {
         // cancel any pending
-        GameExecutor.cancelAysnc()
+        GameExecutor.cancel()
 
         // create and start game on background thread
         GameExecutor.executeAysnc(gameTemplate, ioConfiguration = ioConfiguration)

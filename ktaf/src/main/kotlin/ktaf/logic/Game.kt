@@ -39,15 +39,15 @@ public class Game(
     private val interpreter: Interpreter = defaultInterpreters,
     private val ioConfiguration: IOConfiguration = AnsiConsoleConfiguration
 ) {
-    private var isExecuting: Boolean = false
+    private var state: GameState = GameState.NOT_STARTED
+    public var isExecuting: Boolean = false
+        private set
     private val cancellationToken = CancellationToken()
     private var currentFrame: Frame = ioConfiguration.frameBuilders.aboutFrameBuilder.build(
         information.name,
         information.description,
         information.author
     )
-    public var state: GameState = GameState.NOT_STARTED
-        private set
 
     /**
      * The active [Converser].
@@ -64,6 +64,60 @@ public class Game(
      * Specifies the type of key to use for scene maps.
      */
     public var sceneMapKeyType: KeyType = KeyType.DYNAMIC
+
+    /**
+     * Display a transition frame with a specified [title] and [message].
+     */
+    public fun displayTransition(title: String, message: String) {
+        refresh(ioConfiguration.frameBuilders.transitionFrameBuilder.build(title, message))
+    }
+
+    /**
+     * Find [InteractionTarget] within this [Game] from a specified [name]. If the target cannot be found null is
+     * returned.
+     */
+    public fun findInteractionTarget(name: String): InteractionTarget? {
+        if (name.equalsExaminable(player)) {
+            return player
+        }
+
+        if (player.items.any { name.equalsExaminable(it) }) {
+            return player.findItem(name)
+        }
+
+        if (name.equalsExaminable(overworld.currentRegion?.currentRoom)) {
+            return overworld.currentRegion?.currentRoom
+        }
+
+        return overworld.currentRegion?.currentRoom?.findInteractionTarget(name)
+    }
+
+    /**
+     * Get a list of all [Examinable] that are currently visible to the player.
+     */
+    public fun getAllPlayerVisibleExaminables(): List<Examinable> {
+        val examinables = mutableListOf<Examinable>(player, overworld)
+        val currentRegion = overworld.currentRegion
+        val currentRoom = overworld.currentRegion?.currentRoom
+
+        if (currentRegion != null) {
+            examinables.add(currentRegion)
+        }
+
+        if (currentRoom != null) {
+            examinables.add(currentRoom)
+        }
+
+        examinables.addAll(player.items.filter { it.isPlayerVisible })
+
+        if (currentRoom != null) {
+            examinables.addAll(currentRoom.items.filter { it.isPlayerVisible })
+            examinables.addAll(currentRoom.characters.filter { it.isPlayerVisible })
+            examinables.addAll(currentRoom.exits.filter { it.isPlayerVisible })
+        }
+
+        return examinables.toList()
+    }
 
     /**
      * Start a conversation with a [converser].
@@ -120,13 +174,6 @@ public class Game(
         } else {
             refresh(getFallbackFrame())
         }
-    }
-
-    /**
-     * Display a transition frame with a specified [title] and [message].
-     */
-    public fun displayTransition(title: String, message: String) {
-        refresh(ioConfiguration.frameBuilders.transitionFrameBuilder.build(title, message))
     }
 
     internal fun execute() {
@@ -298,53 +345,6 @@ public class Game(
     private fun refresh(frame: Frame) {
         currentFrame = frame
         drawFrame(frame)
-    }
-
-    /**
-     * Find [InteractionTarget] within this [Game] from a specified [name]. If the target cannot be found null is
-     * returned.
-     */
-    public fun findInteractionTarget(name: String): InteractionTarget? {
-        if (name.equalsExaminable(player)) {
-            return player
-        }
-
-        if (player.items.any { name.equalsExaminable(it) }) {
-            return player.findItem(name)
-        }
-
-        if (name.equalsExaminable(overworld.currentRegion?.currentRoom)) {
-            return overworld.currentRegion?.currentRoom
-        }
-
-        return overworld.currentRegion?.currentRoom?.findInteractionTarget(name)
-    }
-
-    /**
-     * Get a list of all [Examinable] that are currently visible to the player.
-     */
-    public fun getAllPlayerVisibleExaminables(): List<Examinable> {
-        val examinables = mutableListOf<Examinable>(player, overworld)
-        val currentRegion = overworld.currentRegion
-        val currentRoom = overworld.currentRegion?.currentRoom
-
-        if (currentRegion != null) {
-            examinables.add(currentRegion)
-        }
-
-        if (currentRoom != null) {
-            examinables.add(currentRoom)
-        }
-
-        examinables.addAll(player.items.filter { it.isPlayerVisible })
-
-        if (currentRoom != null) {
-            examinables.addAll(currentRoom.items.filter { it.isPlayerVisible })
-            examinables.addAll(currentRoom.characters.filter { it.isPlayerVisible })
-            examinables.addAll(currentRoom.exits.filter { it.isPlayerVisible })
-        }
-
-        return examinables.toList()
     }
 
     public companion object {

@@ -119,8 +119,8 @@ class GameExecutorTest {
         // When
         GameExecutor.executeAysnc(template, ExitMode.EXIT_APPLICATION, AnsiConsoleConfiguration)
         Thread.sleep(1000)
-        GameExecutor.cancelAysnc()
+        GameExecutor.cancel()
         Thread.sleep(1000)
-        Assertions.assertEquals(GameState.FINISHED, game.state)
+        Assertions.assertFalse(game.isExecuting)
     }
 }

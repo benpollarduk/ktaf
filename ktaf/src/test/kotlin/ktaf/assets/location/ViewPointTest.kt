@@ -14,7 +14,16 @@ class ViewPointTest {
         val regionMaker = RegionMaker("", "").also {
             it[1, 0, 0] = Room("", "", listOf(Exit(Direction.NORTH)))
             it[0, 1, 0] = Room("", "", listOf(Exit(Direction.EAST)))
-            it[1, 1, 0] = Room("", "", listOf(Exit(Direction.NORTH), Exit(Direction.EAST), Exit(Direction.SOUTH), Exit(Direction.WEST)))
+            it[1, 1, 0] = Room(
+                "",
+                "",
+                listOf(
+                    Exit(Direction.NORTH),
+                    Exit(Direction.EAST),
+                    Exit(Direction.SOUTH),
+                    Exit(Direction.WEST)
+                )
+            )
             it[2, 1, 0] = Room("", "", listOf(Exit(Direction.WEST)))
             it[1, 2, 0] = Room("", "", listOf(Exit(Direction.SOUTH)))
         }
@@ -31,7 +40,16 @@ class ViewPointTest {
         val regionMaker = RegionMaker("", "").also {
             it[1, 0, 0] = Room("", "", listOf(Exit(Direction.NORTH)))
             it[0, 1, 0] = Room("", "", listOf(Exit(Direction.EAST)))
-            it[1, 1, 0] = Room("", "", listOf(Exit(Direction.NORTH), Exit(Direction.EAST), Exit(Direction.SOUTH), Exit(Direction.WEST)))
+            it[1, 1, 0] = Room(
+                "",
+                "",
+                listOf(
+                    Exit(Direction.NORTH),
+                    Exit(Direction.EAST),
+                    Exit(Direction.SOUTH),
+                    Exit(Direction.WEST)
+                )
+            )
             it[2, 1, 0] = Room("", "", listOf(Exit(Direction.WEST)))
             it[1, 2, 0] = Room("", "", listOf(Exit(Direction.SOUTH)))
         }
@@ -48,7 +66,16 @@ class ViewPointTest {
         val regionMaker = RegionMaker("", "").also {
             it[1, 0, 0] = Room("", "", listOf(Exit(Direction.NORTH)))
             it[0, 1, 0] = Room("", "", listOf(Exit(Direction.EAST)))
-            it[1, 1, 0] = Room("", "", listOf(Exit(Direction.NORTH), Exit(Direction.EAST), Exit(Direction.SOUTH), Exit(Direction.WEST)))
+            it[1, 1, 0] = Room(
+                "",
+                "",
+                listOf(
+                    Exit(Direction.NORTH),
+                    Exit(Direction.EAST),
+                    Exit(Direction.SOUTH),
+                    Exit(Direction.WEST)
+                )
+            )
             it[2, 1, 0] = Room("", "", listOf(Exit(Direction.WEST)))
             it[1, 2, 0] = Room("", "", listOf(Exit(Direction.SOUTH)))
         }

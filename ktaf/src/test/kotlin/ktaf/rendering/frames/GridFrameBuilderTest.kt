@@ -56,7 +56,9 @@ class GridFrameBuilderTest {
             val builder = GridStringBuilder().also {
                 it.resize(Size(80, 50))
             }
-            val longString = "There is a Beaver. Person is in Test Room. To the north is the South Room, east is the East Room, south is the North Room, west is the West Room, above is the Top Room, below is the Bottom Room."
+            val longString = "There is a Beaver. Person is in Test Room. To the north is the South Room, east " +
+                "is the East Room, south is the North Room, west is the West Room, above is the Top Room, below " +
+                "is the Bottom Room."
 
             // When
             builder.drawWrapped(longString, 0, 0, 80)
