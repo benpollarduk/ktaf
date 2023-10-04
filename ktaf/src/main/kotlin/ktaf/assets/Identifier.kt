@@ -1,7 +1,5 @@
 package ktaf.assets
 
-import java.util.*
-
 /**
  * Provides functionality that can be used to identify an object with a specified [name].
  */
