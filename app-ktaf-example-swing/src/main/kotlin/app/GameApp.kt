@@ -7,6 +7,7 @@ import ktaf.logic.GameExecutor
 import ktaf.logic.discovery.CatalogEntry
 import ktaf.logic.discovery.GameCatalogResolver
 import ktaf.utilities.templates.GameTemplate
+import org.apache.logging.log4j.kotlin.Logging
 import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.FlowLayout
@@ -29,7 +30,7 @@ import javax.swing.SwingUtilities
 import javax.swing.border.EmptyBorder
 import javax.swing.filechooser.FileNameExtensionFilter
 
-class GameApp : JFrame("app-example-swing") {
+class GameApp : JFrame("app-example-swing"), Logging {
     private var currentFrameAcceptsInput: Boolean = false
     init {
         // set up main frame
@@ -137,6 +138,7 @@ class GameApp : JFrame("app-example-swing") {
         } else if (gameTemplates.size > 1) {
             handleMultipleGamesFoundInJar(gameTemplates, ioConfiguration)
         } else {
+            logger.error("No games found in ${file.name}.")
             JOptionPane.showMessageDialog(
                 this,
                 "No games were found.",
@@ -169,10 +171,9 @@ class GameApp : JFrame("app-example-swing") {
     }
 
     private fun beginGame(gameTemplate: GameTemplate, ioConfiguration: IOConfiguration) {
-        // cancel any pending
+        logger.info("Ending execution of any executing games...")
         GameExecutor.cancel()
-
-        // create and start game on background thread
+        logger.info("Beginning async execution of $gameTemplate...")
         GameExecutor.executeAysnc(gameTemplate, ioConfiguration = ioConfiguration)
     }
 
