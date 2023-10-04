@@ -63,10 +63,10 @@ public object GameExecutor {
     /**
      * Cancel execution of all executing games.
      */
-    public fun cancelAysnc() {
+    public fun cancel() {
         try {
             lock.lock()
-            executingGames.forEach { cancelAysnc(it) }
+            executingGames.forEach { cancel(it) }
         } finally {
             lock.unlock()
         }
@@ -75,7 +75,7 @@ public object GameExecutor {
     /**
      * Cancel execution of a [game].
      */
-    public fun cancelAysnc(game: Game) {
+    public fun cancel(game: Game) {
         game.end()
     }
 }

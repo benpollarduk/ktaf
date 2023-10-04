@@ -142,7 +142,7 @@ class GameApp : JFrame("app-example-swing") {
 
     private fun beginGame(gameTemplate: GameTemplate, ioConfiguration: IOConfiguration) {
         // cancel any pending
-        GameExecutor.cancelAysnc()
+        GameExecutor.cancel()
 
         // create and start game on background thread
         GameExecutor.executeAysnc(gameTemplate, ioConfiguration = ioConfiguration)
