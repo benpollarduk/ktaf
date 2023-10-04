@@ -7,6 +7,7 @@ import ktaf.assets.locations.RoomPosition
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
+@Suppress("MaxLineLength")
 class RegionMakerTest {
     @Test
     fun `given any empty list when convertToRoomMatrix then return empty matrix`() {

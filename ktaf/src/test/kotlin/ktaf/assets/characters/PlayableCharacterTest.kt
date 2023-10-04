@@ -4,6 +4,7 @@ import ktaf.assets.Item
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
+@Suppress("MaxLineLength")
 class PlayableCharacterTest {
     @Test
     fun `given a default instance when not killed then isAlive is true`() {

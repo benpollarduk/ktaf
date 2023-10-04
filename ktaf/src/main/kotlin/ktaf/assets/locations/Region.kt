@@ -135,6 +135,7 @@ public class Region(
      * Unlock an [Exit] in the specified [direction]. Also unlocks the opposing [Exit] on the adjoining room. If this
      * is possible return true, else false.
      */
+    @Suppress("ReturnCount")
     public fun unlockExitPair(direction: Direction): Boolean {
         val current = currentRoom ?: return false
 

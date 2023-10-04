@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import java.io.File
 import java.io.FileOutputStream
 
+@Suppress("MaxLineLength")
 class GameCatalogResolverTest {
     @Test
     fun `given example jar containing one game template object when resolving catalog entries for jar file then one entry returned`() {

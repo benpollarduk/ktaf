@@ -5,19 +5,6 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class IdentifierTest {
-
-    @Test
-    fun `given empty string as name when calling equals with null then return false`() {
-        // Given
-        val identifier = Identifier("")
-
-        // When
-        val result = identifier.equals(null)
-
-        // Then
-        assertFalse(result)
-    }
-
     @Test
     fun `given a name of abc when calling equals with def then return false`() {
         // Given

@@ -9,6 +9,7 @@ import ktaf.assets.locations.ViewPoint
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
+@Suppress("MaxLineLength")
 class StringUtilitiesTest {
     @Test
     fun `given a ball an armchair and a pig list when constructExaminablesToSentence then return a ball, an armchair and a pig full stop`() {
