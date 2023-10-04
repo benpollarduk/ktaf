@@ -121,6 +121,6 @@ class GameExecutorTest {
         Thread.sleep(1000)
         GameExecutor.cancel()
         Thread.sleep(1000)
-        Assertions.assertEquals(GameState.FINISHED, game.state)
+        Assertions.assertFalse(game.isExecuting)
     }
 }
