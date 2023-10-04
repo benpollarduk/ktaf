@@ -15,7 +15,7 @@ public class AnsiTitleFrameBuilder(
     private val backgroundColor: AnsiColor = AnsiColor.RESET,
     private val borderColor: AnsiColor = AnsiColor.BRIGHT_BLACK,
     private val titleColor: AnsiColor = AnsiColor.WHITE,
-    private val descriptionColor: AnsiColor = AnsiColor.WHITE,
+    private val descriptionColor: AnsiColor = AnsiColor.WHITE
 ) : TitleFrameBuilder {
     override fun build(title: String, introduction: String): Frame {
         val availableWidth = frameSize.width - 4
@@ -28,7 +28,7 @@ public class AnsiTitleFrameBuilder(
             leftMargin,
             2,
             availableWidth,
-            titleColor,
+            titleColor
         )
         ansiGridStringBuilder.drawUnderline(leftMargin, lastPosition.y + 1, title.length, titleColor)
         ansiGridStringBuilder.drawWrapped(
@@ -36,7 +36,7 @@ public class AnsiTitleFrameBuilder(
             leftMargin,
             lastPosition.y + 3,
             availableWidth,
-            descriptionColor,
+            descriptionColor
         )
 
         return AnsiGridTextFrame(ansiGridStringBuilder, 0, 0, false, backgroundColor)

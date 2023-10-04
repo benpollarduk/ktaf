@@ -21,8 +21,8 @@ class ViewPointTest {
                     Exit(Direction.NORTH),
                     Exit(Direction.EAST),
                     Exit(Direction.SOUTH),
-                    Exit(Direction.WEST),
-                ),
+                    Exit(Direction.WEST)
+                )
             )
             it[2, 1, 0] = Room("", "", listOf(Exit(Direction.WEST)))
             it[1, 2, 0] = Room("", "", listOf(Exit(Direction.SOUTH)))
@@ -47,8 +47,8 @@ class ViewPointTest {
                     Exit(Direction.NORTH),
                     Exit(Direction.EAST),
                     Exit(Direction.SOUTH),
-                    Exit(Direction.WEST),
-                ),
+                    Exit(Direction.WEST)
+                )
             )
             it[2, 1, 0] = Room("", "", listOf(Exit(Direction.WEST)))
             it[1, 2, 0] = Room("", "", listOf(Exit(Direction.SOUTH)))
@@ -73,8 +73,8 @@ class ViewPointTest {
                     Exit(Direction.NORTH),
                     Exit(Direction.EAST),
                     Exit(Direction.SOUTH),
-                    Exit(Direction.WEST),
-                ),
+                    Exit(Direction.WEST)
+                )
             )
             it[2, 1, 0] = Room("", "", listOf(Exit(Direction.WEST)))
             it[1, 2, 0] = Room("", "", listOf(Exit(Direction.SOUTH)))

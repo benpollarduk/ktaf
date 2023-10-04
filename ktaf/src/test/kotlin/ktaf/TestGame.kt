@@ -34,8 +34,8 @@ internal object TestGame : GameTemplate() {
                 Exit(Direction.EAST),
                 Exit(Direction.WEST),
                 Exit(Direction.UP),
-                Exit(Direction.DOWN),
-            ),
+                Exit(Direction.DOWN)
+            )
         ).also { room ->
             room.addItem(Item("Beaver", "A beaver is on the floor!", true))
             room.addCharacter(NonPlayableCharacter("Person 1", "A quiet person."))

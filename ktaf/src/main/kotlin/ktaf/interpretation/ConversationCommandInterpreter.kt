@@ -50,8 +50,8 @@ public class ConversationCommandInterpreter : Interpreter {
             commands.add(
                 CommandHelp(
                     (i + 1).toString(),
-                    paragraph.responses[i].line.ensureFinishedSentence().toSpeech(),
-                ),
+                    paragraph.responses[i].line.ensureFinishedSentence().toSpeech()
+                )
             )
         }
 
