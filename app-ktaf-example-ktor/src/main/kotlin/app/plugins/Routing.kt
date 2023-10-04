@@ -1,5 +1,6 @@
 package app.plugins
 
+import app.Central
 import app.io.KtorConfiguration
 import io.ktor.http.ContentType
 import io.ktor.server.application.Application
@@ -43,6 +44,9 @@ fun Application.configureRouting() {
             }
 
             if (timedOut) {
+                Central.logger.error(
+                    "A new frame did not arrive with $KtorConfiguration within the specified timeframe.",
+                )
                 call.respondText("Timed out.", contentType = ContentType.Text.Plain)
             } else {
                 call.respondText(KtorConfiguration.getLastFrame(), contentType = ContentType.Text.Html)
