@@ -11,14 +11,14 @@ import com.github.benpollarduk.ktaf.utilities.RegionMaker
  */
 public class Region(
     override var identifier: Identifier,
-    override var description: com.github.benpollarduk.ktaf.assets.Description
+    override var description: com.github.benpollarduk.ktaf.assets.Description,
 ) : com.github.benpollarduk.ktaf.assets.ExaminableObject() {
     /**
      * Provides a region which is a container of [Room]. The region has an [identifier] and a [description].
      */
     public constructor(
         identifier: String,
-        description: String
+        description: String,
     ) : this(Identifier(identifier), com.github.benpollarduk.ktaf.assets.Description(description))
 
     /**
@@ -202,7 +202,7 @@ public class Region(
             Direction.SOUTH,
             Direction.WEST,
             Direction.UP,
-            Direction.DOWN
+            Direction.DOWN,
         )
     }
 }

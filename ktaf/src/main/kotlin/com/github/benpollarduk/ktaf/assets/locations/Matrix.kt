@@ -47,19 +47,7 @@ public class Matrix(private var rooms: Array<Array<Array<Room>>>) {
      * Get this [Matrix] as a simple [List<Room>].
      */
     public fun toRooms(): List<Room> {
-        val roomList = mutableListOf<Room?>()
-
-        for (z in 0 until depth) {
-            for (y in 0 until height) {
-                for (x in 0 until width) {
-                    roomList.add(this[x, y, z])
-                }
-            }
-        }
-
-        return roomList
-            .filterNotNull()
-            .filter { it != Room.empty }
+        return toRoomPositions().map { it.room }
     }
 
     /**
