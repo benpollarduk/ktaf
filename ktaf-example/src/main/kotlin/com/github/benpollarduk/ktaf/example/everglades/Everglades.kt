@@ -9,6 +9,7 @@ import com.github.benpollarduk.ktaf.example.everglades.rooms.ForestFloor
 import com.github.benpollarduk.ktaf.example.everglades.rooms.GreatWesternOcean
 import com.github.benpollarduk.ktaf.example.everglades.rooms.InnerCave
 import com.github.benpollarduk.ktaf.example.everglades.rooms.Outskirts
+import com.github.benpollarduk.ktaf.example.everglades.rooms.TreeHouse
 import com.github.benpollarduk.ktaf.utilities.RegionMaker
 import com.github.benpollarduk.ktaf.utilities.templates.RegionTemplate
 
@@ -16,6 +17,7 @@ internal class Everglades : RegionTemplate() {
     override fun instantiate(playableCharacter: PlayableCharacter): Region {
         val regionMaker = RegionMaker(NAME, DESCRIPTION).also {
             it[2, 0, 0] = ForestEntrance().instantiate(playableCharacter)
+            it[2, 0, 1] = TreeHouse().instantiate(playableCharacter)
             it[2, 1, 0] = ForestFloor().instantiate(playableCharacter)
             it[2, 2, 0] = CaveMouth().instantiate(playableCharacter)
             it[1, 2, 0] = GreatWesternOcean().instantiate(playableCharacter)

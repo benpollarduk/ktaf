@@ -12,13 +12,14 @@ internal class ForestEntrance : RoomTemplate() {
             NAME,
             DESCRIPTION,
             listOf(
-                Exit(Direction.NORTH)
+                Exit(Direction.NORTH),
+                Exit(Direction.UP)
             )
         )
     }
     internal companion object {
         internal const val NAME = "Forest Entrance"
         private const val DESCRIPTION = "You are standing on the edge of a beautiful forest. There is a parting " +
-            "in the trees to the north."
+            "in the trees to the north and a tree house in one of the nearby trees."
     }
 }
