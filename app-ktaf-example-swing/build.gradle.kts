@@ -57,13 +57,13 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("app.GameApp")
+    mainClass.set("com.github.benpollarduk.ktaf.swing.GameApp")
 }
 
 tasks.jar {
     manifest {
         attributes(
-            "Main-Class" to "app.GameApp",
+            "Main-Class" to "com.github.benpollarduk.ktaf.swing.GameApp",
         )
     }
 }

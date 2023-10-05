@@ -57,13 +57,13 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass.set("app.Main")
+    mainClass.set("com.github.benpollarduk.ktaf.console.Main")
 }
 
 tasks.jar {
     manifest {
         attributes(
-            "Main-Class" to "app.Main",
+            "Main-Class" to "com.github.benpollarduk.ktaf.console.Main",
         )
     }
 }
