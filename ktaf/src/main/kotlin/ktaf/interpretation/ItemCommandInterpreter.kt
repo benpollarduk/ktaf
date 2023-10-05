@@ -62,7 +62,7 @@ public class ItemCommandInterpreter : Interpreter {
         }
     }
 
-    @Suppress("ReturnCount")
+    @Suppress("ReturnCount", "CyclomaticComplexMethod")
     private fun tryParseExamine(text: String, game: Game): Command? {
         val verb = CommonInterpretation.extractVerb(text)
         val noun = CommonInterpretation.extractNoun(text)

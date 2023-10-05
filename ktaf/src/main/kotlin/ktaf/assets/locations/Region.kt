@@ -73,17 +73,8 @@ public class Region(
             return null
         }
 
-        for (z in 0 until matrix.depth) {
-            for (y in 0 until matrix.height) {
-                for (x in 0 until matrix.width) {
-                    if (room == matrix[x, y, z]) {
-                        return RoomPosition(room, x, y, z)
-                    }
-                }
-            }
-        }
-
-        return null
+        val rooms = matrix.toRoomPositions()
+        return rooms.firstOrNull { it.room == room }
     }
 
     /**

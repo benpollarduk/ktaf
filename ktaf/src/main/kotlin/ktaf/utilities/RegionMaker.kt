@@ -63,16 +63,10 @@ public class RegionMaker(
     public fun make(x: Int, y: Int, z: Int): Region {
         val region = Region(identifier, description)
         val matrix = convertToRoomMatrix(rooms)
+        val rooms = matrix.toRoomPositions()
 
-        for (depth in 0 until matrix.depth) {
-            for (row in 0 until matrix.height) {
-                for (column in 0 until matrix.width) {
-                    val room = matrix[column, row, depth]
-                    if (room != Room.empty) {
-                        region.addRoom(room, column, row, depth)
-                    }
-                }
-            }
+        rooms.filter { it.room != Room.empty }.forEach {
+            region.addRoom(it.room, it.x, it.y, it.z)
         }
 
         linkExits(region)
@@ -140,23 +134,20 @@ public class RegionMaker(
          * Link exits in a [region], ensuring that when an [Exit] exists in one [Room] its neighbour also has one.
          */
         internal fun linkExits(region: Region) {
-            region.toMatrix().toRooms().forEach {
-                if (it != Room.empty) {
+            region.toMatrix()
+                .toRooms()
+                .filter { it != Room.empty }
+                .forEach {
                     for (direction in Region.allDirections) {
-                        val exit = it.findExit(direction, true)
-                        if (exit != null) {
-                            val adjoining = region.getAdjoiningRoom(direction, it)
-                            val inverseDirection = direction.inverse()
+                        val exit = it.findExit(direction, true) ?: continue
+                        val adjoining = region.getAdjoiningRoom(direction, it)
+                        val inverseDirection = direction.inverse()
 
-                            if (adjoining != null) {
-                                if (adjoining.findExit(inverseDirection, true) == null) {
-                                    adjoining.addExit(Exit(inverseDirection, exit.isLocked))
-                                }
-                            }
+                        if (adjoining != null && (adjoining.findExit(inverseDirection, true) == null)) {
+                            adjoining.addExit(Exit(inverseDirection, exit.isLocked))
                         }
                     }
                 }
-            }
         }
     }
 }

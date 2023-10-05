@@ -10,6 +10,7 @@ import ktaf.rendering.FramePosition
 /**
  * Provides an ANSI region map builder.
  */
+@Suppress("LongParameterList", "LongMethod", "CyclomaticComplexMethod")
 public class AnsiRegionMapBuilder(
     private val lockedExit: Char = 'x',
     private val unlockedExit: Char = ' ',

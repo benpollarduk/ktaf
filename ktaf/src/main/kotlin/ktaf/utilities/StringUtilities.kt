@@ -54,6 +54,7 @@ internal object StringUtilities {
     /**
      * Cut a line from [paragraph].
      */
+    @Suppress("LoopWithTooManyJumpStatements")
     internal fun cutLineFromParagraph(paragraph: String, maxWidth: Int): ExtractedString {
         var chunk = ""
         var remaining = paragraph

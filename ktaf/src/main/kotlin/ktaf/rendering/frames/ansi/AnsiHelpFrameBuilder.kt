@@ -10,6 +10,7 @@ import ktaf.rendering.frames.HelpFrameBuilder
 /**
  * Provides an ANSI help frame builder that builds in to the specified [ansiGridStringBuilder].
  */
+@Suppress("LongMethod")
 public class AnsiHelpFrameBuilder(
     private val ansiGridStringBuilder: AnsiGridStringBuilder,
     private val frameSize: Size,

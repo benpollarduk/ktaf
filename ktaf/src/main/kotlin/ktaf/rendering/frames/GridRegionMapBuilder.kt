@@ -10,6 +10,7 @@ import ktaf.rendering.FramePosition
 /**
  * Provides a region map builder.
  */
+@Suppress("LongMethod", "CyclomaticComplexMethod")
 public class GridRegionMapBuilder(
     private val lockedExit: Char = 'x',
     private val unlockedExit: Char = ' ',

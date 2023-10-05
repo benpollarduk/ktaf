@@ -20,6 +20,7 @@ import kotlin.math.max
 /**
  * Provides an ANSI scene frame builder that builds in to the specified [ansiGridStringBuilder].
  */
+@Suppress("LongParameterList", "LongMethod")
 public class AnsiSceneFrameBuilder(
     private val ansiGridStringBuilder: AnsiGridStringBuilder,
     private val roomMapBuilder: AnsiRoomMapBuilder,

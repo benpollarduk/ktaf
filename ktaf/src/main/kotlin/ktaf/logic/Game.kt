@@ -176,6 +176,90 @@ public class Game(
         }
     }
 
+    private fun handleConditionSpecificStates() {
+        val completionCheckResult = completionCondition(this)
+        val gameOverCheckResult = gameOverCondition(this)
+        val converser = activeConverser
+        when {
+            completionCheckResult.conditionMet -> {
+                refresh(
+                    ioConfiguration.frameBuilders.completionFrameBuilder.build(
+                        completionCheckResult.title,
+                        completionCheckResult.description
+                    )
+                )
+                end()
+            }
+            gameOverCheckResult.conditionMet -> {
+                refresh(
+                    ioConfiguration.frameBuilders.gameOverFrameBuilder.build(
+                        gameOverCheckResult.title,
+                        gameOverCheckResult.description
+                    )
+                )
+                end()
+            }
+            converser != null -> {
+                refresh(
+                    ioConfiguration.frameBuilders.conversationFrameBuilder.build(
+                        "Conversation with ${converser.identifier.name}",
+                        converser,
+                        interpreter.getContextualCommandHelp(this)
+                    )
+                )
+            }
+        }
+    }
+
+    private fun waitForInput(): String {
+        if (!currentFrame.acceptsInput) {
+            val frame = currentFrame
+            while (!ioConfiguration.waitForAcknowledge(cancellationToken) &&
+                !cancellationToken.wasCancelled &&
+                currentFrame == frame
+            ) {
+                drawFrame(currentFrame)
+            }
+            return ""
+        } else {
+            return ioConfiguration.waitForCommand(cancellationToken)
+        }
+    }
+
+    private fun interpretInput(input: String): Reaction {
+        val interpretation = interpreter.interpret(input, this)
+
+        return when {
+            interpretation.interpretedSuccessfully -> {
+                interpretation.command.invoke(this)
+            }
+            input.isNotEmpty() -> {
+                Reaction(ReactionResult.ERROR, "$input was not valid input.")
+            }
+            else -> {
+                Reaction(ReactionResult.OK, "")
+            }
+        }
+    }
+
+    private fun handleReaction(reaction: Reaction) {
+        when (reaction.result) {
+            ReactionResult.ERROR -> {
+                val message = "$errorPrefix: ${reaction.description}"
+                refresh(message)
+            }
+            ReactionResult.OK -> {
+                refresh(reaction.description)
+            }
+            ReactionResult.INTERNAL -> {
+                // nothing
+            }
+            ReactionResult.FATAL -> {
+                // nothing
+            }
+        }
+    }
+
     internal fun execute() {
         if (isExecuting) {
             return
@@ -195,52 +279,11 @@ public class Game(
 
         do {
             var displayReactionToInput = true
-            val completionCheckResult = completionCondition(this)
-            val gameOverCheckResult = gameOverCondition(this)
-            val converser = activeConverser
 
-            when {
-                completionCheckResult.conditionMet -> {
-                    refresh(
-                        ioConfiguration.frameBuilders.completionFrameBuilder.build(
-                            completionCheckResult.title,
-                            completionCheckResult.description
-                        )
-                    )
-                    end()
-                }
-                gameOverCheckResult.conditionMet -> {
-                    refresh(
-                        ioConfiguration.frameBuilders.gameOverFrameBuilder.build(
-                            gameOverCheckResult.title,
-                            gameOverCheckResult.description
-                        )
-                    )
-                    end()
-                }
-                converser != null -> {
-                    refresh(
-                        ioConfiguration.frameBuilders.conversationFrameBuilder.build(
-                            "Conversation with ${converser.identifier.name}",
-                            converser,
-                            interpreter.getContextualCommandHelp(this)
-                        )
-                    )
-                }
-            }
+            handleConditionSpecificStates()
 
             if (state == GameState.ACTIVE) {
-                if (!currentFrame.acceptsInput) {
-                    val frame = currentFrame
-                    while (!ioConfiguration.waitForAcknowledge(cancellationToken) &&
-                        !cancellationToken.wasCancelled &&
-                        currentFrame == frame
-                    ) {
-                        drawFrame(currentFrame)
-                    }
-                } else {
-                    input = ioConfiguration.waitForCommand(cancellationToken)
-                }
+                input = waitForInput()
             }
 
             when (state) {
@@ -254,19 +297,7 @@ public class Game(
                         displayReactionToInput = false
                     } else {
                         input = input.preen()
-                        val interpretation = interpreter.interpret(input, this)
-
-                        reaction = when {
-                            interpretation.interpretedSuccessfully -> {
-                                interpretation.command.invoke(this)
-                            }
-                            input.isNotEmpty() -> {
-                                Reaction(ReactionResult.ERROR, "$input was not valid input.")
-                            }
-                            else -> {
-                                Reaction(ReactionResult.OK, "")
-                            }
-                        }
+                        reaction = interpretInput(input)
                     }
                 }
                 GameState.FINISHED -> {
@@ -275,21 +306,7 @@ public class Game(
             }
 
             if (displayReactionToInput) {
-                when (reaction.result) {
-                    ReactionResult.ERROR -> {
-                        val message = "$errorPrefix: ${reaction.description}"
-                        refresh(message)
-                    }
-                    ReactionResult.OK -> {
-                        refresh(reaction.description)
-                    }
-                    ReactionResult.INTERNAL -> {
-                        // nothing
-                    }
-                    ReactionResult.FATAL -> {
-                        // nothing
-                    }
-                }
+                handleReaction(reaction)
             }
         } while (state != GameState.FINISHED)
 

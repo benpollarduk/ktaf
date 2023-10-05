@@ -4,7 +4,7 @@ import ktaf.assets.Size
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class GridFrameBuilderTest {
+class GridStringBuilderTest {
     @Test
     fun `given blank when draw wrapped with A then drawn character is A`() {
         // Given

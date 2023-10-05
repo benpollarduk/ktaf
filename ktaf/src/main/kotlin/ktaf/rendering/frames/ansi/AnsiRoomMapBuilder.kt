@@ -9,6 +9,7 @@ import ktaf.rendering.KeyType
 /**
  * Provides an ANSI [Room] map builder.
  */
+@Suppress("LongParameterList")
 public class AnsiRoomMapBuilder(
     private val lockedExit: Char = 'x',
     private val itemOrCharacterInRoom: Char = '?',

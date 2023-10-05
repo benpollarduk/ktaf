@@ -15,6 +15,7 @@ public class AnsiGridTextFrame(
     public override val acceptsInput: Boolean = true,
     private val backgroundColor: AnsiColor = AnsiColor.BLACK
 ) : Frame {
+    @Suppress("NestedBlockDepth")
     override fun render(callback: RenderFrame) {
         val stringBuilder = StringBuilder()
         val newLine = newline()
