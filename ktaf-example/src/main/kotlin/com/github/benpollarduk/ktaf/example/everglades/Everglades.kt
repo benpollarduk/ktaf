@@ -8,6 +8,7 @@ import com.github.benpollarduk.ktaf.example.everglades.rooms.ForestEntrance
 import com.github.benpollarduk.ktaf.example.everglades.rooms.ForestFloor
 import com.github.benpollarduk.ktaf.example.everglades.rooms.GreatWesternOcean
 import com.github.benpollarduk.ktaf.example.everglades.rooms.InnerCave
+import com.github.benpollarduk.ktaf.example.everglades.rooms.Mine
 import com.github.benpollarduk.ktaf.example.everglades.rooms.Outskirts
 import com.github.benpollarduk.ktaf.example.everglades.rooms.TreeHouse
 import com.github.benpollarduk.ktaf.utilities.RegionMaker
@@ -22,6 +23,7 @@ internal class Everglades : RegionTemplate() {
             it[2, 2, 0] = CaveMouth().instantiate(playableCharacter)
             it[1, 2, 0] = GreatWesternOcean().instantiate(playableCharacter)
             it[2, 3, 0] = Cave().instantiate(playableCharacter)
+            it[2, 3, -1] = Mine().instantiate(playableCharacter)
             it[3, 3, 0] = InnerCave().instantiate(playableCharacter)
             it[3, 4, 0] = Outskirts().instantiate(playableCharacter)
         }
