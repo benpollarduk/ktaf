@@ -58,19 +58,20 @@ internal object StringUtilities {
         var chunk = ""
         var remaining = paragraph
         val newline = newline()
+        var done = false
 
-        while (chunk.length < maxWidth) {
+        while (!done) {
             val extractedString = extractNextWordFromString(remaining)
             var word = extractedString.extractedWord
             remaining = extractedString.rest
 
             if (word.isEmpty()) {
-                break
+                done = true
             }
 
             if (chunk.length + word.length > maxWidth) {
                 remaining = "$word$remaining"
-                break
+                done = true
             }
 
             if (word.isNotEmpty() && !word.endsWith(newline)) {
@@ -80,7 +81,11 @@ internal object StringUtilities {
             chunk += word
 
             if (chunk.endsWith(newline)) {
-                break
+                done = true
+            }
+
+            if (chunk.length >= maxWidth) {
+                done = true
             }
         }
 

@@ -12,6 +12,7 @@ import ktaf.rendering.frames.Frame
 /**
  * Provides an ANSI conversation frame builder that builds in to the specified [ansiGridStringBuilder].
  */
+@Suppress("LongMethod")
 public class AnsiConversationFrameBuilder(
     private val ansiGridStringBuilder: AnsiGridStringBuilder,
     private val frameSize: Size,
