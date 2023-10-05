@@ -143,7 +143,7 @@ val template = object : GameTemplate() {
 }
 
 // execute the game
-GameExecutor.execute(template, ioConfiguration = AnsiConsoleConfiguration)
+GameExecutor.execute(template, ioConfiguration = ioConfiguration)
 ```
 
 # For Open Questions
