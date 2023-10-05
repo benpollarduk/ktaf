@@ -13,7 +13,7 @@ import ktaf.assets.locations.RoomPosition
  */
 public class RegionMaker(
     private val identifier: Identifier,
-    private val description: Description,
+    private val description: Description
 ) {
     /**
      * A helper for making a [Region], with a specified [identifier] and [description].

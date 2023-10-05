@@ -93,7 +93,7 @@ public class ItemCommandInterpreter : Interpreter {
             if (direction != null) {
                 val room = game.overworld.currentRegion?.currentRoom
                 val exit = room?.findExit(direction) ?: return Unactionable(
-                    "There is no exit in this room to the $direction.",
+                    "There is no exit in this room to the $direction."
                 )
                 return Examine(exit)
             }
@@ -289,27 +289,27 @@ public class ItemCommandInterpreter : Interpreter {
 
         private val examineCommandHelp = CommandHelp(
             "$EXAMINE / $EXAMINE_SHORT $VARIABLE",
-            "Examine anything in the game",
+            "Examine anything in the game"
         )
         private val dropCommandHelp = CommandHelp(
             "$DROP / $DROP_SHORT $VARIABLE",
-            "Drop an item",
+            "Drop an item"
         )
         private val takeCommandHelp = CommandHelp(
             "$TAKE / $TAKE_SHORT $VARIABLE",
-            "Take an item",
+            "Take an item"
         )
         private val takeAllCommandHelp = CommandHelp(
             "$TAKE / $TAKE_SHORT $ALL",
-            "Take all items in the current room",
+            "Take all items in the current room"
         )
         private val useCommandHelp = CommandHelp(
             "$USE $VARIABLE",
-            "Use an item on the current room",
+            "Use an item on the current room"
         )
         private val useOnCommandHelp = CommandHelp(
             "$USE $VARIABLE ${ON.lowercase()} $VARIABLE",
-            "Use an item on another item or character",
+            "Use an item on another item or character"
         )
 
         /**
@@ -320,7 +320,7 @@ public class ItemCommandInterpreter : Interpreter {
             takeCommandHelp,
             takeAllCommandHelp,
             useCommandHelp,
-            useOnCommandHelp,
+            useOnCommandHelp
         )
     }
 }

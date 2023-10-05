@@ -33,8 +33,8 @@ internal object TestGame : GameTemplate() {
                 Exit(Direction.EAST),
                 Exit(Direction.WEST),
                 Exit(Direction.UP),
-                Exit(Direction.DOWN),
-            ),
+                Exit(Direction.DOWN)
+            )
         ).also { room ->
             room.addItem(Item("Beaver", "A beaver is on the floor!", true))
             room.addCharacter(NonPlayableCharacter("Person 1", "A quiet person."))
@@ -46,12 +46,12 @@ internal object TestGame : GameTemplate() {
                             Paragraph("Here is a question?").also { paragraph ->
                                 paragraph.responses = listOf(
                                     Response("Continue"),
-                                    Response("Repeat", -1),
+                                    Response("Repeat", -1)
                                 )
-                            },
-                        ),
+                            }
+                        )
                     )
-                },
+                }
             )
         }
         regionMaker[0, 1, 1] = Room("West Room", basicRoomDescription, listOf(Exit(Direction.EAST)))
@@ -69,20 +69,20 @@ internal object TestGame : GameTemplate() {
         val overworldMaker = OverworldMaker(
             "Test Overworld",
             "This is a test overworld",
-            listOf(regionMaker),
+            listOf(regionMaker)
         )
         return Game(
             GameInformation(
                 "Test game",
                 "This is a test game",
                 "This is a test game",
-                "Test author",
+                "Test author"
             ),
             player,
             overworldMaker.make(),
             { EndCheckResult.notEnded },
             { EndCheckResult.notEnded },
-            ioConfiguration = ioConfiguration,
+            ioConfiguration = ioConfiguration
         )
     }
 }

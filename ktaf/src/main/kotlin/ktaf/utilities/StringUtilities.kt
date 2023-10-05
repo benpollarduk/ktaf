@@ -54,24 +54,24 @@ internal object StringUtilities {
     /**
      * Cut a line from [paragraph].
      */
+    @Suppress("LoopWithTooManyJumpStatements")
     internal fun cutLineFromParagraph(paragraph: String, maxWidth: Int): ExtractedString {
         var chunk = ""
         var remaining = paragraph
         val newline = newline()
-        var done = false
 
-        while (!done) {
+        while (chunk.length < maxWidth) {
             val extractedString = extractNextWordFromString(remaining)
             var word = extractedString.extractedWord
             remaining = extractedString.rest
 
             if (word.isEmpty()) {
-                done = true
+                break
             }
 
             if (chunk.length + word.length > maxWidth) {
                 remaining = "$word$remaining"
-                done = true
+                break
             }
 
             if (word.isNotEmpty() && !word.endsWith(newline)) {
@@ -81,11 +81,7 @@ internal object StringUtilities {
             chunk += word
 
             if (chunk.endsWith(newline)) {
-                done = true
-            }
-
-            if (chunk.length >= maxWidth) {
-                done = true
+                break
             }
         }
 
