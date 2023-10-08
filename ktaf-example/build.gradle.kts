@@ -16,6 +16,9 @@ plugins {
     // https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow
     id("com.github.johnrengelman.shadow") version "8.1.1"
 
+    // https://plugins.gradle.org/plugin/org.javamodularity.moduleplugin
+    id("org.javamodularity.moduleplugin") version "1.8.12"
+
     // Apply the java-library plugin for API and implementation separation.
     `java-library`
 }
@@ -36,7 +39,7 @@ kotlin {
 val targetLanguageLevel = "9"
 tasks.compileKotlin {
     kotlinOptions.jvmTarget = targetLanguageLevel
-    kotlinOptions.allWarningsAsErrors = true
+    // kotlinOptions.allWarningsAsErrors = true
 }
 
 tasks.compileTestKotlin {

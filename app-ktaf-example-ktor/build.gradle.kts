@@ -9,6 +9,9 @@ plugins {
 
     // https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow
     id("com.github.johnrengelman.shadow") version "8.1.1"
+
+    // https://plugins.gradle.org/plugin/org.javamodularity.moduleplugin
+    id("org.javamodularity.moduleplugin") version "1.8.12"
 }
 
 group = "app"
@@ -16,6 +19,7 @@ version = "0.0.1"
 
 application {
     mainClass.set("com.github.benpollarduk.ktaf.ktor.ApplicationKt")
+    mainModule.set("com.github.benpollarduk.ktaf.ktor")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")

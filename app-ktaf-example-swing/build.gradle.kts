@@ -13,6 +13,9 @@ plugins {
     // https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow
     id("com.github.johnrengelman.shadow") version "8.1.1"
 
+    // https://plugins.gradle.org/plugin/org.javamodularity.moduleplugin
+    id("org.javamodularity.moduleplugin") version "1.8.12"
+
     // Apply the application plugin to add support for building a CLI application in Java.
     application
 
@@ -58,6 +61,7 @@ dependencies {
 application {
     // Define the main class for the application.
     mainClass.set("com.github.benpollarduk.ktaf.swing.GameApp")
+    mainModule.set("com.github.benpollarduk.ktaf.swing")
 }
 
 tasks.jar {
