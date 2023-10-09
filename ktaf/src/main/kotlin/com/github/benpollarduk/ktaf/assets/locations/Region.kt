@@ -73,8 +73,7 @@ public class Region(
             return null
         }
 
-        val rooms = matrix.toRoomPositions()
-        return rooms.firstOrNull { it.room == room }
+        return roomPositions.firstOrNull { it.room == room }
     }
 
     /**
