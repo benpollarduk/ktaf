@@ -9,19 +9,20 @@ import com.github.benpollarduk.ktaf.utilities.templates.PlayableCharacterTemplat
 
 internal class Player : PlayableCharacterTemplate() {
     override fun instantiate(): PlayableCharacter {
-        return PlayableCharacter(NAME, DESCRIPTION, listOf(Knife().instantiate())).also {
+        return PlayableCharacter(NAME, DESCRIPTION).also {
+            it.acquireItem(Knife().instantiate(it))
             it.interaction = { item, _ ->
                 when {
                     Knife.NAME.equalsExaminable(item) -> {
                         InteractionResult(
                             InteractionEffect.FATAL_EFFECT,
                             item,
-                            "You slash wildly at your own throat. You are dead."
+                            "You slash wildly at your own throat. You are dead.",
                         )
                     } else -> {
                         InteractionResult(
                             InteractionEffect.NO_EFFECT,
-                            item
+                            item,
                         )
                     }
                 }

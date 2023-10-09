@@ -9,16 +9,9 @@ import com.github.benpollarduk.ktaf.assets.locations.Room
  */
 public open class ItemTemplate {
     /**
-     * Instantiate a new instance of the templated [Item].
-     */
-    public open fun instantiate(): Item {
-        throw NotImplementedError()
-    }
-
-    /**
      * Instantiate a new instance of the templated [Item] with a specified [playableCharacter] and [room].
      */
-    public open fun instantiate(playableCharacter: PlayableCharacter, room: Room): Item {
+    public open fun instantiate(playableCharacter: PlayableCharacter, room: Room? = null): Item {
         throw NotImplementedError()
     }
 }

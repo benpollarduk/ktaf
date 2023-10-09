@@ -41,7 +41,7 @@ plugins {
 // Publishing properties defined at a project level gradle.properties.
 val artifactId: String by project
 val artifactGroup: String by project
-val ver = "1.0.1"
+val ver = "1.0.2"
 
 ext {
     // Set the version.
@@ -97,6 +97,9 @@ dependencies {
     // https://mvnrepository.com/artifact/io.gitlab.arturbosch.detekt/detekt-gradle-plugin
     implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.23.1")
 
+    // Use kotlin reflection.
+    implementation(kotlin("reflect"))
+
     // Use JUnit Jupiter API for testing.
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.1")
 
@@ -105,7 +108,6 @@ dependencies {
 
     // This dependency is exported to consumers, that is to say found on their compile classpath.
     api("org.apache.commons:commons-math3:3.6.1")
-    implementation(kotlin("reflect"))
 }
 
 // https://docs.gradle.org/current/userguide/publishing_gradle_module_metadata.html#sub:disabling-gmm-publication
