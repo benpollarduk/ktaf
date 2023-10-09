@@ -4,6 +4,7 @@ import com.github.benpollarduk.ktaf.assets.Description
 import com.github.benpollarduk.ktaf.assets.ExaminableObject
 import com.github.benpollarduk.ktaf.assets.ExaminationResult
 import com.github.benpollarduk.ktaf.assets.Identifier
+import com.github.benpollarduk.ktaf.extensions.equalsExaminable
 import com.github.benpollarduk.ktaf.utilities.RegionMaker
 
 /**
@@ -62,6 +63,14 @@ public class Region(
      * Specifies if this [Region] is visible without first being discovered.
      */
     public var visibleWithoutDiscovery: Boolean = false
+
+    /**
+     * Try and get a [Room] from a specified [name]. If a [Room] with a matching name cannot be found then null will
+     * be returned.
+     */
+    public fun findRoom(name: String): Room? {
+        return roomPositions.firstOrNull { name.equalsExaminable(it.room) }?.room
+    }
 
     /**
      * Get the [RoomPosition] of a [room]. If the specified [room] does not exist in this [Region] null is returned.

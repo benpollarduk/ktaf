@@ -6,6 +6,7 @@ import com.github.benpollarduk.ktaf.assets.locations.Direction
 import com.github.benpollarduk.ktaf.assets.locations.Exit
 import com.github.benpollarduk.ktaf.assets.locations.Room
 import com.github.benpollarduk.ktaf.example.everglades.items.Candle
+import com.github.benpollarduk.ktaf.example.global.items.Sphere
 import com.github.benpollarduk.ktaf.utilities.templates.RoomTemplate
 
 internal class Tunnel : RoomTemplate() {

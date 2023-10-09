@@ -8,9 +8,9 @@ import com.github.benpollarduk.ktaf.example.everglades.rooms.ForestEntrance
 import com.github.benpollarduk.ktaf.example.everglades.rooms.ForestFloor
 import com.github.benpollarduk.ktaf.example.everglades.rooms.GreatWesternOcean
 import com.github.benpollarduk.ktaf.example.everglades.rooms.InnerCave
-import com.github.benpollarduk.ktaf.example.everglades.rooms.Tunnel
 import com.github.benpollarduk.ktaf.example.everglades.rooms.Outskirts
 import com.github.benpollarduk.ktaf.example.everglades.rooms.TreeHouse
+import com.github.benpollarduk.ktaf.example.everglades.rooms.Tunnel
 import com.github.benpollarduk.ktaf.utilities.RegionMaker
 import com.github.benpollarduk.ktaf.utilities.templates.RegionTemplate
 
