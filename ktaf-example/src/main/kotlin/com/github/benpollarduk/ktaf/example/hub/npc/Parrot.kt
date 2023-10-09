@@ -9,7 +9,7 @@ import com.github.benpollarduk.ktaf.conversations.Response
 import com.github.benpollarduk.ktaf.utilities.templates.NonPlayableCharacterTemplate
 
 internal class Parrot : NonPlayableCharacterTemplate() {
-    override fun instantiate(playableCharacter: PlayableCharacter, room: Room): NonPlayableCharacter {
+    override fun instantiate(playableCharacter: PlayableCharacter, room: Room?): NonPlayableCharacter {
         return NonPlayableCharacter(
             NAME,
             DESCRIPTION

@@ -10,7 +10,7 @@ import com.github.benpollarduk.ktaf.extensions.equalsExaminable
 import com.github.benpollarduk.ktaf.utilities.templates.ItemTemplate
 
 internal class ConchShell : ItemTemplate() {
-    override fun instantiate(playableCharacter: PlayableCharacter, room: Room): Item {
+    override fun instantiate(playableCharacter: PlayableCharacter, room: Room?): Item {
         return Item(NAME, DESCRIPTION, true).also {
             it.interaction = { item, _ ->
                 when {
