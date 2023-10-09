@@ -372,4 +372,48 @@ class RegionTest {
         Assertions.assertFalse(room1[Direction.NORTH]?.isLocked ?: true)
         Assertions.assertFalse(room2[Direction.SOUTH]?.isLocked ?: true)
     }
+
+    @Test
+    fun `given contains room when find room then not null returned`() {
+        // Given
+        val region = Region("", "")
+        val roomName = "room1"
+        val room1 = Room(roomName, "")
+        region.addRoom(room1, 0, 0, 0)
+
+        // When
+        val result = region.findRoom(roomName)
+
+        // Then
+        Assertions.assertNotNull(result)
+    }
+
+    @Test
+    fun `given contains room when find room then expected room returned`() {
+        // Given
+        val region = Region("", "")
+        val roomName = "room1"
+        val room1 = Room(roomName, "")
+        region.addRoom(room1, 0, 0, 0)
+
+        // When
+        val result = region.findRoom(roomName)
+
+        // Then
+        Assertions.assertEquals(room1, result)
+    }
+
+    @Test
+    fun `given doesnt contain room when find room then null returned`() {
+        // Given
+        val region = Region("", "")
+        val room1 = Room("room1", "")
+        region.addRoom(room1, 0, 0, 0)
+
+        // When
+        val result = region.findRoom("room2")
+
+        // Then
+        Assertions.assertNull(result)
+    }
 }

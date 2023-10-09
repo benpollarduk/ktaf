@@ -9,10 +9,10 @@ import com.github.benpollarduk.ktaf.conversations.Response
 import com.github.benpollarduk.ktaf.utilities.templates.NonPlayableCharacterTemplate
 
 internal class Parrot : NonPlayableCharacterTemplate() {
-    override fun instantiate(playableCharacter: PlayableCharacter, room: Room): NonPlayableCharacter {
+    override fun instantiate(playableCharacter: PlayableCharacter, room: Room?): NonPlayableCharacter {
         return NonPlayableCharacter(
             NAME,
-            DESCRIPTION
+            DESCRIPTION,
         ).also {
             it.conversation = Conversation(
                 listOf(
@@ -21,13 +21,13 @@ internal class Parrot : NonPlayableCharacterTemplate() {
                         it.responses = listOf(
                             Response("I don't have any food to feed you with!", 1),
                             Response("Sure here's some food!", 2),
-                            Response("I'll try bring you some.", 3)
+                            Response("I'll try bring you some.", 3),
                         )
                     },
                     Paragraph("Bring some next time then!", -1),
                     Paragraph("You don't have any food! Errkggg!", -2),
-                    Paragraph("Thanks a lot! Erckgah!", -3)
-                )
+                    Paragraph("Thanks a lot! Erckgah!", -3),
+                ),
             )
         }
     }

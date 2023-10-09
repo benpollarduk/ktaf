@@ -13,13 +13,14 @@ internal class Cave : RoomTemplate() {
             DESCRIPTION,
             listOf(
                 Exit(Direction.SOUTH),
-                Exit(Direction.EAST)
-            )
+                Exit(Direction.EAST),
+                Exit(Direction.DOWN),
+            ),
         )
     }
     internal companion object {
         internal const val NAME = "Cave"
-        private const val DESCRIPTION = "The cave is so dark you struggling to see. " +
-            "A screeching noise is audible to the east."
+        private const val DESCRIPTION = "The cave is so dark you struggling to see, but you can make out a " +
+            "faint glow coming from a crack in the rock leading below. A screeching noise is audible to the east."
     }
 }
