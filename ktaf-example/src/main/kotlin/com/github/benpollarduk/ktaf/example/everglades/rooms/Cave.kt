@@ -14,8 +14,8 @@ internal class Cave : RoomTemplate() {
             listOf(
                 Exit(Direction.SOUTH),
                 Exit(Direction.EAST),
-                Exit(Direction.DOWN),
-            ),
+                Exit(Direction.DOWN)
+            )
         )
     }
     internal companion object {

@@ -30,7 +30,7 @@ public object ExampleGame : GameTemplate() {
             EndCheckResult(
                 true,
                 "Game Over",
-                "You have reached the end of the game, thanks for playing!",
+                "You have reached the end of the game, thanks for playing!"
             )
         } else {
             EndCheckResult.notEnded
@@ -49,7 +49,7 @@ public object ExampleGame : GameTemplate() {
         playableCharacter: PlayableCharacter,
         hub: Region,
         overworld: Overworld,
-        otherRegions: List<Region>,
+        otherRegions: List<Region>
     ) {
         val room = hub.currentRoom ?: return
 
@@ -75,9 +75,9 @@ public object ExampleGame : GameTemplate() {
             CustomCommand(
                 CommandHelp(
                     "Jump",
-                    "Jump to a location in a region.",
+                    "Jump to a location in a region."
                 ),
-                false,
+                false
             ) { game, args ->
                 var x = 0
                 var y = 0
@@ -94,7 +94,7 @@ public object ExampleGame : GameTemplate() {
                 } else {
                     Reaction(ReactionResult.ERROR, "Failed to jump to $x $y $z.")
                 }
-            },
+            }
         )
 
         // add sphere to tunnel - requires an overworld
@@ -109,7 +109,7 @@ public object ExampleGame : GameTemplate() {
             overworld,
             { determineIfGameIsComplete(it) },
             { determineIfGameOver(it) },
-            ioConfiguration = ioConfiguration,
+            ioConfiguration = ioConfiguration
         )
     }
 }

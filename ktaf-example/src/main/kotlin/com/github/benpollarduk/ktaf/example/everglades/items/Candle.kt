@@ -19,25 +19,25 @@ internal class Candle : ItemTemplate() {
             NAME.toIdentifier(),
             ConditionalDescription(
                 DESCRIPTION_LIT,
-                DESCRIPTION_EXTINGUISHED,
+                DESCRIPTION_EXTINGUISHED
             ) { -> isLit },
-            true,
+            true
         ).also {
             it.commands = listOf(
                 CustomCommand(
                     CommandHelp(
                         "Extinguish",
-                        "Extinguish the candle.",
+                        "Extinguish the candle."
                     ),
-                    true,
+                    true
                 ) { _, _ ->
                     isLit = false
                     it.commands = emptyList()
                     Reaction(
                         ReactionResult.OK,
-                        "You extinguish the candle.",
+                        "You extinguish the candle."
                     )
-                },
+                }
             )
         }
     }
