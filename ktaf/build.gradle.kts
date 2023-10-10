@@ -22,6 +22,9 @@ plugins {
     // https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow
     id("com.github.johnrengelman.shadow") version "8.1.1"
 
+    // https://plugins.gradle.org/plugin/org.jetbrains.dokka
+    id("org.jetbrains.dokka") version "1.9.0"
+
     // Apply the Jacoco plugin for test coverage.
     jacoco
 
