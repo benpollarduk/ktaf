@@ -1,4 +1,4 @@
-# the purpose of this workflow is to ensure the codebase builds with the gradle wrapper.
+# main ci workflow is to ensure the codebase builds with the gradle wrapper.
 # all unit tests must pass for the workflow to complete successfully.
 # a JaCoCo coverage report will be published as an artifact.
 
