@@ -79,6 +79,9 @@ val template = catalog.get().first()
 GameExecutor.execute(gameTemplate, ioConfiguration = AnsiConsoleConfiguration)
 ```
 
+# Documentation
+Please visit [https://benpollarduk.github.io/ktaf-docs/](url) to view the ktaf documentation.
+
 # Prerequisites
 The default frame collections for rendering in a terminal assume that a terminal capable of handling ANSI is bring used. If a terminal that doesn't support ANSI is used the game will still render but ANSI will also be displayed.
 
