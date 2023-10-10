@@ -25,6 +25,9 @@ plugins {
     // https://plugins.gradle.org/plugin/org.javamodularity.moduleplugin
     id("org.javamodularity.moduleplugin") version "1.8.12"
 
+    // https://plugins.gradle.org/plugin/org.jetbrains.dokka
+    id("org.jetbrains.dokka") version "1.9.0"
+
     // Apply the Jacoco plugin for test coverage.
     jacoco
 

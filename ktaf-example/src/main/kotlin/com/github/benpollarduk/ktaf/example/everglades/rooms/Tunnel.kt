@@ -6,7 +6,6 @@ import com.github.benpollarduk.ktaf.assets.locations.Direction
 import com.github.benpollarduk.ktaf.assets.locations.Exit
 import com.github.benpollarduk.ktaf.assets.locations.Room
 import com.github.benpollarduk.ktaf.example.everglades.items.Candle
-import com.github.benpollarduk.ktaf.example.global.items.Sphere
 import com.github.benpollarduk.ktaf.utilities.templates.RoomTemplate
 
 internal class Tunnel : RoomTemplate() {
@@ -15,15 +14,15 @@ internal class Tunnel : RoomTemplate() {
             NAME,
             DESCRIPTION_WITH_CANDLE,
             listOf(
-                Exit(Direction.UP),
-            ),
+                Exit(Direction.UP)
+            )
         ).also {
             it.addItem(Candle().instantiate(playableCharacter, it))
             it.specifyConditionalDescription(
                 ConditionalDescription(
                     DESCRIPTION_WITH_CANDLE,
-                    DESCRIPTION_NO_CANDLE,
-                ) { -> it.containsItem(Candle.NAME) },
+                    DESCRIPTION_NO_CANDLE
+                ) { -> it.containsItem(Candle.NAME) }
             )
         }
     }

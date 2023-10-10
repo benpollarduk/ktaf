@@ -13,38 +13,38 @@ import com.github.benpollarduk.ktaf.utilities.templates.ItemTemplate
 
 internal class Sphere(
     private val region: Region,
-    private val overworld: Overworld,
+    private val overworld: Overworld
 ) : ItemTemplate() {
     override fun instantiate(playableCharacter: PlayableCharacter, room: Room?): Item {
         return Item(
             "${region.identifier.name} Sphere",
             "A glass sphere, about the size of a snooker ball. Inside you can see a swirling mist.",
-            true,
+            true
         ).also {
             it.commands = listOf(
                 CustomCommand(
                     CommandHelp(
                         "Warp ${region.identifier.name}",
                         "Use the ${region.identifier.name} Sphere to warp to the " +
-                            "${region.identifier.name}.",
+                            "${region.identifier.name}."
                     ),
-                    true,
+                    true
                 ) { game, _ ->
                     val move = overworld.move(region)
                     if (!move) {
                         Reaction(
                             ReactionResult.ERROR,
-                            "Could not move to ${region.identifier.name}.",
+                            "Could not move to ${region.identifier.name}."
                         )
                     }
                     game.displayTransition(
                         "",
                         "You peer inside the sphere and feel faint. When the sensation passes you open " +
-                            "you eyes and have been transported to the ${region.identifier.name}.",
+                            "you eyes and have been transported to the ${region.identifier.name}."
                     )
 
                     Reaction(ReactionResult.INTERNAL, "")
-                },
+                }
             )
         }
     }

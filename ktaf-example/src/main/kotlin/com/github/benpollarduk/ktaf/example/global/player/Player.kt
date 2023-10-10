@@ -17,12 +17,12 @@ internal class Player : PlayableCharacterTemplate() {
                         InteractionResult(
                             InteractionEffect.FATAL_EFFECT,
                             item,
-                            "You slash wildly at your own throat. You are dead.",
+                            "You slash wildly at your own throat. You are dead."
                         )
                     } else -> {
                         InteractionResult(
                             InteractionEffect.NO_EFFECT,
-                            item,
+                            item
                         )
                     }
                 }

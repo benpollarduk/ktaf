@@ -16,23 +16,23 @@ internal class TreeHouse : RoomTemplate() {
             NAME,
             DESCRIPTION,
             listOf(
-                Exit(Direction.DOWN),
-            ),
+                Exit(Direction.DOWN)
+            )
         ).also {
             it.commands = listOf(
                 CustomCommand(
                     CommandHelp(
                         "Look at view",
-                        "Look at the view all around you.",
+                        "Look at the view all around you."
                     ),
-                    true,
+                    true
                 ) { game, _ ->
                     game.overworld.currentRegion?.visibleWithoutDiscovery = true
                     Reaction(
                         ReactionResult.OK,
-                        "You look all around you, the view is excellent.",
+                        "You look all around you, the view is excellent."
                     )
-                },
+                }
             )
         }
     }
