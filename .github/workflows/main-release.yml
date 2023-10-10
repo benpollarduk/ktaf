@@ -1,0 +1,32 @@
+# main release workflow for ktaf.
+# build and tests the code and if successful publishes the package.
+
+name: main-release
+
+on:
+  workflow_dispatch:
+
+env:
+  PUBLISH_URL: ${{ vars.PUBLISH_URL }}
+  PUBLISH_USERNAME: ${{ vars.PUBLISH_USERNAME }}
+  PUBLISH_PASSWORD: ${{ secrets.PUBLISH_PASSWORD }}
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+    - name: Execute Gradle build and test and then publish
+      run: |
+        sh ./gradlew build test
+	sh ./gradlew :ktaf:publish -ppublishUrl=${PUBLISH_URL} -ppublishUsername=${PUBLISH_USERNAME} -ppublishPassword=${PUBLISH_PASSWORD}
