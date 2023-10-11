@@ -83,7 +83,7 @@ GameExecutor.execute(gameTemplate, ioConfiguration = AnsiConsoleConfiguration)
 Please visit [https://benpollarduk.github.io/ktaf-docs/](https://benpollarduk.github.io/ktaf-docs/) to view the ktaf documentation.
 
 # Prerequisites
-The default frame collections for rendering in a terminal assume that a terminal capable of handling ANSI is bring used. If a terminal that doesn't support ANSI is used the game will still render but ANSI will also be displayed.
+The default frame collections for rendering in a terminal assume that a terminal capable of handling ANSI is being used. If a terminal that doesn't support ANSI is used the game will still render but ANSI will also be displayed as text.
 
 # Getting Started
  * Clone the repo
