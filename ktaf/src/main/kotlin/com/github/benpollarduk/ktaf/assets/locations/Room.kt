@@ -312,7 +312,7 @@ public class Room(
         }
         val firstItemName = sentence.substring(0, endIndex)
         return ExaminationResult(
-            "There ${if (firstItemName.isPlural()) "are" else "is"} ${sentence.startWithLower()}()"
+            "There ${if (firstItemName.isPlural()) "are" else "is"} ${sentence.startWithLower()}"
         )
     }
 
