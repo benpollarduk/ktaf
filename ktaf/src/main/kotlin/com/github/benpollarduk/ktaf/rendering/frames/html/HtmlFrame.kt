@@ -1,9 +1,9 @@
 package com.github.benpollarduk.ktaf.rendering.frames.html
 
-import com.github.benpollarduk.ktaf.helpers.newline
 import com.github.benpollarduk.ktaf.io.RenderFrame
 import com.github.benpollarduk.ktaf.rendering.FramePosition
 import com.github.benpollarduk.ktaf.rendering.frames.Frame
+import com.github.benpollarduk.ktaf.utilities.NEWLINE
 
 /**
  * Provides a HTML based [Frame].
@@ -48,7 +48,7 @@ public class HtmlFrame(
     }
 
     private companion object {
-        private val newline = newline()
+        private val newline = NEWLINE
         private const val HTML_CLOSE: String = "</html>"
         private val bodyOpen: String = "<body>$newline"
         private val bodyClose: String = "</body>$newline"

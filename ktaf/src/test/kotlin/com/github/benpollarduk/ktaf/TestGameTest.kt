@@ -1,6 +1,5 @@
-package com.github.benpollarduk.ktaf.helpers
+package com.github.benpollarduk.ktaf
 
-import com.github.benpollarduk.ktaf.TestGame
 import com.github.benpollarduk.ktaf.io.configurations.AnsiConsoleConfiguration
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test

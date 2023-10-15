@@ -8,7 +8,6 @@ import com.github.benpollarduk.ktaf.assets.locations.ViewPoint
 import com.github.benpollarduk.ktaf.extensions.ensureFinishedSentence
 import com.github.benpollarduk.ktaf.extensions.getObjectifier
 import com.github.benpollarduk.ktaf.extensions.toSentenceCase
-import com.github.benpollarduk.ktaf.helpers.newline
 
 /**
  * Provides utility functions to help with handling [String] values.
@@ -58,7 +57,7 @@ internal object StringUtilities {
     internal fun cutLineFromParagraph(paragraph: String, maxWidth: Int): ExtractedString {
         var chunk = ""
         var remaining = paragraph
-        val newline = newline()
+        val newline = NEWLINE
 
         while (chunk.length < maxWidth) {
             val extractedString = extractNextWordFromString(remaining)

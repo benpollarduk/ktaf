@@ -3,7 +3,7 @@ package com.github.benpollarduk.ktaf.assets
 import com.github.benpollarduk.ktaf.commands.CustomCommand
 import com.github.benpollarduk.ktaf.extensions.ensureFinishedSentence
 import com.github.benpollarduk.ktaf.extensions.removeSentenceEnd
-import com.github.benpollarduk.ktaf.helpers.newline
+import com.github.benpollarduk.ktaf.utilities.NEWLINE
 
 /**
  * Provides a base implementation for examinable objects.
@@ -12,7 +12,7 @@ public abstract class ExaminableObject : com.github.benpollarduk.ktaf.assets.Exa
     /**
      * Provides a callback for handling examination of this object.
      */
-    public var examination: com.github.benpollarduk.ktaf.assets.Examination = {
+    public var examination: Examination = {
         var description = it.description.getDescription()
 
         if (it.commands.any()) {
@@ -20,7 +20,7 @@ public abstract class ExaminableObject : com.github.benpollarduk.ktaf.assets.Exa
                 description += " "
             }
 
-            val newline = newline()
+            val newline = NEWLINE
             description += "$newline$newline${it.identifier.name} provides the following commands: "
 
             it.commands.forEach { command ->

@@ -1,9 +1,9 @@
 package com.github.benpollarduk.ktaf.rendering.frames.ansi
 
-import com.github.benpollarduk.ktaf.helpers.newline
 import com.github.benpollarduk.ktaf.io.RenderFrame
 import com.github.benpollarduk.ktaf.rendering.FramePosition
 import com.github.benpollarduk.ktaf.rendering.frames.Frame
+import com.github.benpollarduk.ktaf.utilities.NEWLINE
 
 /**
  * Provides an ANSI grid based [Frame].
@@ -18,7 +18,7 @@ public class AnsiGridTextFrame(
     @Suppress("NestedBlockDepth")
     override fun render(callback: RenderFrame) {
         val stringBuilder = StringBuilder()
-        val newLine = newline()
+        val newLine = NEWLINE
         var fontColor = builder.getCellColor(0, 0)
 
         // prep by setting background and first font color
@@ -55,7 +55,7 @@ public class AnsiGridTextFrame(
 
     override fun toString(): String {
         val stringBuilder = StringBuilder()
-        val newLine = newline()
+        val newLine = NEWLINE
 
         for (y in 0 until builder.displaySize.height) {
             for (x in 0 until builder.displaySize.width) {

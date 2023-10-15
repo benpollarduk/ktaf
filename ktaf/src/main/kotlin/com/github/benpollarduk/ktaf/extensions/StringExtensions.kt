@@ -1,10 +1,8 @@
 package com.github.benpollarduk.ktaf.extensions
 
 import com.github.benpollarduk.ktaf.assets.Description
-import com.github.benpollarduk.ktaf.assets.Examinable
 import com.github.benpollarduk.ktaf.assets.Identifier
-import com.github.benpollarduk.ktaf.helpers.newline
-import java.lang.NumberFormatException
+import com.github.benpollarduk.ktaf.utilities.NEWLINE
 
 /**
  * Converts the [String] to a [Description].
@@ -210,7 +208,7 @@ public fun String.addSentence(sentence: String): String {
  * Remove any lines of whitespace from this [String].
  */
 public fun String.removeWhitespaceLines(): String {
-    val newline = newline()
+    val newline = NEWLINE
     val lines = this.split(newline)
     var noPaddingLines = ""
 

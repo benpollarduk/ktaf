@@ -1,8 +1,8 @@
 package com.github.benpollarduk.ktaf.rendering.frames
 
 import com.github.benpollarduk.ktaf.assets.Size
-import com.github.benpollarduk.ktaf.helpers.newline
 import com.github.benpollarduk.ktaf.rendering.FramePosition
+import com.github.benpollarduk.ktaf.utilities.NEWLINE
 import com.github.benpollarduk.ktaf.utilities.StringUtilities
 
 /**
@@ -12,7 +12,7 @@ public class GridStringBuilder(
     public var leftBoundary: Char = '|',
     public var rightBoundary: Char = '|',
     public var horizontalDivider: Char = '-',
-    public var lineTerminator: String = newline()
+    public var lineTerminator: String = NEWLINE
 ) {
     private var buffer: Array<Array<Char>> = Array(0) { Array(0) { ' ' } }
 
@@ -78,7 +78,7 @@ public class GridStringBuilder(
 
     override fun toString(): String {
         val stringBuilder = StringBuilder()
-        val newLine = newline()
+        val newLine = NEWLINE
 
         for (y in 0 until displaySize.height) {
             for (x in 0 until displaySize.width) {

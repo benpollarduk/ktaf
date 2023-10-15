@@ -10,13 +10,13 @@ import com.github.benpollarduk.ktaf.extensions.addSentence
 import com.github.benpollarduk.ktaf.extensions.ensureFinishedSentence
 import com.github.benpollarduk.ktaf.extensions.insensitiveEquals
 import com.github.benpollarduk.ktaf.extensions.removeWhitespaceLines
-import com.github.benpollarduk.ktaf.helpers.newline
 import com.github.benpollarduk.ktaf.interpretation.CommandHelp
 import com.github.benpollarduk.ktaf.rendering.KeyType
 import com.github.benpollarduk.ktaf.rendering.frames.Frame
 import com.github.benpollarduk.ktaf.rendering.frames.GridRoomMapBuilder
 import com.github.benpollarduk.ktaf.rendering.frames.GridStringBuilder
 import com.github.benpollarduk.ktaf.rendering.frames.SceneFrameBuilder
+import com.github.benpollarduk.ktaf.utilities.NEWLINE
 import com.github.benpollarduk.ktaf.utilities.StringUtilities
 
 /**
@@ -86,7 +86,7 @@ public class HtmlSceneFrameBuilder(
 
             roomMapBuilder.build(gridStringBuilder, room, viewPoint, keyType, leftMargin, 0)
             var map = gridStringBuilder.toString().removeWhitespaceLines()
-            htmlPageBuilder.pre(map.replace(newline(), "<br>"))
+            htmlPageBuilder.pre(map.replace(NEWLINE, "<br>"))
 
             if (playableCharacter.items.any()) {
                 htmlPageBuilder.p(

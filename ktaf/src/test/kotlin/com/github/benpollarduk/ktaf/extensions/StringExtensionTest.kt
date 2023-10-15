@@ -2,7 +2,7 @@ package com.github.benpollarduk.ktaf.extensions
 
 import com.github.benpollarduk.ktaf.assets.Identifier
 import com.github.benpollarduk.ktaf.assets.Item
-import com.github.benpollarduk.ktaf.helpers.newline
+import com.github.benpollarduk.ktaf.utilities.NEWLINE
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -707,7 +707,7 @@ class StringExtensionTest {
     @Test
     fun `given 3 lines total 2 padding when removing whitespace lines then return 1 line`() {
         // Given
-        val newline = newline()
+        val newline = NEWLINE
         val value = "${newline}Test$newline$newline"
 
         // When
