@@ -1,5 +1,6 @@
 package com.github.benpollarduk.ktaf.rendering.frames.html
 
+import com.github.benpollarduk.ktaf.utilities.NEWLINE
 import java.lang.StringBuilder
 
 /**
@@ -10,7 +11,10 @@ public class HtmlPageBuilder(
 ) {
     private val builder = StringBuilder()
     override fun toString(): String {
-        return builder.toString()
+        var str = builder.toString()
+        // ensure newlines are handled correctly
+        str = str.replace(NEWLINE, "<br>")
+        return str
     }
 
     /**

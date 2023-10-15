@@ -176,40 +176,45 @@ public class Game(
         }
     }
 
-    private fun handleConditionSpecificStates() {
+    private fun checkForCompletion() {
         val completionCheckResult = completionCondition(this)
+        if (completionCheckResult.conditionMet) {
+            waitForInput()
+            refresh(
+                ioConfiguration.frameBuilders.completionFrameBuilder.build(
+                    completionCheckResult.title,
+                    completionCheckResult.description
+                )
+            )
+            waitForInput()
+            end()
+        }
+    }
+
+    private fun checkForGameOver() {
         val gameOverCheckResult = gameOverCondition(this)
-        val converser = activeConverser
-        when {
-            completionCheckResult.conditionMet -> {
-                refresh(
-                    ioConfiguration.frameBuilders.completionFrameBuilder.build(
-                        completionCheckResult.title,
-                        completionCheckResult.description
-                    )
+        if (gameOverCheckResult.conditionMet) {
+            waitForInput()
+            refresh(
+                ioConfiguration.frameBuilders.gameOverFrameBuilder.build(
+                    gameOverCheckResult.title,
+                    gameOverCheckResult.description
                 )
-                waitForInput()
-                end()
-            }
-            gameOverCheckResult.conditionMet -> {
-                refresh(
-                    ioConfiguration.frameBuilders.gameOverFrameBuilder.build(
-                        gameOverCheckResult.title,
-                        gameOverCheckResult.description
-                    )
+            )
+            waitForInput()
+            end()
+        }
+    }
+
+    private fun actionConversation(converser: Converser?) {
+        if (converser != null) {
+            refresh(
+                ioConfiguration.frameBuilders.conversationFrameBuilder.build(
+                    "Conversation with ${converser.identifier.name}",
+                    converser,
+                    interpreter.getContextualCommandHelp(this)
                 )
-                waitForInput()
-                end()
-            }
-            converser != null -> {
-                refresh(
-                    ioConfiguration.frameBuilders.conversationFrameBuilder.build(
-                        "Conversation with ${converser.identifier.name}",
-                        converser,
-                        interpreter.getContextualCommandHelp(this)
-                    )
-                )
-            }
+            )
         }
     }
 
@@ -281,6 +286,8 @@ public class Game(
         do {
             var displayReactionToInput = true
 
+            actionConversation(activeConverser)
+
             if (state == GameState.ACTIVE) {
                 input = waitForInput()
             }
@@ -308,7 +315,8 @@ public class Game(
                 handleReaction(reaction)
             }
 
-            handleConditionSpecificStates()
+            checkForCompletion()
+            checkForGameOver()
         } while (state != GameState.FINISHED)
 
         isExecuting = false
