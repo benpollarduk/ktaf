@@ -1,6 +1,5 @@
 package com.github.benpollarduk.ktaf.interpretation
 
-import com.github.benpollarduk.ktaf.assets.Examinable
 import com.github.benpollarduk.ktaf.assets.Item
 import com.github.benpollarduk.ktaf.assets.interaction.InteractionTarget
 import com.github.benpollarduk.ktaf.commands.Command
@@ -89,7 +88,7 @@ public class ItemCommandInterpreter : Interpreter {
                 return Examine(examinable)
             }
 
-            val direction = CommonInterpretation.tryParseDirection(text)
+            val direction = CommonInterpretation.tryParseDirection(noun)
             if (direction != null) {
                 val room = game.overworld.currentRegion?.currentRoom
                 val exit = room?.findExit(direction) ?: return Unactionable(
