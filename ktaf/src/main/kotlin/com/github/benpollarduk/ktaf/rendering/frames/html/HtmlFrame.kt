@@ -43,16 +43,15 @@ public class HtmlFrame(
     }
 
     private fun getHtmlOpen(title: String = "", css: String = ""): String {
-        return "<!DOCTYPE html>$newline<html>$newline<head>$newline<title>$title</title>$newline" +
-            "<style>$css</style>$newline</head>$newline"
+        return "<!DOCTYPE html>$NEWLINE<html>$NEWLINE<head>$NEWLINE<title>$title</title>$NEWLINE" +
+            "<style>$css</style>$NEWLINE</head>$NEWLINE"
     }
 
     private companion object {
-        private val newline = NEWLINE
         private const val HTML_CLOSE: String = "</html>"
-        private val bodyOpen: String = "<body>$newline"
-        private val bodyClose: String = "</body>$newline"
-        private val divOpen: String = "<div>$newline"
-        private val divClose: String = "</div>$newline"
+        private val bodyOpen: String = "<body>$NEWLINE"
+        private val bodyClose: String = "</body>$NEWLINE"
+        private val divOpen: String = "<div>$NEWLINE"
+        private val divClose: String = "</div>$NEWLINE"
     }
 }
