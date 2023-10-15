@@ -37,7 +37,7 @@ public class Game(
     private val gameOverCondition: EndCheck,
     private val errorPrefix: String = DEFAULT_ERROR_PREFIX,
     private val interpreter: Interpreter = defaultInterpreters,
-    private val ioConfiguration: IOConfiguration = AnsiConsoleConfiguration
+    private val ioConfiguration: IOConfiguration = AnsiConsoleConfiguration,
 ) {
     private var state: GameState = GameState.NOT_STARTED
     public var isExecuting: Boolean = false
@@ -46,7 +46,7 @@ public class Game(
     private var currentFrame: Frame = ioConfiguration.frameBuilders.aboutFrameBuilder.build(
         information.name,
         information.description,
-        information.author
+        information.author,
     )
 
     /**
@@ -142,8 +142,8 @@ public class Game(
             ioConfiguration.frameBuilders.aboutFrameBuilder.build(
                 "About",
                 this.information.description,
-                this.information.author
-            )
+                this.information.author,
+            ),
         )
     }
 
@@ -158,8 +158,8 @@ public class Game(
             ioConfiguration.frameBuilders.helpFrameBuilder.build(
                 "Help",
                 "",
-                commands.distinct()
-            )
+                commands.distinct(),
+            ),
         )
     }
 
@@ -176,40 +176,45 @@ public class Game(
         }
     }
 
-    private fun handleConditionSpecificStates() {
+    private fun checkForCompletion() {
         val completionCheckResult = completionCondition(this)
+        if (completionCheckResult.conditionMet) {
+            waitForInput()
+            refresh(
+                ioConfiguration.frameBuilders.completionFrameBuilder.build(
+                    completionCheckResult.title,
+                    completionCheckResult.description,
+                ),
+            )
+            waitForInput()
+            end()
+        }
+    }
+
+    private fun checkForGameOver() {
         val gameOverCheckResult = gameOverCondition(this)
-        val converser = activeConverser
-        when {
-            completionCheckResult.conditionMet -> {
-                refresh(
-                    ioConfiguration.frameBuilders.completionFrameBuilder.build(
-                        completionCheckResult.title,
-                        completionCheckResult.description
-                    )
-                )
-                waitForInput()
-                end()
-            }
-            gameOverCheckResult.conditionMet -> {
-                refresh(
-                    ioConfiguration.frameBuilders.gameOverFrameBuilder.build(
-                        gameOverCheckResult.title,
-                        gameOverCheckResult.description
-                    )
-                )
-                waitForInput()
-                end()
-            }
-            converser != null -> {
-                refresh(
-                    ioConfiguration.frameBuilders.conversationFrameBuilder.build(
-                        "Conversation with ${converser.identifier.name}",
-                        converser,
-                        interpreter.getContextualCommandHelp(this)
-                    )
-                )
-            }
+        if (gameOverCheckResult.conditionMet) {
+            waitForInput()
+            refresh(
+                ioConfiguration.frameBuilders.gameOverFrameBuilder.build(
+                    gameOverCheckResult.title,
+                    gameOverCheckResult.description,
+                ),
+            )
+            waitForInput()
+            end()
+        }
+    }
+
+    private fun actionConversation(converser: Converser?) {
+        if (converser != null) {
+            refresh(
+                ioConfiguration.frameBuilders.conversationFrameBuilder.build(
+                    "Conversation with ${converser.identifier.name}",
+                    converser,
+                    interpreter.getContextualCommandHelp(this),
+                ),
+            )
         }
     }
 
@@ -271,8 +276,8 @@ public class Game(
         refresh(
             ioConfiguration.frameBuilders.titleFrameBuilder.build(
                 information.name,
-                information.introduction
-            )
+                information.introduction,
+            ),
         )
 
         var input = ""
@@ -280,6 +285,8 @@ public class Game(
 
         do {
             var displayReactionToInput = true
+
+            actionConversation(activeConverser)
 
             if (state == GameState.ACTIVE) {
                 input = waitForInput()
@@ -308,7 +315,8 @@ public class Game(
                 handleReaction(reaction)
             }
 
-            handleConditionSpecificStates()
+            checkForCompletion()
+            checkForGameOver()
         } while (state != GameState.FINISHED)
 
         isExecuting = false
@@ -332,7 +340,7 @@ public class Game(
     private fun getFallbackFrame(): Frame {
         return ioConfiguration.frameBuilders.transitionFrameBuilder.build(
             "Error",
-            "Couldn't refresh frame."
+            "Couldn't refresh frame.",
         )
     }
 
@@ -352,8 +360,8 @@ public class Game(
                     player,
                     message,
                     if (displayCommandListInSceneFrames) interpreter.getContextualCommandHelp(this) else emptyList(),
-                    sceneMapKeyType
-                )
+                    sceneMapKeyType,
+                ),
             )
         } else {
             refresh(getFallbackFrame())
@@ -379,8 +387,8 @@ public class Game(
                 ItemCommandInterpreter(),
                 CharacterCommandInterpreter(),
                 MovementCommandInterpreter(),
-                CustomCommandInterpreter()
-            )
+                CustomCommandInterpreter(),
+            ),
         )
     }
 }
