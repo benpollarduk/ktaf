@@ -7,11 +7,11 @@ import com.github.benpollarduk.ktaf.assets.ExaminableObject
 public class Exit(
     public val direction: Direction,
     private var locked: Boolean = false,
-    description: com.github.benpollarduk.ktaf.assets.Description? = null
-) : com.github.benpollarduk.ktaf.assets.ExaminableObject() {
+    description: Description? = null
+) : ExaminableObject() {
     init {
         if (description == null) {
-            this.description = com.github.benpollarduk.ktaf.assets.ConditionalDescription(
+            this.description = ConditionalDescription(
                 "The exit ${direction.toString().lowercase()} is locked.",
                 "The exit ${direction.toString().lowercase()} is unlocked."
             ) { this.isLocked }
