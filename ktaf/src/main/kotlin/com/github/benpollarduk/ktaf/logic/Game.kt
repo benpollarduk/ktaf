@@ -188,6 +188,7 @@ public class Game(
                         completionCheckResult.description
                     )
                 )
+                waitForInput()
                 end()
             }
             gameOverCheckResult.conditionMet -> {
@@ -197,6 +198,7 @@ public class Game(
                         gameOverCheckResult.description
                     )
                 )
+                waitForInput()
                 end()
             }
             converser != null -> {
@@ -245,8 +247,7 @@ public class Game(
     private fun handleReaction(reaction: Reaction) {
         when (reaction.result) {
             ReactionResult.ERROR -> {
-                val message = "$errorPrefix: ${reaction.description}"
-                refresh(message)
+                refresh("$errorPrefix: ${reaction.description}")
             }
             ReactionResult.OK -> {
                 refresh(reaction.description)
@@ -255,7 +256,7 @@ public class Game(
                 // nothing
             }
             ReactionResult.FATAL -> {
-                // nothing
+                refresh(reaction.description)
             }
         }
     }
@@ -279,8 +280,6 @@ public class Game(
 
         do {
             var displayReactionToInput = true
-
-            handleConditionSpecificStates()
 
             if (state == GameState.ACTIVE) {
                 input = waitForInput()
@@ -308,6 +307,8 @@ public class Game(
             if (displayReactionToInput) {
                 handleReaction(reaction)
             }
+
+            handleConditionSpecificStates()
         } while (state != GameState.FINISHED)
 
         isExecuting = false
