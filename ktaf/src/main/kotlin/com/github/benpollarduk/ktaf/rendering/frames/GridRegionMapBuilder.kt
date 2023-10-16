@@ -10,7 +10,7 @@ import com.github.benpollarduk.ktaf.rendering.FramePosition
 /**
  * Provides a region map builder.
  */
-@Suppress("LongMethod", "CyclomaticComplexMethod")
+@Suppress("LongMethod", "LongParameterList", "CyclomaticComplexMethod")
 public class GridRegionMapBuilder(
     private val lockedExit: Char = 'x',
     private val unlockedExit: Char = ' ',
@@ -18,6 +18,8 @@ public class GridRegionMapBuilder(
     private val verticalBoundary: Char = '|',
     private val horizontalBoundary: Char = '-',
     private val lowerLevel: Char = '.',
+    private val up: Char = '^',
+    private val down: Char = 'v',
     private val player: Char = 'O',
     private val currentFloorIndicator: Char = '*',
     private val showLowerFloors: Boolean = true
@@ -74,7 +76,7 @@ public class GridRegionMapBuilder(
                 gridStringBuilder.setCell(left + 1, top + 1, lockedExit)
             }
             room.hasUnlockedExitInDirection(Direction.UP) -> {
-                gridStringBuilder.setCell(left + 1, top + 1, '^')
+                gridStringBuilder.setCell(left + 1, top + 1, up)
             }
             else -> {
                 gridStringBuilder.setCell(left + 1, top + 1, emptySpace)
@@ -92,7 +94,7 @@ public class GridRegionMapBuilder(
                 gridStringBuilder.setCell(left + 3, top + 1, lockedExit)
             }
             room.hasUnlockedExitInDirection(Direction.DOWN) -> {
-                gridStringBuilder.setCell(left + 3, top + 1, 'v')
+                gridStringBuilder.setCell(left + 3, top + 1, down)
             }
             else -> {
                 gridStringBuilder.setCell(left + 3, top + 1, emptySpace)
@@ -143,7 +145,6 @@ public class GridRegionMapBuilder(
          * .....
          * .....
          * .....
-         *
          */
 
         for (y in 0 until 3) {

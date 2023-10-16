@@ -18,6 +18,8 @@ public class AnsiRegionMapBuilder(
     private val verticalBoundary: Char = '|',
     private val horizontalBoundary: Char = '-',
     private val lowerLevel: Char = '.',
+    private val up: Char = '^',
+    private val down: Char = 'v',
     private val player: Char = 'O',
     private val currentFloorIndicator: Char = '*',
     private val visitedBoundaryColor: AnsiColor = AnsiColor.WHITE,
@@ -81,7 +83,7 @@ public class AnsiRegionMapBuilder(
                 ansiGridStringBuilder.setCell(left + 1, top + 1, lockedExit, lockedExitColor)
             }
             room.hasUnlockedExitInDirection(Direction.UP) -> {
-                ansiGridStringBuilder.setCell(left + 1, top + 1, '^', color)
+                ansiGridStringBuilder.setCell(left + 1, top + 1, up, color)
             }
             else -> {
                 ansiGridStringBuilder.setCell(left + 1, top + 1, emptySpace, color)
@@ -99,7 +101,7 @@ public class AnsiRegionMapBuilder(
                 ansiGridStringBuilder.setCell(left + 3, top + 1, lockedExit, lockedExitColor)
             }
             room.hasUnlockedExitInDirection(Direction.DOWN) -> {
-                ansiGridStringBuilder.setCell(left + 3, top + 1, 'v', color)
+                ansiGridStringBuilder.setCell(left + 3, top + 1, down, color)
             }
             else -> {
                 ansiGridStringBuilder.setCell(left + 3, top + 1, emptySpace, color)
@@ -150,7 +152,6 @@ public class AnsiRegionMapBuilder(
          * .....
          * .....
          * .....
-         *
          */
 
         for (y in 0 until 3) {
