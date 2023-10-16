@@ -97,20 +97,20 @@ class MatrixTest {
     }
 
     @Test
-    fun `given 1x2x3 matrix with 0 rooms when calling toRooms then return array with 0 elements`() {
+    fun `given 1x2x3 matrix with 0 rooms when calling toRoomPositions then return array with 0 elements`() {
         // Given
         val rooms = Array(1) { Array(2) { Array(3) { Room.empty } } }
         val matrix = Matrix(rooms)
 
         // When
-        val result = matrix.toRooms()
+        val result = matrix.toRoomPositions()
 
         // Then
         Assertions.assertEquals(0, result.size)
     }
 
     @Test
-    fun `given 1x2x3 matrix with 4 rooms when calling toRooms then return array with 4 elements`() {
+    fun `given 1x2x3 matrix with 4 rooms when calling toRoomPositions then return array with 4 elements`() {
         // Given
         val rooms = Array(1) { Array(2) { Array(3) { Room.empty } } }
         rooms[0][1][2] = Room("", "")
@@ -121,7 +121,7 @@ class MatrixTest {
         val matrix = Matrix(rooms)
 
         // When
-        val result = matrix.toRooms()
+        val result = matrix.toRoomPositions()
 
         // Then
         Assertions.assertEquals(4, result.size)

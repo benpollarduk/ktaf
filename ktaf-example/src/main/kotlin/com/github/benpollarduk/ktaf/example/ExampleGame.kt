@@ -1,11 +1,8 @@
 package com.github.benpollarduk.ktaf.example
 
 import com.github.benpollarduk.ktaf.assets.characters.PlayableCharacter
-import com.github.benpollarduk.ktaf.assets.interaction.Reaction
-import com.github.benpollarduk.ktaf.assets.interaction.ReactionResult
 import com.github.benpollarduk.ktaf.assets.locations.Overworld
 import com.github.benpollarduk.ktaf.assets.locations.Region
-import com.github.benpollarduk.ktaf.commands.CustomCommand
 import com.github.benpollarduk.ktaf.example.everglades.Everglades
 import com.github.benpollarduk.ktaf.example.everglades.rooms.Outskirts
 import com.github.benpollarduk.ktaf.example.everglades.rooms.Tunnel
@@ -13,8 +10,6 @@ import com.github.benpollarduk.ktaf.example.global.items.Sphere
 import com.github.benpollarduk.ktaf.example.global.player.Player
 import com.github.benpollarduk.ktaf.example.hub.Hub
 import com.github.benpollarduk.ktaf.extensions.equalsExaminable
-import com.github.benpollarduk.ktaf.extensions.tryParseInt
-import com.github.benpollarduk.ktaf.interpretation.CommandHelp
 import com.github.benpollarduk.ktaf.io.IOConfiguration
 import com.github.benpollarduk.ktaf.logic.Game
 import com.github.benpollarduk.ktaf.logic.GameInformation
@@ -70,32 +65,6 @@ public object ExampleGame : GameTemplate() {
         regions.forEach {
             overworld.addRegion(it)
         }
-
-        overworld.commands = listOf(
-            CustomCommand(
-                CommandHelp(
-                    "Jump",
-                    "Jump to a location in a region."
-                ),
-                false
-            ) { game, args ->
-                var x = 0
-                var y = 0
-                var z = 0
-
-                if (args.size >= 3) {
-                    x = args[0].tryParseInt() ?: 0
-                    y = args[1].tryParseInt() ?: 0
-                    z = args[2].tryParseInt() ?: 0
-                }
-
-                if (game.overworld.currentRegion?.jumpToRoom(x, y, z) == true) {
-                    Reaction(ReactionResult.OK, "Jumped to $x $y $z.")
-                } else {
-                    Reaction(ReactionResult.ERROR, "Failed to jump to $x $y $z.")
-                }
-            }
-        )
 
         // add sphere to tunnel - requires an overworld
         everglades.findRoom(Tunnel.NAME)?.addItem(Sphere(hub, overworld).instantiate(playableCharacter))

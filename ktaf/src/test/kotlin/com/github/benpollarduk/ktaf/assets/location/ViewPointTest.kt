@@ -15,7 +15,7 @@ class ViewPointTest {
             it[1, 0, 0] = Room("", "", listOf(Exit(Direction.NORTH)))
             it[0, 1, 0] = Room("", "", listOf(Exit(Direction.EAST)))
             it[1, 1, 0] = Room(
-                "",
+                "Test",
                 "",
                 listOf(
                     Exit(Direction.NORTH),
@@ -27,7 +27,7 @@ class ViewPointTest {
             it[2, 1, 0] = Room("", "", listOf(Exit(Direction.WEST)))
             it[1, 2, 0] = Room("", "", listOf(Exit(Direction.SOUTH)))
         }
-        val region = regionMaker.make(1, 1, 0)
+        val region = regionMaker.make("Test")
         val result = ViewPoint(region)
         Assertions.assertNotNull(result[Direction.NORTH])
         Assertions.assertNotNull(result[Direction.EAST])
@@ -38,7 +38,7 @@ class ViewPointTest {
     @Test
     fun `given a viewpoint of a room with one surrounding room then one viewpoint not null`() {
         val regionMaker = RegionMaker("", "").also {
-            it[1, 0, 0] = Room("", "", listOf(Exit(Direction.NORTH)))
+            it[1, 0, 0] = Room("Test", "", listOf(Exit(Direction.NORTH)))
             it[0, 1, 0] = Room("", "", listOf(Exit(Direction.EAST)))
             it[1, 1, 0] = Room(
                 "",
@@ -53,7 +53,7 @@ class ViewPointTest {
             it[2, 1, 0] = Room("", "", listOf(Exit(Direction.WEST)))
             it[1, 2, 0] = Room("", "", listOf(Exit(Direction.SOUTH)))
         }
-        val region = regionMaker.make(1, 0, 0)
+        val region = regionMaker.make("Test")
         val result = ViewPoint(region)
         Assertions.assertNotNull(result[Direction.NORTH])
         Assertions.assertNull(result[Direction.EAST])
@@ -64,7 +64,7 @@ class ViewPointTest {
     @Test
     fun `given a viewpoint of a room with one surrounding room when getting any then return true`() {
         val regionMaker = RegionMaker("", "").also {
-            it[1, 0, 0] = Room("", "", listOf(Exit(Direction.NORTH)))
+            it[1, 0, 0] = Room("Test", "", listOf(Exit(Direction.NORTH)))
             it[0, 1, 0] = Room("", "", listOf(Exit(Direction.EAST)))
             it[1, 1, 0] = Room(
                 "",
@@ -79,7 +79,7 @@ class ViewPointTest {
             it[2, 1, 0] = Room("", "", listOf(Exit(Direction.WEST)))
             it[1, 2, 0] = Room("", "", listOf(Exit(Direction.SOUTH)))
         }
-        val region = regionMaker.make(1, 0, 0)
+        val region = regionMaker.make("Test")
         val result = ViewPoint(region).any
         Assertions.assertTrue(result)
     }
@@ -87,9 +87,9 @@ class ViewPointTest {
     @Test
     fun `given a viewpoint of a room with no surroundings room when getting any then return false`() {
         val regionMaker = RegionMaker("", "").also {
-            it[0, 0, 0] = Room("", "")
+            it[0, 0, 0] = Room("Test", "")
         }
-        val region = regionMaker.make(0, 0, 0)
+        val region = regionMaker.make("Test")
         val result = ViewPoint(region).any
         Assertions.assertFalse(result)
     }

@@ -7,6 +7,7 @@ import com.github.benpollarduk.ktaf.assets.locations.Matrix
 import com.github.benpollarduk.ktaf.assets.locations.Region
 import com.github.benpollarduk.ktaf.assets.locations.Room
 import com.github.benpollarduk.ktaf.assets.locations.RoomPosition
+import com.github.benpollarduk.ktaf.extensions.equalsExaminable
 
 /**
  * A helper for making a [Region], with a specified [identifier] and [description].
@@ -50,28 +51,33 @@ public class RegionMaker(
      * Make a new [Region].
      */
     public fun make(): Region {
-        return make(rooms.first())
+        return make(rooms.first().room)
     }
 
     /**
-     * Make a new [Region] with a specified [startPosition].
+     * Make a new [Region] with a specified [startRoomName].
      */
-    public fun make(startPosition: RoomPosition): Region {
-        return make(startPosition.x, startPosition.y, startPosition.z)
+    public fun make(startRoomName: String): Region {
+        val room = rooms.first { startRoomName.equalsExaminable(it.room) }.room
+        return make(room)
     }
 
     /**
-     * Make a new [Region] with a specified [x], [y] and [z] start position.
+     * Make a new [Region] with a specified [startRoom].
      */
-    public fun make(x: Int, y: Int, z: Int): Region {
+    public fun make(startRoom: Room): Region {
+        // conversion to matrix normalises positions to be 0 indexed regardless of how they were originally specified
+        val matrix = convertToRoomMatrix(rooms)
+        val rooms = matrix.toRoomPositions()
         val region = Region(identifier, description)
+
         rooms.filter { it.room != Room.empty }.forEach {
             region.addRoom(it.room, it.x, it.y, it.z)
         }
 
         linkExits(region)
 
-        region.setStartRoom(x, y, z)
+        region.setStartRoom(startRoom)
         return region
     }
 
@@ -130,7 +136,8 @@ public class RegionMaker(
          */
         internal fun linkExits(region: Region) {
             region.toMatrix()
-                .toRooms()
+                .toRoomPositions()
+                .map { it.room }
                 .filter { it != Room.empty }
                 .forEach {
                     for (direction in Region.allDirections) {
