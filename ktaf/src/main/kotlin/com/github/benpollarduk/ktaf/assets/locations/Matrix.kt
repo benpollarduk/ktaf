@@ -44,21 +44,21 @@ public class Matrix(private var rooms: Array<Array<Array<Room>>>) {
         get() = rooms.isEmpty()
 
     /**
-     * Get this [Matrix] as a simple [List<Room>].
+     * Get this [Matrix] as a simple [List<RoomPosition>].
      */
-    public fun toRooms(): List<Room> {
-        val roomList = mutableListOf<Room?>()
+    public fun toRoomPositions(): List<RoomPosition> {
+        val roomList = mutableListOf<RoomPosition?>()
 
         for (z in 0 until depth) {
             for (y in 0 until height) {
                 for (x in 0 until width) {
-                    roomList.add(this[x, y, z])
+                    roomList.add(RoomPosition(this[x, y, z], x, y, z))
                 }
             }
         }
 
         return roomList
             .filterNotNull()
-            .filter { it != Room.empty }
+            .filter { it.room != Room.empty }
     }
 }

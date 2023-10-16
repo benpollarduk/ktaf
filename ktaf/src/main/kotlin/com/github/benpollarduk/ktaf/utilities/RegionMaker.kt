@@ -64,7 +64,7 @@ public class RegionMaker(
      * Make a new [Region] with a specified [x], [y] and [z] start position.
      */
     public fun make(x: Int, y: Int, z: Int): Region {
-        // conversion to matrix normalises room positions to be 0 indexed regardless of how they were originally specified
+        // conversion to matrix normalises positions to be 0 indexed regardless of how they were originally specified
         val matrix = convertToRoomMatrix(rooms)
         val rooms = matrix.toRoomPositions()
         val region = Region(identifier, description)
@@ -139,7 +139,8 @@ public class RegionMaker(
          */
         internal fun linkExits(region: Region) {
             region.toMatrix()
-                .toRooms()
+                .toRoomPositions()
+                .map { it.room }
                 .filter { it != Room.empty }
                 .forEach {
                     for (direction in Region.allDirections) {

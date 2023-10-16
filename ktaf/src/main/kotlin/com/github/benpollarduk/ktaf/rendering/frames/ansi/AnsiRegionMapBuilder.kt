@@ -217,7 +217,7 @@ public class AnsiRegionMapBuilder(
         val currentRoom: Room = region.currentRoom ?: return
         val currentRoomPosition = region.getPositionOfRoom(currentRoom) ?: return
         val currentFloor = currentRoomPosition.z
-        val rooms = matrix.toRooms()
+        val rooms = matrix.toRoomPositions().map { it.room }
         val unvisitedRoomPositions = rooms.map { region.getPositionOfRoom(it) }
             .filter { it?.room?.hasBeenVisited == false }
             .toList()
