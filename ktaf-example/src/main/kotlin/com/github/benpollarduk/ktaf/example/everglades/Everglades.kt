@@ -27,7 +27,7 @@ internal class Everglades : RegionTemplate() {
             it[3, 3, 0] = InnerCave().instantiate(playableCharacter)
             it[3, 4, 0] = Outskirts().instantiate(playableCharacter)
         }
-        return regionMaker.make(2, 0, 0)
+        return regionMaker.make(ForestEntrance.NAME)
     }
     internal companion object {
         internal const val NAME = "Everglades"

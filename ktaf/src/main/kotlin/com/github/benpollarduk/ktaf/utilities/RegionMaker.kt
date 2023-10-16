@@ -7,6 +7,7 @@ import com.github.benpollarduk.ktaf.assets.locations.Matrix
 import com.github.benpollarduk.ktaf.assets.locations.Region
 import com.github.benpollarduk.ktaf.assets.locations.Room
 import com.github.benpollarduk.ktaf.assets.locations.RoomPosition
+import com.github.benpollarduk.ktaf.extensions.equalsExaminable
 
 /**
  * A helper for making a [Region], with a specified [identifier] and [description].
@@ -50,20 +51,21 @@ public class RegionMaker(
      * Make a new [Region].
      */
     public fun make(): Region {
-        return make(rooms.first())
+        return make(rooms.first().room)
     }
 
     /**
-     * Make a new [Region] with a specified [startPosition].
+     * Make a new [Region] with a specified [startRoomName].
      */
-    public fun make(startPosition: RoomPosition): Region {
-        return make(startPosition.x, startPosition.y, startPosition.z)
+    public fun make(startRoomName: String): Region {
+        val room = rooms.first { startRoomName.equalsExaminable(it.room) }.room
+        return make(room)
     }
 
     /**
-     * Make a new [Region] with a specified [x], [y] and [z] start position.
+     * Make a new [Region] with a specified [startRoom].
      */
-    public fun make(x: Int, y: Int, z: Int): Region {
+    public fun make(startRoom: Room): Region {
         // conversion to matrix normalises positions to be 0 indexed regardless of how they were originally specified
         val matrix = convertToRoomMatrix(rooms)
         val rooms = matrix.toRoomPositions()
@@ -75,12 +77,7 @@ public class RegionMaker(
 
         linkExits(region)
 
-        // offset start room, matrix will have normalised positions
-        val minX = rooms.minByOrNull { it.x }?.x ?: 0
-        val minY = rooms.minByOrNull { it.y }?.y ?: 0
-        val minZ = rooms.minByOrNull { it.z }?.z ?: 0
-
-        region.setStartRoom(x - minX, y - minY, z - minZ)
+        region.setStartRoom(startRoom)
         return region
     }
 

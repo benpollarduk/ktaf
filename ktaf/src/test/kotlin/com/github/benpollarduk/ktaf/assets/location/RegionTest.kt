@@ -127,7 +127,7 @@ class RegionTest {
         region.addRoom(room1, 0, 0, 0)
 
         // When
-        val result = region.jumpToRoom(0, 0, 0)
+        val result = region.jumpToRoom(room1)
 
         // Then
         Assertions.assertTrue(result)
@@ -141,7 +141,7 @@ class RegionTest {
         region.addRoom(room1, 0, 0, 0)
 
         // When
-        val result = region.jumpToRoom(1, 0, 0)
+        val result = region.jumpToRoom("no-room")
 
         // Then
         Assertions.assertFalse(result)
@@ -350,7 +350,7 @@ class RegionTest {
         region.addRoom(room2, 0, 1, 0)
 
         // When
-        region.setStartRoom(0, 1, 0)
+        region.setStartRoom(room2)
 
         // Then
         Assertions.assertEquals(room2, region.currentRoom)

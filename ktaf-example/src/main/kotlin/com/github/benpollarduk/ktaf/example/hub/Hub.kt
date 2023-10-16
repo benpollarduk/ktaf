@@ -11,7 +11,7 @@ internal class Hub : RegionTemplate() {
         val regionMaker = RegionMaker(NAME, DESCRIPTION).also {
             it[0, 0, 0] = Clearing().instantiate(playableCharacter)
         }
-        return regionMaker.make(0, 0, 0)
+        return regionMaker.make(Clearing.NAME)
     }
 
     internal companion object {

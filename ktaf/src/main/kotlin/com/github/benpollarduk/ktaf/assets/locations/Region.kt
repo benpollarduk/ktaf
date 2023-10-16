@@ -1,7 +1,5 @@
 package com.github.benpollarduk.ktaf.assets.locations
 
-import com.github.benpollarduk.ktaf.assets.Description
-import com.github.benpollarduk.ktaf.assets.ExaminableObject
 import com.github.benpollarduk.ktaf.assets.ExaminationResult
 import com.github.benpollarduk.ktaf.assets.Identifier
 import com.github.benpollarduk.ktaf.extensions.equalsExaminable
@@ -159,11 +157,14 @@ public class Region(
     }
 
     /**
-     * Set a [Room] at a specified [x], [y] and [z] position as the start room.
+     * Set a [Room] specified by [roomName] as the start room.
      */
-    public fun setStartRoom(x: Int, y: Int, z: Int) {
-        var room = roomPositions.firstOrNull { it.isAtPosition(x, y, z) }?.room
-        setStartRoom(room ?: roomPositions.first().room)
+    public fun setStartRoom(roomName: String) {
+        val room = roomPositions.firstOrNull { roomName.equalsExaminable(it.room) }?.room
+        if (room != null) {
+            currentRoom = room
+            room.movedInto(null)
+        }
     }
 
     /**
@@ -174,12 +175,20 @@ public class Region(
     }
 
     /**
-     * Jump to a [Room] at a specified [x], [y] and [z] position.
+     * Jump to specified [room]. If the jump was possible true is returned, else false.
      */
-    public fun jumpToRoom(x: Int, y: Int, z: Int): Boolean {
-        val roomPosition = roomPositions.firstOrNull { it.isAtPosition(x, y, z) } ?: return false
+    public fun jumpToRoom(room: Room): Boolean {
+        val roomPosition = roomPositions.firstOrNull { it.room == room } ?: return false
         currentRoom = roomPosition.room
         return true
+    }
+
+    /**
+     * Jump to a [Room] specified by [roomName]. If the jump was possible true is returned, else false.
+     */
+    public fun jumpToRoom(roomName: String): Boolean {
+        val room = roomPositions.firstOrNull { roomName.equalsExaminable(it.room) }?.room ?: return false
+        return jumpToRoom(room)
     }
 
     override fun examine(): ExaminationResult {
