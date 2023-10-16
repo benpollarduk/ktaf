@@ -64,14 +64,23 @@ public class RegionMaker(
      * Make a new [Region] with a specified [x], [y] and [z] start position.
      */
     public fun make(x: Int, y: Int, z: Int): Region {
+        // conversion to matrix normalises room positions to be 0 indexed regardless of how they were originally specified
+        val matrix = convertToRoomMatrix(rooms)
+        val rooms = matrix.toRoomPositions()
         val region = Region(identifier, description)
+
         rooms.filter { it.room != Room.empty }.forEach {
             region.addRoom(it.room, it.x, it.y, it.z)
         }
 
         linkExits(region)
 
-        region.setStartRoom(x, y, z)
+        // offset start room, matrix will have normalised positions
+        val minX = rooms.minByOrNull { it.x }?.x ?: 0
+        val minY = rooms.minByOrNull { it.y }?.y ?: 0
+        val minZ = rooms.minByOrNull { it.z }?.z ?: 0
+
+        region.setStartRoom(x - minX, y - minY, z - minZ)
         return region
     }
 
