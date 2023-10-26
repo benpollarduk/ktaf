@@ -8,7 +8,7 @@ import com.github.benpollarduk.ktaf.utilities.NEWLINE
 /**
  * Provides a base implementation for examinable objects.
  */
-public abstract class ExaminableObject : com.github.benpollarduk.ktaf.assets.Examinable {
+public abstract class ExaminableObject : Examinable {
     /**
      * Provides a callback for handling examination of this object.
      */
@@ -38,21 +38,21 @@ public abstract class ExaminableObject : com.github.benpollarduk.ktaf.assets.Exa
             }
         }
 
-        com.github.benpollarduk.ktaf.assets.ExaminationResult(description)
+        ExaminationResult(description)
     }
 
     override fun toString(): String {
         return identifier.name
     }
 
-    override var identifier: com.github.benpollarduk.ktaf.assets.Identifier =
-        com.github.benpollarduk.ktaf.assets.Identifier.Companion.empty
+    override var identifier: Identifier =
+        Identifier.empty
         protected set
-    override var description: com.github.benpollarduk.ktaf.assets.Description =
-        com.github.benpollarduk.ktaf.assets.Description.Companion.default
+    override var description: Description =
+        Description.default
     override var commands: List<CustomCommand> = emptyList()
 
-    override fun examine(): com.github.benpollarduk.ktaf.assets.ExaminationResult {
+    override fun examine(): ExaminationResult {
         return examination(this)
     }
 

@@ -14,14 +14,14 @@ import com.github.benpollarduk.ktaf.extensions.equalsExaminable
  */
 public class RegionMaker(
     private val identifier: Identifier,
-    private val description: com.github.benpollarduk.ktaf.assets.Description
+    private val description: Description
 ) {
     /**
      * A helper for making a [Region], with a specified [identifier] and [description].
      */
     public constructor(identifier: String, description: String) : this(
         Identifier(identifier),
-        com.github.benpollarduk.ktaf.assets.Description(description)
+        Description(description)
     )
 
     /**

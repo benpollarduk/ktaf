@@ -9,7 +9,7 @@ import com.github.benpollarduk.ktaf.logic.Game
 /**
  * Provides a command to examine a specified [examinable].
  */
-internal class Examine(private val examinable: com.github.benpollarduk.ktaf.assets.Examinable?) : Command {
+internal class Examine(private val examinable: Examinable?) : Command {
     override fun invoke(game: Game): Reaction {
         if (examinable == null) {
             return Reaction(ReactionResult.ERROR, "You must specify an examinable.")

@@ -12,7 +12,7 @@ import com.github.benpollarduk.ktaf.assets.interaction.InteractionTarget
  */
 public class PlayableCharacter(
     override var identifier: Identifier,
-    override var description: com.github.benpollarduk.ktaf.assets.Description,
+    override var description: Description,
     items: List<Item> = emptyList()
 ) : Character() {
 
@@ -47,5 +47,5 @@ public class PlayableCharacter(
         identifier: String,
         description: String,
         items: List<Item> = emptyList()
-    ) : this(Identifier(identifier), com.github.benpollarduk.ktaf.assets.Description(description), items)
+    ) : this(Identifier(identifier), Description(description), items)
 }

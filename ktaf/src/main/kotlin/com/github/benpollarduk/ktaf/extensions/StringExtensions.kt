@@ -7,8 +7,8 @@ import com.github.benpollarduk.ktaf.utilities.NEWLINE
 /**
  * Converts the [String] to a [Description].
  */
-public fun String.toDescription(): com.github.benpollarduk.ktaf.assets.Description {
-    return com.github.benpollarduk.ktaf.assets.Description(this)
+public fun String.toDescription(): Description {
+    return Description(this)
 }
 
 /**

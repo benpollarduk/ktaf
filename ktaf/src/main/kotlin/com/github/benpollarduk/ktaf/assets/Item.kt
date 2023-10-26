@@ -12,10 +12,10 @@ import com.github.benpollarduk.ktaf.assets.interaction.InteractionTarget
  */
 public class Item(
     override var identifier: Identifier,
-    override var description: com.github.benpollarduk.ktaf.assets.Description,
+    override var description: Description,
     public var takeable: Boolean = false,
     public var interaction: Interaction = defaultInteraction
-) : com.github.benpollarduk.ktaf.assets.ExaminableObject(), InteractionTarget {
+) : ExaminableObject(), InteractionTarget {
 
     /**
      * Provides an item that can appear in a [Game]. The item must have a [identifier] and a [description].

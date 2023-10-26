@@ -14,7 +14,7 @@ import com.github.benpollarduk.ktaf.conversations.Converser
  */
 public class NonPlayableCharacter(
     override var identifier: Identifier,
-    override var description: com.github.benpollarduk.ktaf.assets.Description,
+    override var description: Description,
     override var conversation: Conversation = Conversation.empty,
     isAlive: Boolean = true
 ) : Character(), Converser {
@@ -23,14 +23,14 @@ public class NonPlayableCharacter(
      * A non-playable character with the specified [identifier] and [description].
      */
     public constructor(identifier: String, description: String) :
-        this(Identifier(identifier), com.github.benpollarduk.ktaf.assets.Description(description))
+        this(Identifier(identifier), Description(description))
 
     /**
      * A non-playable character with the specified [identifier] and [description].
      */
     public constructor(
         identifier: Identifier,
-        description: com.github.benpollarduk.ktaf.assets.Description,
+        description: Description,
         conversation: Conversation = Conversation.empty,
         isAlive: Boolean = true,
         examination: Examination? = null,

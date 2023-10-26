@@ -8,7 +8,7 @@ class DescriptionTest {
     @Test
     fun `given abc when calling getDescription then return abc`() {
         // Given
-        val description = com.github.benpollarduk.ktaf.assets.Description("abc")
+        val description = Description("abc")
 
         // When
         val result = description.getDescription()

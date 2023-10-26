@@ -23,10 +23,10 @@ import com.github.benpollarduk.ktaf.utilities.StringUtilities
  */
 public class Room(
     override var identifier: Identifier,
-    override var description: com.github.benpollarduk.ktaf.assets.Description,
+    override var description: Description,
     exits: List<Exit> = emptyList(),
     items: List<Item> = emptyList()
-) : com.github.benpollarduk.ktaf.assets.ExaminableObject(), InteractionTarget {
+) : ExaminableObject(), InteractionTarget {
     /**
      * A room with a specified [identifier] and a [description].
      */
@@ -35,7 +35,7 @@ public class Room(
         description: String,
         exits: List<Exit> = emptyList(),
         items: List<Item> = emptyList()
-    ) : this(Identifier(identifier), com.github.benpollarduk.ktaf.assets.Description(description), exits, items)
+    ) : this(Identifier(identifier), Description(description), exits, items)
 
     private val _exits: MutableList<Exit> = mutableListOf()
     private val _characters: MutableList<NonPlayableCharacter> = mutableListOf()
@@ -286,7 +286,7 @@ public class Room(
     /**
      * Specify a [ConditionalDescription] for this [Room] with [description].
      */
-    public fun specifyConditionalDescription(description: com.github.benpollarduk.ktaf.assets.ConditionalDescription) {
+    public fun specifyConditionalDescription(description: ConditionalDescription) {
         this.description = description
     }
 

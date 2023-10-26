@@ -11,15 +11,15 @@ import com.github.benpollarduk.ktaf.extensions.equalsExaminable
  */
 public class Overworld(
     override var identifier: Identifier,
-    override var description: com.github.benpollarduk.ktaf.assets.Description
-) : com.github.benpollarduk.ktaf.assets.ExaminableObject() {
+    override var description: Description
+) : ExaminableObject() {
     /**
      * Provides an overworld which is a container of [Region]. The overwold has an [identifier] and a [description].
      */
     public constructor(
         identifier: String,
         description: String
-    ) : this(Identifier(identifier), com.github.benpollarduk.ktaf.assets.Description(description))
+    ) : this(Identifier(identifier), Description(description))
 
     private val mutableRegions: MutableList<Region> = mutableListOf()
     private var _currentRegion: Region? = null

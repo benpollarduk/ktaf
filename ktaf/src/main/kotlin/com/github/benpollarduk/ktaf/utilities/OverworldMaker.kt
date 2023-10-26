@@ -9,7 +9,7 @@ import com.github.benpollarduk.ktaf.assets.locations.Overworld
  */
 public class OverworldMaker(
     private val identifier: Identifier,
-    private val description: com.github.benpollarduk.ktaf.assets.Description,
+    private val description: Description,
     private val regionMakers: List<RegionMaker> = emptyList()
 ) {
     /**
@@ -19,7 +19,7 @@ public class OverworldMaker(
         identifier: String,
         description: String,
         regionMakers: List<RegionMaker> = emptyList()
-    ) : this(Identifier(identifier), com.github.benpollarduk.ktaf.assets.Description(description), regionMakers)
+    ) : this(Identifier(identifier), Description(description), regionMakers)
 
     /**
      * Make a new [Overworld].

@@ -10,7 +10,7 @@ import com.github.benpollarduk.ktaf.assets.interaction.InteractionTarget
 /**
  * Provides a base for all Characters.
  */
-public abstract class Character : com.github.benpollarduk.ktaf.assets.ExaminableObject(), InteractionTarget {
+public abstract class Character : ExaminableObject(), InteractionTarget {
 
     /**
      * Specifies how this [Character] interacts with various [Item].

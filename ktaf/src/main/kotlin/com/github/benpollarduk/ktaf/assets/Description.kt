@@ -17,7 +17,7 @@ public open class Description(description: String) {
         /**
          * A default empty description.
          */
-        public val default: com.github.benpollarduk.ktaf.assets.Description =
-            com.github.benpollarduk.ktaf.assets.Description("")
+        public val default: Description =
+            Description("")
     }
 }

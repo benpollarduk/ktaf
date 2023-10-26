@@ -5,7 +5,7 @@ import com.github.benpollarduk.ktaf.assets.Examinable
 /**
  * Provides a contract for any onject that can hold a [Conversation].
  */
-public interface Converser : com.github.benpollarduk.ktaf.assets.Examinable {
+public interface Converser : Examinable {
     /**
      * This [Converser] [Conversation].
      */

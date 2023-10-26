@@ -7,8 +7,8 @@ package com.github.benpollarduk.ktaf.assets
 public class ConditionalDescription(
     trueDescription: String,
     private val falseDescription: String,
-    private val condition: com.github.benpollarduk.ktaf.assets.Condition
-) : com.github.benpollarduk.ktaf.assets.Description(trueDescription) {
+    private val condition: Condition
+) : Description(trueDescription) {
 
     override fun getDescription(): String {
         return if (condition.invoke()) {

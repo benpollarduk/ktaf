@@ -8,7 +8,7 @@ class ConditionalDescriptionTest {
     @Test
     fun `given a true description of abc when calling getDescription and condition returns true then return abc`() {
         // Given
-        val description = com.github.benpollarduk.ktaf.assets.ConditionalDescription("abc", "def") { true }
+        val description = ConditionalDescription("abc", "def") { true }
 
         // When
         val result = description.getDescription()
@@ -20,7 +20,7 @@ class ConditionalDescriptionTest {
     @Test
     fun `given a false description of def when calling getDescription and condition returns false then return def`() {
         // Given
-        val description = com.github.benpollarduk.ktaf.assets.ConditionalDescription("abc", "def") { false }
+        val description = ConditionalDescription("abc", "def") { false }
 
         // When
         val result = description.getDescription()
