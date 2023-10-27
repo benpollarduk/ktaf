@@ -150,4 +150,4 @@ GameExecutor.execute(template, ioConfiguration = ioConfiguration)
 ```
 
 # For Open Questions
-Visit https://github.com/ben-pollard-uk/ktaf/issues
+Visit https://github.com/benpollarduk/ktaf/issues
