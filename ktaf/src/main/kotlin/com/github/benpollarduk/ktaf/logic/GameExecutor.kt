@@ -4,6 +4,9 @@ import com.github.benpollarduk.ktaf.io.IOConfiguration
 import com.github.benpollarduk.ktaf.utilities.templates.GameTemplate
 import java.util.concurrent.locks.ReentrantLock
 
+/**
+ * Provides an object that controls execution of games.
+ */
 public object GameExecutor {
     private val executingGames: MutableList<Game> = mutableListOf()
     private val lock = ReentrantLock()
