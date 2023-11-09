@@ -71,6 +71,7 @@ internal class SwingConfiguration(
                 SwingUtilities.invokeLater(runnable)
             }
         }
+
     override val waitForAcknowledge: WaitForAcknowledge
         get() = object : WaitForAcknowledge {
             override fun invoke(cancellationToken: CancellationToken): Boolean {
@@ -95,6 +96,7 @@ internal class SwingConfiguration(
                 }
             }
         }
+
     override val waitForCommand: WaitForCommand
         get() = object : WaitForCommand {
             override fun invoke(cancellationToken: CancellationToken): String {
@@ -121,6 +123,7 @@ internal class SwingConfiguration(
                 return captured
             }
         }
+
     override val frameBuilders: FrameBuilderCollection
         get() {
             val width = 600

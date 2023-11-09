@@ -125,6 +125,7 @@ public object KtorConfiguration : IOConfiguration {
                 }
             }
         }
+
     override val waitForAcknowledge: WaitForAcknowledge
         get() = object : WaitForAcknowledge {
             override fun invoke(cancellationToken: CancellationToken): Boolean {
@@ -149,6 +150,7 @@ public object KtorConfiguration : IOConfiguration {
                 }
             }
         }
+
     override val waitForCommand: WaitForCommand
         get() = object : WaitForCommand {
             override fun invoke(cancellationToken: CancellationToken): String {
@@ -175,6 +177,7 @@ public object KtorConfiguration : IOConfiguration {
                 return captured
             }
         }
+
     override val frameBuilders: FrameBuilderCollection
         get() {
             val mapSize = Size(60, 35)

@@ -27,12 +27,13 @@ import com.github.benpollarduk.ktaf.rendering.frames.ansi.AnsiTransitionFrameBui
 public object AnsiConsoleConfiguration : IOConfiguration {
     private const val END_OF_BUFFER = -1
     private const val LINE_FEED = 10
+
     override val renderFrame: RenderFrame
         get() = object : RenderFrame {
             override fun invoke(
                 frame: String,
                 allowInput: Boolean,
-                cursorPosition: FramePosition
+                cursorPosition: FramePosition,
             ) {
                 // windows terminal doesn't clear properly with ANSI...
                 if (System.getProperty("os.name").contains("Windows")) {
@@ -51,6 +52,7 @@ public object AnsiConsoleConfiguration : IOConfiguration {
                 print(if (allowInput) "\u001b[?25h" else "\u001b[?25l")
             }
         }
+
     override val waitForAcknowledge: WaitForAcknowledge
         get() = object : WaitForAcknowledge {
             override fun invoke(cancellationToken: CancellationToken): Boolean {
@@ -66,6 +68,7 @@ public object AnsiConsoleConfiguration : IOConfiguration {
                 return c == LINE_FEED
             }
         }
+
     override val waitForCommand: WaitForCommand
         get() = object : WaitForCommand {
             override fun invoke(cancellationToken: CancellationToken): String {
@@ -73,6 +76,7 @@ public object AnsiConsoleConfiguration : IOConfiguration {
                 return readLine() ?: ""
             }
         }
+
     override val frameBuilders: FrameBuilderCollection
         get() {
             val gridStringBuilder = AnsiGridStringBuilder()
@@ -86,7 +90,7 @@ public object AnsiConsoleConfiguration : IOConfiguration {
                 AnsiGameOverFrameBuilder(gridStringBuilder, frameSize),
                 AnsiConversationFrameBuilder(gridStringBuilder, frameSize),
                 AnsiSceneFrameBuilder(gridStringBuilder, AnsiRoomMapBuilder(), frameSize),
-                AnsiRegionMapFrameBuilder(gridStringBuilder, AnsiRegionMapBuilder(), frameSize)
+                AnsiRegionMapFrameBuilder(gridStringBuilder, AnsiRegionMapBuilder(), frameSize),
             )
         }
 }
