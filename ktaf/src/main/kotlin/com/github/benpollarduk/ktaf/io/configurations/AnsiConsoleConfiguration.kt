@@ -33,7 +33,7 @@ public object AnsiConsoleConfiguration : IOConfiguration {
             override fun invoke(
                 frame: String,
                 allowInput: Boolean,
-                cursorPosition: FramePosition,
+                cursorPosition: FramePosition
             ) {
                 // windows terminal doesn't clear properly with ANSI...
                 if (System.getProperty("os.name").contains("Windows")) {
@@ -90,7 +90,7 @@ public object AnsiConsoleConfiguration : IOConfiguration {
                 AnsiGameOverFrameBuilder(gridStringBuilder, frameSize),
                 AnsiConversationFrameBuilder(gridStringBuilder, frameSize),
                 AnsiSceneFrameBuilder(gridStringBuilder, AnsiRoomMapBuilder(), frameSize),
-                AnsiRegionMapFrameBuilder(gridStringBuilder, AnsiRegionMapBuilder(), frameSize),
+                AnsiRegionMapFrameBuilder(gridStringBuilder, AnsiRegionMapBuilder(), frameSize)
             )
         }
 }
