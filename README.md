@@ -87,9 +87,11 @@ The default frame collections for rendering in a terminal assume that a terminal
 
 # Getting Started
  * Clone the repo
- * Run the included terminal application
+ * Build and run the included terminal application
 ```bash
-./gradlew :app-ktaf-example-console:run
+./gradlew clean :app-ktaf-example-console:build
+cd app-ktaf-example-console/build/libs
+java -jar app-ktaf-example-console-all.jar
 ```
  * Run included Swing example application to run with a basic UI
 ```bash
