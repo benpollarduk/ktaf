@@ -7,6 +7,7 @@ import com.github.benpollarduk.ktaf.logic.discovery.CatalogEntry
 import com.github.benpollarduk.ktaf.logic.discovery.GameCatalogResolver
 import com.github.benpollarduk.ktaf.swing.io.SwingConfiguration
 import com.github.benpollarduk.ktaf.utilities.templates.GameTemplate
+import org.apache.logging.log4j.kotlin.Logging
 import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.FlowLayout
@@ -28,9 +29,8 @@ import javax.swing.JTextField
 import javax.swing.SwingUtilities
 import javax.swing.border.EmptyBorder
 import javax.swing.filechooser.FileNameExtensionFilter
-import org.apache.logging.log4j.kotlin.Logging
 
-class GameApp : JFrame("app-example-swing"), Logging {
+class GameApp : JFrame("app-ktaf-example-swing"), Logging {
     private var currentFrameAcceptsInput: Boolean = false
     init {
         // set up main frame
