@@ -86,18 +86,18 @@ Please visit [https://benpollarduk.github.io/ktaf-docs/](https://benpollarduk.gi
 The default frame collections for rendering in a terminal assume that a terminal capable of handling ANSI is being used. If a terminal that doesn't support ANSI is used the game will still render but ANSI will also be displayed as text.
 
 # Getting Started
- * Clone the repo
- * Build and run the included terminal application
+ * Clone the repo.
+ * Build and run the included terminal application.
 ```bash
 ./gradlew clean :app-ktaf-example-console:build
 cd app-ktaf-example-console/build/libs
 java -jar app-ktaf-example-console-all.jar
 ```
- * Run included Swing example application to run with a basic UI
+ * Run included Swing example application to run with a basic UI.
 ```bash
 ./gradlew :app-ktaf-example-swing:run
 ```
- * Run included ktor example webserver then navigate to localhost:8080 in browser
+ * Run included ktor example webserver then navigate to localhost:8080 in browser.
 ```bash
 ./gradlew :app-ktaf-example-ktor:run
 ```

@@ -9,7 +9,9 @@ import java.net.URLClassLoader
 import java.util.jar.JarFile
 
 /**
- * Provides an object for resolving a [Catalog] of [GameTemplate] objects.
+ * Provides an object for resolving a [Catalog] of [GameTemplate] objects. Caution should be exercised as this can be a
+ * volatile method of adding extensibility as any changes to the targeted [GameTemplate] class or its dependencies can
+ * cause the class loader to fail.
  */
 public object GameCatalogResolver {
     /**
