@@ -103,7 +103,7 @@ class GameApp : JFrame("app-ktaf-example-swing"), Logging {
 
     private fun createMenu(ioConfiguration: IOConfiguration): JMenuBar {
         val menu = JMenuBar()
-        val zzMenuItem = JMenu("Game")
+        val gameMenuItem = JMenu("Game")
         val importJarMenuItem = JMenuItem("Load .jar...")
         val examplesMenuItem = JMenu("Examples")
         val ktafDemoMenuItem = JMenuItem("ktaf-demo")
