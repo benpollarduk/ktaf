@@ -1,3 +1,8 @@
+[![main-ci](https://github.com/benpollarduk/ktaf/actions/workflows/main-ci.yml/badge.svg?branch=main)](https://github.com/benpollarduk/ktaf/actions/workflows/main-ci.yml)
+[![GitHub release](https://img.shields.io/github/release/benpollarduk/ktaf.svg)](https://github.com/benpollarduk/ktaf/releases)
+[![License](https://img.shields.io/github/license/benpollarduk/ktaf.svg)](https://opensource.org/licenses/MIT)
+[![Documentation Status](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://benpollarduk.github.io/ktaf-docs/)
+
 # Introduction 
 An implementation of the BP.AdventureFramework - a framework for building text based adventures - in Kotlin. Ktaf aims to provide all of the basic building blocks required to start writing simple games.
 
