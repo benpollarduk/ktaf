@@ -1,4 +1,5 @@
 [![main-ci](https://github.com/benpollarduk/ktaf/actions/workflows/main-ci.yml/badge.svg?branch=main)](https://github.com/benpollarduk/ktaf/actions/workflows/main-ci.yml)
+[![codecov](https://codecov.io/gh/benpollarduk/ktaf/graph/badge.svg?token=1C7HRFJ6C9)](https://codecov.io/gh/benpollarduk/ktaf)
 [![GitHub release](https://img.shields.io/github/release/benpollarduk/ktaf.svg)](https://github.com/benpollarduk/ktaf/releases)
 [![License](https://img.shields.io/github/license/benpollarduk/ktaf.svg)](https://opensource.org/licenses/MIT)
 [![Documentation Status](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://benpollarduk.github.io/ktaf-docs/)
