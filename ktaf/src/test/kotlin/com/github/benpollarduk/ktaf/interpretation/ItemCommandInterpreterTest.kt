@@ -150,6 +150,21 @@ class ItemCommandInterpreterTest {
     }
 
     @Test
+    fun `given examine with item when interpret then interpreted successfully is true`() {
+        // Given
+        val interpreter = ItemCommandInterpreter()
+        val item = Item("Sword", "A test sword.")
+        val game = GameTestHelper.getBlankGame()
+        game.overworld.currentRegion?.currentRoom?.addItem(item)
+
+        // When
+        val result = interpreter.interpret("${ItemCommandInterpreter.EXAMINE} ${item.identifier.name}", game)
+
+        // Then
+        Assertions.assertTrue(result.interpretedSuccessfully)
+    }
+
+    @Test
     fun `given take when interpret then return instance of take`() {
         // Given
         val interpreter = ItemCommandInterpreter()

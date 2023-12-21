@@ -9,18 +9,6 @@ import org.junit.jupiter.api.Test
 
 class ExaminableTest {
     @Test
-    fun `given item with defaults when calling examine then return empty string`() {
-        // Given
-        val examinable = Item("", "")
-
-        // When
-        val result = examinable.examine()
-
-        // Then
-        Assertions.assertEquals("", result.description)
-    }
-
-    @Test
     fun `given item with description when calling examine then result contains description`() {
         // Given
         val examinable = Item("Test", "ABC")
@@ -30,6 +18,30 @@ class ExaminableTest {
 
         // Then
         Assertions.assertTrue(result.description.contains("ABC"))
+    }
+
+    @Test
+    fun `given item with no description when calling examine then result contains name`() {
+        // Given
+        val examinable = Item("Test", "")
+
+        // When
+        val result = examinable.examine()
+
+        // Then
+        Assertions.assertTrue(result.description.contains("Test"))
+    }
+
+    @Test
+    fun `given item with no name or description when calling examine then result contains class name`() {
+        // Given
+        val examinable = Item("", "")
+
+        // When
+        val result = examinable.examine()
+
+        // Then
+        Assertions.assertTrue(result.description.contains("Item"))
     }
 
     @Test

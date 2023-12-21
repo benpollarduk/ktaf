@@ -27,15 +27,19 @@ public abstract class ExaminableObject : Examinable {
                 description += "$newline \"${command.commandHelp.command}\" - " +
                     "${command.commandHelp.description.removeSentenceEnd()}, "
             }
+        }
 
-            if (description.endsWith(", ")) {
-                description = description.substring(0, description.length - 2)
-                description.ensureFinishedSentence()
-            }
+        if (description.endsWith(", ")) {
+            description = description.substring(0, description.length - 2)
+            description.ensureFinishedSentence()
+        }
 
-            if (description == "") {
-                description = it::class.simpleName.toString()
-            }
+        if (description == "") {
+            description = it.identifier.name
+        }
+
+        if (description == "") {
+            description = it::class.simpleName.toString()
         }
 
         ExaminationResult(description)
