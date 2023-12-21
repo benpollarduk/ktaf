@@ -48,8 +48,10 @@ public abstract class ExaminableObject : Examinable {
     override var identifier: Identifier =
         Identifier.empty
         protected set
+
     override var description: Description =
         Description.default
+
     override var commands: List<CustomCommand> = emptyList()
 
     override fun examine(): ExaminationResult {

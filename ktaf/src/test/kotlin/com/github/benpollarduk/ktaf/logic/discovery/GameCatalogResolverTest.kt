@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import java.io.File
 import java.io.FileOutputStream
+import java.nio.file.Files
 
 @Suppress("MaxLineLength")
 class GameCatalogResolverTest {
@@ -23,6 +24,30 @@ class GameCatalogResolverTest {
 
         // When
         val result = GameCatalogResolver.resolveCatalogFromJar(tempFile)
+
+        // Then
+        Assertions.assertEquals(1, result.get().size)
+        Assertions.assertEquals("ktav demo", result.get().first().name)
+    }
+
+    @Test
+    fun `given example jar containing one game template object when resolving catalog entries for directory then one entry returned`() {
+        // Given
+        val testJarStream = javaClass.classLoader.getResourceAsStream("test.jar")
+        val tempDir = Files.createTempDirectory("tempDir").toFile()
+        tempDir.deleteOnExit()
+
+        val tempFile = File(tempDir, "test.jar")
+
+        // write the contents of the resource to the temporary file
+        testJarStream.use { input ->
+            FileOutputStream(tempFile).use { output ->
+                input.copyTo(output)
+            }
+        }
+
+        // When
+        val result = GameCatalogResolver.resolveCatalogFromDirectory(tempDir.absolutePath)
 
         // Then
         Assertions.assertEquals(1, result.get().size)

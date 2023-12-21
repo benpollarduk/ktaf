@@ -76,4 +76,18 @@ class IdentifierTest {
         // Then
         assertTrue(result)
     }
+
+    @Test
+    fun `given 2 identifiers when calling hash code then different has codes returned`() {
+        // Given
+        val identifier1 = Identifier("ABC")
+        val identifier2 = Identifier("XYZ")
+
+        // When
+        val result1 = identifier1.hashCode()
+        val result2 = identifier2.hashCode()
+
+        // Then
+        assertTrue(result1 != result2)
+    }
 }
