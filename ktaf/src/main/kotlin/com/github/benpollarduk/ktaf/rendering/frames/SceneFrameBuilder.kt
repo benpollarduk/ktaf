@@ -9,7 +9,7 @@ import com.github.benpollarduk.ktaf.rendering.KeyType
 /**
  * Provides a standard interface for scene frames.
  */
-public interface SceneFrameBuilder {
+public fun interface SceneFrameBuilder {
     /**
      * Build a frame with a [room], [viewPoint], [playableCharacter], [message], [contextualCommands] and [keyType].
      */
