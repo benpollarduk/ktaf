@@ -5,7 +5,7 @@ import com.github.benpollarduk.ktaf.interpretation.CommandHelp
 /**
  * Provides a standard interface for help frames.
  */
-public interface HelpFrameBuilder {
+public fun interface HelpFrameBuilder {
     /**
      * Build a frame with a [title], [description] and [commands].
      */

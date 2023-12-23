@@ -3,7 +3,7 @@ package com.github.benpollarduk.ktaf.rendering.frames
 /**
  * Provides a standard interface for completion frames.
  */
-public interface CompletionFrameBuilder {
+public fun interface CompletionFrameBuilder {
     /**
      * Build a frame with a [title] and [reason].
      */

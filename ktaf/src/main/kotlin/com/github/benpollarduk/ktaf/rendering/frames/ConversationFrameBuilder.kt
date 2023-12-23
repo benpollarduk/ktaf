@@ -6,7 +6,7 @@ import com.github.benpollarduk.ktaf.interpretation.CommandHelp
 /**
  * Provides a standard interface for conversation frames.
  */
-public interface ConversationFrameBuilder {
+public fun interface ConversationFrameBuilder {
     /**
      * Build a frame with a [title], [converser] and [commands].
      */

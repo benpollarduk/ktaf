@@ -5,7 +5,7 @@ import com.github.benpollarduk.ktaf.assets.locations.Region
 /**
  * Provides a standard interface for region map frames.
  */
-public interface RegionMapFrameBuilder {
+public fun interface RegionMapFrameBuilder {
     /**
      * Build a frame with a [region].
      */
