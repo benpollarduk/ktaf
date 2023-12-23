@@ -6,7 +6,7 @@ import com.github.benpollarduk.ktaf.logic.Game
 /**
  * Provides a contract for in game commands.
  */
-public interface Command {
+public fun interface Command {
     /**
      * Invoke the [Command] on the [game] to obtain a [Reaction].
      */

@@ -5,7 +5,7 @@ import com.github.benpollarduk.ktaf.logic.CancellationToken
 /**
  * Provides an interface for waiting for an acknowledgement.
  */
-public interface WaitForAcknowledge {
+public fun interface WaitForAcknowledge {
     /**
      * Wait for acknowledgment to be received. Returns true if a positive acknowledgment was received, else false. A
      * [cancellationToken] can be provided to accommodate cancellation of the invocation.

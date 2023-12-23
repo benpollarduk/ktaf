@@ -3,7 +3,7 @@ package com.github.benpollarduk.ktaf.rendering.frames
 /**
  * Provides a standard interface for transition frames.
  */
-public interface TransitionFrameBuilder {
+public fun interface TransitionFrameBuilder {
     /**
      * Build a frame with a [title] and [message].
      */

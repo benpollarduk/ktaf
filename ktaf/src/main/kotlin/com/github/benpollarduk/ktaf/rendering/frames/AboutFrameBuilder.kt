@@ -3,7 +3,7 @@ package com.github.benpollarduk.ktaf.rendering.frames
 /**
  * Provides a standard interface for about frames.
  */
-public interface AboutFrameBuilder {
+public fun interface AboutFrameBuilder {
     /**
      * Build a frame with a [title], [description] and [author].
      */

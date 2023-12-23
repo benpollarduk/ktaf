@@ -5,7 +5,7 @@ import com.github.benpollarduk.ktaf.logic.CancellationToken
 /**
  * Provides an interface for waiting for a command.
  */
-public interface WaitForCommand {
+public fun interface WaitForCommand {
     /**
      * Wait for a command. A [cancellationToken] can be provided to accommodate cancellation of the invocation.
      */

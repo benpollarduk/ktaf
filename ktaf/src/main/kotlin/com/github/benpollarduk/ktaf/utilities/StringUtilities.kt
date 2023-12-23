@@ -34,16 +34,22 @@ internal object StringUtilities {
         for (index in examinableNames.indices) {
             val examinable = examinableNames[index]
 
-            examinabesAsList += if (index == 0 && examinableNames.size > 2) {
-                "${examinable.getObjectifier().toSentenceCase()} $examinable, "
-            } else if (index == 0) {
-                "${examinable.getObjectifier().toSentenceCase()} $examinable "
-            } else if (index < examinableNames.size - 2) {
-                "${examinable.getObjectifier()} $examinable, "
-            } else if (index < examinableNames.size - 1) {
-                "${examinable.getObjectifier()} $examinable "
-            } else {
-                "and ${examinable.getObjectifier()} $examinable."
+            examinabesAsList += when {
+                index == 0 && examinableNames.size > 2 -> {
+                    "${examinable.getObjectifier().toSentenceCase()} $examinable, "
+                }
+                index == 0 -> {
+                    "${examinable.getObjectifier().toSentenceCase()} $examinable "
+                }
+                index < examinableNames.size - 2 -> {
+                    "${examinable.getObjectifier()} $examinable, "
+                }
+                index < examinableNames.size - 1 -> {
+                    "${examinable.getObjectifier()} $examinable "
+                }
+                else -> {
+                    "and ${examinable.getObjectifier()} $examinable."
+                }
             }
         }
 
