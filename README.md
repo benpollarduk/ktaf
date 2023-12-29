@@ -10,7 +10,7 @@
 [![Documentation Status](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://benpollarduk.github.io/ktaf-docs/)
 
 # Introduction 
-An implementation of the BP.AdventureFramework - a framework for building text based adventures - in Kotlin. Ktaf aims to provide all of the basic building blocks required to start writing simple games.
+An implementation of the BP.AdventureFramework - a framework for building text based adventures - in Kotlin or Java. Ktaf aims to provide all of the basic building blocks required to start writing simple games.
 
 Included in the repo are example projects that show how ktaf can be used to write games that run in a terminal window as originally intended, and also an example Swing application and an example Ktor webserver are also included that render the game in HTML.
 
