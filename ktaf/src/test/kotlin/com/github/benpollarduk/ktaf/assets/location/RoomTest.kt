@@ -2,6 +2,7 @@ package com.github.benpollarduk.ktaf.assets.location
 
 import com.github.benpollarduk.ktaf.assets.Item
 import com.github.benpollarduk.ktaf.assets.characters.NonPlayableCharacter
+import com.github.benpollarduk.ktaf.assets.interaction.InteractionEffect
 import com.github.benpollarduk.ktaf.assets.locations.Direction
 import com.github.benpollarduk.ktaf.assets.locations.Exit
 import com.github.benpollarduk.ktaf.assets.locations.Room
@@ -211,5 +212,120 @@ class RoomTest {
 
         // Then
         Assertions.assertFalse(result)
+    }
+
+    @Test
+    fun `given one item when examine then result contains item name`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val item = Item("Item", "Item description")
+        room.addItem(item)
+
+        // When
+        val result = room.examine().description
+
+        // Then
+        Assertions.assertTrue(result.contains("Item"))
+    }
+
+    @Test
+    fun `given two items when examine then result contains both item names`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val item1 = Item("Item 1", "Item 1 description")
+        val item2 = Item("Item 2", "Item 2 description")
+        room.addItem(item1)
+        room.addItem(item2)
+
+        // When
+        val result = room.examine().description
+
+        // Then
+        Assertions.assertTrue(result.contains("Item 1"))
+        Assertions.assertTrue(result.contains("Item 2"))
+    }
+
+    @Test
+    fun `given character in room when contains character then true returned`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val character = NonPlayableCharacter("NPC", "")
+        room.addCharacter(character)
+
+        // When
+        val result = room.containsCharacter(character)
+
+        // Then
+        Assertions.assertTrue(result)
+    }
+
+    @Test
+    fun `given character in room when contains character by name then true returned`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val character = NonPlayableCharacter("NPC", "")
+        room.addCharacter(character)
+
+        // When
+        val result = room.containsCharacter(character.identifier.name)
+
+        // Then
+        Assertions.assertTrue(result)
+    }
+
+    @Test
+    fun `given character in room when find character then character returned`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val character = NonPlayableCharacter("NPC", "")
+        room.addCharacter(character)
+
+        // When
+        val result = room.findCharacter("NPC")
+
+        // Then
+        Assertions.assertEquals(character, result)
+    }
+
+    @Test
+    fun `given character in room when contains interaction target by name then true returned`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val character = NonPlayableCharacter("NPC", "")
+        room.addCharacter(character)
+
+        // When
+        val result = room.containsInteractionTarget(character.identifier.name)
+
+        // Then
+        Assertions.assertTrue(result)
+    }
+
+    @Test
+    fun `given character in room when find interaction target then target returned`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val character = NonPlayableCharacter("NPC", "")
+        room.addCharacter(character)
+
+        // When
+        val result = room.findInteractionTarget("NPC")
+
+        // Then
+        Assertions.assertEquals(character, result)
+    }
+
+    @Test
+    fun `given no specified interaction when interact then no effect`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val item = Item("Item", "")
+        room.addItem(item)
+
+        // When
+        val result = room.interact(item)
+
+        // Then
+        Assertions.assertEquals(InteractionEffect.NO_EFFECT, result.effect)
     }
 }
