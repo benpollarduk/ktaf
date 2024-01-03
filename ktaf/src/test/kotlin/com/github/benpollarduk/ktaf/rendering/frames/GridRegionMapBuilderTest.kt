@@ -24,8 +24,8 @@ class GridRegionMapBuilderTest {
                 Exit(Direction.NORTH),
                 Exit(Direction.SOUTH),
                 Exit(Direction.UP),
-                Exit(Direction.DOWN),
-            ),
+                Exit(Direction.DOWN)
+            )
         )
         regionMaker[2, 1, 1] = Room("", "", listOf(Exit(Direction.WEST)))
         regionMaker[0, 0, 1] = Room("", "", listOf(Exit(Direction.SOUTH)))
@@ -61,8 +61,8 @@ class GridRegionMapBuilderTest {
                 Exit(Direction.NORTH, true),
                 Exit(Direction.SOUTH, true),
                 Exit(Direction.UP, true),
-                Exit(Direction.DOWN, true),
-            ),
+                Exit(Direction.DOWN, true)
+            )
         )
         regionMaker[2, 1, 1] = Room("", "", listOf(Exit(Direction.WEST, true)))
         regionMaker[0, 0, 1] = Room("", "", listOf(Exit(Direction.SOUTH, true)))

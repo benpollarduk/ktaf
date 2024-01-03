@@ -76,7 +76,7 @@ class GameTest {
             player,
             overworldMaker.make(),
             { EndCheckResult.notEnded },
-            { EndCheckResult.notEnded },
+            { EndCheckResult.notEnded }
         )
 
         // Then
@@ -95,7 +95,7 @@ class GameTest {
             player,
             overworldMaker.make(),
             { EndCheckResult.notEnded },
-            { EndCheckResult.notEnded },
+            { EndCheckResult.notEnded }
         )
 
         // When
@@ -119,7 +119,7 @@ class GameTest {
             player,
             overworldMaker.make(),
             { EndCheckResult.notEnded },
-            { EndCheckResult.notEnded },
+            { EndCheckResult.notEnded }
         )
 
         // When
@@ -144,7 +144,7 @@ class GameTest {
             player,
             overworldMaker.make(),
             { EndCheckResult.notEnded },
-            { EndCheckResult.notEnded },
+            { EndCheckResult.notEnded }
         )
 
         // When
@@ -169,7 +169,7 @@ class GameTest {
             player,
             overworldMaker.make(),
             { EndCheckResult.notEnded },
-            { EndCheckResult.notEnded },
+            { EndCheckResult.notEnded }
         )
 
         // When
@@ -192,7 +192,7 @@ class GameTest {
             player,
             overworldMaker.make(),
             { EndCheckResult.notEnded },
-            { EndCheckResult.notEnded },
+            { EndCheckResult.notEnded }
         )
 
         // When
@@ -216,7 +216,7 @@ class GameTest {
                 player,
                 overworldMaker.make(),
                 { EndCheckResult.notEnded },
-                { EndCheckResult.notEnded },
+                { EndCheckResult.notEnded }
             )
 
             // When
