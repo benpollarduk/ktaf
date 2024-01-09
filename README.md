@@ -2,7 +2,8 @@
 
 # Ktaf
 
-An implementation of the BP.AdventureFramework - a framework for building text based adventures - in Kotlin or Java. Ktaf aims to provide all of the basic building blocks required to start writing simple games.
+A Kotlin library that provides a framework for creating text adventures and interactive stories for JVM. Ktaf is a Kotlin implementation of the BP.AdventureFramework. 
+Ktaf aims to provide all of the basic building blocks required to start writing simple games.
 
 [![main-ci](https://github.com/benpollarduk/ktaf/actions/workflows/main-ci.yml/badge.svg?branch=main)](https://github.com/benpollarduk/ktaf/actions/workflows/main-ci.yml)
 [![codecov](https://codecov.io/gh/benpollarduk/ktaf/graph/badge.svg?token=1C7HRFJ6C9)](https://codecov.io/gh/benpollarduk/ktaf)
