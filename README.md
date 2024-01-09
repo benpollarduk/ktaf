@@ -1,3 +1,9 @@
+<div align="center">
+
+# Ktaf
+
+An implementation of the BP.AdventureFramework - a framework for building text based adventures - in Kotlin or Java. Ktaf aims to provide all of the basic building blocks required to start writing simple games.
+
 [![main-ci](https://github.com/benpollarduk/ktaf/actions/workflows/main-ci.yml/badge.svg?branch=main)](https://github.com/benpollarduk/ktaf/actions/workflows/main-ci.yml)
 [![codecov](https://codecov.io/gh/benpollarduk/ktaf/graph/badge.svg?token=1C7HRFJ6C9)](https://codecov.io/gh/benpollarduk/ktaf)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=benpollarduk_ktaf&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=benpollarduk_ktaf)
@@ -9,9 +15,9 @@
 [![License](https://img.shields.io/github/license/benpollarduk/ktaf.svg)](https://opensource.org/licenses/MIT)
 [![Documentation Status](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://benpollarduk.github.io/ktaf-docs/)
 
-# Introduction 
-An implementation of the BP.AdventureFramework - a framework for building text based adventures - in Kotlin or Java. Ktaf aims to provide all of the basic building blocks required to start writing simple games.
+</div>
 
+## Introduction 
 Included in the repo are example projects that show how ktaf can be used to write games that run in a terminal window as originally intended, and also an example Swing application and an example Ktor webserver are also included that render the game in HTML.
 
 ![image](https://github.com/ben-pollard-uk/ktaf/assets/129943363/27670c5d-7f4f-4534-93cb-7931fd8d90e4)
@@ -90,13 +96,13 @@ val template = catalog.get().first()
 GameExecutor.execute(gameTemplate, ioConfiguration = AnsiConsoleConfiguration)
 ```
 
-# Documentation
+## Documentation
 Please visit [https://benpollarduk.github.io/ktaf-docs/](https://benpollarduk.github.io/ktaf-docs/) to view the ktaf documentation.
 
-# Prerequisites
+## Prerequisites
 The default frame collections for rendering in a terminal assume that a terminal capable of handling ANSI is being used. If a terminal that doesn't support ANSI is used the game will still render but ANSI will also be displayed as text.
 
-# Getting Started
+## Getting Started
  * Clone the repo.
  * Build and run the included terminal application.
 ```bash
@@ -113,7 +119,7 @@ java -jar app-ktaf-example-console-all.jar
 ./gradlew :app-ktaf-example-ktor:run
 ```
 
-# Hello World
+## Hello World
 ```kotlin
 // create a template for creating games
 val template = object : GameTemplate() {
