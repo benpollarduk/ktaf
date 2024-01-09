@@ -169,5 +169,5 @@ val template = object : GameTemplate() {
 GameExecutor.execute(template, ioConfiguration = ioConfiguration)
 ```
 
-# For Open Questions
+## For Open Questions
 Visit https://github.com/benpollarduk/ktaf/issues
