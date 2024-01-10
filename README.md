@@ -21,7 +21,7 @@ Ktaf aims to provide all of the basic building blocks required to start writing 
 ## Introduction 
 Included in the repo are example projects that show how ktaf can be used to write games that run in a terminal window as originally intended, and also an example Swing application and an example Ktor webserver are also included that render the game in HTML.
 
-![image](https://github.com/ben-pollard-uk/ktaf/assets/129943363/27670c5d-7f4f-4534-93cb-7931fd8d90e4)
+![ktaf_example](https://github.com/benpollarduk/ktaf/assets/129943363/10ee7024-f3ea-4679-b50c-011503eac836)
 
 Ktaf provides simple classes for developing game elements:
   * Interface and base class for examinable objects:
