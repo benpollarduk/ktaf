@@ -115,23 +115,14 @@ GameExecutor.execute(gameTemplate, ioConfiguration = AnsiConsoleConfiguration)
 The default frame collections for rendering in a terminal assume that a terminal capable of handling ANSI is being used. If a terminal that doesn't support ANSI is used the game will still render but ANSI will also be displayed as text.
 
 ## Getting Started
- * Clone the repo.
- * Build and run the included terminal application.
+
+### Clone the repo
+Clone the repo to the local machine.
 ```bash
-./gradlew clean :app-ktaf-example-console:build
-cd app-ktaf-example-console/build/libs
-java -jar app-ktaf-example-console-all.jar
-```
- * Run included Swing example application to run with a basic UI.
-```bash
-./gradlew :app-ktaf-example-swing:run
-```
- * Run included ktor example webserver then navigate to localhost:8080 in browser.
-```bash
-./gradlew :app-ktaf-example-ktor:run
+git clone https://github.com/benpollarduk/ktaf.git
 ```
 
-## Hello World
+### Hello World
 ```kotlin
 // create a game template. this template can be use to instantiate instances of the game
 val template = object : GameTemplate() {
@@ -168,6 +159,48 @@ val template = object : GameTemplate() {
 
 // begin execution of the game. the ioConfiguration determines how input is received and output is displayed
 GameExecutor.execute(template, ioConfiguration = ioConfiguration)
+```
+
+### Example game
+The quickest way to start getting to grips with the structure of Ktaf is by taking a look at the examples.
+An example game is provided in the [ktaf-exmples](https://github.com/benpollarduk/ktaf/tree/main/ktaf-example/src/main/kotlin/com/github/benpollarduk/ktaf/example) directory 
+and have been designed with the aim of showcasing the various features.
+
+### Running the examples
+The example applications can be used to execute the example Ktaf game and demonstrate the core principals of the framework.
+
+#### Example console
+The example console provides a basic terminal application that can execute a Ktaf game.
+* Build the example console application.
+```bash
+./gradlew clean :app-ktaf-example-console:build
+```
+* Run the example console application.
+```bash
+cd app-ktaf-example-console/build/libs
+java -jar app-ktaf-example-console-all.jar
+```
+
+#### Example Swing application
+The example Swing application provides a basic UI that can execute a Ktaf game.
+* Build the example Swing application.
+```bash
+./gradlew clean :app-ktaf-example-swing:build
+```
+* Run the example Swing application.
+```bash
+./gradlew :app-ktaf-example-swing:run
+```
+
+#### Example Ktor web app
+The example Ktor web app provides a basic web server that can host a Ktaf game and display it in the browser.
+* Build the example Ktor application.
+```bash
+./gradlew clean :app-ktaf-example-ktor:build
+```
+* Run included ktor example webserver then navigate to localhost:8080 in browser.
+```bash
+./gradlew :app-ktaf-example-ktor:run
 ```
 
 ## Documentation
