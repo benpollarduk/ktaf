@@ -73,7 +73,7 @@ Non-playable characters (NPC's) can be added to rooms and can help drive the nar
 and interact with items.
 
 ```kotlin
-// create a player
+// create a npc
 val npc = NonPlayableChracter("Gary", "The antagonist of the story.")
 ```
 
