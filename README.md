@@ -23,28 +23,59 @@ Included in the repo are example projects that show how Ktaf can be used to writ
 
 ![ktaf_example](https://github.com/benpollarduk/ktaf/assets/129943363/10ee7024-f3ea-4679-b50c-011503eac836)
 
-Ktaf provides simple classes for developing game elements:
-  * Interface and base class for examinable objects:
-    * Examination returns a description of the object.
-    * Descriptions can be conditional, with different results generated from the game state.
-    * All items can contain custom commands.
-  * Hierarchical environments:
-    * Overworld
-      * Acts as a container of regions.
-    * Region
-      * Acts as a container of rooms.
-    * Room
-      * The player traverses through the rooms.
-      * Provides a description of itself.
-      * Supports up to 6 exits. Each exit can be locked until a condition is met.
-      * Can contain multiple items.
-  * NPC's:
-    * Support provided for conversations with the player.
-    * Can interact with items.
-    * Can contain multiple items.
-  * Items
-    * Support interaction with the player, rooms, other items and NPC's.
-    * Items can morph in to other items. For example, using item A on item B may cause item B to morph into item C.
+At its core Ktaf provides simple classes for developing game elements:
+
+### Environments
+Environments are broken down in to three elements - Overworld, Region and Room. An Overworld contains one or more Regions. A Region contains one or more Rooms. 
+A Room can contain up to six exits (north, south, east, west, up and down).
+
+```
+Overworld
+├── Region
+│   ├── Room
+│   ├── Room
+│   ├── Room
+├── Region
+│   ├── Room
+│   ├── Room
+```
+
+### Exits
+Rooms contain exits. Exits can be locked to block progress through the game.
+
+```kotlin
+// create a test room
+val room = Room("Test Room", "A test room.")
+        
+// add an exit to the north
+room.addExit(Exit(Direction.NORTH))
+```
+
+### Items
+Items add richness the game. Items support interaction with the player, rooms, other items and NPC's. Items can morph in to other items. 
+For example, using item A on item B may cause item B to morph into item C.
+
+```kotlin
+// create a sword
+val sword = Item("Sword", "The heroes sword.")
+```
+
+### Playable Character
+Each Ktaf game has a single playable charcter. This who the player controls.
+
+```kotlin
+// create a player
+val player = PlayableChracter("Dave", "The hero of the story.")
+```
+
+### Non-playable Characters
+Non-playable characters (NPC's) can be added to rooms and can help drive the narrative. NPC's can hold conversations, contains items, 
+and interact with items.
+
+```kotlin
+// create a player
+val npc = NonPlayableChracter("Gary", "The antagonist of the story.")
+```
 
 ### Commands
   
