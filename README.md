@@ -56,7 +56,6 @@ Items add richness the game. Items support interaction with the player, rooms, o
 For example, using item A on item B may cause item B to morph into item C.
 
 ```kotlin
-// create a sword
 val sword = Item("Sword", "The heroes sword.")
 ```
 
@@ -64,7 +63,6 @@ val sword = Item("Sword", "The heroes sword.")
 Each Ktaf game has a single playable charcter. This who the player controls.
 
 ```kotlin
-// create a player
 val player = PlayableChracter("Dave", "The hero of the story.")
 ```
 
@@ -73,7 +71,6 @@ Non-playable characters (NPC's) can be added to rooms and can help drive the nar
 and interact with items.
 
 ```kotlin
-// create a npc
 val npc = NonPlayableChracter("Gary", "The antagonist of the story.")
 ```
 
