@@ -1,5 +1,8 @@
 package com.github.benpollarduk.ktaf.logic.discovery
 
+import com.github.benpollarduk.ktaf.assets.locations.Direction
+import com.github.benpollarduk.ktaf.assets.locations.Exit
+import com.github.benpollarduk.ktaf.assets.locations.Room
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import java.io.File
@@ -45,6 +48,12 @@ class GameCatalogResolverTest {
                 input.copyTo(output)
             }
         }
+
+        // create a test room
+        val room = Room("Test Room", "A test room.")
+
+        // add an exit to the north
+        room.addExit(Exit(Direction.NORTH))
 
         // When
         val result = GameCatalogResolver.resolveCatalogFromDirectory(tempDir.absolutePath)

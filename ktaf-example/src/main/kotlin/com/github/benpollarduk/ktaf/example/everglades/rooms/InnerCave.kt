@@ -1,7 +1,5 @@
 package com.github.benpollarduk.ktaf.example.everglades.rooms
 
-import com.github.benpollarduk.ktaf.assets.ConditionalDescription
-import com.github.benpollarduk.ktaf.assets.characters.PlayableCharacter
 import com.github.benpollarduk.ktaf.assets.interaction.InteractionEffect
 import com.github.benpollarduk.ktaf.assets.interaction.InteractionResult
 import com.github.benpollarduk.ktaf.assets.locations.Direction
@@ -10,10 +8,10 @@ import com.github.benpollarduk.ktaf.assets.locations.Room
 import com.github.benpollarduk.ktaf.example.everglades.items.ConchShell
 import com.github.benpollarduk.ktaf.example.global.items.Knife
 import com.github.benpollarduk.ktaf.extensions.equalsExaminable
-import com.github.benpollarduk.ktaf.utilities.templates.RoomTemplate
+import com.github.benpollarduk.ktaf.utilities.templates.AssetTemplate
 
-internal class InnerCave : RoomTemplate() {
-    override fun instantiate(playableCharacter: PlayableCharacter): Room {
+internal class InnerCave : AssetTemplate<Room> {
+    override fun instantiate(): Room {
         return Room(
             NAME,
             "",

@@ -2,19 +2,17 @@ package com.github.benpollarduk.ktaf.example.everglades.items
 
 import com.github.benpollarduk.ktaf.assets.ConditionalDescription
 import com.github.benpollarduk.ktaf.assets.Item
-import com.github.benpollarduk.ktaf.assets.characters.PlayableCharacter
 import com.github.benpollarduk.ktaf.assets.interaction.Reaction
 import com.github.benpollarduk.ktaf.assets.interaction.ReactionResult
-import com.github.benpollarduk.ktaf.assets.locations.Room
 import com.github.benpollarduk.ktaf.commands.CustomCommand
 import com.github.benpollarduk.ktaf.extensions.toIdentifier
 import com.github.benpollarduk.ktaf.interpretation.CommandHelp
-import com.github.benpollarduk.ktaf.utilities.templates.ItemTemplate
+import com.github.benpollarduk.ktaf.utilities.templates.AssetTemplate
 
-internal class Candle : ItemTemplate() {
+internal class Candle : AssetTemplate<Item> {
 
     private var isLit: Boolean = true
-    override fun instantiate(playableCharacter: PlayableCharacter, room: Room?): Item {
+    override fun instantiate(): Item {
         return Item(
             NAME.toIdentifier(),
             ConditionalDescription(

@@ -1,6 +1,5 @@
 package com.github.benpollarduk.ktaf.example.everglades.rooms
 
-import com.github.benpollarduk.ktaf.assets.characters.PlayableCharacter
 import com.github.benpollarduk.ktaf.assets.interaction.Reaction
 import com.github.benpollarduk.ktaf.assets.interaction.ReactionResult
 import com.github.benpollarduk.ktaf.assets.locations.Direction
@@ -8,10 +7,10 @@ import com.github.benpollarduk.ktaf.assets.locations.Exit
 import com.github.benpollarduk.ktaf.assets.locations.Room
 import com.github.benpollarduk.ktaf.commands.CustomCommand
 import com.github.benpollarduk.ktaf.interpretation.CommandHelp
-import com.github.benpollarduk.ktaf.utilities.templates.RoomTemplate
+import com.github.benpollarduk.ktaf.utilities.templates.AssetTemplate
 
-internal class TreeHouse : RoomTemplate() {
-    override fun instantiate(playableCharacter: PlayableCharacter): Room {
+internal class TreeHouse : AssetTemplate<Room> {
+    override fun instantiate(): Room {
         return Room(
             NAME,
             DESCRIPTION,

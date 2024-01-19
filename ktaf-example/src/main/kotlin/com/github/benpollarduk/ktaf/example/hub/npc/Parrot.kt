@@ -1,15 +1,13 @@
 package com.github.benpollarduk.ktaf.example.hub.npc
 
 import com.github.benpollarduk.ktaf.assets.characters.NonPlayableCharacter
-import com.github.benpollarduk.ktaf.assets.characters.PlayableCharacter
-import com.github.benpollarduk.ktaf.assets.locations.Room
 import com.github.benpollarduk.ktaf.conversations.Conversation
 import com.github.benpollarduk.ktaf.conversations.Paragraph
 import com.github.benpollarduk.ktaf.conversations.Response
-import com.github.benpollarduk.ktaf.utilities.templates.NonPlayableCharacterTemplate
+import com.github.benpollarduk.ktaf.utilities.templates.AssetTemplate
 
-internal class Parrot : NonPlayableCharacterTemplate() {
-    override fun instantiate(playableCharacter: PlayableCharacter, room: Room?): NonPlayableCharacter {
+internal class Parrot : AssetTemplate<NonPlayableCharacter> {
+    override fun instantiate(): NonPlayableCharacter {
         return NonPlayableCharacter(
             NAME,
             DESCRIPTION

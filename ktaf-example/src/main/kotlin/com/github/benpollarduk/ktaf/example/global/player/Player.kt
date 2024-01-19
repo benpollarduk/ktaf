@@ -5,12 +5,12 @@ import com.github.benpollarduk.ktaf.assets.interaction.InteractionEffect
 import com.github.benpollarduk.ktaf.assets.interaction.InteractionResult
 import com.github.benpollarduk.ktaf.example.global.items.Knife
 import com.github.benpollarduk.ktaf.extensions.equalsExaminable
-import com.github.benpollarduk.ktaf.utilities.templates.PlayableCharacterTemplate
+import com.github.benpollarduk.ktaf.utilities.templates.AssetTemplate
 
-internal class Player : PlayableCharacterTemplate() {
+internal class Player : AssetTemplate<PlayableCharacter> {
     override fun instantiate(): PlayableCharacter {
         return PlayableCharacter(NAME, DESCRIPTION).also {
-            it.acquireItem(Knife().instantiate(it))
+            it.acquireItem(Knife().instantiate())
             it.interaction = { item, _ ->
                 when {
                     Knife.NAME.equalsExaminable(item) -> {

@@ -1,13 +1,12 @@
 package com.github.benpollarduk.ktaf.example.everglades.rooms
 
-import com.github.benpollarduk.ktaf.assets.characters.PlayableCharacter
 import com.github.benpollarduk.ktaf.assets.locations.Direction
 import com.github.benpollarduk.ktaf.assets.locations.Exit
 import com.github.benpollarduk.ktaf.assets.locations.Room
-import com.github.benpollarduk.ktaf.utilities.templates.RoomTemplate
+import com.github.benpollarduk.ktaf.utilities.templates.AssetTemplate
 
-internal class Outskirts : RoomTemplate() {
-    override fun instantiate(playableCharacter: PlayableCharacter): Room {
+internal class Outskirts : AssetTemplate<Room> {
+    override fun instantiate(): Room {
         return Room(NAME, DESCRIPTION, listOf(Exit(Direction.SOUTH)))
     }
     internal companion object {

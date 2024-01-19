@@ -1,21 +1,19 @@
 package com.github.benpollarduk.ktaf.example.global.items
 
 import com.github.benpollarduk.ktaf.assets.Item
-import com.github.benpollarduk.ktaf.assets.characters.PlayableCharacter
 import com.github.benpollarduk.ktaf.assets.interaction.Reaction
 import com.github.benpollarduk.ktaf.assets.interaction.ReactionResult
 import com.github.benpollarduk.ktaf.assets.locations.Overworld
 import com.github.benpollarduk.ktaf.assets.locations.Region
-import com.github.benpollarduk.ktaf.assets.locations.Room
 import com.github.benpollarduk.ktaf.commands.CustomCommand
 import com.github.benpollarduk.ktaf.interpretation.CommandHelp
-import com.github.benpollarduk.ktaf.utilities.templates.ItemTemplate
+import com.github.benpollarduk.ktaf.utilities.templates.AssetTemplate
 
 internal class Sphere(
     private val region: Region,
     private val overworld: Overworld
-) : ItemTemplate() {
-    override fun instantiate(playableCharacter: PlayableCharacter, room: Room?): Item {
+) : AssetTemplate<Item> {
+    override fun instantiate(): Item {
         return Item(
             "${region.identifier.name} Sphere",
             "A glass sphere, about the size of a snooker ball. Inside you can see a swirling mist.",

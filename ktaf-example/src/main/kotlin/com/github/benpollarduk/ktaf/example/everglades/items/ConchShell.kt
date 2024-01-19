@@ -1,16 +1,14 @@
 package com.github.benpollarduk.ktaf.example.everglades.items
 
 import com.github.benpollarduk.ktaf.assets.Item
-import com.github.benpollarduk.ktaf.assets.characters.PlayableCharacter
 import com.github.benpollarduk.ktaf.assets.interaction.InteractionEffect
 import com.github.benpollarduk.ktaf.assets.interaction.InteractionResult
-import com.github.benpollarduk.ktaf.assets.locations.Room
 import com.github.benpollarduk.ktaf.example.global.items.Knife
 import com.github.benpollarduk.ktaf.extensions.equalsExaminable
-import com.github.benpollarduk.ktaf.utilities.templates.ItemTemplate
+import com.github.benpollarduk.ktaf.utilities.templates.AssetTemplate
 
-internal class ConchShell : ItemTemplate() {
-    override fun instantiate(playableCharacter: PlayableCharacter, room: Room?): Item {
+internal class ConchShell : AssetTemplate<Item> {
+    override fun instantiate(): Item {
         return Item(NAME, DESCRIPTION, true).also {
             it.interaction = { item, _ ->
                 when {

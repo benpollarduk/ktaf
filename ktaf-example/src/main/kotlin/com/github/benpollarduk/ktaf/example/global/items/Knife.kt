@@ -1,12 +1,10 @@
 package com.github.benpollarduk.ktaf.example.global.items
 
 import com.github.benpollarduk.ktaf.assets.Item
-import com.github.benpollarduk.ktaf.assets.characters.PlayableCharacter
-import com.github.benpollarduk.ktaf.assets.locations.Room
-import com.github.benpollarduk.ktaf.utilities.templates.ItemTemplate
+import com.github.benpollarduk.ktaf.utilities.templates.AssetTemplate
 
-internal class Knife : ItemTemplate() {
-    override fun instantiate(playableCharacter: PlayableCharacter, room: Room?): Item {
+internal class Knife : AssetTemplate<Item> {
+    override fun instantiate(): Item {
         return Item(NAME, DESCRIPTION)
     }
     internal companion object {
