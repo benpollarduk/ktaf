@@ -1,14 +1,13 @@
 package com.github.benpollarduk.ktaf.example.hub.rooms
 
-import com.github.benpollarduk.ktaf.assets.characters.PlayableCharacter
 import com.github.benpollarduk.ktaf.assets.locations.Room
 import com.github.benpollarduk.ktaf.example.hub.npc.Parrot
-import com.github.benpollarduk.ktaf.utilities.templates.RoomTemplate
+import com.github.benpollarduk.ktaf.utilities.templates.AssetTemplate
 
-internal class Clearing : RoomTemplate() {
-    override fun instantiate(playableCharacter: PlayableCharacter): Room {
+internal class Clearing : AssetTemplate<Room> {
+    override fun instantiate(): Room {
         val room = Room(NAME, DESCRIPTION).also {
-            it.addCharacter(Parrot().instantiate(playableCharacter, it))
+            it.addCharacter(Parrot().instantiate())
         }
 
         return room

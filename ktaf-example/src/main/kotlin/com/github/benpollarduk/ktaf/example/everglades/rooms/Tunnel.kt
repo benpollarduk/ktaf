@@ -1,15 +1,14 @@
 package com.github.benpollarduk.ktaf.example.everglades.rooms
 
 import com.github.benpollarduk.ktaf.assets.ConditionalDescription
-import com.github.benpollarduk.ktaf.assets.characters.PlayableCharacter
 import com.github.benpollarduk.ktaf.assets.locations.Direction
 import com.github.benpollarduk.ktaf.assets.locations.Exit
 import com.github.benpollarduk.ktaf.assets.locations.Room
 import com.github.benpollarduk.ktaf.example.everglades.items.Candle
-import com.github.benpollarduk.ktaf.utilities.templates.RoomTemplate
+import com.github.benpollarduk.ktaf.utilities.templates.AssetTemplate
 
-internal class Tunnel : RoomTemplate() {
-    override fun instantiate(playableCharacter: PlayableCharacter): Room {
+internal class Tunnel : AssetTemplate<Room> {
+    override fun instantiate(): Room {
         return Room(
             NAME,
             DESCRIPTION_WITH_CANDLE,
@@ -17,7 +16,7 @@ internal class Tunnel : RoomTemplate() {
                 Exit(Direction.UP)
             )
         ).also {
-            it.addItem(Candle().instantiate(playableCharacter, it))
+            it.addItem(Candle().instantiate())
             it.specifyConditionalDescription(
                 ConditionalDescription(
                     DESCRIPTION_WITH_CANDLE,

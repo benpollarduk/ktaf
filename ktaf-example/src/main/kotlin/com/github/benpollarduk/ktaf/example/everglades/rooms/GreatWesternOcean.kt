@@ -1,14 +1,13 @@
 package com.github.benpollarduk.ktaf.example.everglades.rooms
 
-import com.github.benpollarduk.ktaf.assets.characters.PlayableCharacter
 import com.github.benpollarduk.ktaf.assets.locations.Direction
 import com.github.benpollarduk.ktaf.assets.locations.Exit
 import com.github.benpollarduk.ktaf.assets.locations.Room
 import com.github.benpollarduk.ktaf.example.everglades.items.ConchShell
-import com.github.benpollarduk.ktaf.utilities.templates.RoomTemplate
+import com.github.benpollarduk.ktaf.utilities.templates.AssetTemplate
 
-internal class GreatWesternOcean : RoomTemplate() {
-    override fun instantiate(playableCharacter: PlayableCharacter): Room {
+internal class GreatWesternOcean : AssetTemplate<Room> {
+    override fun instantiate(): Room {
         return Room(
             NAME,
             DESCRIPTION,
@@ -16,7 +15,7 @@ internal class GreatWesternOcean : RoomTemplate() {
                 Exit(Direction.EAST)
             )
         ).also {
-            it.addItem(ConchShell().instantiate(playableCharacter, it))
+            it.addItem(ConchShell().instantiate())
         }
     }
     internal companion object {

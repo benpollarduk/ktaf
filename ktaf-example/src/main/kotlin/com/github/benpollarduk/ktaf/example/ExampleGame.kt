@@ -1,6 +1,5 @@
 package com.github.benpollarduk.ktaf.example
 
-import com.github.benpollarduk.ktaf.assets.characters.PlayableCharacter
 import com.github.benpollarduk.ktaf.assets.locations.Overworld
 import com.github.benpollarduk.ktaf.assets.locations.Region
 import com.github.benpollarduk.ktaf.example.everglades.Everglades
@@ -41,7 +40,6 @@ public object ExampleGame : GameTemplate() {
     }
 
     private fun populateHub(
-        playableCharacter: PlayableCharacter,
         hub: Region,
         overworld: Overworld,
         otherRegions: List<Region>
@@ -49,17 +47,17 @@ public object ExampleGame : GameTemplate() {
         val room = hub.currentRoom ?: return
 
         otherRegions.forEach { region ->
-            room.addItem(Sphere(region, overworld).instantiate(playableCharacter))
+            room.addItem(Sphere(region, overworld).instantiate())
         }
     }
 
     override fun instantiate(ioConfiguration: IOConfiguration): Game {
         val playableCharacter = Player().instantiate()
-        val everglades = Everglades().instantiate(playableCharacter)
+        val everglades = Everglades().instantiate()
         val regions = listOf(everglades)
         val overworld = Overworld("Test Overworld", "This is a test overworld")
-        val hub = Hub().instantiate(playableCharacter)
-        populateHub(playableCharacter, hub, overworld, regions)
+        val hub = Hub().instantiate()
+        populateHub(hub, overworld, regions)
         overworld.addRegion(hub)
 
         regions.forEach {
@@ -67,7 +65,7 @@ public object ExampleGame : GameTemplate() {
         }
 
         // add sphere to tunnel - requires an overworld
-        everglades.findRoom(Tunnel.NAME)?.addItem(Sphere(hub, overworld).instantiate(playableCharacter))
+        everglades.findRoom(Tunnel.NAME)?.addItem(Sphere(hub, overworld).instantiate())
 
         val about = "This is a short demo of ktaf made up from test chunks of games that were " +
             "build to test different features during development."

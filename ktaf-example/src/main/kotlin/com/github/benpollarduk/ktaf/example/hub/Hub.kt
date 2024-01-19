@@ -1,15 +1,14 @@
 package com.github.benpollarduk.ktaf.example.hub
 
-import com.github.benpollarduk.ktaf.assets.characters.PlayableCharacter
 import com.github.benpollarduk.ktaf.assets.locations.Region
 import com.github.benpollarduk.ktaf.example.hub.rooms.Clearing
 import com.github.benpollarduk.ktaf.utilities.RegionMaker
-import com.github.benpollarduk.ktaf.utilities.templates.RegionTemplate
+import com.github.benpollarduk.ktaf.utilities.templates.AssetTemplate
 
-internal class Hub : RegionTemplate() {
-    override fun instantiate(playableCharacter: PlayableCharacter): Region {
+internal class Hub : AssetTemplate<Region> {
+    override fun instantiate(): Region {
         val regionMaker = RegionMaker(NAME, DESCRIPTION).also {
-            it[0, 0, 0] = Clearing().instantiate(playableCharacter)
+            it[0, 0, 0] = Clearing().instantiate()
         }
         return regionMaker.make(Clearing.NAME)
     }
