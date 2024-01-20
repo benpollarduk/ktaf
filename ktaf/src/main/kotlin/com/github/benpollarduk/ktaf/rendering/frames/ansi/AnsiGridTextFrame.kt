@@ -16,9 +16,27 @@ public class AnsiGridTextFrame(
     private val backgroundColor: AnsiColor = AnsiColor.BLACK
 ) : Frame {
     @Suppress("NestedBlockDepth")
-    override fun render(callback: RenderFrame) {
-        val stringBuilder = StringBuilder()
-        val newLine = NEWLINE
+    internal fun renderNoColor(stringBuilder: StringBuilder) {
+        for (y in 0 until builder.displaySize.height) {
+            for (x in 0 until builder.displaySize.width) {
+                val c = builder.getCharacter(x, y)
+
+                if (c != 0.toChar()) {
+                    stringBuilder.append(c)
+                } else {
+                    stringBuilder.append(' ')
+                }
+            }
+
+            // for all but the last line append the newline
+            if (y < builder.displaySize.height - 1) {
+                stringBuilder.append(NEWLINE)
+            }
+        }
+    }
+
+    @Suppress("NestedBlockDepth")
+    internal fun renderColor(stringBuilder: StringBuilder) {
         var fontColor = builder.getCellColor(0, 0)
 
         // prep by setting background and first font color
@@ -42,14 +60,25 @@ public class AnsiGridTextFrame(
 
             // for all but the last line append the newline
             if (y < builder.displaySize.height - 1) {
-                stringBuilder.append(newLine)
+                stringBuilder.append(NEWLINE)
             }
+        }
+    }
+
+    override fun render(callback: RenderFrame) {
+        val stringBuilder = StringBuilder()
+
+        if (isColorSuppressed()) {
+            renderNoColor(stringBuilder)
+        } else {
+            renderColor(stringBuilder)
         }
 
         // reset both font and background colors
         stringBuilder.append(
             "${AnsiColor.RESET.toFontColorEscapeCode()}${AnsiColor.RESET.toBackgroundColorEscapeCode()}"
         )
+
         callback(stringBuilder.toString(), acceptsInput, FramePosition(cursorLeft, cursorTop))
     }
 
@@ -69,5 +98,19 @@ public class AnsiGridTextFrame(
         }
 
         return stringBuilder.toString()
+    }
+
+    private companion object {
+        private const val NO_COLOR: String = "NO_COLOR"
+
+        private fun isColorSuppressed(): Boolean {
+            // terminal color may be suppressed with the NO_COLOR environment variable
+            return when (System.getenv(NO_COLOR)?.lowercase() ?: "") {
+                "" -> false
+                "0" -> false
+                "false" -> false
+                else -> true
+            }
+        }
     }
 }
