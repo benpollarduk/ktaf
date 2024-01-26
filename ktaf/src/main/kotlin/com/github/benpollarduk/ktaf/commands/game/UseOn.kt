@@ -1,8 +1,8 @@
 package com.github.benpollarduk.ktaf.commands.game
 
 import com.github.benpollarduk.ktaf.assets.Item
+import com.github.benpollarduk.ktaf.assets.interaction.InteractWithItem
 import com.github.benpollarduk.ktaf.assets.interaction.InteractionEffect
-import com.github.benpollarduk.ktaf.assets.interaction.InteractionTarget
 import com.github.benpollarduk.ktaf.assets.interaction.Reaction
 import com.github.benpollarduk.ktaf.assets.interaction.ReactionResult
 import com.github.benpollarduk.ktaf.commands.Command
@@ -11,7 +11,7 @@ import com.github.benpollarduk.ktaf.logic.Game
 /**
  * Provides a command to use a specified [item] on a specified [target].
  */
-internal class UseOn(private val item: Item?, private val target: InteractionTarget?) : Command {
+internal class UseOn(private val item: Item?, private val target: InteractWithItem?) : Command {
     override fun invoke(game: Game): Reaction {
         if (item == null) {
             return Reaction(ReactionResult.ERROR, "You must specify an item.")

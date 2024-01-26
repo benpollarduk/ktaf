@@ -1,26 +1,26 @@
 package com.github.benpollarduk.ktaf.assets
 
+import com.github.benpollarduk.ktaf.assets.interaction.InteractWithItem
 import com.github.benpollarduk.ktaf.assets.interaction.Interaction
 import com.github.benpollarduk.ktaf.assets.interaction.InteractionEffect
 import com.github.benpollarduk.ktaf.assets.interaction.InteractionResult
-import com.github.benpollarduk.ktaf.assets.interaction.InteractionTarget
 
 /**
  * Provides an item that can appear in a [Game]. The item must have a [identifier] and a [description].
  * Optionally the item can be made takeable by setting [takeable] to true, and an interaction to define how this
- * interacts with various [InteractionTarget] specified with [interaction].
+ * interacts with various [InteractWithItem] specified with [interaction].
  */
 public class Item(
     override var identifier: Identifier,
     override var description: Description,
     public var takeable: Boolean = false,
     public var interaction: Interaction = defaultInteraction
-) : ExaminableObject(), InteractionTarget {
+) : ExaminableObject(), InteractWithItem {
 
     /**
      * Provides an item that can appear in a [Game]. The item must have a [identifier] and a [description].
      * Optionally the item can be made takeable by setting [takeable] to true, and a interaction to define how this
-     * interacts with various [InteractionTarget] specified with [interaction].
+     * interacts with various [InteractWithItem] specified with [interaction].
      */
     public constructor(
         identifier: String,

@@ -2,7 +2,7 @@ package com.github.benpollarduk.ktaf.logic
 
 import com.github.benpollarduk.ktaf.assets.Examinable
 import com.github.benpollarduk.ktaf.assets.characters.PlayableCharacter
-import com.github.benpollarduk.ktaf.assets.interaction.InteractionTarget
+import com.github.benpollarduk.ktaf.assets.interaction.InteractWithItem
 import com.github.benpollarduk.ktaf.assets.interaction.Reaction
 import com.github.benpollarduk.ktaf.assets.interaction.ReactionResult
 import com.github.benpollarduk.ktaf.assets.locations.Overworld
@@ -73,10 +73,10 @@ public class Game(
     }
 
     /**
-     * Find [InteractionTarget] within this [Game] from a specified [name]. If the target cannot be found null is
+     * Find an [InteractWithItem] within this [Game] from a specified [name]. If the target cannot be found null is
      * returned.
      */
-    public fun findInteractionTarget(name: String): InteractionTarget? {
+    public fun findInteractionTarget(name: String): InteractWithItem? {
         if (name.equalsExaminable(player)) {
             return player
         }

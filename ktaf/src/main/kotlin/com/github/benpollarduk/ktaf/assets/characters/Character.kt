@@ -2,15 +2,15 @@ package com.github.benpollarduk.ktaf.assets.characters
 
 import com.github.benpollarduk.ktaf.assets.ExaminableObject
 import com.github.benpollarduk.ktaf.assets.Item
+import com.github.benpollarduk.ktaf.assets.interaction.InteractWithItem
 import com.github.benpollarduk.ktaf.assets.interaction.Interaction
 import com.github.benpollarduk.ktaf.assets.interaction.InteractionEffect
 import com.github.benpollarduk.ktaf.assets.interaction.InteractionResult
-import com.github.benpollarduk.ktaf.assets.interaction.InteractionTarget
 
 /**
  * Provides a base for all Characters.
  */
-public abstract class Character : ExaminableObject(), InteractionTarget {
+public abstract class Character : ExaminableObject(), InteractWithItem {
 
     /**
      * Specifies how this [Character] interacts with various [Item].

@@ -5,7 +5,7 @@ package com.github.benpollarduk.ktaf.assets.interaction
  */
 public enum class InteractionEffect {
     /**
-     * No effect to the interaction on either the [Item] or the [InteractionTarget].
+     * No effect to the interaction on either the [Item] or the [InteractWithItem].
      */
     NO_EFFECT,
 
@@ -25,7 +25,7 @@ public enum class InteractionEffect {
     FATAL_EFFECT,
 
     /**
-     * The [InteractionTarget] was used up.
+     * The [InteractWithItem] was used up.
      */
     TARGET_USED_UP,
 

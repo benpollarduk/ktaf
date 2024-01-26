@@ -8,10 +8,10 @@ import com.github.benpollarduk.ktaf.assets.Identifier
 import com.github.benpollarduk.ktaf.assets.Item
 import com.github.benpollarduk.ktaf.assets.characters.Character
 import com.github.benpollarduk.ktaf.assets.characters.NonPlayableCharacter
+import com.github.benpollarduk.ktaf.assets.interaction.InteractWithItem
 import com.github.benpollarduk.ktaf.assets.interaction.Interaction
 import com.github.benpollarduk.ktaf.assets.interaction.InteractionEffect
 import com.github.benpollarduk.ktaf.assets.interaction.InteractionResult
-import com.github.benpollarduk.ktaf.assets.interaction.InteractionTarget
 import com.github.benpollarduk.ktaf.extensions.equalsExaminable
 import com.github.benpollarduk.ktaf.extensions.getObjectifier
 import com.github.benpollarduk.ktaf.extensions.isPlural
@@ -26,7 +26,7 @@ public class Room(
     override var description: Description,
     exits: List<Exit> = emptyList(),
     items: List<Item> = emptyList()
-) : ExaminableObject(), InteractionTarget {
+) : ExaminableObject(), InteractWithItem {
     /**
      * A room with a specified [identifier] and a [description].
      */
@@ -169,7 +169,7 @@ public class Room(
     /**
      * Remove a [target] from this [Room]. If the [target] exists in the [Room] true is returned else false.
      */
-    public fun removeInteractionTarget(target: InteractionTarget): Boolean {
+    public fun removeInteractionTarget(target: InteractWithItem): Boolean {
         if (_items.contains(target)) {
             removeItem(target as Item)
             return true
@@ -239,7 +239,7 @@ public class Room(
     }
 
     /**
-     * Get if this [Room] contains an [InteractionTarget] specified by [target]. If [includeInvisibleExits] is true
+     * Get if this [Room] contains an [InteractWithItem] specified by [target]. If [includeInvisibleExits] is true
      * then targets that aren't visible to the player are included.
      */
     public fun containsInteractionTarget(target: String, includeInvisibleExits: Boolean = false): Boolean {
@@ -248,10 +248,10 @@ public class Room(
     }
 
     /**
-     * Find an [InteractionTarget] in this [Room], specified by [target]. If [includeInvisibleTargets] is true then
+     * Find an [InteractWithItem] in this [Room], specified by [target]. If [includeInvisibleTargets] is true then
      * targets that aren't visible to the player are included.
      */
-    public fun findInteractionTarget(target: String, includeInvisibleTargets: Boolean = false): InteractionTarget? {
+    public fun findInteractionTarget(target: String, includeInvisibleTargets: Boolean = false): InteractWithItem? {
         val item = items.firstOrNull { target.equalsExaminable(it) && (includeInvisibleTargets || it.isPlayerVisible) }
         return item ?: characters.firstOrNull {
             target.equalsExaminable(it) && (includeInvisibleTargets || it.isPlayerVisible)
