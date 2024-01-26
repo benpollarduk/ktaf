@@ -12,7 +12,7 @@ class ItemTest {
         val itemB = Item("B", "")
 
         // When
-        val result = itemA.use(itemB)
+        val result = itemA.interact(itemB)
 
         // Then
         Assertions.assertEquals(InteractionEffect.NO_EFFECT, result.effect)

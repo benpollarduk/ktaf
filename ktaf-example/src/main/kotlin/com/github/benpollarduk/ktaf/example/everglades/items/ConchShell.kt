@@ -10,7 +10,7 @@ import com.github.benpollarduk.ktaf.utilities.templates.AssetTemplate
 internal class ConchShell : AssetTemplate<Item> {
     override fun instantiate(): Item {
         return Item(NAME, DESCRIPTION, true).also {
-            it.interaction = { item, _ ->
+            it.interaction = { item ->
                 when {
                     Knife.NAME.equalsExaminable(item) -> {
                         InteractionResult(

@@ -15,7 +15,7 @@ public abstract class Character : ExaminableObject(), InteractionTarget {
     /**
      * Specifies how this [Character] interacts with various [Item].
      */
-    public var interaction: Interaction = { item, _ ->
+    public var interaction: Interaction = { item ->
         InteractionResult(InteractionEffect.NO_EFFECT, item)
     }
 
@@ -34,7 +34,7 @@ public abstract class Character : ExaminableObject(), InteractionTarget {
     private val itemsList: MutableList<Item> = mutableListOf()
 
     protected fun interactWithItem(item: Item): InteractionResult {
-        return interaction.invoke(item, this)
+        return interaction.invoke(item)
     }
 
     /**

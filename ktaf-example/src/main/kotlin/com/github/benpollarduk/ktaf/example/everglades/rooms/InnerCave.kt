@@ -20,7 +20,7 @@ internal class InnerCave : AssetTemplate<Room> {
                 Exit(Direction.NORTH, true)
             )
         ).also {
-            it.interaction = { item, _ ->
+            it.interaction = { item ->
                 when {
                     ConchShell.NAME.equalsExaminable(item) -> {
                         it[Direction.NORTH]?.unlock()

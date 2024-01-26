@@ -11,7 +11,7 @@ internal class Player : AssetTemplate<PlayableCharacter> {
     override fun instantiate(): PlayableCharacter {
         return PlayableCharacter(NAME, DESCRIPTION).also {
             it.acquireItem(Knife().instantiate())
-            it.interaction = { item, _ ->
+            it.interaction = { item ->
                 when {
                     Knife.NAME.equalsExaminable(item) -> {
                         InteractionResult(
