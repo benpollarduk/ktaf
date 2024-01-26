@@ -45,22 +45,15 @@ public class Item(
         takeable = item.isTakeable
     }
 
-    /**
-     * Use this [Item] on the specified [target] to obtain an [InteractionResult].
-     */
-    public fun use(target: InteractionTarget): InteractionResult {
-        return target.interact(this)
-    }
-
     override fun interact(item: Item): InteractionResult {
-        return interaction.invoke(item, this)
+        return interaction.invoke(item)
     }
 
     public companion object {
         /**
          * A default [Interaction] that has no effect.
          */
-        public val defaultInteraction: Interaction = { item, _ ->
+        public val defaultInteraction: Interaction = { item ->
             InteractionResult(InteractionEffect.NO_EFFECT, item)
         }
     }

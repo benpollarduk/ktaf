@@ -86,7 +86,7 @@ public class Room(
     /**
      * Specifies how this [Room] interacts with various [Item].
      */
-    public var interaction: Interaction = { item, _ ->
+    public var interaction: Interaction = { item ->
         InteractionResult(InteractionEffect.NO_EFFECT, item)
     }
 
@@ -317,7 +317,7 @@ public class Room(
     }
 
     override fun interact(item: Item): InteractionResult {
-        return interaction.invoke(item, this)
+        return interaction.invoke(item)
     }
 
     public companion object {

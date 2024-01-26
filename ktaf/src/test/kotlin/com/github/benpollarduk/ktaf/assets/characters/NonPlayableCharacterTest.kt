@@ -108,7 +108,7 @@ class NonPlayableCharacterTest {
         val examination: Examination = { _ ->
             ExaminationResult("ABC")
         }
-        val interaction: Interaction = { i, _ ->
+        val interaction: Interaction = { i ->
             InteractionResult(InteractionEffect.ITEM_USED_UP, i, "XYZ")
         }
         val character = NonPlayableCharacter(
