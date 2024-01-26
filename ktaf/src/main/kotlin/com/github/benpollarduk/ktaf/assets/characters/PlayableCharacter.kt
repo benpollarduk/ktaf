@@ -3,9 +3,9 @@ package com.github.benpollarduk.ktaf.assets.characters
 import com.github.benpollarduk.ktaf.assets.Description
 import com.github.benpollarduk.ktaf.assets.Identifier
 import com.github.benpollarduk.ktaf.assets.Item
+import com.github.benpollarduk.ktaf.assets.interaction.InteractWithItem
 import com.github.benpollarduk.ktaf.assets.interaction.InteractionEffect
 import com.github.benpollarduk.ktaf.assets.interaction.InteractionResult
-import com.github.benpollarduk.ktaf.assets.interaction.InteractionTarget
 
 /**
  * A playable character with the specified [identifier] and [description] and [items].
@@ -23,7 +23,7 @@ public class PlayableCharacter(
     /**
      * Trigger this [Player] to use the specified [item] on the specified [target].
      */
-    public fun useItem(item: Item, target: InteractionTarget): InteractionResult {
+    public fun useItem(item: Item, target: InteractWithItem): InteractionResult {
         val result = target.interact(item)
 
         if (result.effect == InteractionEffect.FATAL_EFFECT) {

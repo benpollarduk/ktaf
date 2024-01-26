@@ -1,7 +1,7 @@
 package com.github.benpollarduk.ktaf.interpretation
 
 import com.github.benpollarduk.ktaf.assets.Item
-import com.github.benpollarduk.ktaf.assets.interaction.InteractionTarget
+import com.github.benpollarduk.ktaf.assets.interaction.InteractWithItem
 import com.github.benpollarduk.ktaf.commands.Command
 import com.github.benpollarduk.ktaf.commands.game.Drop
 import com.github.benpollarduk.ktaf.commands.game.Examine
@@ -125,7 +125,7 @@ public class ItemCommandInterpreter : Interpreter {
             return null
         }
 
-        val target: InteractionTarget?
+        val target: InteractWithItem?
         var itemName: String
         val onPadded = " $ON "
 
