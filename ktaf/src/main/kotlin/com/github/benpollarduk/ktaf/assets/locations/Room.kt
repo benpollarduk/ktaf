@@ -249,7 +249,8 @@ public class Room(
      */
     public fun containsInteractionTarget(target: String, includeInvisibleExits: Boolean = false): Boolean {
         return items.any { target.equalsExaminable(it) && (includeInvisibleExits || it.isPlayerVisible) } ||
-            characters.any { target.equalsExaminable(it) && (includeInvisibleExits || it.isPlayerVisible) }
+            characters.any { target.equalsExaminable(it) && (includeInvisibleExits || it.isPlayerVisible) } ||
+            exits.any { target.equalsExaminable(it) && (includeInvisibleExits || it.isPlayerVisible) }
     }
 
     /**

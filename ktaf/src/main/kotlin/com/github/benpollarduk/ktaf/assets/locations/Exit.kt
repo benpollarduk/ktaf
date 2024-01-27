@@ -17,16 +17,11 @@ public class Exit(
     description: Description? = null
 ) : ExaminableObject(), InteractWithItem {
     init {
-        if (identifier == null) {
-            this.identifier = Identifier(direction.name)
-        }
-
-        if (description == null) {
-            this.description = ConditionalDescription(
-                "The exit ${direction.toString().lowercase()} is locked.",
-                "The exit ${direction.toString().lowercase()} is unlocked."
-            ) { this.isLocked }
-        }
+        this.identifier = identifier ?: Identifier(direction.name)
+        this.description = description ?: ConditionalDescription(
+            "The exit ${direction.toString().lowercase()} is locked.",
+            "The exit ${direction.toString().lowercase()} is unlocked."
+        ) { this.isLocked }
     }
 
     /**

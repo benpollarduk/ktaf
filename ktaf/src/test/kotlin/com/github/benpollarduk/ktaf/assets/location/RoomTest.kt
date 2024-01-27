@@ -1,5 +1,6 @@
 package com.github.benpollarduk.ktaf.assets.location
 
+import com.github.benpollarduk.ktaf.assets.Identifier
 import com.github.benpollarduk.ktaf.assets.Item
 import com.github.benpollarduk.ktaf.assets.characters.NonPlayableCharacter
 import com.github.benpollarduk.ktaf.assets.interaction.InteractionEffect
@@ -320,7 +321,7 @@ class RoomTest {
         // Given
         val room = Room("Room", "Room description")
         val item = Item("Sword", "")
-        room.addItem(exit)
+        room.addItem(item)
 
         // When
         val result = room.containsInteractionTarget(item.identifier.name)
@@ -356,17 +357,43 @@ class RoomTest {
     }
 
     @Test
-    fun `given character in room when find interaction target then target returned`() {
+    fun `given item in room when find interaction target then target returned`() {
         // Given
         val room = Room("Room", "Room description")
-        val character = NonPlayableCharacter("NPC", "")
-        room.addCharacter(character)
+        val item = Item("Item", "")
+        room.addItem(item)
 
         // When
-        val result = room.findInteractionTarget("NPC")
+        val result = room.findInteractionTarget("Item")
 
         // Then
-        Assertions.assertEquals(character, result)
+        Assertions.assertEquals(item, result)
+    }
+
+    @Test
+    fun `given exit in room when find interaction target then target returned`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val exit = Exit(Direction.NORTH, true, Identifier("North"))
+        room.addExit(exit)
+
+        // When
+        val result = room.findInteractionTarget("North")
+
+        // Then
+        Assertions.assertEquals(exit, result)
+    }
+
+    @Test
+    fun `given invalid when find interaction target then null returned`() {
+        // Given
+        val room = Room("Room", "Room description")
+
+        // When
+        val result = room.findInteractionTarget("1234")
+
+        // Then
+        Assertions.assertNull(result)
     }
 
     @Test
