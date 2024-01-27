@@ -409,4 +409,71 @@ class RoomTest {
         // Then
         Assertions.assertEquals(InteractionEffect.NO_EFFECT, result.effect)
     }
+
+    @Test
+    fun `given no visible items when examine then expected result of examination returned`() {
+        // Given
+        val room = Room("Room", "Room description")
+
+        // When
+        val result = room.examine()
+
+        // Then
+        Assertions.assertEquals("There is nothing to examine.", result.description)
+    }
+
+    @Test
+    fun `given valid exit when remove interaction target then return true`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val exit = Exit(Direction.NORTH)
+        room.addExit(exit)
+
+        // When
+        val result = room.removeInteractionTarget(exit)
+
+        // Then
+        Assertions.assertTrue(result)
+    }
+
+    @Test
+    fun `given valid character when remove interaction target then return true`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val character = NonPlayableCharacter("", "")
+        room.addCharacter(character)
+
+        // When
+        val result = room.removeInteractionTarget(character)
+
+        // Then
+        Assertions.assertTrue(result)
+    }
+
+    @Test
+    fun `given valid item when remove interaction target then return true`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val item = Item("", "")
+        room.addItem(item)
+
+        // When
+        val result = room.removeInteractionTarget(item)
+
+        // Then
+        Assertions.assertTrue(result)
+    }
+
+    @Test
+    fun `given invalid when remove interaction target then return false`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val item = Item("", "")
+
+        // When
+        val result = room.removeInteractionTarget(item)
+
+        // Then
+        Assertions.assertFalse(result)
+    }
 }
