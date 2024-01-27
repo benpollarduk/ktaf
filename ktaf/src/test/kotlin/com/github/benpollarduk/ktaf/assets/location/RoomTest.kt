@@ -302,6 +302,60 @@ class RoomTest {
     }
 
     @Test
+    fun `given exit in room when contains interaction target by name then true returned`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val exit = Exit(Direction.NORTH)
+        room.addExit(exit)
+
+        // When
+        val result = room.containsInteractionTarget(exit.identifier.name)
+
+        // Then
+        Assertions.assertTrue(result)
+    }
+
+    @Test
+    fun `given item in room when contains interaction target by name then true returned`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val item = Item("Sword", "")
+        room.addItem(exit)
+
+        // When
+        val result = room.containsInteractionTarget(item.identifier.name)
+
+        // Then
+        Assertions.assertTrue(result)
+    }
+
+    @Test
+    fun `given invalid when contains interaction target by name then false returned`() {
+        // Given
+        val room = Room("Room", "Room description")
+
+        // When
+        val result = room.containsInteractionTarget("1234")
+
+        // Then
+        Assertions.assertFalse(result)
+    }
+
+    @Test
+    fun `given character in room when find interaction target then target returned`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val character = NonPlayableCharacter("NPC", "")
+        room.addCharacter(character)
+
+        // When
+        val result = room.findInteractionTarget("NPC")
+
+        // Then
+        Assertions.assertEquals(character, result)
+    }
+
+    @Test
     fun `given character in room when find interaction target then target returned`() {
         // Given
         val room = Room("Room", "Room description")

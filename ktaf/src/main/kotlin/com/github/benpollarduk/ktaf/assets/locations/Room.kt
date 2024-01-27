@@ -180,6 +180,11 @@ public class Room(
             return true
         }
 
+        if (_exits.contains(target)) {
+            removeExit(target as Exit)
+            return true
+        }
+
         return false
     }
 
@@ -252,8 +257,23 @@ public class Room(
      * targets that aren't visible to the player are included.
      */
     public fun findInteractionTarget(target: String, includeInvisibleTargets: Boolean = false): InteractWithItem? {
-        val item = items.firstOrNull { target.equalsExaminable(it) && (includeInvisibleTargets || it.isPlayerVisible) }
-        return item ?: characters.firstOrNull {
+        val item = items.firstOrNull {
+            target.equalsExaminable(it) && (includeInvisibleTargets || it.isPlayerVisible)
+        }
+
+        if (item != null) {
+            return item
+        }
+
+        val character = characters.firstOrNull {
+            target.equalsExaminable(it) && (includeInvisibleTargets || it.isPlayerVisible)
+        }
+
+        if (character != null) {
+            return character
+        }
+
+        return exits.firstOrNull {
             target.equalsExaminable(it) && (includeInvisibleTargets || it.isPlayerVisible)
         }
     }
