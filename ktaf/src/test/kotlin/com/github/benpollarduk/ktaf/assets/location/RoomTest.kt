@@ -1,5 +1,6 @@
 package com.github.benpollarduk.ktaf.assets.location
 
+import com.github.benpollarduk.ktaf.assets.Identifier
 import com.github.benpollarduk.ktaf.assets.Item
 import com.github.benpollarduk.ktaf.assets.characters.NonPlayableCharacter
 import com.github.benpollarduk.ktaf.assets.interaction.InteractionEffect
@@ -302,6 +303,46 @@ class RoomTest {
     }
 
     @Test
+    fun `given exit in room when contains interaction target by name then true returned`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val exit = Exit(Direction.NORTH)
+        room.addExit(exit)
+
+        // When
+        val result = room.containsInteractionTarget(exit.identifier.name)
+
+        // Then
+        Assertions.assertTrue(result)
+    }
+
+    @Test
+    fun `given item in room when contains interaction target by name then true returned`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val item = Item("Sword", "")
+        room.addItem(item)
+
+        // When
+        val result = room.containsInteractionTarget(item.identifier.name)
+
+        // Then
+        Assertions.assertTrue(result)
+    }
+
+    @Test
+    fun `given invalid when contains interaction target by name then false returned`() {
+        // Given
+        val room = Room("Room", "Room description")
+
+        // When
+        val result = room.containsInteractionTarget("1234")
+
+        // Then
+        Assertions.assertFalse(result)
+    }
+
+    @Test
     fun `given character in room when find interaction target then target returned`() {
         // Given
         val room = Room("Room", "Room description")
@@ -316,6 +357,46 @@ class RoomTest {
     }
 
     @Test
+    fun `given item in room when find interaction target then target returned`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val item = Item("Item", "")
+        room.addItem(item)
+
+        // When
+        val result = room.findInteractionTarget("Item")
+
+        // Then
+        Assertions.assertEquals(item, result)
+    }
+
+    @Test
+    fun `given exit in room when find interaction target then target returned`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val exit = Exit(Direction.NORTH, true, Identifier("North"))
+        room.addExit(exit)
+
+        // When
+        val result = room.findInteractionTarget("North")
+
+        // Then
+        Assertions.assertEquals(exit, result)
+    }
+
+    @Test
+    fun `given invalid when find interaction target then null returned`() {
+        // Given
+        val room = Room("Room", "Room description")
+
+        // When
+        val result = room.findInteractionTarget("1234")
+
+        // Then
+        Assertions.assertNull(result)
+    }
+
+    @Test
     fun `given no specified interaction when interact then no effect`() {
         // Given
         val room = Room("Room", "Room description")
@@ -327,5 +408,72 @@ class RoomTest {
 
         // Then
         Assertions.assertEquals(InteractionEffect.NO_EFFECT, result.effect)
+    }
+
+    @Test
+    fun `given no visible items when examine then expected result of examination returned`() {
+        // Given
+        val room = Room("Room", "Room description")
+
+        // When
+        val result = room.examine()
+
+        // Then
+        Assertions.assertEquals("There is nothing to examine.", result.description)
+    }
+
+    @Test
+    fun `given valid exit when remove interaction target then return true`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val exit = Exit(Direction.NORTH)
+        room.addExit(exit)
+
+        // When
+        val result = room.removeInteractionTarget(exit)
+
+        // Then
+        Assertions.assertTrue(result)
+    }
+
+    @Test
+    fun `given valid character when remove interaction target then return true`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val character = NonPlayableCharacter("", "")
+        room.addCharacter(character)
+
+        // When
+        val result = room.removeInteractionTarget(character)
+
+        // Then
+        Assertions.assertTrue(result)
+    }
+
+    @Test
+    fun `given valid item when remove interaction target then return true`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val item = Item("", "")
+        room.addItem(item)
+
+        // When
+        val result = room.removeInteractionTarget(item)
+
+        // Then
+        Assertions.assertTrue(result)
+    }
+
+    @Test
+    fun `given invalid when remove interaction target then return false`() {
+        // Given
+        val room = Room("Room", "Room description")
+        val item = Item("", "")
+
+        // When
+        val result = room.removeInteractionTarget(item)
+
+        // Then
+        Assertions.assertFalse(result)
     }
 }
