@@ -1,5 +1,5 @@
 # Welcome
-Ktaf is a C# library that provides a framework for building text adventures and interactive stories in Kotlin or Java.
+Ktaf is a library that provides a framework for building text adventures and interactive stories in Kotlin or Java.
 
 The repo is open source and is available at [https://github.com/benpollarduk/ktaf](https://github.com/benpollarduk/ktaf). Ktaf has a sister .Net implementation, BP.AdventureFramework, which is available at [https://github.com/benpollarduk/bp.adventureframework](https://github.com/benpollarduk/bp.adventureframework).
 
