@@ -47,15 +47,27 @@ jobs:
           git rm -r --ignore-unmatch .
           cp -r ../ktaf/build/dokka/html/* .
           git add .
-          git commit -m "Update documentation"
+          git commit -m "Update api documentation"
           git tag -a "${{ inputs.ver }}" -m "${{ inputs.ver }} tagged during GitHub action"
           git push --follow-tags https://${{ secrets.PAT }}@github.com/benpollarduk/ktaf-api-docs.git HEAD:main
+
+      - name: Install python
+        run: |
+          python -m ensurepip --upgrade      
+
+      - name: Install pip
+        run: |
+          python -m ensurepip --upgrade
+
+      - name: Install mkdocs
+        run: |
+          pip install mkdocs-material
 
       - name: Build mkdocs documentation
         run: |
           cd ..
           cd docs/mkdocs/
-          sh mkdocs build
+          mkdocs build
 
       - name: Copy website files, commit and tag, then push changes to ktaf-docs
         run: |
@@ -68,7 +80,7 @@ jobs:
           git fetch
           git checkout main
           git rm -r --ignore-unmatch .
-          cp -r ../site/html/* .
+          cp -r ../site/* .
           git add .
           git commit -m "Update documentation"
           git tag -a "${{ inputs.ver }}" -m "${{ inputs.ver }} tagged during GitHub action"
