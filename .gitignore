@@ -50,4 +50,7 @@ build
 # SonarLint working directories, configuration files (including credentials)
 .sonarlint/
 
+# mkdocs site
+docs/mkdocs/site/
+
 # End of https://www.toptal.com/developers/gitignore/api/sonarqube
