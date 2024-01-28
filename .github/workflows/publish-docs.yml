@@ -34,7 +34,7 @@ jobs:
         run: |
           sh ./gradlew build test :ktaf:dokkaHtml -PpublishVersion=${PUBLISH_VERSION}
 
-      - name: Copy api website files, commit and tag, then push changes to ktaf-api-docs
+      - name: Copy api website files, commit, then push changes to ktaf-api-docs
         run: |
           mkdir ktaf-api-docs
           cd ktaf-api-docs
@@ -48,8 +48,7 @@ jobs:
           cp -r ../ktaf/build/dokka/html/* .
           git add .
           git commit -m "Update api documentation"
-          git tag -a "${{ inputs.ver }}" -m "${{ inputs.ver }} tagged during GitHub action"
-          git push --follow-tags https://${{ secrets.PAT }}@github.com/benpollarduk/ktaf-api-docs.git HEAD:main
+          git push https://${{ secrets.PAT }}@github.com/benpollarduk/ktaf-api-docs.git HEAD:main
 
       - name: Install pip
         run: |
@@ -66,7 +65,7 @@ jobs:
           cd docs/mkdocs/
           mkdocs build
 
-      - name: Copy website files, commit and tag, then push changes to ktaf-docs
+      - name: Copy website files, commit, then push changes to ktaf-docs
         run: |
           mkdir ktaf-docs
           cd ktaf-docs
@@ -80,5 +79,4 @@ jobs:
           cp -r ../site/* .
           git add .
           git commit -m "Update documentation"
-          git tag -a "${{ inputs.ver }}" -m "${{ inputs.ver }} tagged during GitHub action"
-          git push --follow-tags https://${{ secrets.PAT }}@github.com/benpollarduk/ktaf-docs.git HEAD:main
+          git push https://${{ secrets.PAT }}@github.com/benpollarduk/ktaf-docs.git HEAD:main
