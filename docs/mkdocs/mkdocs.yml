@@ -1,0 +1,15 @@
+site_name: ktaf
+theme:
+  name: material
+nav:
+  - Welcome: 'index.md'
+  - Getting Started: 'getting-started.md'
+  - Environments:
+    - 'Overworld': 'overworld.md'
+    - 'Region': 'region.md'
+    - 'Room': 'room.md'
+    - 'Exit': 'exit.md'
+  - Items: 'items.md'
+  - Characters:
+    - 'PlayableCharacter': 'playable-character.md'
+    - 'NonPlayableCharacter': 'non-playable-character.md'
