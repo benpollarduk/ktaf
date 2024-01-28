@@ -34,8 +34,11 @@ replay_pid*
 # Ignore Gradle build output directory
 build
 
-# Igbore all .idea files
+# Ignore all .idea files
 .idea/
+
+# mkdocs site
+docs/mkdocs/site/
 
 ### SonarQube ###
 # SonarQube ignore files.
@@ -49,8 +52,5 @@ build
 # http://www.sonarlint.org/commandline/
 # SonarLint working directories, configuration files (including credentials)
 .sonarlint/
-
-# mkdocs site
-docs/mkdocs/site/
 
 # End of https://www.toptal.com/developers/gitignore/api/sonarqube
