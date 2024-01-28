@@ -1,0 +1,20 @@
+site_name: Ktaf
+theme:
+  name: material
+nav:
+  - Welcome: 'index.md'
+  - Getting Started: 'getting-started.md'
+  - Environments:
+    - 'Overworld': 'overworld.md'
+    - 'Region': 'region.md'
+    - 'Room': 'room.md'
+    - 'Exit': 'exit.md'
+  - Items: 'items.md'
+  - Characters:
+    - 'PlayableCharacter': 'playable-character.md'
+    - 'NonPlayableCharacter': 'non-playable-character.md'
+  - Conditional Descriptions: 'conditional-descriptions.md'
+  - Commands: 'commands.md'
+  - Frame Builders: 'frame-builders.md'
+  - End Conditions: 'end-conditions.md'
+  - Api documentation: 'api-documentation.md'
