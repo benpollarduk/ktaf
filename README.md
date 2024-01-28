@@ -232,7 +232,8 @@ The example Ktor web app provides a basic web server that can host a Ktaf game a
 ```
 
 ## Documentation
-Please visit [https://benpollarduk.github.io/ktaf-docs/](https://benpollarduk.github.io/ktaf-docs/) to view the ktaf documentation.
+Please visit [https://benpollarduk.github.io/ktaf-docs/](https://benpollarduk.github.io/ktaf-docs/) to view the Ktaf documentation.
+Please visit [https://benpollarduk.github.io/ktaf-api-docs/](https://benpollarduk.github.io/ktaf-api-docs/) to view the Ktaf Api documentation.
 
 ## For Open Questions
 Visit https://github.com/benpollarduk/ktaf/issues
