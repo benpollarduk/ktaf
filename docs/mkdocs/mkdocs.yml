@@ -17,3 +17,4 @@ nav:
   - Commands: 'commands.md'
   - Frame Builders: 'frame-builders.md'
   - End Conditions: 'end-conditions.md'
+  - Api documentation: 'api-documentation.md'
