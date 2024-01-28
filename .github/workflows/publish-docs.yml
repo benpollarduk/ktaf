@@ -55,14 +55,13 @@ jobs:
           git fetch
           git checkout main
           git rm -r --ignore-unmatch .
-          cp -r ../site/* .
+          cp -r docs/mkdocs/site/* .
           git add .
           git commit -m "Update documentation"
           git push https://${{ secrets.PAT }}@github.com/benpollarduk/ktaf-docs.git HEAD:main
       
       - name: Build dokka documentation
         run: |
-          cd ..
           sh ./gradlew build test :ktaf:dokkaHtml -PpublishVersion=${PUBLISH_VERSION}
 
       - name: Copy api website files, commit, then push changes to ktaf-api-docs
