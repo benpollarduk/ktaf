@@ -15,62 +15,64 @@ Overworld
 │   ├── Room
 ```
 
-A Room can contain up to six Exits, one for each of the directions **north**, **east**, **south**, **west**, **up** and **down**.
+A Room can contain up to six Exits, one for each of the directions **north**, **east**, **south**, **west**, **up** and 
+**down**.
 
 ## Use
 
 A Region can be simply instantiated with a name and description.
 
-```csharp
-var room = new Room("Name", "Description.");
+```kotlin
+val room = Room("Name", "Description.")
 ```
 
-Exits can be added to the Room with the **AddExit** method.
+Exits can be added to the Room with the **addExit** function.
 
-```csharp
-room.AddExit(new Exit(Direction.East));
+```kotlin
+room.addExit(Exit(Direction.EAST));
 ```
 
-Exits can be removed from a Room with the **RemoveExit** method.
+Exits can be removed from a Room with the **removeExit** function.
 
-```csharp
-region.RemoveExit(exit);
+```kotlin
+region.removeExit(exit);
 ```
 
-Items can be added to the Room with the **AddItem** method.
+Items can be added to the Room with the **addItem** function.
 
-```csharp
-room.AddItem(new Item("Name", "Description."));
+```kotlin
+room.addItem(Item("Name", "Description."))
 ```
 
-Items can be removed from a Room with the **RemoveItem** method.
+Items can be removed from a Room with the **removeItem** function.
 
-```csharp
-region.RemoveItem(item);
+```kotlin
+region.removeItem(item)
 ```
 
-Characters can be added to the Room with the **AddCharacter** method.
+Characters can be added to the Room with the **addCharacter** function.
 
-```csharp
-room.AddCharacter(new Character("Name", "Description."));
+```kotlin
+room.addCharacter(NonPlayableCharacter("Name", "Description."))
 ```
 
-Characters can be removed from a Room with the **RemoveCharacter** method.
+Characters can be removed from a Room with the **removeCharacter** function.
 
-```csharp
-region.RemoveCharacter(character);
+```kotlin
+region.removeCharacter(character)
 ```
 
 Rooms can contain custom commands that allow the user to directly interact with the Room.
 
-```csharp
-room.Commands =
-[
-    new CustomCommand(new CommandHelp("Pull lever", "Pull the lever."), true, (game, args) =>
-    {
-        room.FindExit(Direction.East, true, out var exit);
-        exit.Unlock();
-        return new Reaction(ReactionResult.OK, "The exit was unlocked.");
-    })
-];
+```kotlin
+room.commands = listOf(
+    CustomCommand(
+        CommandHelp("Pull lever", "Pull the lever."),
+        true
+    ) { game, args ->
+        val exit = room.findExit(Direction.EAST, true)
+        exit.unlock()
+        Reaction(ReactionResult.OK, "The exit was unlocked.");
+    }
+)
 ```

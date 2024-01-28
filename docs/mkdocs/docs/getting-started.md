@@ -1,23 +1,22 @@
 # Getting Started
 
-## Adding the NuGet package to your project
-You need to pull BP.AdventureFramework into your project. The easiest way to do this is to add the NuGet package. The latest package and installation instructions are available [here](https://github.com/benpollarduk/BP.AdventureFramework/pkgs/nuget/BP.AdventureFramework).
+## Adding the package to your project
+You need to pull Ktaf into your project. The easiest way to do this is to add the package. The latest package and 
+installation instructions are available [here](https://github.com/benpollarduk/ktaf/packages/).
 
 ## First Game
 Once the package has been installed it's time to jump in and start building your first game.
 
 ### Setup
-To start with create a new Console application. Regardless of target framework, it should look something like this:
+To start with create a new Console application. It should look something like this:
 
-```csharp
-namespace BP.AdventureFramework.GettingStarted
-{
-    internal class Program
-    {
-        private static void Main(string[] args)
-        {
-           
-        }
+```kotlin
+package com.github.benpollarduk.ktaf.gettingstarted
+
+object Main {
+    @JvmStatic
+    fun main(args: Array<String>) {
+
     }
 }
 ```
@@ -25,206 +24,311 @@ namespace BP.AdventureFramework.GettingStarted
 ### Adding a PlayableCharacter
 Every game requires a character to play as, lets add that next:
 
-```csharp
-private static PlayableCharacter CreatePlayer()
-{
-    return new PlayableCharacter("Dave", "A young boy on a quest to find the meaning of life.");
+```kotlin
+private fun createPlayer(): PlayableCharacter {
+    return PlayableCharacter("Dave", "A young boy on a quest to find the meaning of life.")
 }
 ```
 
-In this example whenever **CreatePlayer** is called a new **PlayableCharacter** will be created. The character is called "Dave" and has a description that describes him as "A young boy on a quest to find the meaning of life.".
+In this example whenever **createPlayer** is called a new **PlayableCharacter** will be created. The character is 
+called "Dave" and has a description that describes him as "A young boy on a quest to find the meaning of life.".
 
 ### Creating the game world
-The game world consists of a hierarchy of three tiers: **Overworld**, **Region** and **Room**. We will create a simple **Region** with two **Rooms**. We can do this directly in the **Main** function for simplicity. To start with lets make the **Rooms**:
+The game world consists of a hierarchy of three tiers: **Overworld**, **Region** and **Room**. We will create a simple 
+**Region** with two **Rooms**. We can do this directly in the **main** function for simplicity. To start with lets make 
+the **Rooms**:
 
-```csharp
-private static void Main(string[] args)
-{
-    var cavern = new Room("Cavern", "A dark cavern set in to the base of the mountain.", new Exit(Direction.North));
+```kotlin
+@JvmStatic
+fun main(args: Array<String>) {
+    val cavern = Room(
+        "Cavern",
+        "A dark cavern set in to the base of the mountain.",
+        listOf(
+            Exit(Direction.NORTH),
+        ),
+    )
 
-    var tunnel = new Room("Tunnel", "A dark tunnel leading inside the mountain.", new Exit(Direction.South));
+    val tunnel = Room(
+        "Tunnel",
+        "A dark tunnel leading inside the mountain.",
+        listOf(
+            Exit(Direction.SOUTH),
+        ),
+    )
 }
 ```
 
-Although the **Rooms** haven't been added to a **Region** yet there are exits in place that will allow the player to move between them.
+Although the **Rooms** haven't been added to a **Region** yet there are exits in place that will allow the player to 
+move between them.
 
 Games are boring without **Items** to interact with, let's add an item to the tunnel:
 
-```csharp
-var holyGrail = new Item("Holy Grail", "A dull golden cup, looks pretty old.", true);
+```kotlin
+val holyGrail = Item("Holy Grail", "A dull golden cup, looks pretty old.", true)
 
-tunnel.AddItem(holyGrail);
+tunnel.addItem(holyGrail)
 ```
 
-Looking good, but the **Rooms** need to be contained within a **Region**. **RegionMaker** simplifies this process, but sometimes creating a **Region** directly may be more appropriate if more control is needed. Here we will use **RegionMaker**:
+Looking good, but the **Rooms** need to be contained within a **Region**. **RegionMaker** simplifies this process, 
+but sometimes creating a **Region** directly may be more appropriate if more control is needed. Here we will 
+use **RegionMaker**:
 
-```csharp
-var regionMaker = new RegionMaker("Mountain", "An imposing volcano just East of town.")
-{
-    [0, 0, 0] = cavern,
-    [0, 1, 0] = tunnel
-};
+```kotlin
+val regionMaker = RegionMaker("Mountain", "An imposing volcano just East of town.").also {
+    it[0, 0, 0] = cavern
+    it[0, 1, 0] = tunnel
+}
 ```
 
-This needs more breaking down. The **RegionMaker** will create a region called "Mountain" with a description of "An imposing volcano just East of town.". The region will contain two rooms, the cavern and the tunnel. The cavern will be added at position *x* 0, *y* 0, *z* 0. The tunnel will be added at position *x* 0, *y* 1, *z* 0, north of the cavern.
+This needs more breaking down. The **RegionMaker** will create a region called "Mountain" with a description of "An 
+imposing volcano just East of town.". The region will contain two rooms, the cavern and the tunnel. The cavern will be 
+added at position *x* 0, *y* 0, *z* 0. The tunnel will be added at position *x* 0, *y* 1, *z* 0, north of the cavern.
 
-The game world is nearly complete, but the **Region** needs to exist within an **Overworld** for it to be finished. We will use **OverworldMaker** to achieve this:
+The game world is nearly complete, but the **Region** needs to exist within an **Overworld** for it to be finished. We 
+will use **OverworldMaker** to achieve this:
 
-```csharp
-var overworldMaker = new OverworldMaker("Daves World", "An ancient kingdom.", regionMaker);
+```kotlin
+val overworldMaker = OverworldMaker(
+    "Daves World",
+    "An ancient kingdom.", listOf(
+        regionMaker
+    )
+)
 ```
 
-This will create an **Overworld** called "Daves World" which is described as "An ancient kingdom" and contains a single **Region**.
+This will create an **Overworld** called "Daves World" which is described as "An ancient kingdom" and contains a 
+single **Region**.
 
 All together the code looks like this:
 
-```csharp
-var cavern = new Room("Cavern", "A dark cavern set in to the base of the mountain.", new Exit(Direction.North));
+```kotlin
+val cavern = Room(
+    "Cavern",
+    "A dark cavern set in to the base of the mountain.",
+    listOf(
+        Exit(Direction.NORTH),
+    ),
+)
 
-var tunnel = new Room("Tunnel", "A dark tunnel leading inside the mountain.", new Exit(Direction.South));
+val tunnel = Room(
+    "Tunnel",
+    "A dark tunnel leading inside the mountain.",
+    listOf(
+        Exit(Direction.SOUTH),
+    ),
+)
 
-var holyGrail = new Item("Holy Grail", "A dull golden cup, looks pretty old.", true);
+val holyGrail = Item("Holy Grail", "A dull golden cup, looks pretty old.", true)
 
-tunnel.AddItem(holyGrail);
+tunnel.addItem(holyGrail)
 
-var regionMaker = new RegionMaker("Mountain", "An imposing volcano just East of town.")
-{
-    [0, 0, 0] = cavern,
-    [0, 1, 0] = tunnel
-};
+val regionMaker = RegionMaker("Mountain", "An imposing volcano just East of town.").also {
+    it[0, 0, 0] = cavern
+    it[0, 1, 0] = tunnel
+}
 
-var overworldMaker = new OverworldMaker("Daves World", "An ancient kingdom.", regionMaker);
+val overworldMaker = OverworldMaker(
+    "Daves World",
+    "An ancient kingdom.", listOf(
+        regionMaker
+    )
+)
 ```
 
 ### Checking the game is complete
 For a game to come to an end it needs to either hit a game over state or a completion state.
 
-Firstly lets look at the logic that determines if the game is complete. An **EndCheck** is required, which returns an **EndCheckResult** that determines if the game is complete.
+Firstly lets look at the logic that determines if the game is complete. An **EndCheck** is required, which returns an 
+**EndCheckResult** that determines if the game is complete.
 
-In this example lets make a method that determines if the game is complete. The game is complete if the player has the holy grail:
+In this example lets make a function that determines if the game is complete. The game is complete if the player has 
+the holy grail:
 
-```csharp
-private static EndCheckResult IsGameComplete(Game game)
-{
-    if (!game.Player.FindItem("Holy Grail", out _))
-        return EndCheckResult.NotEnded;
+```kotlin
+private fun isGameComplete(game: Game): EndCheckResult {
+    if (game.player.findItem("Holy Grail") == null) {
+        return EndCheckResult.notEnded
+    }
 
-    return new EndCheckResult(true, "Game Complete", "You have the Holy Grail!");
+    return EndCheckResult(true, "Game Complete", "You have the Holy Grail!")
 }
 ```
 
-If the player has the holy grail then the **EndCheckResult** will return that the game has ended, and have a title that will read "Game Complete" and a description that reads "You have the Holy Grail!".
+If the player has the holy grail then the **EndCheckResult** will return that the game has ended, and have a title that 
+will read "Game Complete" and a description that reads "You have the Holy Grail!".
 
 A common game over state may be if the player dies:
 
-```chsarp
-private static EndCheckResult IsGameOver(Game game)
-{
-    if (game.Player.IsAlive)
-        return EndCheckResult.NotEnded;
+```kotlin
+private fun isGameOver(game: Game): EndCheckResult {
+    if (game.player.isAlive) {
+        return EndCheckResult.notEnded
+    }
 
-    return new EndCheckResult(true, "Game Over", "You died!");
+    return EndCheckResult(true, "Game Over", "You died!")
 }
 ```
 
 ### Creating the game
-The game now has all the required assets and logic it just needs some boilerplate to tie everything together before it is ready to play.
+The game now has all the required assets and logic it just needs some boilerplate to tie everything together before it 
+is ready to play.
 
-A **GameCreationCallback** is required to instantiate an instance of a **Game**. This is so that new instances of the **Game** can be created as required.
+A **GameCreationCallback** is required to instantiate an instance of a **Game**. This is so that new instances of the 
+**Game** can be created as required.
 
-```csharp
-var gameCreator = Game.Create(
-    "The Life Of Dave",
-    "Dave awakes to find himself in a cavern...",
-    "A very low budget adventure.",
-    x => overworldMaker.Make(),
-    CreatePlayer,
-    IsGameComplete,
-    IsGameOver);
+```kotlin
+val gameTemplate = object : GameTemplate() {
+    override fun instantiate(ioConfiguration: IOConfiguration): Game {
+        return Game(
+            GameInformation(
+                "The Life Of Dave",
+                "Dave awakes to find himself in a cavern...",
+                "A very low budget adventure.",
+                "Ben Pollard"
+            ),
+            createPlayer(),
+            overworldMaker.make(),
+            { isGameComplete(it) },
+            { isGameOver(it) },
+            ioConfiguration = ioConfiguration
+        )
+    }
+}
 ```
 
-This requires some breaking down. The **Game** class has a **Create** method that can be used to create instances of **Game**. This takes the following arguments:
-* **Name** - the name of the game.
-* **Introduction** - an introduction to the game.
-* **Description** - a description of the game.
-* **OverworldGenerator** - a callback for generating instances of the overworld.
-* **PlayerGenerator** - a callback for generating instances of the player.
-* **CompletionCondition** - a callback for determining if the game is complete.
-* **GameOverCondition** - a callback for determining if the game is over.
+This requires some breaking down. A new subclass of **GameTemplate** is created. A **GameTemplate** is required to 
+execute a game because the **GameExecutor**, the class responsible for executing games may need to instantiate more than 
+one instance of the game. When **instantiate** is called a new instance of **Game** is returned. The constructor for  
+**Game** class takes the following arguments:
+**GameInformation** - information abut the game.
+**Player** - the player.
+**Overworld** - the overworld.
+**CompletionCondition** - a callback for determining if the game is complete. Here it is passed a lambda, which in turn passes in the player to the function.
+**GameOverCondition** - a callback for determining if the game is over. Here it is passed a lambda, which in turn passes in the player to the function.
+**IOConfiguration** - a configuration that allows Ktaf to be used with different applications. Here the ioConfiguration which is passed in when the instantiate function is called is used.
 
 ### Executing the game
-The game is executed simply by calling the static **Execute** method on **Game** and passing in the game creation callback.
+As previously mentioned, the **GameExecutor** is responsible for executing the game. **GameExecutor** can execute games 
+either synchronously or asynchronously. For console applications synchronous execution is appropriate. However, for 
+other types of application asynchronous execution may be required. As this is a console application synchronous execution 
+is most appropriate. The **ExitMode** has been set to **RETURN_TO_TITLE_SCREEN** so that when the game ends, either on 
+completion, game over or when the player chooses to exit the game by tying the **Exit** command, the application will 
+return to the title screen. The **AnsiConsoleConfiguration** is used, this configures the game to be run on an ANSI 
+compatible console. Other configurations can be created to allow Ktaf to function with other types of application, see 
+the examples in the repo for more information.
 
-```csharp
-Game.Execute(gameCreator);
+```kotlin
+GameExecutor.execute(
+    gameTemplate,
+    ExitMode.RETURN_TO_TITLE_SCREEN,
+    AnsiConsoleConfiguration
+)
 ```
 
 ### Bringing it all together
 The full example code should look like this:
 
-```csharp
-using BP.AdventureFramework.Assets;
-using BP.AdventureFramework.Assets.Characters;
-using BP.AdventureFramework.Assets.Locations;
-using BP.AdventureFramework.Logic;
-using BP.AdventureFramework.Utilities;
+```kotlin
+package com.github.benpollarduk.ktaf.gettingstarted
 
-namespace BP.AdventureFramework.GettingStarted
-{
-    internal class Program
-    {
-        private static EndCheckResult IsGameComplete(Game game)
-        {
-            if (!game.Player.FindItem("Holy Grail", out _))
-                return EndCheckResult.NotEnded;
+import com.github.benpollarduk.ktaf.assets.Item
+import com.github.benpollarduk.ktaf.assets.characters.PlayableCharacter
+import com.github.benpollarduk.ktaf.assets.locations.Direction
+import com.github.benpollarduk.ktaf.assets.locations.Exit
+import com.github.benpollarduk.ktaf.assets.locations.Room
+import com.github.benpollarduk.ktaf.io.IOConfiguration
+import com.github.benpollarduk.ktaf.io.configurations.AnsiConsoleConfiguration
+import com.github.benpollarduk.ktaf.logic.ExitMode
+import com.github.benpollarduk.ktaf.logic.Game
+import com.github.benpollarduk.ktaf.logic.GameExecutor
+import com.github.benpollarduk.ktaf.logic.GameInformation
+import com.github.benpollarduk.ktaf.logic.conditions.EndCheckResult
+import com.github.benpollarduk.ktaf.utilities.OverworldMaker
+import com.github.benpollarduk.ktaf.utilities.RegionMaker
+import com.github.benpollarduk.ktaf.utilities.templates.GameTemplate
 
-            return new EndCheckResult(true, "Game Complete", "You have the Holy Grail!");
+object Main {
+    private fun createPlayer(): PlayableCharacter {
+        return PlayableCharacter("Dave", "A young boy on a quest to find the meaning of life.")
+    }
+
+    private fun isGameComplete(game: Game): EndCheckResult {
+        if (game.player.findItem("Holy Grail") == null) {
+            return EndCheckResult.notEnded
         }
 
-        private static EndCheckResult IsGameOver(Game game)
-        {
-            if (game.Player.IsAlive)
-                return EndCheckResult.NotEnded;
+        return EndCheckResult(true, "Game Complete", "You have the Holy Grail!")
+    }
 
-            return new EndCheckResult(true, "Game Over", "You died!");
+    private fun isGameOver(game: Game): EndCheckResult {
+        if (game.player.isAlive) {
+            return EndCheckResult.notEnded
         }
 
-        private static PlayableCharacter CreatePlayer()
-        {
-            return new PlayableCharacter("Dave", "A young boy on a quest to find the meaning of life.");
+        return EndCheckResult(true, "Game Over", "You died!")
+    }
+
+    @JvmStatic
+    fun main(args: Array<String>) {
+        val cavern = Room(
+            "Cavern",
+            "A dark cavern set in to the base of the mountain.",
+            listOf(
+                Exit(Direction.NORTH),
+            ),
+        )
+
+        val tunnel = Room(
+            "Tunnel",
+            "A dark tunnel leading inside the mountain.",
+            listOf(
+                Exit(Direction.SOUTH),
+            ),
+        )
+
+        val holyGrail = Item("Holy Grail", "A dull golden cup, looks pretty old.", true)
+
+        tunnel.addItem(holyGrail)
+
+        val regionMaker = RegionMaker("Mountain", "An imposing volcano just East of town.").also {
+            it[0, 0, 0] = cavern
+            it[0, 1, 0] = tunnel
         }
 
-        private static void Main(string[] args)
-        {
-            var cavern = new Room("Cavern", "A dark cavern set in to the base of the mountain.", new Exit(Direction.North));
+        val overworldMaker = OverworldMaker(
+            "Daves World",
+            "An ancient kingdom.",
+            listOf(
+                regionMaker,
+            ),
+        )
 
-            var tunnel = new Room("Tunnel", "A dark tunnel leading inside the mountain.", new Exit(Direction.South));
-
-            var holyGrail = new Item("Holy Grail", "A dull golden cup, looks pretty old.", true);
-
-            tunnel.AddItem(holyGrail);
-
-            var regionMaker = new RegionMaker("Mountain", "An imposing volcano just East of town.")
-            {
-                [0, 0, 0] = cavern,
-                [0, 1, 0] = tunnel
-            };
-
-            var overworldMaker = new OverworldMaker("Daves World", "An ancient kingdom.", regionMaker);
-
-            var gameCreator = Game.Create(
-                "The Life Of Dave",
-                "Dave awakes to find himself in a cavern...",
-                "A very low budget adventure.",
-                x => overworldMaker.Make(),
-                CreatePlayer,
-                IsGameComplete,
-                IsGameOver);
-
-            Game.Execute(gameCreator);
+        val gameTemplate = object : GameTemplate() {
+            override fun instantiate(ioConfiguration: IOConfiguration): Game {
+                return Game(
+                    GameInformation(
+                        "The Life Of Dave",
+                        "Dave awakes to find himself in a cavern...",
+                        "A very low budget adventure.",
+                        "Ben Pollard",
+                    ),
+                    createPlayer(),
+                    overworldMaker.make(),
+                    { isGameComplete(it) },
+                    { isGameOver(it) },
+                    ioConfiguration = AnsiConsoleConfiguration,
+                )
+            }
         }
+
+        GameExecutor.execute(
+            gameTemplate,
+            ExitMode.RETURN_TO_TITLE_SCREEN,
+            AnsiConsoleConfiguration,
+        )
     }
 }
 ```
 
-Simply build and run the application and congratulations, you have a working BP.AdventureFramework game!
+Simply build and run the application and congratulations, you have a working Ktaf game!

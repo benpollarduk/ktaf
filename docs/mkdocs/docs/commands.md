@@ -66,7 +66,8 @@ If only a single NonPlayableCharacter is in the current Room no argument needs t
 talk
 ```
 
-However, if the current Room contains two or more NonPlayableCharacters then **to** and the NonPlayableCharacters name must be specified.
+However, if the current Room contains two or more NonPlayableCharacters then **to** and the NonPlayableCharacters name 
+must be specified.
 
 ```
 talk to dave
@@ -79,7 +80,8 @@ Use allows the player to use the Items that the player has or that are in the cu
 use sword
 ```
 
-Items can be used on the Player, the Room, an Exit, a NonPlayableCharacter or another Item. The target must be specified with the **on** keyword.
+Items can be used on the Player, the Room, an Exit, a NonPlayableCharacter or another Item. The target must be specified
+with the **on** keyword.
 
 ```
 use sword on me
@@ -172,4 +174,5 @@ new
 ```
 
 ## Custom Commands
-Custom commands can be added to many of the assets, including Room, PlayableCharacter, NonPlayableCharacter, Item and Exit.
+Custom commands can be added to many of the assets, including Room, PlayableCharacter, NonPlayableCharacter, Item and 
+Exit.

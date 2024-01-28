@@ -1,7 +1,8 @@
 ﻿# Conditional Descriptions
 
 ## Overview
-Normally assets are assigned a **Description** during the constructor. This is what is returned when the asset is examined.
+Normally assets are assigned a **Description** during the constructor. This is what is returned when the asset is 
+examined.
 
 Descriptions are usually specified as a string.
 
@@ -15,9 +16,11 @@ They can also be specified as a **Description**.
 val item = Item(Identifier("The items name"), Description("The items description."))
 ```
 
-However, sometimes it may be desirable to have a conditional description that can change based on the state of the asset.
+However, sometimes it may be desirable to have a conditional description that can change based on the state of the 
+asset.
 
-Conditional descriptions can be specified with **ConditionalDescription** and contain a lambda which determines which one of two strings are returned when the asset is examined.
+Conditional descriptions can be specified with **ConditionalDescription** and contain a lambda which determines which 
+one of two strings are returned when the asset is examined.
 
 ```kotlin
  // the player, just for demo purposes
