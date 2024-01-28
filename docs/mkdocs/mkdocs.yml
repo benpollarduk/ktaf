@@ -13,3 +13,7 @@ nav:
   - Characters:
     - 'PlayableCharacter': 'playable-character.md'
     - 'NonPlayableCharacter': 'non-playable-character.md'
+  - Conditional Descriptions: 'conditional-descriptions.md'
+  - Commands: 'commands.md'
+  - Frame Builders: 'frame-builders.md'
+  - End Conditions: 'end-conditions.md'
