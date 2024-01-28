@@ -53,7 +53,7 @@ jobs:
       - name: Install pip
         run: |
           sudo apt update
-	  sudo apt install python3-pip
+          sudo apt install python3-pip
 
       - name: Install mkdocs
         run: |
