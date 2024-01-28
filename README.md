@@ -189,10 +189,11 @@ val template = object : GameTemplate() {
 GameExecutor.execute(template, ioConfiguration = ioConfiguration)
 ```
 
+### Tutorial
+The quickest way to start getting to grips with Ktaf is to take a look at the [Getting Started](https://benpollarduk.github.io/ktaf-docs/getting-started/) page.
+
 ### Example game
-The quickest way to start getting to grips with the structure of Ktaf is by taking a look at the examples.
-An example game is provided in the [ktaf-exmples](https://github.com/benpollarduk/ktaf/tree/main/ktaf-example/src/main/kotlin/com/github/benpollarduk/ktaf/example) directory 
-and have been designed with the aim of showcasing the various features.
+An example game is provided in the [ktaf-exmples](https://github.com/benpollarduk/ktaf/tree/main/ktaf-example/src/main/kotlin/com/github/benpollarduk/ktaf/example) directory  and have been designed with the aim of showcasing the various features.
 
 ### Running the examples
 The example applications can be used to execute the example Ktaf game and demonstrate the core principals of the framework.
