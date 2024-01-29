@@ -5,6 +5,7 @@ import com.github.benpollarduk.ktaf.assets.characters.NonPlayableCharacter
 import com.github.benpollarduk.ktaf.conversations.Conversation
 import com.github.benpollarduk.ktaf.conversations.Paragraph
 import com.github.benpollarduk.ktaf.conversations.Response
+import com.github.benpollarduk.ktaf.conversations.instructions.Next
 import com.github.benpollarduk.ktaf.interpretation.ConversationCommandInterpreter
 import com.github.benpollarduk.ktaf.logic.GameTestHelper
 import org.junit.jupiter.api.Assertions
@@ -21,9 +22,9 @@ class AnsiConversationFrameBuilderTest {
             val paragraph2 = Paragraph("Then I said a load more.")
             val paragraph3 = Paragraph("A test paragraph, this is something that is said.").also {
                 it.responses = listOf(
-                    Response("Response a.", 1),
-                    Response("Response b.", 1),
-                    Response("Response c.", 1)
+                    Response("Response a.", Next()),
+                    Response("Response b.", Next()),
+                    Response("Response c.", Next())
                 )
             }
             character.conversation = Conversation(listOf(paragraph1, paragraph2, paragraph3))

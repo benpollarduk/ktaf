@@ -1,13 +1,17 @@
 package com.github.benpollarduk.ktaf.conversations
 
+import com.github.benpollarduk.ktaf.conversations.instructions.EndOfParagraphInstruction
+import com.github.benpollarduk.ktaf.conversations.instructions.Next
+
 /**
  * A paragraph within a [Conversation]. Must contain a [line], but can also have an optional [action] that is invoked
- * as a response to this paragraph being triggered. The [delta] is a relative pointer to the next element within the
- * [Conversation].
+ * as a response to this paragraph being triggered. The [instruction] is applied to direct the conversation after this
+ * paragraph.
  */
 public class Paragraph(
     public val line: String,
-    public val delta: Int = 1,
+    public val instruction: EndOfParagraphInstruction = Next(),
+    public val name: String = "",
     public val action: ConversationAction = { }
 ) {
     /**
