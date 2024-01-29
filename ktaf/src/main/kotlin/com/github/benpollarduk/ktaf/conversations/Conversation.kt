@@ -2,6 +2,7 @@ package com.github.benpollarduk.ktaf.conversations
 
 import com.github.benpollarduk.ktaf.assets.interaction.Reaction
 import com.github.benpollarduk.ktaf.assets.interaction.ReactionResult
+import com.github.benpollarduk.ktaf.conversations.instructions.EndOfParagraphInstruction
 import com.github.benpollarduk.ktaf.extensions.ensureFinishedSentence
 import com.github.benpollarduk.ktaf.extensions.toSpeech
 import com.github.benpollarduk.ktaf.logic.Game
@@ -13,8 +14,7 @@ import com.github.benpollarduk.ktaf.logic.Game
 public class Conversation(
     private val paragraphs: List<Paragraph> = emptyList()
 ) {
-    private var paragraphIndex: Int = 0
-    private var selectedResponseDelta: Int? = null
+    private var selectedResponseInstruction: EndOfParagraphInstruction? = null
     private val mutableLog: MutableList<LogItem> = mutableListOf()
 
     /**
@@ -30,17 +30,24 @@ public class Conversation(
         get() = mutableLog.toList()
 
     /**
-     * Shift this [Conversation] to a new [Paragraph]. The [delta] specifies the next [Paragraph], which is retrieved
-     * from the [paragraphs] array. If the [delta] shifts the conversation out of bounds then null is returned.
+     * Shift this [Conversation] to a new [Paragraph]. The [index] specifies the next [Paragraph], which is retrieved
+     * from the [paragraphs] array. If the [index] shifts the conversation out of bounds then the current paragraph is
+     * returned.
      */
-    private fun shift(delta: Int): Paragraph? {
-        paragraphIndex += delta
-
-        return if (paragraphIndex >= 0 && paragraphIndex < paragraphs.count()) {
-            paragraphs[paragraphIndex]
+    private fun shift(index: Int): Paragraph? {
+        return if (index >= 0 && index < paragraphs.count()) {
+            paragraphs[index]
         } else {
             currentParagraph
         }
+    }
+
+    /**
+     * Update the [currentParagraph] based on an [instruction].
+     */
+    private fun updateCurrentParagraph(instruction: EndOfParagraphInstruction) {
+        val current = currentParagraph ?: return
+        currentParagraph = shift(instruction.getIndexOfNext(current, paragraphs))
     }
 
     /**
@@ -58,13 +65,13 @@ public class Conversation(
                 currentParagraph = paragraphs.firstOrNull()
             }
             current.canRespond -> {
-                selectedResponseDelta?.let { delta ->
-                    currentParagraph = shift(delta)
-                    selectedResponseDelta = null
+                selectedResponseInstruction?.let {
+                    updateCurrentParagraph(it)
+                    selectedResponseInstruction = null
                 } ?: return Reaction(ReactionResult.INTERNAL, "Awaiting response.")
             }
             else -> {
-                currentParagraph = shift(current.delta)
+                updateCurrentParagraph(current.instruction)
             }
         }
 
@@ -86,7 +93,7 @@ public class Conversation(
                 return@respond Reaction(ReactionResult.ERROR, "Invalid response.")
             }
             mutableLog.add(LogItem(Participant.PLAYER, response.line.ensureFinishedSentence()))
-            selectedResponseDelta = response.delta
+            selectedResponseInstruction = response.instruction
             return@respond next(game)
         } ?: return Reaction(ReactionResult.ERROR, "No paragraph.")
     }

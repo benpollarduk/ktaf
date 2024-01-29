@@ -9,6 +9,7 @@ import com.github.benpollarduk.ktaf.assets.locations.Room
 import com.github.benpollarduk.ktaf.conversations.Conversation
 import com.github.benpollarduk.ktaf.conversations.Paragraph
 import com.github.benpollarduk.ktaf.conversations.Response
+import com.github.benpollarduk.ktaf.conversations.instructions.Previous
 import com.github.benpollarduk.ktaf.io.IOConfiguration
 import com.github.benpollarduk.ktaf.logic.Game
 import com.github.benpollarduk.ktaf.logic.GameInformation
@@ -46,7 +47,7 @@ internal object TestGame : GameTemplate() {
                             Paragraph("Here is a question?").also { paragraph ->
                                 paragraph.responses = listOf(
                                     Response("Continue"),
-                                    Response("Repeat", -1)
+                                    Response("Repeat", Previous())
                                 )
                             }
                         )
