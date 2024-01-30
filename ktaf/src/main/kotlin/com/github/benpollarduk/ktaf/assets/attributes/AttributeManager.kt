@@ -70,7 +70,7 @@ public class AttributeManager {
     /**
      * Get all [Attribute] and values managed by this [AttributeManager].
      */
-    public fun getAsMap(): Map<Attribute, Int> {
+    public fun toMap(): Map<Attribute, Int> {
         return attributes.toMap()
     }
 
@@ -98,7 +98,7 @@ public class AttributeManager {
         attributes[attribute] = capValue(
             attributes[attribute]?.plus(value) ?: 0,
             attribute.minimum,
-            attribute.maximum,
+            attribute.maximum
         )
     }
 
@@ -110,7 +110,7 @@ public class AttributeManager {
         attributes[matchedAttribute] = capValue(
             attributes[matchedAttribute]?.plus(value) ?: 0,
             matchedAttribute.minimum,
-            matchedAttribute.maximum,
+            matchedAttribute.maximum
         )
     }
 
@@ -123,7 +123,7 @@ public class AttributeManager {
         attributes[attribute] = capValue(
             attributes[attribute]?.minus(value) ?: 0,
             attribute.minimum,
-            attribute.maximum,
+            attribute.maximum
         )
     }
 
@@ -135,7 +135,7 @@ public class AttributeManager {
         attributes[matchedAttribute] = capValue(
             attributes[matchedAttribute]?.minus(value) ?: 0,
             matchedAttribute.minimum,
-            matchedAttribute.maximum,
+            matchedAttribute.maximum
         )
     }
 

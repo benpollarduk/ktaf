@@ -15,6 +15,7 @@ nav:
     - 'NonPlayableCharacter': 'non-playable-character.md'
   - Conditional Descriptions: 'conditional-descriptions.md'
   - Commands: 'commands.md'
+  - Attributes: 'attributes.md'
   - Frame Builders: 'frame-builders.md'
   - End Conditions: 'end-conditions.md'
   - Api documentation: 'api-documentation.md'

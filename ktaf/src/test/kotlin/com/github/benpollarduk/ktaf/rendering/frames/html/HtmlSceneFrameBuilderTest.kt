@@ -1,6 +1,7 @@
 package com.github.benpollarduk.ktaf.rendering.frames.html
 
 import com.github.benpollarduk.ktaf.TestGame
+import com.github.benpollarduk.ktaf.assets.Item
 import com.github.benpollarduk.ktaf.assets.Size
 import com.github.benpollarduk.ktaf.assets.characters.PlayableCharacter
 import com.github.benpollarduk.ktaf.assets.locations.Direction
@@ -28,12 +29,15 @@ class HtmlSceneFrameBuilderTest {
         regionMaker[1, 0, 0] = Room("Bog of eternal stench", "", listOf(Exit(Direction.WEST)))
         val region = regionMaker.make()
         val viewPoint = ViewPoint(region)
+        val player = PlayableCharacter("Test", "Test")
+        player.acquireItem(Item("Test", "Test"))
+        player.attributes.add("Test", 1)
 
         // When
         val result = builder.build(
             startRoom,
             viewPoint,
-            PlayableCharacter("Test", "Test"),
+            player,
             "",
             listOf(CommandHelp("Test", "Test command.")),
             KeyType.DYNAMIC

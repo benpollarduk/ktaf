@@ -1,6 +1,8 @@
 package com.github.benpollarduk.ktaf.rendering.frames.html
 
+import com.github.benpollarduk.ktaf.assets.Item
 import com.github.benpollarduk.ktaf.assets.Size
+import com.github.benpollarduk.ktaf.assets.attributes.Attribute
 import com.github.benpollarduk.ktaf.assets.characters.PlayableCharacter
 import com.github.benpollarduk.ktaf.assets.locations.Region
 import com.github.benpollarduk.ktaf.assets.locations.Room
@@ -27,7 +29,7 @@ public class HtmlSceneFrameBuilder(
     private val roomMapBuilder: GridRoomMapBuilder,
     private val frameSize: Size,
     private val displayMessagesInIsolation: Boolean = true,
-    private val suppressMovementMessages: Boolean = true
+    private val suppressMovementMessages: Boolean = true,
 ) : SceneFrameBuilder {
     private fun isMovementConfirmation(message: String): Boolean {
         if (message.isNotEmpty()) {
@@ -41,13 +43,25 @@ public class HtmlSceneFrameBuilder(
         return false
     }
 
+    private fun addPlayerItems(items: List<Item>) {
+        if (items.any()) {
+            htmlPageBuilder.p("You have: " + StringUtilities.constructExaminablesAsSentence(items))
+        }
+    }
+
+    private fun addPlayerAttributes(attributes: Map<Attribute, Int>) {
+        if (attributes.any()) {
+            htmlPageBuilder.p(StringUtilities.getAttributesAsString(attributes))
+        }
+    }
+
     override fun build(
         room: Room,
         viewPoint: ViewPoint,
         playableCharacter: PlayableCharacter,
         message: String,
         contextualCommands: List<CommandHelp>,
-        keyType: KeyType
+        keyType: KeyType,
     ): Frame {
         val leftMargin = 2
         val displayMessage = message.isNotEmpty() && (!isMovementConfirmation(message) || !suppressMovementMessages)
@@ -73,8 +87,8 @@ public class HtmlSceneFrameBuilder(
                 extendedDescription = extendedDescription.addSentence(
                     StringUtilities.createViewpointAsString(
                         room,
-                        viewPoint
-                    )
+                        viewPoint,
+                    ),
                 )
             }
 
@@ -88,13 +102,8 @@ public class HtmlSceneFrameBuilder(
             var map = gridStringBuilder.toString().removeWhitespaceLines()
             htmlPageBuilder.pre(map.replace(NEWLINE, "<br>"))
 
-            if (playableCharacter.items.any()) {
-                htmlPageBuilder.p(
-                    "You have: " + StringUtilities.constructExaminablesAsSentence(
-                        playableCharacter.items
-                    )
-                )
-            }
+            addPlayerItems(playableCharacter.items)
+            addPlayerAttributes(playableCharacter.attributes.toMap())
 
             if (!displayMessagesInIsolation && !displayMessage) {
                 htmlPageBuilder.p(message.ensureFinishedSentence())
