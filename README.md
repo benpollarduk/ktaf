@@ -75,7 +75,6 @@ val npc = NonPlayableChracter("Gary", "The antagonist of the story.")
 ```
 
 ### Commands
-  
 Ktaf provides commands for interacting with game elements:
   * **Drop X** - drop an item.
   * **Examine X** - allows items, characters and environments to be examined.
@@ -96,17 +95,17 @@ Ktaf also provides global commands to help with game flow and option management:
 Custom commands can be added to games without the need to extend the existing interpretation.
 
 ### Interpretation
-
 Ktaf provides classes for handling interpretation of input. Interpretation is extensible with the ability for custom interpreters to be added outside of the core Ktaf library.
 
 ### Conversations
-
 Conversations can be held between the player and a NPC. Conversations support multiple lines of dialogue and responses.
 
 ![image](https://github.com/ben-pollard-uk/ktaf/assets/129943363/3adc4210-2732-4f79-9d19-000af0287f07)
 
-### Rendering
+### Attributes
+All game assets support customisable attributes. This provides the possibility to build systems within a game, for example adding currency and trading, adding HP to enemies, MP to your character, durability to Items etc.
 
+### Rendering
 Ktaf provides frames for rendering the various game screens. These are fully extensible and customisable. These include:
    * Scene frame.
    * Help frame.
@@ -118,7 +117,6 @@ Ktaf provides frames for rendering the various game screens. These are fully ext
    * Conversation frame.
 
 ### Maps
-  
 Maps are automatically generated for regions and rooms, and can be viewed with the **map** command:
 
 ![image](https://github.com/ben-pollard-uk/ktaf/assets/129943363/b8e52974-dad7-4c27-8c0a-6861964a2fbe)
@@ -126,7 +124,6 @@ Maps are automatically generated for regions and rooms, and can be viewed with t
 Maps display visited rooms, exits, player position, if an item is in a room, lower floors and more.
 
 ### Dynamic Loading
-
 Precompiled games can also be discovered and loaded from .jar files at runtime with the GameCatalogResolver.
 ```Kotlin
 // load a .jar file and discover all GameTemplate instances
