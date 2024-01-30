@@ -1,6 +1,7 @@
 package com.github.benpollarduk.ktaf.utilities
 
 import com.github.benpollarduk.ktaf.assets.ExaminableObject
+import com.github.benpollarduk.ktaf.assets.attributes.Attribute
 import com.github.benpollarduk.ktaf.assets.locations.Direction
 import com.github.benpollarduk.ktaf.assets.locations.Region
 import com.github.benpollarduk.ktaf.assets.locations.Room
@@ -38,15 +39,19 @@ internal object StringUtilities {
                 index == 0 && examinableNames.size > 2 -> {
                     "${examinable.getObjectifier().toSentenceCase()} $examinable, "
                 }
+
                 index == 0 -> {
                     "${examinable.getObjectifier().toSentenceCase()} $examinable "
                 }
+
                 index < examinableNames.size - 2 -> {
                     "${examinable.getObjectifier()} $examinable, "
                 }
+
                 index < examinableNames.size - 1 -> {
                     "${examinable.getObjectifier()} $examinable "
                 }
+
                 else -> {
                     "and ${examinable.getObjectifier()} $examinable."
                 }
@@ -143,9 +148,11 @@ internal object StringUtilities {
                 characters.size - 1 -> {
                     "${character.identifier} are in the ${room.identifier}."
                 }
+
                 characters.size - 2 -> {
                     "${character.identifier} and "
                 }
+
                 else -> {
                     "${character.identifier}, "
                 }
@@ -185,5 +192,26 @@ internal object StringUtilities {
         }
 
         return if (view.isEmpty()) "" else view.substring(0, view.length - 2).ensureFinishedSentence()
+    }
+
+    /**
+     * Get a map of [attributes] as a [String].
+     */
+    internal fun getAttributesAsString(attributes: Map<Attribute, Int>): String {
+        if (attributes.isEmpty()) {
+            return ""
+        }
+
+        var line = ""
+
+        for (i in attributes.keys.indices) {
+            line += "${attributes.keys.elementAt(i).name}: ${attributes.values.elementAt(i)}"
+
+            if (i < attributes.size - 1) {
+                line += "\t"
+            }
+        }
+
+        return line
     }
 }

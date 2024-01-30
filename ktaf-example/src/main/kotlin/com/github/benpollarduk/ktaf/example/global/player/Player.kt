@@ -10,6 +10,7 @@ import com.github.benpollarduk.ktaf.utilities.templates.AssetTemplate
 internal class Player : AssetTemplate<PlayableCharacter> {
     override fun instantiate(): PlayableCharacter {
         return PlayableCharacter(NAME, DESCRIPTION).also {
+            it.attributes.add("£", 5)
             it.acquireItem(Knife().instantiate())
             it.interaction = { item ->
                 when {

@@ -128,6 +128,16 @@ public class AnsiSceneFrameBuilder(
                 )
             }
 
+            if (playableCharacter.attributes.count > 0) {
+                lastPosition = ansiGridStringBuilder.drawWrapped(
+                    StringUtilities.getAttributesAsString(playableCharacter.attributes.toMap()),
+                    leftMargin,
+                    lastPosition.y + 2,
+                    availableWidth,
+                    textColor
+                )
+            }
+
             if (!displayMessagesInIsolation && !displayMessage) {
                 ansiGridStringBuilder.drawHorizontalDivider(lastPosition.y + 3, borderColor)
                 lastPosition = ansiGridStringBuilder.drawWrapped(

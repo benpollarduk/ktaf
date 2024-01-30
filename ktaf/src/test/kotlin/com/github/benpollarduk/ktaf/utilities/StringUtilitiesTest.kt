@@ -1,6 +1,7 @@
 package com.github.benpollarduk.ktaf.utilities
 
 import com.github.benpollarduk.ktaf.assets.Item
+import com.github.benpollarduk.ktaf.assets.attributes.Attribute
 import com.github.benpollarduk.ktaf.assets.characters.NonPlayableCharacter
 import com.github.benpollarduk.ktaf.assets.locations.Direction
 import com.github.benpollarduk.ktaf.assets.locations.Exit
@@ -150,5 +151,46 @@ class StringUtilitiesTest {
 
         // Then
         Assertions.assertTrue(result.isNotEmpty())
+    }
+
+    @Test
+    fun `given no attributes when get attributes as line then empty string`() {
+        // Given
+        val attributes = emptyMap<Attribute, Int>()
+
+        // When
+        val result = StringUtilities.getAttributesAsString(attributes)
+
+        // Then
+        Assertions.assertEquals("", result)
+    }
+
+    @Test
+    fun `given one attribute when get attributes as line then test colon 1`() {
+        // Given
+        val attributes = mapOf(
+            Attribute("test", "") to 1
+        )
+
+        // When
+        val result = StringUtilities.getAttributesAsString(attributes)
+
+        // Then
+        Assertions.assertEquals("test: 1", result)
+    }
+
+    @Test
+    fun `given two attributes when get attributes as line then test colon 1 tab test2 colon 1`() {
+        // Given
+        val attributes = mapOf(
+            Attribute("test", "") to 1,
+            Attribute("test2", "") to 1
+        )
+
+        // When
+        val result = StringUtilities.getAttributesAsString(attributes)
+
+        // Then
+        Assertions.assertEquals("test: 1\ttest2: 1", result)
     }
 }
