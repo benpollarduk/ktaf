@@ -1,5 +1,6 @@
 package com.github.benpollarduk.ktaf.assets
 
+import com.github.benpollarduk.ktaf.assets.attributes.AttributeManager
 import com.github.benpollarduk.ktaf.commands.CustomCommand
 import com.github.benpollarduk.ktaf.extensions.ensureFinishedSentence
 import com.github.benpollarduk.ktaf.extensions.removeSentenceEnd
@@ -9,6 +10,8 @@ import com.github.benpollarduk.ktaf.utilities.NEWLINE
  * Provides a base implementation for examinable objects.
  */
 public abstract class ExaminableObject : Examinable {
+    public override val attributes: AttributeManager = AttributeManager()
+
     /**
      * Provides a callback for handling examination of this object.
      */

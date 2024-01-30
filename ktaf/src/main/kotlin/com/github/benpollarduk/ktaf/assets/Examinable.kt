@@ -1,5 +1,6 @@
 package com.github.benpollarduk.ktaf.assets
 
+import com.github.benpollarduk.ktaf.assets.attributes.AttributeManager
 import com.github.benpollarduk.ktaf.commands.CustomCommand
 
 /**
@@ -20,6 +21,11 @@ public interface Examinable : PlayerVisible {
      * A list of [CustomCommand] that this [Examinable] provides.
      */
     public val commands: List<CustomCommand>
+
+    /**
+     * An [AttributeManager] that provides management of all [Attribute] for this [Examinable].
+     */
+    public val attributes: AttributeManager
 
     /**
      * Examine this object to obtain an [ExaminationResult].
