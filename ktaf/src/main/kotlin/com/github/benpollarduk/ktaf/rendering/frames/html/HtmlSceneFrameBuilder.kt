@@ -29,7 +29,7 @@ public class HtmlSceneFrameBuilder(
     private val roomMapBuilder: GridRoomMapBuilder,
     private val frameSize: Size,
     private val displayMessagesInIsolation: Boolean = true,
-    private val suppressMovementMessages: Boolean = true,
+    private val suppressMovementMessages: Boolean = true
 ) : SceneFrameBuilder {
     private fun isMovementConfirmation(message: String): Boolean {
         if (message.isNotEmpty()) {
@@ -61,7 +61,7 @@ public class HtmlSceneFrameBuilder(
         playableCharacter: PlayableCharacter,
         message: String,
         contextualCommands: List<CommandHelp>,
-        keyType: KeyType,
+        keyType: KeyType
     ): Frame {
         val leftMargin = 2
         val displayMessage = message.isNotEmpty() && (!isMovementConfirmation(message) || !suppressMovementMessages)
@@ -87,8 +87,8 @@ public class HtmlSceneFrameBuilder(
                 extendedDescription = extendedDescription.addSentence(
                     StringUtilities.createViewpointAsString(
                         room,
-                        viewPoint,
-                    ),
+                        viewPoint
+                    )
                 )
             }
 
