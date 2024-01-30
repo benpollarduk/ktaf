@@ -45,18 +45,18 @@ A NonPlayableCharacter can hold a conversation with the player.
 goblin.conversation = Conversation(
     listOf(
         Paragraph("This is a the first line."),
-        Paragraph("This is a question.).also {
+        Paragraph("This is a question.").also {
             it.responses = listOf(
-                Response("This is the first response., Jump(1)),
+                Response("This is the first response.", Jump(1)),
                 Response("This is the second response.", Jump(2)),
-                Response("This is the third response.", Jump(3))
+                Response("This is the third response.", Jump(3)),
             )
         },
         Paragraph("You picked first response, return to start of conversation.", GoTo(1)),
-        Paragraph("You picked second response, return to start of conversation., GoTo(1)),
+        Paragraph("You picked second response, return to start of conversation.", GoTo(1)),
         Paragraph("This is the third response.") {
             it.player.kill()
-        }
-    )
+        },
+    ),
 )
 ```
