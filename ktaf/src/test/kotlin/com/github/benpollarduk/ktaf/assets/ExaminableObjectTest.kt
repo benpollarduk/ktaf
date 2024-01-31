@@ -7,7 +7,7 @@ import com.github.benpollarduk.ktaf.interpretation.CommandHelp
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class ExaminableTest {
+class ExaminableObjectTest {
     @Test
     fun `given item with description when calling examine then result contains description`() {
         // Given
@@ -59,5 +59,18 @@ class ExaminableTest {
 
         // Then
         Assertions.assertTrue(result.description.contains("ABC"))
+    }
+
+    @Test
+    fun `given item with attributes when calling examine then result contains assey`() {
+        // Given
+        val examinable = Item("", "")
+        examinable.attributes.add("attribute", 0)
+
+        // When
+        val result = examinable.examine()
+
+        // Then
+        Assertions.assertTrue(result.description.contains("attribute"))
     }
 }

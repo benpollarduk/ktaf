@@ -5,6 +5,7 @@ import com.github.benpollarduk.ktaf.commands.CustomCommand
 import com.github.benpollarduk.ktaf.extensions.ensureFinishedSentence
 import com.github.benpollarduk.ktaf.extensions.removeSentenceEnd
 import com.github.benpollarduk.ktaf.utilities.NEWLINE
+import com.github.benpollarduk.ktaf.utilities.StringUtilities
 
 /**
  * Provides a base implementation for examinable objects.
@@ -43,6 +44,10 @@ public abstract class ExaminableObject : Examinable {
 
         if (description == "") {
             description = it::class.simpleName.toString()
+        }
+
+        if (attributes.count > 0) {
+            description += "\n\n" + StringUtilities.getAttributesAsString(it.attributes.toMap())
         }
 
         ExaminationResult(description)
