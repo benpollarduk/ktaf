@@ -60,7 +60,7 @@ val sword = Item("Sword", "The heroes sword.")
 ```
 
 ### Playable Character
-Each Ktaf game has a single playable charcter. This who the player controls.
+Each Ktaf game has a single playable character. The game is played through the view point of the playable character.
 
 ```kotlin
 val player = PlayableChracter("Dave", "The hero of the story.")
