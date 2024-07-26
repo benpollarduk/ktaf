@@ -52,7 +52,7 @@ room.addExit(Exit(Direction.NORTH))
 ```
 
 ### Items
-Items add richness the game. Items support interaction with the player, rooms, other items and NPC's. Items can morph in to other items. 
+Items add richness to a game. Items support interaction with the player, rooms, other items and NPC's. Items can morph in to other items. 
 For example, using item A on item B may cause item B to morph into item C.
 
 ```kotlin
