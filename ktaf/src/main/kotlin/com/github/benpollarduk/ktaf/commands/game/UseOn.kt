@@ -25,7 +25,6 @@ internal class UseOn(private val item: Item?, private val target: InteractWithIt
 
         return when (interaction.effect) {
             InteractionEffect.FATAL_EFFECT -> {
-                game.player.kill()
                 Reaction(ReactionResult.FATAL, interaction.description)
             }
             InteractionEffect.ITEM_USED_UP -> {
