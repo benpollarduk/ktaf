@@ -12,7 +12,7 @@ An Exit can be simply instantiated with a direction.
 val exit = Exit(Direction.North)
 ```
 
-An Exit can be hidden from the player by setting its **isPlayerVisible** property to false, this can be set in the 
+An Exit can be hidden from the player by setting its **isPlayerVisible** property to false. This can be set in the 
 constructor.
 
 ```kotlin
