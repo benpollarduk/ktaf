@@ -311,6 +311,10 @@ public class Game(
                 }
             }
 
+            if (reaction.result == ReactionResult.FATAL) {
+                player.kill()
+            }
+
             if (displayReactionToInput) {
                 handleReaction(reaction)
             }
