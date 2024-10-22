@@ -1,5 +1,6 @@
 package com.github.benpollarduk.ktaf.assets.location
 
+import com.github.benpollarduk.ktaf.assets.ExaminationScene
 import com.github.benpollarduk.ktaf.assets.Identifier
 import com.github.benpollarduk.ktaf.assets.Item
 import com.github.benpollarduk.ktaf.assets.characters.NonPlayableCharacter
@@ -223,7 +224,7 @@ class RoomTest {
         room.addItem(item)
 
         // When
-        val result = room.examine().description
+        val result = room.examine(ExaminationScene.noScene).description
 
         // Then
         Assertions.assertTrue(result.contains("Item"))
@@ -239,7 +240,7 @@ class RoomTest {
         room.addItem(item2)
 
         // When
-        val result = room.examine().description
+        val result = room.examine(ExaminationScene.noScene).description
 
         // Then
         Assertions.assertTrue(result.contains("Item 1"))
@@ -416,7 +417,7 @@ class RoomTest {
         val room = Room("Room", "Room description")
 
         // When
-        val result = room.examine()
+        val result = room.examine(ExaminationScene.noScene)
 
         // Then
         Assertions.assertEquals("There is nothing to examine.", result.description)

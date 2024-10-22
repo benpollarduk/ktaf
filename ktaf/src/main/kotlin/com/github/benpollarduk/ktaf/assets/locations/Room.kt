@@ -4,6 +4,7 @@ import com.github.benpollarduk.ktaf.assets.ConditionalDescription
 import com.github.benpollarduk.ktaf.assets.Description
 import com.github.benpollarduk.ktaf.assets.ExaminableObject
 import com.github.benpollarduk.ktaf.assets.ExaminationResult
+import com.github.benpollarduk.ktaf.assets.ExaminationScene
 import com.github.benpollarduk.ktaf.assets.Identifier
 import com.github.benpollarduk.ktaf.assets.Item
 import com.github.benpollarduk.ktaf.assets.characters.Character
@@ -311,7 +312,7 @@ public class Room(
         this.description = description
     }
 
-    override fun examine(): ExaminationResult {
+    override fun examine(scene: ExaminationScene): ExaminationResult {
         val visibleItems = items.filter { it.isPlayerVisible }
 
         if (visibleItems.isEmpty()) {

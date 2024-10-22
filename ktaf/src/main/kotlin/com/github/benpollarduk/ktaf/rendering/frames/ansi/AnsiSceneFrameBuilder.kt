@@ -1,5 +1,6 @@
 package com.github.benpollarduk.ktaf.rendering.frames.ansi
 
+import com.github.benpollarduk.ktaf.assets.ExaminationScene
 import com.github.benpollarduk.ktaf.assets.Size
 import com.github.benpollarduk.ktaf.assets.characters.PlayableCharacter
 import com.github.benpollarduk.ktaf.assets.locations.Region
@@ -89,7 +90,7 @@ public class AnsiSceneFrameBuilder(
             )
 
             var extendedDescription: String = if (room.items.any()) {
-                room.examine().description.ensureFinishedSentence()
+                room.examine(ExaminationScene(playableCharacter, room)).description.ensureFinishedSentence()
             } else {
                 "There are no items in this area."
             }

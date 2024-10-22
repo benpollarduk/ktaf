@@ -14,7 +14,7 @@ class ExaminableObjectTest {
         val examinable = Item("Test", "ABC")
 
         // When
-        val result = examinable.examine()
+        val result = examinable.examine(ExaminationScene.noScene)
 
         // Then
         Assertions.assertTrue(result.description.contains("ABC"))
@@ -26,7 +26,7 @@ class ExaminableObjectTest {
         val examinable = Item("Test", "")
 
         // When
-        val result = examinable.examine()
+        val result = examinable.examine(ExaminationScene.noScene)
 
         // Then
         Assertions.assertTrue(result.description.contains("Test"))
@@ -38,7 +38,7 @@ class ExaminableObjectTest {
         val examinable = Item("", "")
 
         // When
-        val result = examinable.examine()
+        val result = examinable.examine(ExaminationScene.noScene)
 
         // Then
         Assertions.assertTrue(result.description.contains("Item"))
@@ -55,7 +55,7 @@ class ExaminableObjectTest {
         )
 
         // When
-        val result = examinable.examine()
+        val result = examinable.examine(ExaminationScene.noScene)
 
         // Then
         Assertions.assertTrue(result.description.contains("ABC"))
@@ -68,7 +68,7 @@ class ExaminableObjectTest {
         examinable.attributes.add("attribute", 0)
 
         // When
-        val result = examinable.examine()
+        val result = examinable.examine(ExaminationScene.noScene)
 
         // Then
         Assertions.assertTrue(result.description.contains("attribute"))

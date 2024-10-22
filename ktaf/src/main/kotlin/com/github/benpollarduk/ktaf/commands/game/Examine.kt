@@ -1,8 +1,10 @@
 package com.github.benpollarduk.ktaf.commands.game
 
 import com.github.benpollarduk.ktaf.assets.Examinable
+import com.github.benpollarduk.ktaf.assets.ExaminationScene
 import com.github.benpollarduk.ktaf.assets.interaction.Reaction
 import com.github.benpollarduk.ktaf.assets.interaction.ReactionResult
+import com.github.benpollarduk.ktaf.assets.locations.Room
 import com.github.benpollarduk.ktaf.commands.Command
 import com.github.benpollarduk.ktaf.logic.Game
 
@@ -15,6 +17,14 @@ internal class Examine(private val examinable: Examinable?) : Command {
             return Reaction(ReactionResult.ERROR, "You must specify an examinable.")
         }
 
-        return Reaction(ReactionResult.OK, examinable.examine().description)
+        return Reaction(
+            ReactionResult.OK,
+            examinable.examine(
+                ExaminationScene(
+                    game.player,
+                    game.overworld.currentRegion?.currentRoom ?: Room("", "")
+                )
+            ).description
+        )
     }
 }

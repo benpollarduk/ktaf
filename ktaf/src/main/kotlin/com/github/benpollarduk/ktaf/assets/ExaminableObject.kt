@@ -17,17 +17,17 @@ public abstract class ExaminableObject : Examinable {
      * Provides a callback for handling examination of this object.
      */
     public var examination: Examination = {
-        var description = it.description.getDescription()
+        var description = it.examinable.description.getDescription()
 
-        if (it.commands.any()) {
+        if (it.examinable.commands.any()) {
             if (description != "") {
                 description += " "
             }
 
             val newline = NEWLINE
-            description += "$newline$newline${it.identifier.name} provides the following commands: "
+            description += "$newline$newline${it.examinable.identifier.name} provides the following commands: "
 
-            it.commands.forEach { command ->
+            it.examinable.commands.forEach { command ->
                 description += "$newline \"${command.commandHelp.command}\" - " +
                     "${command.commandHelp.description.removeSentenceEnd()}, "
             }
@@ -39,15 +39,15 @@ public abstract class ExaminableObject : Examinable {
         }
 
         if (description == "") {
-            description = it.identifier.name
+            description = it.examinable.identifier.name
         }
 
         if (description == "") {
-            description = it::class.simpleName.toString()
+            description = it.examinable::class.simpleName.toString()
         }
 
         if (attributes.count > 0) {
-            description += "\n\n" + StringUtilities.getAttributesAsString(it.attributes.toMap())
+            description += "\n\n" + StringUtilities.getAttributesAsString(it.examinable.attributes.toMap())
         }
 
         ExaminationResult(description)
@@ -66,8 +66,8 @@ public abstract class ExaminableObject : Examinable {
 
     override var commands: List<CustomCommand> = emptyList()
 
-    override fun examine(): ExaminationResult {
-        return examination(this)
+    override fun examine(scene: ExaminationScene): ExaminationResult {
+        return examination(ExaminationRequest(this, scene))
     }
 
     override var isPlayerVisible: Boolean = true
