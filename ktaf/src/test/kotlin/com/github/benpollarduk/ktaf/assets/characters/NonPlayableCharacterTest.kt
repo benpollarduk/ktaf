@@ -2,6 +2,7 @@ package com.github.benpollarduk.ktaf.assets.characters
 
 import com.github.benpollarduk.ktaf.assets.Examination
 import com.github.benpollarduk.ktaf.assets.ExaminationResult
+import com.github.benpollarduk.ktaf.assets.ExaminationScene
 import com.github.benpollarduk.ktaf.assets.Item
 import com.github.benpollarduk.ktaf.assets.interaction.Interaction
 import com.github.benpollarduk.ktaf.assets.interaction.InteractionEffect
@@ -95,7 +96,7 @@ class NonPlayableCharacterTest {
         )
 
         // When
-        val result = character.examine()
+        val result = character.examine(ExaminationScene.noScene)
 
         // Then
         Assertions.assertEquals("ABC", result.description)

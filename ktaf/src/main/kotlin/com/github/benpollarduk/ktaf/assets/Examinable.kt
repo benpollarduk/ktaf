@@ -28,7 +28,8 @@ public interface Examinable : PlayerVisible {
     public val attributes: AttributeManager
 
     /**
-     * Examine this object to obtain an [ExaminationResult].
+     * Examine this object to obtain an [ExaminationResult]. The [scene] that the examination occurs in must be
+     * specified.
      */
-    public fun examine(): ExaminationResult
+    public fun examine(scene: ExaminationScene): ExaminationResult
 }

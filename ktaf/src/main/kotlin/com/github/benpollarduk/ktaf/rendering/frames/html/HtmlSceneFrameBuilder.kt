@@ -1,5 +1,6 @@
 package com.github.benpollarduk.ktaf.rendering.frames.html
 
+import com.github.benpollarduk.ktaf.assets.ExaminationScene
 import com.github.benpollarduk.ktaf.assets.Item
 import com.github.benpollarduk.ktaf.assets.Size
 import com.github.benpollarduk.ktaf.assets.attributes.Attribute
@@ -76,7 +77,7 @@ public class HtmlSceneFrameBuilder(
             htmlPageBuilder.p(room.description.getDescription().ensureFinishedSentence())
 
             var extendedDescription: String = if (room.items.any()) {
-                room.examine().description.ensureFinishedSentence()
+                room.examine(ExaminationScene(playableCharacter, room)).description.ensureFinishedSentence()
             } else {
                 "There are no items in this area."
             }

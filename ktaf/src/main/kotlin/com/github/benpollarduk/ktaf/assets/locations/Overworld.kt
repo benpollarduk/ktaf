@@ -3,6 +3,7 @@ package com.github.benpollarduk.ktaf.assets.locations
 import com.github.benpollarduk.ktaf.assets.Description
 import com.github.benpollarduk.ktaf.assets.ExaminableObject
 import com.github.benpollarduk.ktaf.assets.ExaminationResult
+import com.github.benpollarduk.ktaf.assets.ExaminationScene
 import com.github.benpollarduk.ktaf.assets.Identifier
 import com.github.benpollarduk.ktaf.extensions.equalsExaminable
 
@@ -14,7 +15,7 @@ public class Overworld(
     override var description: Description
 ) : ExaminableObject() {
     /**
-     * Provides an overworld which is a container of [Region]. The overwold has an [identifier] and a [description].
+     * Provides an overlord which is a container of [Region]. The overwold has an [identifier] and a [description].
      */
     public constructor(
         identifier: String,
@@ -83,7 +84,7 @@ public class Overworld(
         return true
     }
 
-    override fun examine(): ExaminationResult {
+    override fun examine(scene: ExaminationScene): ExaminationResult {
         return ExaminationResult(description.getDescription())
     }
 }

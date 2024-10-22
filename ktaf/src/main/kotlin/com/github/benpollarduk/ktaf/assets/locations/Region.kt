@@ -1,6 +1,7 @@
 package com.github.benpollarduk.ktaf.assets.locations
 
 import com.github.benpollarduk.ktaf.assets.ExaminationResult
+import com.github.benpollarduk.ktaf.assets.ExaminationScene
 import com.github.benpollarduk.ktaf.assets.Identifier
 import com.github.benpollarduk.ktaf.extensions.equalsExaminable
 import com.github.benpollarduk.ktaf.utilities.RegionMaker
@@ -191,7 +192,7 @@ public class Region(
         return jumpToRoom(room)
     }
 
-    override fun examine(): ExaminationResult {
+    override fun examine(scene: ExaminationScene): ExaminationResult {
         return ExaminationResult("$Identifier: ${description.getDescription()}")
     }
 
