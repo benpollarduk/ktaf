@@ -223,4 +223,27 @@ class GameTest {
             game.displayTransition("Title", "Message")
         }
     }
+
+    @Test
+    fun `given change player when player2 then player is player2`() {
+// Given
+        val player = PlayableCharacter("TestPlayer", "")
+        val player2 = PlayableCharacter("TestPlayer", "")
+        val regionMaker = RegionMaker("TestRegion", "")
+        regionMaker[0, 0, 0] = Room("TestRoom", "")
+        val overworldMaker = OverworldMaker("TestOverworld", "", listOf(regionMaker))
+        val game = Game(
+            GameInformation("", "", "", ""),
+            player,
+            overworldMaker.make(),
+            { EndCheckResult.notEnded },
+            { EndCheckResult.notEnded }
+        )
+
+        // When
+        game.changePlayer(player2)
+
+        // Then
+        Assertions.assertEquals(player2, game.player)
+    }
 }

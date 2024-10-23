@@ -31,7 +31,7 @@ import com.github.benpollarduk.ktaf.rendering.frames.Frame
  */
 public class Game(
     public val information: GameInformation,
-    public val player: PlayableCharacter,
+    initialPlayer: PlayableCharacter,
     public val overworld: Overworld,
     private val completionCondition: EndCheck,
     private val gameOverCondition: EndCheck,
@@ -50,6 +50,12 @@ public class Game(
     )
 
     /**
+     * The current [PlayableCharacter].
+     */
+    public var player: PlayableCharacter
+        private set
+
+    /**
      * The active [Converser].
      */
     public var activeConverser: Converser? = null
@@ -64,6 +70,10 @@ public class Game(
      * Specifies the type of key to use for scene maps.
      */
     public var sceneMapKeyType: KeyType = KeyType.DYNAMIC
+
+    init {
+        player = initialPlayer
+    }
 
     /**
      * Display a transition frame with a specified [title] and [message].
@@ -339,6 +349,13 @@ public class Game(
     internal fun end() {
         cancellationToken.cancel()
         state = GameState.FINISHED
+    }
+
+    /**
+     * Change to a specified [player].
+     */
+    public fun changePlayer(player: PlayableCharacter) {
+        this.player = player
     }
 
     private fun getFallbackFrame(): Frame {
