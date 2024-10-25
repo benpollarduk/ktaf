@@ -87,7 +87,7 @@ class PlayableCharacterTest {
     @Test
     fun `given a default instance when finding a visible item it has then instance is returned`() {
         // Given
-        val character = PlayableCharacter("", "", listOf(Item("Test", "")))
+        val character = PlayableCharacter("", "", true, listOf(Item("Test", "")))
 
         // When
         val result = character.findItem("Test")
@@ -102,7 +102,7 @@ class PlayableCharacterTest {
         val item = Item("Test", "").apply {
             isPlayerVisible = false
         }
-        val character = PlayableCharacter("", "", listOf(item))
+        val character = PlayableCharacter("", "", true, listOf(item))
 
         // When
         val result = character.findItem("Test")
@@ -117,7 +117,7 @@ class PlayableCharacterTest {
         val item = Item("Test", "").apply {
             isPlayerVisible = false
         }
-        val character = PlayableCharacter("", "", listOf(item))
+        val character = PlayableCharacter("", "", true, listOf(item))
 
         // When
         val result = character.findItem("Test", true)
@@ -144,7 +144,7 @@ class PlayableCharacterTest {
     fun `given a default instance when giving an item it has then true is returned`() {
         // Given
         val item = Item("", "")
-        val character = PlayableCharacter("", "", listOf(item))
+        val character = PlayableCharacter("", "", true, listOf(item))
         val otherCharacter = NonPlayableCharacter("", "")
 
         // When
@@ -158,7 +158,7 @@ class PlayableCharacterTest {
     fun `given a default instance when giving an item it has then item is dequired`() {
         // Given
         val item = Item("Test", "")
-        val character = PlayableCharacter("", "", listOf(item))
+        val character = PlayableCharacter("", "", true, listOf(item))
         val otherCharacter = NonPlayableCharacter("", "")
 
         // When
@@ -173,7 +173,7 @@ class PlayableCharacterTest {
     fun `given a default instance when giving an item it has then other character has item`() {
         // Given
         val item = Item("Test", "")
-        val character = PlayableCharacter("", "", listOf(item))
+        val character = PlayableCharacter("", "", true, listOf(item))
         val otherCharacter = NonPlayableCharacter("", "")
 
         // When

@@ -12,6 +12,10 @@ import com.github.benpollarduk.ktaf.logic.Game
  */
 internal class Talk(private val converser: Converser?) : Command {
     override fun invoke(game: Game): Reaction {
+        if (!game.player.canConverse) {
+            return Reaction(ReactionResult.ERROR, "Can't converse.")
+        }
+
         if (converser == null) {
             return Reaction(ReactionResult.ERROR, "Can't converse.")
         }

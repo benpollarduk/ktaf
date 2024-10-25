@@ -6,13 +6,16 @@ import com.github.benpollarduk.ktaf.assets.Item
 import com.github.benpollarduk.ktaf.assets.interaction.InteractWithItem
 import com.github.benpollarduk.ktaf.assets.interaction.InteractionEffect
 import com.github.benpollarduk.ktaf.assets.interaction.InteractionResult
+import com.github.benpollarduk.ktaf.conversations.Converser
 
 /**
  * A playable character with the specified [identifier] and [description] and [items].
+ * If the playable character can converse with a [Converser] [canConverse] should be set to true, else false.
  */
 public class PlayableCharacter(
     override var identifier: Identifier,
     override var description: Description,
+    public val canConverse: Boolean = true,
     items: List<Item> = emptyList()
 ) : Character() {
 
@@ -21,7 +24,7 @@ public class PlayableCharacter(
     }
 
     /**
-     * Trigger this [Player] to use the specified [item] on the specified [target].
+     * Trigger this [PlayableCharacter] to use the specified [item] on the specified [target].
      */
     public fun useItem(item: Item, target: InteractWithItem): InteractionResult {
         val result = target.interact(item)
@@ -42,10 +45,12 @@ public class PlayableCharacter(
 
     /**
      * A playable character with the specified [identifier] and [description] and [items].
+     * If the playable character can converse with a [Converser] [canConverse] should be set to true, else false.
      */
     public constructor(
         identifier: String,
         description: String,
+        canConverse: Boolean = true,
         items: List<Item> = emptyList()
-    ) : this(Identifier(identifier), Description(description), items)
+    ) : this(Identifier(identifier), Description(description), canConverse, items)
 }

@@ -51,7 +51,7 @@ public class CharacterCommandInterpreter : Interpreter {
 
         val commands = mutableListOf<CommandHelp>()
 
-        if (game.overworld.currentRegion?.currentRoom?.characters?.any() == true) {
+        if (game.player.canConverse && game.overworld.currentRegion?.currentRoom?.characters?.any() == true) {
             commands.add(talkCommandHelp)
         }
 

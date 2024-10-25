@@ -1,6 +1,7 @@
 package com.github.benpollarduk.ktaf.command.game
 
 import com.github.benpollarduk.ktaf.assets.characters.NonPlayableCharacter
+import com.github.benpollarduk.ktaf.assets.characters.PlayableCharacter
 import com.github.benpollarduk.ktaf.assets.interaction.ReactionResult
 import com.github.benpollarduk.ktaf.commands.game.Talk
 import com.github.benpollarduk.ktaf.conversations.Conversation
@@ -17,6 +18,22 @@ class TalkTest {
 
         // When
         val result = command.invoke(GameTestHelper.getBlankGame())
+
+        // Then
+        Assertions.assertEquals(ReactionResult.ERROR, result.result)
+    }
+
+    @Test
+    fun `given player that can't converse when invoke then return error`() {
+        // Given
+        val converser = NonPlayableCharacter("", "")
+        val command = Talk(converser)
+        val game = GameTestHelper.getBlankGame().also {
+            it.changePlayer(PlayableCharacter("", "", false))
+        }
+
+        // When
+        val result = command.invoke(game)
 
         // Then
         Assertions.assertEquals(ReactionResult.ERROR, result.result)
