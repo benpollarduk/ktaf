@@ -24,11 +24,11 @@ jobs:
 
     steps:
 
-     - name: Restrict to owner
-      if: github.actor != 'benpollarduk'
-      run: |
-        echo "Access denied for user ${{ github.actor }}"
-        exit 1
+      - name: Restrict to owner
+        if: github.actor != 'benpollarduk'
+        run: |
+          echo "Access denied for user ${{ github.actor }}"
+          exit 1
         
       - name: Checkout repository
         uses: actions/checkout@v3
